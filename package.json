@@ -1,0 +1,25 @@
+{
+  "name": "fe-capstone",
+  "version": "1.0.0",
+  "description": "Front-end capstone project for HackReactor HR-RFE1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hr-rfe1-dagobah/fe-capstone.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "webpack",
+    "babel"
+  ],
+  "author": "Stephen Hyde, Zach Kodjo, Kaleb Lyda, Phil Teves",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/hr-rfe1-dagobah/fe-capstone/issues"
+  },
+  "homepage": "https://github.com/hr-rfe1-dagobah/fe-capstone#readme"
+}
