@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import StyledSlide from './Slide.jsx';
 
-const Slide = styled.div`
-  width: 150px;
-  height: 200px;
-  background-color: grey;
-`;
+
 
 const Container = styled.div`
 width: 50%;
@@ -18,10 +15,10 @@ width: 50%;
 const Carousel = () => {
   return (
     <Container>
-      <Slide> </Slide>
-      <Slide> </Slide>
-      <Slide> </Slide>
-      <Slide> </Slide>
+      <StyledSlide> </StyledSlide>
+      <StyledSlide> </StyledSlide>
+      <StyledSlide> </StyledSlide>
+      <StyledSlide> </StyledSlide>
     </Container>
   );
 };
