@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Slide = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 200px;
   background-color: grey;
 `;
 
@@ -24,6 +24,6 @@ const Carousel = () => {
       <Slide> </Slide>
     </Container>
   );
-}
+};
 
 export default Carousel;
