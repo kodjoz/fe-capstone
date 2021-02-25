@@ -1,21 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import Carousel from './Carousel.jsx';
 
 
-
-const fooButton = styled.button`
-  margin: 0 1em;
-  padding: 0.25em 1em;
-  color: blue;
-`;
-
-const RelatedProducts = () => {
+const RelatedProductsWrapper = () => {
   return (
     <div>
-      <fooButton/>
+      <h4>Related Products</h4>
+      <Carousel/>
+      <h4>Your outfit</h4>
+      <Carousel />
     </div>
   );
 };
 
 
-export default RelatedProducts;
+export default RelatedProductsWrapper;
