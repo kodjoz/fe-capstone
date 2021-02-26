@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 
 const SlideInfo = (props) => {
   return (
@@ -10,6 +12,10 @@ const SlideInfo = (props) => {
       <div> stars </div>
     </div>
   );
+};
+
+SlideInfo.propTypes = {
+  className: PropTypes.string.isRequired
 };
 
 const StyledSlideInfo = styled(SlideInfo)`

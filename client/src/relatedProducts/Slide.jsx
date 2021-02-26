@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StyledSlideInfo from './SlideInfo.jsx';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 
 class Slide extends Component {
@@ -10,12 +11,16 @@ class Slide extends Component {
 
   render() {
     return (
-    <div className={this.props.className}>
-      <StyledSlideInfo></StyledSlideInfo>
-    </div>
+      <div className={this.props.className}>
+        <StyledSlideInfo></StyledSlideInfo>
+      </div>
     );
   }
 }
+
+Slide.propTypes = {
+  className: PropTypes.string.isRequired
+};
 
 const StyledSlide = styled(Slide)`
   width: 150px;
