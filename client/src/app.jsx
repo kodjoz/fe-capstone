@@ -1,6 +1,7 @@
 import React from 'react';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
+import QuestionList from './questionAndAnswer/QuestionList.jsx';
 import Overview from './overview/Overview.jsx';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
       <Overview/>
       <RelatedProducts/>
       {/* <ReviewsList/> */}
+      <QuestionList/>
     </div>
   );
 };
