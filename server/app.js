@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const github = require('./config');
+const cors = require('cors');
 const app = express();
 
 // create an options variable for the proxy
@@ -14,7 +15,7 @@ const options = {
     'Authorization': github.token
   },
   pathRewrite: {
-    '^/api': '/'
+    '^/api/': '/'
   },
   logLevel: 'debug',
 }
@@ -24,9 +25,13 @@ const proxy = createProxyMiddleware(options);
 // use the proxy and create the '/api' endpoint that communicates with our actual API
 app.use('/api/**', proxy);
 // set up body-parser
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 // serve static files from the 'dist' folder
-app.use(express.static(path.join(__dirname, '../client/dist/')));
+app.use(express.static(path.join(__dirname, '/../client/dist/')), (req, res, next) => {
+  res.sendStatus(200).send('OK');
+});
+console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
 
 module.exports = app;
