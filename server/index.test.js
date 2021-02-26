@@ -14,11 +14,11 @@ describe('Connect to the API Proxy Server', () => {
   var apiParams = {
     params: {
       page: 1,
-      count: 1
+      count: 5
     }
-  }
+  };
 
-  server = server + '/api'
+  server = server + '/api';
 
   test('Expect the server to connect to the products endpoint', () => {
     return axios.get(`${server}/products`, apiParams)
@@ -26,7 +26,7 @@ describe('Connect to the API Proxy Server', () => {
         expect(response.status).toBe(200);
         expect(response.statusText).toBe('OK');
         expect(response.data).toBeDefined();
-      })
+      });
   });
 
   test('Expect the server to connect to the reviews endpoint', () => {
@@ -42,8 +42,8 @@ describe('Connect to the API Proxy Server', () => {
         expect(response.status).toBe(200);
         expect(response.statusText).toBe('OK');
         expect(response.data).toBeDefined();
-      })
-  })
+      });
+  });
 
   test('Expect the server to connect to the Q & A endpoint', () => {
     return axios.get(`${server}/reviews`, {
@@ -67,12 +67,12 @@ describe('Connect to the API Proxy Server', () => {
         expect(response.statusText).toBe('OK');
         expect(response.data).toBeDefined();
       });
-  })
+  });
 
-  xtest('Expect the server to connect to the Interactions endpoint', () => {
+  test('Expect the server to connect to the Interactions endpoint', () => {
     return axios.post(`${server}/interactions`)
       .then((response) => {
         expect(response.status).toBe(201);
       })
-  })
+  });
 });
