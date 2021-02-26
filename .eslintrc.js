@@ -27,17 +27,17 @@ module.exports = {
     'jest'
   ],
   'rules': {
-    "camelcase": ["error", { "allow": ["product_id"]} ],
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
+    'camelcase': ['error', { 'allow': ['product_id']} ],
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error'
   },
   'settings': {
     'react': {
-      "pragma": "React",
-      "fragment": "Fragment",
-      "version" : "detect"
+      'pragma': 'React',
+      'fragment': 'Fragment',
+      'version': 'detect'
     }
   }
 };

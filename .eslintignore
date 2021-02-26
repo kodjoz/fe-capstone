@@ -1,5 +1,6 @@
-.eslint*
+!.eslint*
 !.eslintrc.js
 **/node_modules
 **/bower_components
 **/lib
+.gitignore
