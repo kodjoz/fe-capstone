@@ -17,7 +17,7 @@ const options = {
     '^/api': '/'
   },
   logLevel: 'debug',
-}
+};
 // create the proxy
 const proxy = createProxyMiddleware(options);
 // middleware
