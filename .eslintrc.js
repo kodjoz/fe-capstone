@@ -1,8 +1,10 @@
+/* eslint-disable no-eval */
 module.exports = {
   'env': {
     'browser': true,
     'es6': true,
-    'node': true
+    'node': true,
+    'jest/globals': true
   },
   'extends': [
     'eslint:recommended',
@@ -21,8 +23,21 @@ module.exports = {
     'sourceType': 'module'
   },
   'plugins': [
-    'react'
+    'react',
+    'jest'
   ],
   'rules': {
+    'camelcase': ['error', { 'allow': ['product_id']} ],
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error'
+  },
+  'settings': {
+    'react': {
+      'pragma': 'React',
+      'fragment': 'Fragment',
+      'version': 'detect'
+    }
   }
 };

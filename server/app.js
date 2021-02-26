@@ -1,9 +1,10 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const github = require('./config');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
+const github = require('./config');
+
 const app = express();
 
 // create an options variable for the proxy
@@ -20,18 +21,21 @@ const options = {
   logLevel: 'debug',
 };
 // create the proxy
+app.use(cors());
 const proxy = createProxyMiddleware(options);
 // middleware
 // use the proxy and create the '/api' endpoint that communicates with our actual API
 app.use('/api/**', proxy);
 // set up body-parser
-app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 // serve static files from the 'dist' folder
 app.use(express.static(path.join(__dirname, '/../client/dist/')), (req, res, next) => {
-  res.sendStatus(200).send('OK');
+  // This is needed, couldn't find any docs supporting the status that express.static is sending to the client
+  res.status(200).send('OK');
+  next();
 });
-console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
+//console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
 
 module.exports = app;
