@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: 11
+      product_id: 19089
     };
   }
 
@@ -24,7 +24,7 @@ class App extends React.Component {
     );
   }
 
-};
+}
 
 export default App;
 
