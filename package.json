@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "build": "webpack --watch --config webpack.config.js",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor/precourse-pomander/master/bin/install | bash"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
