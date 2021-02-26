@@ -41,16 +41,22 @@ class QuestionList extends React.Component {
     // only return two questions to start
     let questions = this.state.questions.slice(0, 4);
 
-    let formattedQuestions = questions.map((question) => (
-      <div key={question.question_id}>
+    let formattedQuestions = questions.map((question) => {
+      let prettyDate = new Date(question.question_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      return (<div key={question.question_id}>
         <div>
           <p>Q: {question.question_body}</p>
         </div>
         <div>
-          <p>by {question.asker_name} | {question.question_date} | Helpful yes?/no? | Report</p>
+          <p>by {question.asker_name} | {prettyDate} | Helpful yes?/no? | Report</p>
         </div>
-      </div>
-    ));
+      </div>)
+    });
 
     const QuestionBox = styled.div`
       margin: 0 1em;
