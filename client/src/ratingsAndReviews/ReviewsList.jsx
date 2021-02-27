@@ -27,7 +27,7 @@ class ReviewsList extends React.Component {
       }
     })
       .then((res) => {
-        console.log('GET REQ: ', res.data.results);
+        //console.log('GET REQ: ', res.data.results);
         this.setState({reviews: res.data.results});
       });
   }
