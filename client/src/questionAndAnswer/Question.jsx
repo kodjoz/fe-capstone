@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Answer from './Answer';
 
 class Question extends React.Component {
   constructor(props) {
@@ -7,45 +8,35 @@ class Question extends React.Component {
   }
 
   render() {
-    let question;
+    // Incase this prop is empty render nothing onscreen
     if (this.props.question === undefined) {
       return '';
-    } else {
-      question = this.props.question;
+    }
+    // Create aliases
+    let question = this.props.question;
+    let answers = Object.values(question.answers).sort((a, b) => { return b.helpfulness - a.helpfulness; });
+    // if there are no answers return an empty array, else return max 2 answers
+    if (!answers.length) {
+      answers = [];
+    } else if (answers.length > 2 && this.props.loadMoreAnswers === false) {
+      answers = answers.slice(0, 2);
     }
 
-    let answers = Object.keys(question.answers).slice(0, 2);
-    let formattedAnswers = answers.map((answer) => {
-      let prettyDate = new Date(question.answers[answer].date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-
-      return (
-        <div className="answers" key={answer}>
-          <p><strong>A:</strong> {question.answers[answer].body}</p>
-          <div>
-            <p>by {question.answers[answer].answerer_name} | {prettyDate} | Helpful? ({question.answers[answer].helpfulness}) | <u>Report</u></p>
-          </div>
-        </div>
-      );
-    });
-
+    // render a question
     return (
       <div className="question">
         <div>
-          <p><strong>Q: {question.question_body}</strong></p>
-          {formattedAnswers}
+          <div><p><strong>Q: {question.question_body}</strong></p>Helpful? ({question.question_helpfulness})</div>
+          {answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
         </div>
       </div>
     );
   }
 }
-
+// each question should be an object
 Question.propTypes = {
-  question: PropTypes.array.isRequired
+  question: PropTypes.object.isRequired,
+  loadMoreAnswers: PropTypes.bool.isRequired
 };
 
 export default Question;
-
