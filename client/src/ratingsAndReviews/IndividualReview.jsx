@@ -27,9 +27,10 @@ class IndividualReview extends React.Component {
 
     let body = null;
     review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
+
     let bodyId = 'review' + review.review_id;
     let bodyShowId = bodyId + 'vis';
-    console.log(bodyId);
+
     if (review.body.length <= 250) {
       body = <p>{review.body}</p>;
     } else {
