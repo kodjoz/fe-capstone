@@ -2,6 +2,8 @@ import React from 'react';
 import Carousel from './Carousel.jsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import StarRow from '../starRow.jsx';
+
 
 class RelatedProductsWrapper extends React.Component {
   constructor(props) {
@@ -53,7 +55,6 @@ class RelatedProductsWrapper extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      console.log('loading');
       return <div>RELATED LOADING</div>;
     }
     return (
@@ -62,6 +63,8 @@ class RelatedProductsWrapper extends React.Component {
         <Carousel data={this.state.relatedProductsData}/>
         <h4>Your outfit</h4>
         <Carousel />
+        <h4>Stars</h4>
+        <StarRow></StarRow>
       </div>
     );
   }
