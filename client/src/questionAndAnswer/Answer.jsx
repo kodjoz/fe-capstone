@@ -17,20 +17,21 @@ const Answer = (props) => {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }
+  };
   // pretty print the date
   let prettyDate = new Date(answer.date).toLocaleDateString('en-US', options);
 
   return (
     <div className="answer">
-      <p><strong>A:</strong>{answer.body}</p>
+      <p><strong>A:</strong> {answer.body}</p>
       <span>by {answer.answerer_name}, {prettyDate} | Helpful? <a>Yes</a> ({answer.helpfulness}) | <a>Report</a></span>
     </div>
   );
-}
+};
 
 Answer.propTypes = {
   answer: PropTypes.object.isRequired
 };
 // each answer should be an object
+// accidentally deleted my branch
 export default Answer;

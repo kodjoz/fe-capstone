@@ -27,7 +27,7 @@ module.exports = {
     'jest'
   ],
   'rules': {
-    'camelcase': ['error', { 'allow': ['product_id']} ],
+    'camelcase': ['error', { 'allow': ['product_id', 'default_price', 'created_at', 'updated_at', 'style_id', 'sale_price', 'original_price', 'thumbnail_url', 'review_id', 'reviewer_name', 'question_id', 'question_body', 'question_date', 'asker_name', 'question_helpfulness', 'answerer_name', 'sku_id']} ],
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
