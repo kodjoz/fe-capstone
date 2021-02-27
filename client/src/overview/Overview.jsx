@@ -70,7 +70,7 @@ class OverviewContainer extends React.Component {
           <StyleSelector />
           <AddToCart />
         </RightContainer>
-        <ProductDescription />
+        <ProductDescription product={this.state.product}/>
       </Grid>
     );
   }
