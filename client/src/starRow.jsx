@@ -21,7 +21,7 @@ const StyledStarRow = styled.div`
 
 const StarRow = (props) => {
   var rating = props.rating || 0;
-  //Rounds number to nearest multiple of 20
+  //Rounds number to nearest multiple of 5
   rating = Math.round(rating / 5) * 5;
   return (
     <div>
