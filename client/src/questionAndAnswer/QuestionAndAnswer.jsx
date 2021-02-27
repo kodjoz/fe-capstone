@@ -85,19 +85,20 @@ class QuestionAndAnswer extends React.Component {
 // style the question module
 const QuestionContainer = styled.div`
   display: grid;
-  grid-template-columns: 100%
+  grid-template-columns: 66%
   grid-template-rows: auto;
   grid-auto-columns: 100%;
   grid-auto-flow: column;
   grid-template-areas:
     "questionHeader"
     "searchQuestion"
-    "styledQuestion";
+    "styledQuestion"
+    "styledLoadAnswers";
 `;
 
 const QuestionHeader = styled.h3`
   grid-area: questionHeader;
-  grid-row: 1;
+  grid-row: span 1;
 `;
 
 const StyledLoadAnswers = styled.div`
