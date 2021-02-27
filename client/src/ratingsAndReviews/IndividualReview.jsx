@@ -6,14 +6,15 @@ class IndividualReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpfulRated: false
-      // reviewBodyExtra: props.review.body.length > 250 ? props.review.body.slice(251, props.review.body.length) : null
+      helpfulRated: false,
+      //reviewBodyExtra: props.review.body.length > 250 ? props.review.body.slice(251, props.review.body.length) : null
     };
   }
   helpfulVote() {
     if (this.state.helpfulRated === false) { this.props.review.helpfulness++; }
     this.setState({helpfulRated: true});
   }
+
   render() {
     let review = this.props.review;
     // let body;
@@ -24,20 +25,25 @@ class IndividualReview extends React.Component {
     //   <span onClick={() => {document.getElementById('review-body').value = this.state.reviewBodyExtra}}>Show more...</span>
     //   </p>
     // }
-    review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
+    // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
     if (summary.length > 60) {
-      summary = <div><b>{review.summary.slice(0,60)}...</b><p>...{review.summary.slice(60, review.summary.length-1)}</p></div>;
+      summary = <div><b>{review.summary.slice(0, 60)}...</b><p>...{review.summary.slice(60, review.summary.length)}</p></div>;
     } else {
       summary = <b>{review.summary}</b>;
     }
 
-    // let body = null;
-    // if (review.body.length > 250) {
-    //   body = <p>{review.body}</p>
-    // } else {
-    //   body = <div><p>{</p></div>
-    // }
+    let body = null;
+    review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
+    if (review.body.length <= 250) {
+      body = <p>{review.body}</p>
+    } else {
+      body = <div>
+        <p>{review.body.slice(0,251)}</p>
+        <span id='review-body-extra' style={{visibility: 'hidden'}}>{review.body.slice(251, review.body.length)}</span>
+        <p id='review-body-show' onClick={()=> {document.getElementById('review-body-extra').style.visibility='visible'; document.getElementById('review-body-show').style.visibility='hidden';}} >Show More...</p>
+      </div>
+    }
 
     let response = null;
     //review.response = 'im a seller and give me all ya monayyyy~';
@@ -53,16 +59,16 @@ class IndividualReview extends React.Component {
     }
     return (
       <div>
-        <p>{review.rating} Stars - rendered as an img?</p>
         <StarRow size={15} rating={review.rating * 20} />
         <span>{review.reviewer_name}</span>
         <p>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</p>
         <div>{summary}</div>
         {/* <b>{review.summary} - <em>use ... to truncate me into one line</em></b> */}
-        <p>{review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p>
+        <div>{body}</div>
+        {/* <p>{review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p> */}
         <p>{recommend}</p>
         <span>{response}</span>
-        <p>Helpful? <span onClick={() => { this.helpfulVote(); }}>Yes</span> {review.helpfulness}</p>
+        <p>Helpful? <span onClick={() => { this.helpfulVote(); }}>Yes</span> ({review.helpfulness})</p>
         <p>{JSON.stringify(this.props.review)}</p>
       </div>
     );
