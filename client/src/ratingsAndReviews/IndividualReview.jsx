@@ -6,12 +6,12 @@ const IndividualReview = (props) => {
     <div>
       <p>{props.review.rating} Stars - rendered as an img?</p>
       <span>{props.review.reviewer_name}</span>
-      <span>{props.review.date} - prettify me</span>
-      <p>{props.review.summary} - <em>...</em> truncate me into one line</p>
-      <p>{props.review.body} - slice me into 250 char, w a <em>Show more</em> link</p>
-      <p>{props.review.response} - if i dont exist, dont show me</p>
+      <p>{new Date(props.review.date).toLocaleString("en-US", {month: "long", day: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit"})}</p>
+      <p>{props.review.summary} - <em>use ... to truncate me into one line</em></p>
+      <p>{props.review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p>
+      <p>{props.review.response} - <em>if i dont exist, dont show me</em></p>
       <p>Helpful? <a>Yes</a> ({props.review.helpfulness})</p>
-      <p>{JSON.stringify(props.review)}</p>
+      {/* <p>{JSON.stringify(props.review)}</p> */}
     </div>
   );
 };
