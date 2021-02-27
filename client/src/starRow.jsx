@@ -11,7 +11,6 @@ const StyledStarRow = styled.div`
 
   &::before {
     content: '★★★★★';
-    letter-spacing: 3px;
    background: linear-gradient(90deg, #fc0 ${props => props.rating}%, #D8DCD6 ${props => props.rating}%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -21,8 +20,8 @@ const StyledStarRow = styled.div`
 
 const StarRow = (props) => {
   var rating = props.rating || 0;
-  //Rounds number to nearest quarter
-  rating = Math.round(rating / 25) * 25;
+  //Rounds number to nearest multiple of 5
+  rating = Math.round(rating / 5) * 5;
   return (
     <div>
       <StyledStarRow rating={rating || 0} size={props.size || 30}></StyledStarRow>

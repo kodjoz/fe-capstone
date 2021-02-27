@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StarRow from '../starRow.jsx';
 
 class IndividualReview extends React.Component {
   constructor(props) {
@@ -26,15 +27,23 @@ class IndividualReview extends React.Component {
     let response = null;
     //review.response = 'im a seller and give me all ya monayyyy~';
     if (review.response) {
-      response = <p className='seller-response'>{review.response}</p>
+      response = <p className='seller-response'>{review.response}</p>;
+    }
+    //review.rating = 2.5;
+    //review.recommend = false;
+    let recommend = null;
+    if (review.recommend) {
+      recommend = <span>&#10003; I recommend this product</span>
     }
     return (
       <div>
         <p>{review.rating} Stars - rendered as an img?</p>
+        <StarRow size={15} rating={review.rating * 20} />
         <span>{review.reviewer_name}</span>
         <p>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</p>
         <b>{review.summary} - <em>use ... to truncate me into one line</em></b>
         <p>{review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p>
+        <p>{recommend}</p>
         <span>{response}</span>
         <p>Helpful? <span onClick={() => { this.helpfulVote(); }}>Yes</span> {review.helpfulness}</p>
         <p>{JSON.stringify(this.props.review)}</p>
