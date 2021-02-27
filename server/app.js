@@ -18,7 +18,7 @@ const options = {
   pathRewrite: {
     '^/api/': '/'
   },
-  logLevel: 'debug',
+  logLevel: 'error',
 };
 // create the proxy
 app.use(cors());
