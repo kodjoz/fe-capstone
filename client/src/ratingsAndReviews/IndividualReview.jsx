@@ -5,8 +5,13 @@ class IndividualReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      helpfulRated: false
       // reviewBodyExtra: props.review.body.length > 250 ? props.review.body.slice(251, props.review.body.length) : null
     };
+  }
+  helpfulVote() {
+    if (this.state.helpfulRated === false) {this.props.review.helpfulness++;}
+    this.setState({helpfulRated: true});
   }
   render() {
     // let body;
@@ -26,7 +31,7 @@ class IndividualReview extends React.Component {
         <b>{review.summary} - <em>use ... to truncate me into one line</em></b>
         <p>{review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p>
         <p>{review.response} - <em>if i dont exist, dont show me</em></p>
-        <p>Helpful? <a>Yes</a> ({review.helpfulness})</p>
+        <p>Helpful? <span onClick={() => {this.helpfulVote()}}>Yes</span> {review.helpfulness}</p>
         {/* <p>{JSON.stringify(props.review)}</p> */}
       </div>
     );
