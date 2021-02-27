@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const StyledStarRow = styled.div`
 
   display: inline-block;
-  font-size: 50px;
+  font-size: ${props => props.size}px;
   font-family: Times;
 
   &::before {
@@ -22,13 +22,14 @@ const StyledStarRow = styled.div`
 const StarRow = (props) => {
   return (
     <div>
-      <StyledStarRow rating={props.rating || 50}></StyledStarRow>
+      <StyledStarRow rating={props.rating || 50} size={props.size || 30}></StyledStarRow>
     </div>
   );
 };
 
 StarRow.propTypes = {
-  rating: PropTypes.number
+  rating: PropTypes.number,
+  size: PropTypes.number
 };
 
 export default StarRow;
