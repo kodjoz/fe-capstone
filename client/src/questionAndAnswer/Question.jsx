@@ -29,7 +29,7 @@ class Question extends React.Component {
             <p>by {question.answers[answer].answerer_name} | {prettyDate} | Helpful? ({question.answers[answer].helpfulness}) | <u>Report</u></p>
           </div>
         </div>
-      )
+      );
     });
 
     return (
@@ -39,8 +39,12 @@ class Question extends React.Component {
           {formattedAnswers}
         </div>
       </div>
-    )
+    );
   }
 }
+
+Question.propTypes = {
+  question: PropTypes.array.isRequired
+};
 
 export default Question;

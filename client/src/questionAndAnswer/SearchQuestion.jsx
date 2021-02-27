@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const SearchQuestion = (props) => {
   // create an input field
@@ -9,11 +9,16 @@ const SearchQuestion = (props) => {
   // update the visible question???
   return (
     <input type="text"
-    placeholder="Have a question? Search for answers..."
-    onChange={props.onChange}
-    value={props.value}
+      placeholder="Have a question? Search for answers..."
+      onChange={props.onChange}
+      value={props.value}
     ></input>
-  )
+  );
+};
+
+SearchQuestion.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 };
 
 export default SearchQuestion;
