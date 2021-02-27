@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
 import ProductDescription from './ProductDescription';
@@ -15,6 +16,31 @@ class OverviewContainer extends React.Component {
       product_id: props.product_id,
       product: null
     };
+  }
+
+  componentDidMount() {
+    if (this.state.product_id !== undefined) {
+      this.fetchProductData(this.state.product_id)
+        .then((productData) => {
+          this.setState({
+            product: productData
+          });
+        })
+        .catch((error) => {
+          console.log('error fetching data', error);
+        });
+    }
+  }
+
+  fetchProductData(id) {
+    const productUrl = `/api/products/${id}`;
+    return axios.get(productUrl)
+      .then((results) => {
+        if (results && results.data) {
+          return results.data;
+        }
+        throw Error('fetchProductData failed');
+      });
   }
 
   render() {
