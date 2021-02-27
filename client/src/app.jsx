@@ -15,11 +15,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
         <Overview product_id={this.state.product_id}/>
         <RelatedProducts product_id={this.state.product_id}/>
-        <ReviewsList product_id={this.state.product_id}/>
         <QuestionModule product_id={this.state.product_id}/>
+        <ReviewsList product_id={this.state.product_id}/>
       </div>
     );
   }
