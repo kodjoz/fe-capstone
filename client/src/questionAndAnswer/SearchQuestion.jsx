@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const SearchQuestion = (props) => {
   // create an input field
@@ -8,13 +9,18 @@ const SearchQuestion = (props) => {
   // pass in all the questions as props so we can search each question
   // update the visible question???
   return (
-    <input type="text"
+    <StyledSearch type="text"
       placeholder="Have a question? Search for answers..."
       onChange={props.onChange}
       value={props.value}
-    ></input>
+    ></StyledSearch>
   );
 };
+
+const StyledSearch = styled.input`
+  grid-area: searchQuestion;
+  grid-row: span 1;
+`;
 
 SearchQuestion.propTypes = {
   onChange: PropTypes.func.isRequired,
