@@ -21,8 +21,8 @@ const StyledStarRow = styled.div`
 
 const StarRow = (props) => {
   var rating = props.rating || 0;
-  //Rounds number to nearest quarter
-  rating = Math.round(rating / 25) * 25;
+  //Rounds number to nearest multiple of 20
+  rating = Math.round(rating / 5) * 5;
   return (
     <div>
       <StyledStarRow rating={rating || 0} size={props.size || 30}></StyledStarRow>
