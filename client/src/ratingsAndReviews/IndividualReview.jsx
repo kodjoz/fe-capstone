@@ -7,7 +7,6 @@ class IndividualReview extends React.Component {
     super(props);
     this.state = {
       helpfulRated: false,
-      //reviewBodyExtra: props.review.body.length > 250 ? props.review.body.slice(251, props.review.body.length) : null
     };
   }
   helpfulVote() {
@@ -36,13 +35,12 @@ class IndividualReview extends React.Component {
     let body = null;
     review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
     if (review.body.length <= 250) {
-      body = <p>{review.body}</p>
+      body = <p>{review.body}</p>;
     } else {
       body = <div>
-        <p>{review.body.slice(0,251)}</p>
-        <span id='review-body-extra' style={{visibility: 'hidden'}}>{review.body.slice(251, review.body.length)}</span>
-        <p id='review-body-show' onClick={()=> {document.getElementById('review-body-extra').style.visibility='visible'; document.getElementById('review-body-show').style.visibility='hidden';}} >Show More...</p>
-      </div>
+        <p id='review-body'>{review.body.slice(0, 251)}</p>
+        <span id='review-body-show' onClick={ ()=> { document.getElementById('review-body').innerHTML = review.body; document.getElementById('review-body-show').style.visibility = 'hidden';}} >Show More...</span>
+      </div>;
     }
 
     let response = null;
