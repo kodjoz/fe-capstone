@@ -26,7 +26,7 @@ class Question extends React.Component {
     return (
       <div className="question">
         <div>
-          <div><p><strong>Q: {question.question_body}</strong></p>Helpful? ({question.question_helpfulness})</div>
+          <div><p><strong>Q: {question.question_body}</strong></p>Helpful? Yes({question.question_helpfulness}) | Add Answer</div>
           {answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
         </div>
       </div>
