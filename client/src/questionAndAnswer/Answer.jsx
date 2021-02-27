@@ -36,7 +36,7 @@ Answer.propTypes = {
 };
 
 const AnswerContainer = styled.div`
-  grid-area: AnswerContainer;
+  grid-area: answerContainer;
   grid-row: span 1;
 `;
 
