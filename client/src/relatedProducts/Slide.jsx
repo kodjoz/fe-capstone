@@ -3,15 +3,21 @@ import StyledSlideInfo from './SlideInfo.jsx';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-
 class Slide extends Component {
   constructor(props) {
     super(props);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  handleButtonClick(e) {
+    e.preventDefault();
+    console.log('clicked');
   }
 
   render() {
     return (
       <div className={this.props.className}>
+        {this.props.render(this.handleButtonClick)}
         <StyledSlideInfo data={this.props.data}></StyledSlideInfo>
       </div>
     );
@@ -20,7 +26,8 @@ class Slide extends Component {
 
 Slide.propTypes = {
   className: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  render: PropTypes.func.isRequired
 };
 
 const StyledSlide = styled(Slide)`
