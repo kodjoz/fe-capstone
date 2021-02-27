@@ -50,7 +50,7 @@ class QuestionModule extends React.Component {
     const questions = this.state.questions.slice(0, 4).map((question) => {
       return (
         <Question question={question} key={question.question_id}/>
-      )
+      );
     });
     // styles the whole body of this section
     // const Module = styled.div`
