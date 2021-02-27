@@ -25,11 +25,11 @@ class Question extends React.Component {
 
     // render a question
     return (
-      <QuestionContainer>
-        <StyledQuestion><strong>Q: {question.question_body}</strong></StyledQuestion>
+      <StyledQuestion>
+        <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
         <QuestionLinks>Helpful? Yes({question.question_helpfulness}) | Add Answer</QuestionLinks>
         {answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
-      </QuestionContainer>
+      </StyledQuestion>
     );
   }
 }
@@ -41,18 +41,20 @@ Question.propTypes = {
 };
 
 // style the components
-const QuestionContainer = styled.div`
-  display: grid;
+const StyledQuestion = styled.div`
+  grid-area: styledQuestion;
+  grid-row: span 1;
+  display: inline-grid;
   grid-template-columns: 70% 30%;
   grid-template-rows: auto;
   grid-auto-columns: 100%;
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "AnswerContainer .";
+    "answerContainer .";
 `;
 
-const StyledQuestion = styled.div`
+const QuestionBody = styled.div`
   grid-area: question;
 `;
 
