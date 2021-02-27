@@ -33,7 +33,7 @@ class ReviewsList extends React.Component {
 
   render() {
     if (!this.state.reviews) {
-      return (<div></div>);
+      return (<div> </div>);
     } else {
       return (
         <div>
