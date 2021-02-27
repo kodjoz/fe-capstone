@@ -57,7 +57,8 @@ OverviewContainer.propTypes = {
     name: PropTypes.string,
     slogan: PropTypes.string,
     description: PropTypes.string,
-    category: PropTypes.string
+    category: PropTypes.string,
+    default_price: PropTypes.string
   })
 };
 
