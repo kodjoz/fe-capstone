@@ -27,7 +27,7 @@ class ReviewsList extends React.Component {
       }
     })
       .then((res) => {
-        //console.log('GET REQ: ', res.data.results);
+        // console.log('GET REQ: ', res.data.results);
         this.setState({reviews: res.data.results});
       });
   }
@@ -39,9 +39,9 @@ class ReviewsList extends React.Component {
       return (
         <div>
           <p>#### reviews, sorted by this.state.sortOrder</p>
-          {/* {this.state.reviews.map((review) => {
-            <IndividualReview review={review} />
-          })} */}
+          {this.state.reviews.map((review) => {
+            return (<IndividualReview review={review} />);
+          })}
           <IndividualReview review={this.state.reviews[0]}/>
           <button>MORE REVIEWS</button>
           <button>ADD A REVIEW  +</button>
