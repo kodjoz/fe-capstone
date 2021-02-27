@@ -22,7 +22,7 @@ const StyledStarRow = styled.div`
 const StarRow = (props) => {
   return (
     <div>
-      <StyledStarRow rating={props.rating || 50} size={props.size || 30}></StyledStarRow>
+      <StyledStarRow rating={props.rating || 0} size={props.size || 30}></StyledStarRow>
     </div>
   );
 };
