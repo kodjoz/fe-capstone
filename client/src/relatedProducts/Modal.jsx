@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Modal = (props) => {
-  var { handleClose, show, children } = props;
+  var { handleClose, children } = props;
   return (
     <div className={props.className}>
       <h3>Comparing</h3>
@@ -14,6 +15,13 @@ const Modal = (props) => {
       </section>
     </div>
   );
+};
+
+Modal.propTypes = {
+  className: PropTypes.string.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  children: PropTypes.object
 };
 
 
