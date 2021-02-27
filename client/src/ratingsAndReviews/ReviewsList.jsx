@@ -9,7 +9,7 @@ class ReviewsList extends React.Component {
       product_id: props.product_id,
       reviews: null,
       sortOrder: 'relevance'
-    }
+    };
   }
 
   componentDidMount() {
@@ -17,38 +17,39 @@ class ReviewsList extends React.Component {
     this.getReviews(this.state.sortOrder);
   }
 
-  getReviews(sortOrder){
+  getReviews(sortOrder) {
     //if(!sortOrder){sort order = 'newest';}
     axios.get('/api/reviews', {
       params: {
-        product_id: this.state.product_id
+        product_id: this.state.product_id,
+        sort: sortOrder
       }
     })
-    .then((res) => {
-      console.log('GET REQ: ', res.data.results);
-      this.setState({reviews: res.data.results});
-    })
+      .then((res) => {
+        console.log('GET REQ: ', res.data.results);
+        this.setState({reviews: res.data.results});
+      });
   }
 
   render() {
-    if(!this.state.reviews){
+    if (!this.state.reviews) {
       return (<div></div>);
     } else {
       return (
-      <div>
-        <p>#### reviews, sorted by this.state.sortOrder</p>
-        {/* {this.state.reviews.map((review) => {
-          <IndividualReview review={review} />
-        })} */}
-        <IndividualReview review={this.state.reviews[0]}/>
-        <button>MORE REVIEWS</button>
-        <button>ADD A REVIEW  +</button>
-        {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
-      </div>
+        <div>
+          <p>#### reviews, sorted by this.state.sortOrder</p>
+          {/* {this.state.reviews.map((review) => {
+            <IndividualReview review={review} />
+          })} */}
+          <IndividualReview review={this.state.reviews[0]}/>
+          <button>MORE REVIEWS</button>
+          <button>ADD A REVIEW  +</button>
+          {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
+        </div>
       );
     }
   }
-};
+}
 
 export default ReviewsList;
 
