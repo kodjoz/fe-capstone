@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledSlide from './Slide.jsx';
 import PropTypes from 'prop-types';
+import StarButton from './StarButton.jsx';
 
 
 
@@ -20,14 +21,19 @@ const Carousel = ({ data }) => {
   return (
     <Container>
       {Object.values(data).map((product) => {
-        return <StyledSlide data={product} key={product.id}></StyledSlide>;
+        return <StyledSlide data={product}
+          key={product.id}
+          render={onClick => (
+            <StarButton onClick={onClick}/>
+          )}>
+        </StyledSlide>;
       })}
     </Container>
   );
 };
 
 Carousel.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object
 };
 
 export default Carousel;
