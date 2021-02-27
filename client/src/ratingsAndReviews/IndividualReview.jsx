@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StarRow from '../starRow.jsx';
+import styled from 'styled-components';
 
 class IndividualReview extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class IndividualReview extends React.Component {
     } else {
       body = <div>
         <p id='review-body'>{review.body.slice(0, 251)}</p>
-        <span id='review-body-show' onClick={ ()=> { document.getElementById('review-body').innerHTML = review.body; document.getElementById('review-body-show').style.visibility = 'hidden';}} >Show More...</span>
+        <span id='review-body-show' onClick={ ()=> { document.getElementById('review-body').innerHTML = review.body; document.getElementById('review-body-show').style.visibility = 'hidden'; }} >Show More...</span>
       </div>;
     }
 
@@ -55,19 +56,25 @@ class IndividualReview extends React.Component {
     if (review.recommend) {
       recommend = <span>&#10003; I recommend this product</span>;
     }
+
     return (
       <div>
         <StarRow size={15} rating={review.rating * 20} />
         <span>{review.reviewer_name}</span>
         <p>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</p>
         <div>{summary}</div>
-        {/* <b>{review.summary} - <em>use ... to truncate me into one line</em></b> */}
         <div>{body}</div>
-        {/* <p>{review.body} - <em>slice me into 250 char, w a <b>Show more</b> link</em></p> */}
+        <div className='review-images' >
+          {review.photos.map((photo) => {
+            return(
+              <img className='review-img-thumbnail' onClick={() => {console.log('open me in a modal window!')}} src={photo.url} />
+            );
+          })}
+        </div>
         <p>{recommend}</p>
         <span>{response}</span>
         <p>Helpful? <span onClick={() => { this.helpfulVote(); }}>Yes</span> ({review.helpfulness})</p>
-        <p>{JSON.stringify(this.props.review)}</p>
+        {/* <p>{JSON.stringify(this.props.review)}</p> */}
       </div>
     );
   }
