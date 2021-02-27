@@ -20,9 +20,12 @@ const StyledStarRow = styled.div`
 `;
 
 const StarRow = (props) => {
+  var rating = props.rating || 0;
+  //Rounds number to nearest quarter with maximum of 2 digits after decimal
+  rating = (Math.round(rating * 4) / 4).toFixed(2);
   return (
     <div>
-      <StyledStarRow rating={props.rating || 0} size={props.size || 30}></StyledStarRow>
+      <StyledStarRow rating={rating || 0} size={props.size || 30}></StyledStarRow>
     </div>
   );
 };
