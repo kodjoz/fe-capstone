@@ -64,7 +64,7 @@ class RelatedProductsWrapper extends React.Component {
         <h4>Your outfit</h4>
         <Carousel />
         <h4>Stars</h4>
-        <StarRow></StarRow>
+        <StarRow rating={70}></StarRow>
       </div>
     );
   }

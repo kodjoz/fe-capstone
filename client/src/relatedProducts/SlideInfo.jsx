@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import StarRow from '../starRow.jsx';
 
 
 const SlideInfo = (props) => {
@@ -9,7 +10,7 @@ const SlideInfo = (props) => {
       <div> {props.data.category} </div>
       <div> {props.data.name} </div>
       <div> {props.data.default_price} </div>
-      <div> Rating </div>
+      <StarRow size={20}></StarRow>
     </div>
   );
 };
@@ -22,7 +23,7 @@ SlideInfo.propTypes = {
 const StyledSlideInfo = styled(SlideInfo)`
   width: 150px;
   height: 100px;
-  background-color: lightblue;
+  background-color: #B0A8B9;
 `;
 
 export default StyledSlideInfo;
