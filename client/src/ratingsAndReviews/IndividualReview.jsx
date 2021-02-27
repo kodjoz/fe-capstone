@@ -17,14 +17,6 @@ class IndividualReview extends React.Component {
 
   render() {
     let review = this.props.review;
-    // let body;
-    // if (props.review.body.length <= 250) {
-    //   body = <p>{props.review.body}</p>
-    // } else {
-    //   body = <p id='review-body'>{props.review.body.slice(0,250) + '...'}
-    //   <span onClick={() => {document.getElementById('review-body').value = this.state.reviewBodyExtra}}>Show more...</span>
-    //   </p>
-    // }
     // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
     if (summary.length > 60) {
@@ -35,12 +27,15 @@ class IndividualReview extends React.Component {
 
     let body = null;
     review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
+    let bodyId = 'review' + review.review_id;
+    let bodyShowId = bodyId + 'vis';
+    console.log(bodyId);
     if (review.body.length <= 250) {
       body = <p>{review.body}</p>;
     } else {
       body = <div>
-        <p id='review-body'>{review.body.slice(0, 251)}</p>
-        <span id='review-body-show' onClick={ ()=> { document.getElementById('review-body').innerHTML = review.body; document.getElementById('review-body-show').style.visibility = 'hidden'; }} >Show More...</span>
+        <p id={bodyId}>{review.body.slice(0, 251)}</p>
+        <span id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; document.getElementById(bodyShowId).style.visibility = 'hidden'; }} >Show More...</span>
       </div>;
     }
 
@@ -64,13 +59,13 @@ class IndividualReview extends React.Component {
         <p>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</p>
         <div>{summary}</div>
         <div>{body}</div>
-        <div className='review-images' >
+        {/* <div className='review-photos' >
           {review.photos.map((photo) => {
-            return(
-              <img className='review-img-thumbnail' onClick={() => {console.log('open me in a modal window!')}} src={photo.url} />
+            return (
+              <img key={review.review_id} className='review-img-thumbnail' onClick={() => { console.log('open me in a modal window!'); }} src={photo.url} />
             );
           })}
-        </div>
+        </div> */}
         <p>{recommend}</p>
         <span>{response}</span>
         <p>Helpful? <span onClick={() => { this.helpfulVote(); }}>Yes</span> ({review.helpfulness})</p>
