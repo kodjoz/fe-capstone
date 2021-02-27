@@ -66,7 +66,7 @@ class OverviewContainer extends React.Component {
           <ImageGallery />
         </LeftContainer>
         <RightContainer>
-          <ProductDetail />
+          <ProductDetail product={this.state.product} />
           <StyleSelector />
           <AddToCart />
         </RightContainer>
