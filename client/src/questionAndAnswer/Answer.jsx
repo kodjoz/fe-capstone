@@ -33,4 +33,5 @@ Answer.propTypes = {
   answer: PropTypes.object.isRequired
 };
 // each answer should be an object
+// accidentally deleted my branch
 export default Answer;

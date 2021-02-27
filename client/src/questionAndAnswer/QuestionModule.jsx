@@ -83,5 +83,5 @@ class QuestionModule extends React.Component {
 QuestionModule.propTypes = {
   product_id: PropTypes.number
 };
-
+// deleted my branch on accident
 export default QuestionModule;
