@@ -1,6 +1,7 @@
 import React from 'react';
 import IndividualReview from './IndividualReview.jsx';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class ReviewsList extends React.Component {
 
   render() {
     if (!this.state.reviews) {
-      return (<div> </div>);
+      return (<div></div>);
     } else {
       return (
         <div>
@@ -50,6 +51,10 @@ class ReviewsList extends React.Component {
     }
   }
 }
+
+ReviewsList.propTypes = {
+  product_id: PropTypes.number
+};
 
 export default ReviewsList;
 
