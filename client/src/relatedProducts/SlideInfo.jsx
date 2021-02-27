@@ -6,21 +6,22 @@ import PropTypes from 'prop-types';
 const SlideInfo = (props) => {
   return (
     <div className={props.className}>
-      <div> category </div>
-      <div> name </div>
-      <div> price </div>
-      <div> stars </div>
+      <div> {props.data.category} </div>
+      <div> {props.data.name} </div>
+      <div> {props.data.default_price} </div>
+      <div> Rating </div>
     </div>
   );
 };
 
 SlideInfo.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired
 };
 
 const StyledSlideInfo = styled(SlideInfo)`
   width: 150px;
-  height: 80px;
+  height: 100px;
   background-color: lightblue;
 `;
 

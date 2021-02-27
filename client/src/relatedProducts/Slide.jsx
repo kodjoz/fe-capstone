@@ -12,14 +12,15 @@ class Slide extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <StyledSlideInfo></StyledSlideInfo>
+        <StyledSlideInfo data={this.props.data}></StyledSlideInfo>
       </div>
     );
   }
 }
 
 Slide.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired
 };
 
 const StyledSlide = styled(Slide)`
