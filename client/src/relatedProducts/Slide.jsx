@@ -34,6 +34,7 @@ const StyledSlide = styled(Slide)`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 `;
 
 export default StyledSlide;
