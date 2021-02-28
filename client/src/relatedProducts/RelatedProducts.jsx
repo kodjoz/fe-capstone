@@ -1,8 +1,6 @@
 import React from 'react';
-import Carousel from './Carousel.jsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import StarRow from '../starRow.jsx';
 import CarouselWrapper from './CarouselWrapper.jsx';
 import RelatedCarousel from './RelatedCarousel.jsx';
 import OutfitCarousel from './OutfitCarousel.jsx';
@@ -55,17 +53,6 @@ class RelatedProductsWrapper extends React.Component {
     this.getRelatedProducts();
   }
 
-  showModal() {
-    this.setState({
-      showModal: true
-    });
-  }
-
-  hideModal() {
-    this.setState({
-      showModal: false
-    });
-  }
 
   render() {
     if (this.state.isLoading) {
@@ -76,13 +63,11 @@ class RelatedProductsWrapper extends React.Component {
       <div>
         <h4>Related Products</h4>
         <CarouselWrapper
-          cardButtonClick={() => { console.log('related click'); }}
           data={this.state.relatedProductsData}
           render={(data) => {
             return <RelatedCarousel data={data}/>;
           }}/>
         <CarouselWrapper
-          cardButtonClick={() => {console.log('outfit click'); }}
           data={this.state.relatedProductsData}
           render={(data) => {
             return <OutfitCarousel data={data} />;
