@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const Answer = (props) => {
   // takes the answers property from the question
@@ -22,16 +23,22 @@ const Answer = (props) => {
   let prettyDate = new Date(answer.date).toLocaleDateString('en-US', options);
 
   return (
-    <div className="answer">
-      <p><strong>A:</strong> {answer.body}</p>
-      <span>by {answer.answerer_name}, {prettyDate} | Helpful? <a>Yes</a> ({answer.helpfulness}) | <a>Report</a></span>
-    </div>
+    <AnswerContainer>
+      <div className="answer"><strong>A:</strong> {answer.body}</div>
+      <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful? <a>Yes</a> ({answer.helpfulness}) | <a>Report</a></div>
+    </AnswerContainer>
   );
 };
 
+// each answer should be an object
 Answer.propTypes = {
   answer: PropTypes.object.isRequired
 };
-// each answer should be an object
+
+const AnswerContainer = styled.div`
+  grid-area: answerContainer;
+  grid-row: span 1;
+`;
+
 // accidentally deleted my branch
 export default Answer;
