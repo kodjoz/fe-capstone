@@ -12,8 +12,9 @@ class RelatedCarousel extends React.Component {
     this.state = {
       showModal: false
     };
-    this.show = this.showModal.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.cardButtonClick = this.cardButtonClick.bind(this);
   }
 
   showModal() {

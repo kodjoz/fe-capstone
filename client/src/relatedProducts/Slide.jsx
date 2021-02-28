@@ -6,15 +6,19 @@ import PropTypes from 'prop-types';
 class Slide extends Component {
   constructor(props) {
     super(props);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
+  handleButtonClick(event) {
+    event.preventDefault();
+    this.props.cardButtonClick();
+  }
 
   render() {
     return (
       <div className={this.props.className}>
-        {this.props.render(this.props.cardButtonClick)}
+        {this.props.render(this.handleButtonClick)}
         <StyledSlideInfo data={this.props.data}></StyledSlideInfo>
-
       </div>
     );
   }
