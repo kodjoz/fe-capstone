@@ -1,6 +1,4 @@
 import React from 'react';
-import StyledSlide from './Slide.jsx';
-import StarButton from './StarButton.jsx';
 import PropTypes from 'prop-types';
 
 
