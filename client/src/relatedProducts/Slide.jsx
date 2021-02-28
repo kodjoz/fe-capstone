@@ -32,6 +32,7 @@ class Slide extends Component {
     e.preventDefault();
     console.log('clicked');
     this.showModal();
+    this.props.cardButtonClick();
   }
 
   render() {
@@ -39,7 +40,9 @@ class Slide extends Component {
       <div className={this.props.className}>
         {this.props.render(this.handleButtonClick)}
         <StyledSlideInfo data={this.props.data}></StyledSlideInfo>
-        <StyledModal show={this.state.showModal} handleClose={this.hideModal}>
+        <StyledModal show={this.state.showModal}
+          handleClose={this.hideModal}
+          data={this.props.data}>
           <p>Modal</p>
         </StyledModal>
       </div>
