@@ -21,13 +21,15 @@ Modal.propTypes = {
   className: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
-  children: PropTypes.object
+  children: PropTypes.object,
+  data: PropTypes.object.isRequired
 };
 
 
 const StyledModal = styled(Modal)`
   display: ${props => props.show ? 'block' : 'none'};
-  position: fixed;
+  position: absolute;
+  z-index: 1;
   width: 30%;
   height: auto;
   top: 50%;
