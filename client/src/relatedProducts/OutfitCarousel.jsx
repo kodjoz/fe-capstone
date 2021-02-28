@@ -6,7 +6,6 @@ import StyledSlide from './Slide.jsx';
 class OutfitCarousel extends React.Component {
   constructor(props) {
     super(props);
-
     this.cardButtonClick = this.cardButtonClick.bind(this);
   }
 
