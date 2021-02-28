@@ -12,14 +12,7 @@ class RelatedCarousel extends React.Component {
   render() {
     return (
       <>
-        {Object.values(this.props.data).map((product) => {
-          return <StyledSlide data={product}
-            key={product.id}
-            render={onClick => (
-              <StarButton onClick={onClick}/>
-            )}>
-          </StyledSlide>;
-        })}
+
       </>
     );
   }

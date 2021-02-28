@@ -11,14 +11,6 @@ class OutfitCarousel extends React.Component {
     return (
       <>
         <div>First Slide</div>
-        {Object.values(this.props.data).map((product) => {
-          return <StyledSlide data={product}
-            key={product.id}
-            render={onClick => (
-              <button onClick={onClick}>Button</button>
-            )}>
-          </StyledSlide>;
-        })}
       </>
     );
   }
