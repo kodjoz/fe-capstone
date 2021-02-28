@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import StyledSlideInfo from './SlideInfo.jsx';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import StyledModal from './Modal.jsx';
 
 class Slide extends Component {
   constructor(props) {
@@ -40,11 +39,7 @@ class Slide extends Component {
       <div className={this.props.className}>
         {this.props.render(this.handleButtonClick)}
         <StyledSlideInfo data={this.props.data}></StyledSlideInfo>
-        <StyledModal show={this.state.showModal}
-          handleClose={this.hideModal}
-          data={this.props.data}>
-          <p>Modal</p>
-        </StyledModal>
+
       </div>
     );
   }
@@ -53,7 +48,8 @@ class Slide extends Component {
 Slide.propTypes = {
   className: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  render: PropTypes.func.isRequired
+  render: PropTypes.func.isRequired,
+  cardButtonClick: PropTypes.func.isRequired
 };
 
 const StyledSlide = styled(Slide)`
