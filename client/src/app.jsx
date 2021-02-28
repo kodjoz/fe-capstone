@@ -1,7 +1,7 @@
 import React from 'react';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
-import QuestionModule from './questionAndAnswer/QuestionModule.jsx';
+import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
 import Overview from './overview/Overview.jsx';
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
       <div>
         <Overview product_id={this.state.product_id}/>
         <RelatedProducts product_id={this.state.product_id}/>
-        <QuestionModule product_id={this.state.product_id}/>
+        <QuestionAndAnswer product_id={this.state.product_id}/>
         <ReviewsList product_id={this.state.product_id}/>
       </div>
     );
