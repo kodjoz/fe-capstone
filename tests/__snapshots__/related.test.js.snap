@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<div
+  className="sc-dlfnbm vlvdc"
+>
+  <p>
+    ok
+  </p>
+  <div
+    className="sc-gsTCUz jGrfKI"
+  >
+    <div>
+       
+      Romper
+       
+    </div>
+    <div>
+       
+      Alberto Romper
+       
+    </div>
+    <div>
+       
+      826.00
+       
+    </div>
+    <div>
+      <div
+        className="sc-bdfBwQ juPdoH"
+        size={20}
+      />
+    </div>
+  </div>
+</div>
+`;
