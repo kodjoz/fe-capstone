@@ -40,9 +40,8 @@ class ReviewsList extends React.Component {
         <div>
           <p>#### reviews, sorted by this.state.sortOrder</p>
           {this.state.reviews.map((review) => {
-            return (<IndividualReview review={review} />);
+            return (<IndividualReview key={review.review_id} review={review} />);
           })}
-          <IndividualReview review={this.state.reviews[0]}/>
           <button>MORE REVIEWS</button>
           <button>ADD A REVIEW  +</button>
           {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
