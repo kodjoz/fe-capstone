@@ -24,12 +24,12 @@ CarouselWrapper.propTypes = {
 };
 
 const Container = styled.div`
-  border: 1px solid black;
   width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 `;
 
 export default CarouselWrapper;
