@@ -8,6 +8,7 @@ class OutfitCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
+    this.removeProductClickHandler = this.removeProductClickHandler.bind(this);
     this.addToOutfit = this.addToOutfit.bind(this);
     this.addProductClickHandler = this.addProductClickHandler.bind(this);
 
@@ -25,15 +26,17 @@ class OutfitCarousel extends React.Component {
     }
   }
   componentDidUpdate() {
-    console.log(this.state.yourOutfit);
+    console.log('update');
     window.localStorage.setItem('relatedProducts', JSON.stringify(this.state));
   }
 
-  removeFromOutfit() {
+  removeFromOutfit(product) {
+    console.log('remove from Outfit', product);
+    let currentOutfit = this.state.yourOutfit;
+    delete currentOutfit[product.id];
     this.setState({
-      yourOutfit: 'bye'
+      yourOutfit: currentOutfit
     });
-    console.log('remove from Outfit');
   }
 
   addToOutfit(newProduct) {
@@ -49,6 +52,10 @@ class OutfitCarousel extends React.Component {
     this.addToOutfit(this.props.currentProduct);
   }
 
+  removeProductClickHandler(event, data) {
+    this.removeFromOutfit(data);
+  }
+
   render() {
     return (
       <>
@@ -57,9 +64,9 @@ class OutfitCarousel extends React.Component {
           <button onClick={this.addProductClickHandler}>add to outfit</button>
         </FirstSlide>
         {/* change to use this.state.yourOutfit once add button adds productData */}
-        {Object.values(this.props.data).map((product) => {
+        {Object.values(this.state.yourOutfit).map((product) => {
           return <StyledSlide data={product}
-            cardButtonClick={this.removeFromOutfit}
+            cardButtonClick={this.removeProductClickHandler}
             key={product.id}
             render={onClick => (
               <button onClick={onClick}>x</button>
