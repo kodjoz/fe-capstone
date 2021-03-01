@@ -19,6 +19,7 @@ class QuestionAndAnswer extends React.Component {
 
     this.searchQuestions = this.searchQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.getMoreQuestions = this.getMoreQuestions.bind(this);
   }
 
   getQuestions(page, count) {
@@ -49,11 +50,23 @@ class QuestionAndAnswer extends React.Component {
     this.getQuestions(1, 4);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.product_id !== prevProps.product_id) {
+      this.getQuestions(1, 4);
+    }
+  }
+
   // type in a term and update the state
   searchQuestions(e) {
     // console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
+    });
+  }
+  getMoreQuestions() {
+    this.getQuestions(1, 999);
+    this.setState({
+      getMoreQuestions: !this.state.getMoreQuestions
     });
   }
   // if the user wants to load more answers click on the button and update the state
@@ -79,7 +92,7 @@ class QuestionAndAnswer extends React.Component {
         {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.getMoreAnswers} />))}
         <StyledLoadAnswers><a onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
-          <button>More Answered Questions</button>
+          <button onClick={this.getMoreQuestions}>More Answered Questions</button>
           <button>Add A Question</button>
         </StyledButtons>
       </QuestionContainer>
