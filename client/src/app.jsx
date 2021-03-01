@@ -18,8 +18,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Overview product_id={this.state.product_id}/>
-        <RelatedProducts product_id={this.state.product_id}/>
+        <Overview product_id={this.state.product_id} product={this.product}/>
+        <RelatedProducts product_id={this.state.product_id} product={this.product}/>
         <QuestionAndAnswer product_id={this.state.product_id}/>
         <ReviewsList product_id={this.state.product_id}/>
       </div>
@@ -45,7 +45,7 @@ class App extends React.Component {
   /**
    * input: number id
    * return: Promise<product data>
-   * does NOT handle errors
+   * does NOT handle errors, handle them in the calling function
    */
   fetchProductData(id) {
     const productUrl = `/api/products/${id}`;
