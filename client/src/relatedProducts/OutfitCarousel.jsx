@@ -7,11 +7,32 @@ import styled from 'styled-components';
 class OutfitCarousel extends React.Component {
   constructor(props) {
     super(props);
-    this.cardButtonClick = this.cardButtonClick.bind(this);
+    this.removeFromOutfit = this.removeFromOutfit.bind(this);
+    this.addToOutfit = this.addToOutfit.bind(this);
+
+    this.state = {
+      yourOutfit: JSON.parse(
+        window.localStorage.getItem('yourOutfit')
+      ) || {}
+    };
   }
 
-  cardButtonClick() {
-    console.log('outfit click');
+  componentDidUpdate() {
+    window.localStorage.setItem('yourOutfit', JSON.stringify(this.state));
+  }
+
+  removeFromOutfit() {
+    this.setState({
+      yourOutfit: 'bye'
+    });
+    console.log('remove from Outfit');
+  }
+
+  addToOutfit() {
+    this.setState({
+      yourOutfit: 'hi'
+    });
+    console.log('add to outfit');
   }
 
   render() {
@@ -19,11 +40,11 @@ class OutfitCarousel extends React.Component {
       <>
         <FirstSlide>
           First Slide
-          <button onClick={() => { console.log('add to outfit'); }}>add to outfit</button>
+          <button onClick={this.addToOutfit}>add to outfit</button>
         </FirstSlide>
         {Object.values(this.props.data).map((product) => {
           return <StyledSlide data={product}
-            cardButtonClick={this.cardButtonClick}
+            cardButtonClick={this.removeFromOutfit}
             key={product.id}
             render={onClick => (
               <button onClick={onClick}>x</button>
