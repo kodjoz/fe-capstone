@@ -13,19 +13,20 @@ class QuestionAndAnswer extends React.Component {
     this.state = {
       questions: [],
       searchTerm: '',
-      loadMoreAnswers: false,
+      getMoreQuestions: false,
+      getMoreAnswers: false
     };
 
     this.searchQuestions = this.searchQuestions.bind(this);
-    this.loadAnswers = this.loadAnswers.bind(this);
+    this.getMoreAnswers = this.getMoreAnswers.bind(this);
   }
 
-  getQuestions() {
+  getQuestions(page, count) {
     axios.get('/api/qa/questions', {
       params: {
         product_id: this.props.product_id,
-        page: 1,
-        count: 4
+        page: page,
+        count: count
       }
     })
       .then(({ data }) => {
@@ -45,7 +46,7 @@ class QuestionAndAnswer extends React.Component {
   }
 
   componentDidMount() {
-    this.getQuestions();
+    this.getQuestions(1, 4);
   }
 
   // type in a term and update the state
@@ -56,9 +57,9 @@ class QuestionAndAnswer extends React.Component {
     });
   }
   // if the user wants to load more answers click on the button and update the state
-  loadAnswers() {
+  getMoreAnswers() {
     this.setState({
-      loadMoreAnswers: !this.state.loadMoreAnswers
+      getMoreAnswers: !this.state.getMoreAnswers
     });
   }
 
@@ -75,8 +76,8 @@ class QuestionAndAnswer extends React.Component {
       <QuestionContainer>
         <QuestionHeader>Questions & Answers</QuestionHeader>
         <SearchQuestion onChange={this.searchQuestions} value={this.state.searchTerm}/>
-        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.loadMoreAnswers} />))}
-        <StyledLoadAnswers><a onClick={this.loadAnswers}>Load More Answers</a></StyledLoadAnswers>
+        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.getMoreAnswers} />))}
+        <StyledLoadAnswers><a onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
           <button>More Answered Questions</button>
           <button>Add A Question</button>
