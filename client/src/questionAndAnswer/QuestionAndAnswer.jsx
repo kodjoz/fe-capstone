@@ -65,32 +65,32 @@ class QuestionAndAnswer extends React.Component {
     if (this.state.searchTerm.length > 2) {
       // get more questions from the server
       this.getQuestions(1, 999)
-      .then(() => {
-        // for each question if the question_body contains the search letters
-        for (let q = 0; q < this.state.questions.length; q++) {
-          let currentQuestion = this.state.questions[q];
-          if (currentQuestion.question_body.includes(this.state.searchTerm)) {
-            results.push(currentQuestion);
-            console.log(results);
+        .then(() => {
+          // for each question if the question_body contains the search letters
+          for (let q = 0; q < this.state.questions.length; q++) {
+            let currentQuestion = this.state.questions[q];
+            if (currentQuestion.question_body.includes(this.state.searchTerm)) {
+              results.push(currentQuestion);
+              console.log(results);
+            }
           }
-        }
-      })
-      .then(() => {
+        })
+        .then(() => {
         // update questions state to only show search results
           this.setState({
             questions: results,
             getMoreQuestions: true,
           });
         });
-        // if there are no characters then reset the search
-      } else if (this.state.searchTerm === '') {
-        this.getQuestions(1, 4)
-          .then(() => {
-            this.setState({
-              getMoreQuestions: false
-              });
+      // if there are no characters then reset the search
+    } else if (this.state.searchTerm === '') {
+      this.getQuestions(1, 4)
+        .then(() => {
+          this.setState({
+            getMoreQuestions: false
           });
-      }
+        });
+    }
   }
 
   getMoreQuestions() {
