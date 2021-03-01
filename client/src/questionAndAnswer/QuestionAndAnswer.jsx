@@ -83,7 +83,7 @@ class QuestionAndAnswer extends React.Component {
           });
         });
       // if there are no characters then reset the search
-    } else if (this.state.searchTerm === '') {
+    } else if (this.state.searchTerm.length < 2) {
       this.getQuestions(1, 4)
         .then(() => {
           this.setState({
