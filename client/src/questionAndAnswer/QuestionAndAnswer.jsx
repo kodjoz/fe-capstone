@@ -63,11 +63,12 @@ class QuestionAndAnswer extends React.Component {
       searchTerm: e.target.value
     });
   }
+
   getMoreQuestions() {
-    this.getQuestions(1, 999);
     this.setState({
       getMoreQuestions: !this.state.getMoreQuestions
     });
+    this.getQuestions(1, 999);
   }
   // if the user wants to load more answers click on the button and update the state
   getMoreAnswers() {
@@ -81,7 +82,7 @@ class QuestionAndAnswer extends React.Component {
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
     if (!questions.length) {
       questions = [];
-    } else if (questions.length > 4) {
+    } else if (questions.length > 4 && !this.state.getMoreQuestions) {
       questions = this.state.questions.slice(0, 4);
     }
     // render our module
