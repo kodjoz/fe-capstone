@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
@@ -25,6 +26,21 @@ class App extends React.Component {
     );
   }
 
+  /**
+   * input: number id
+   * return: Promise<product data>
+   * does NOT handle errors
+   */
+  fetchProductData(id) {
+    const productUrl = `/api/products/${id}`;
+    return axios.get(productUrl)
+      .then((results) => {
+        if (results && results.data) {
+          return results.data;
+        }
+        throw Error('error fetching product data');
+      });
+  }
 }
 
 const featureTuplePropType = PropTypes.arrayOf(
