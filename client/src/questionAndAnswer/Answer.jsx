@@ -25,7 +25,7 @@ const Answer = (props) => {
   return (
     <AnswerContainer>
       <div className="answer"><strong>A:</strong> {answer.body}</div>
-      <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful? <a>Yes</a> ({answer.helpfulness}) | <a>Report</a></div>
+      <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful?  <LinkText>Yes ({answer.helpfulness})</LinkText> | <LinkText>Report</LinkText></div>
     </AnswerContainer>
   );
 };
@@ -38,6 +38,13 @@ Answer.propTypes = {
 const AnswerContainer = styled.div`
   grid-area: answerContainer;
   grid-row: span 1;
+`;
+
+const LinkText = styled.span`
+  text-decoration: underline;
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 // accidentally deleted my branch

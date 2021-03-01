@@ -27,7 +27,7 @@ class Question extends React.Component {
     return (
       <StyledQuestion>
         <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
-        <QuestionLinks>Helpful? Yes({question.question_helpfulness}) | Add Answer</QuestionLinks>
+        <QuestionLinks>Helpful? <LinkText>Yes({question.question_helpfulness})</LinkText> | Add Answer</QuestionLinks>
         {answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
       </StyledQuestion>
     );
@@ -61,6 +61,13 @@ const QuestionBody = styled.div`
 const QuestionLinks = styled.div`
   grid-area: links;
   justify-self: end;
+`;
+
+const LinkText = styled.span`
+  text-decoration: underline;
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 // first row is two columns
