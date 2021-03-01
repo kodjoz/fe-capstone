@@ -51,7 +51,7 @@ class OutfitCarousel extends React.Component {
     event.preventDefault();
     //get product data from app
     //pass to addToOutfit as parameter
-    this.addToOutfit(fakeProduct);
+    this.addToOutfit(this.props.currentProduct);
   }
 
   render() {
@@ -77,7 +77,8 @@ class OutfitCarousel extends React.Component {
 }
 
 OutfitCarousel.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  currentProduct: PropTypes.object
 };
 
 const FirstSlide = styled.div`
