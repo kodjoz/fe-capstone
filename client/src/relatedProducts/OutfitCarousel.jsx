@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import StyledSlide from './Slide.jsx';
 import styled from 'styled-components';
 
-let fakeProduct = {'id': 19090, 'campus': 'hr-rfe', 'name': 'Bright Future Sunglasses', 'slogan': 'You\'ve got to wear shades', 'description': 'Where you\'re going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.', 'category': 'Accessories', 'default_price': '69.00', 'created_at': '2021-02-23T19:24:34.450Z', 'updated_at': '2021-02-23T19:24:34.450Z', 'features': [{'feature': 'Lenses', 'value': 'Ultrasheen'}, {'feature': 'UV Protection', 'value': null}, {'feature': 'Frames', 'value': 'LightCompose'}]};
-
 
 class OutfitCarousel extends React.Component {
   constructor(props) {
@@ -29,7 +27,6 @@ class OutfitCarousel extends React.Component {
   componentDidUpdate() {
     console.log(this.state.yourOutfit);
     window.localStorage.setItem('relatedProducts', JSON.stringify(this.state));
-    //window.localStorage.setItem('relatedProducts', 'hi');
   }
 
   removeFromOutfit() {
@@ -49,8 +46,6 @@ class OutfitCarousel extends React.Component {
 
   addProductClickHandler(event) {
     event.preventDefault();
-    //get product data from app
-    //pass to addToOutfit as parameter
     this.addToOutfit(this.props.currentProduct);
   }
 
