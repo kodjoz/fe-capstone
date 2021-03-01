@@ -16,9 +16,10 @@ class RelatedProductsWrapper extends React.Component {
 
   //get list of related products using productId prop
   getRelatedProducts() {
-    axios.get('/api/products/19089/related', {
+    let product_id = this.props.product_id;
+    axios.get(`/api/products/${product_id}/related`, {
       params: {
-        product_id: 19089
+        product_id: {product_id}
       }
     }).then(({data}) => {
       return Promise.all(data.map((id) => {
@@ -78,7 +79,8 @@ class RelatedProductsWrapper extends React.Component {
 }
 
 RelatedProductsWrapper.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  product: PropTypes.object
 };
 
 export default RelatedProductsWrapper;
