@@ -114,6 +114,7 @@ class QuestionAndAnswer extends React.Component {
     return axios.put(`/api/qa/questions/${id}/helpful`)
       .then(() => {
         // send message to API to mark question as helpful, then rerender the state
+        // Only query as many questions as we already have and no more
         this.getQuestions(1, this.state.questions.length);
       })
       .catch((err) => {
@@ -126,6 +127,7 @@ class QuestionAndAnswer extends React.Component {
     return axios.put(`/api/qa/answers/${id}/helpful`)
       .then(() => {
         // rerender the state once we get the value back
+        // Only query as many questions as we already have and no more
         this.getQuestions(1, this.state.questions.length);
       })
       .catch((err) => {
