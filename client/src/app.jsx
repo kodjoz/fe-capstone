@@ -26,6 +26,22 @@ class App extends React.Component {
     );
   }
 
+  componentDidMount() {
+    const product_id = this.state.product_id;
+    if (!product_id) {
+      return console.error('product_id missing from root app state');
+    }
+    this.fetchProductData(product_id)
+      .then((data) => {
+        this.setState({
+          product: data
+        });
+      })
+      .catch((error) => {
+        console.error('something went wrong fetching product data', error);
+      });
+  }
+
   /**
    * input: number id
    * return: Promise<product data>
