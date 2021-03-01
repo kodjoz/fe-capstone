@@ -77,6 +77,10 @@ class QuestionAndAnswer extends React.Component {
         <SearchQuestion onChange={this.searchQuestions} value={this.state.searchTerm}/>
         {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.loadMoreAnswers} />))}
         <StyledLoadAnswers><a onClick={this.loadAnswers}>Load More Answers</a></StyledLoadAnswers>
+        <StyledButtons>
+          <button>More Answered Questions</button>
+          <button>Add A Question</button>
+        </StyledButtons>
       </QuestionContainer>
     );
   }
@@ -93,7 +97,8 @@ const QuestionContainer = styled.div`
     "questionHeader"
     "searchQuestion"
     "styledQuestion"
-    "styledLoadAnswers";
+    "styledLoadAnswers"
+    "styledButtons";
 `;
 
 const QuestionHeader = styled.h3`
@@ -103,6 +108,11 @@ const QuestionHeader = styled.h3`
 
 const StyledLoadAnswers = styled.div`
   grid-area: styledLoadAnswers;
+  grid-row: span 1;
+`;
+
+const StyledButtons = styled.div`
+  grid-area: styledButtons;
   grid-row: span 1;
 `;
 // the product id should be a number
