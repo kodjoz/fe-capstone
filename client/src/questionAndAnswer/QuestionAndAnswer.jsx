@@ -13,28 +13,28 @@ class QuestionAndAnswer extends React.Component {
     this.state = {
       questions: [],
       searchTerm: '',
-      loadMoreAnswers: false,
+      getMoreQuestions: false,
+      getMoreAnswers: false
     };
 
     this.searchQuestions = this.searchQuestions.bind(this);
-    this.loadAnswers = this.loadAnswers.bind(this);
+    this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.getMoreQuestions = this.getMoreQuestions.bind(this);
   }
 
-  getQuestions() {
-    axios.get('/api/qa/questions', {
+  getQuestions(page, count) {
+    return axios.get('/api/qa/questions', {
       params: {
         product_id: this.props.product_id,
-        page: 1,
-        count: 4
+        page: page,
+        count: count
       }
     })
       .then(({ data }) => {
-
         // sort the questions by question_helpfulness
         data.results.sort((a, b) => {
           return b.question_helpfulness - a.question_helpfulness;
         });
-
         this.setState({
           questions: data.results
         });
@@ -45,7 +45,13 @@ class QuestionAndAnswer extends React.Component {
   }
 
   componentDidMount() {
-    this.getQuestions();
+    this.getQuestions(1, 4);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.product_id !== prevProps.product_id) {
+      this.getQuestions(1, 4);
+    }
   }
 
   // type in a term and update the state
@@ -54,11 +60,49 @@ class QuestionAndAnswer extends React.Component {
     this.setState({
       searchTerm: e.target.value
     });
+    var results = [];
+    // if the searchterm is longer than 3 begin searching questions
+    if (this.state.searchTerm.length > 2) {
+      // get more questions from the server
+      this.getQuestions(1, 999)
+        .then(() => {
+          // for each question if the question_body contains the search letters
+          for (let q = 0; q < this.state.questions.length; q++) {
+            let currentQuestion = this.state.questions[q];
+            if (currentQuestion.question_body.includes(this.state.searchTerm)) {
+              results.push(currentQuestion);
+              console.log(results);
+            }
+          }
+        })
+        .then(() => {
+        // update questions state to only show search results
+          this.setState({
+            questions: results,
+            getMoreQuestions: true,
+          });
+        });
+      // if there are no characters then reset the search
+    } else if (this.state.searchTerm.length < 2) {
+      this.getQuestions(1, 4)
+        .then(() => {
+          this.setState({
+            getMoreQuestions: false
+          });
+        });
+    }
+  }
+
+  getMoreQuestions() {
+    this.setState({
+      getMoreQuestions: !this.state.getMoreQuestions
+    });
+    this.getQuestions(1, 999);
   }
   // if the user wants to load more answers click on the button and update the state
-  loadAnswers() {
+  getMoreAnswers() {
     this.setState({
-      loadMoreAnswers: !this.state.loadMoreAnswers
+      getMoreAnswers: !this.state.getMoreAnswers
     });
   }
 
@@ -67,7 +111,7 @@ class QuestionAndAnswer extends React.Component {
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
     if (!questions.length) {
       questions = [];
-    } else if (questions.length > 4) {
+    } else if (questions.length > 4 && !this.state.getMoreQuestions) {
       questions = this.state.questions.slice(0, 4);
     }
     // render our module
@@ -75,8 +119,12 @@ class QuestionAndAnswer extends React.Component {
       <QuestionContainer>
         <QuestionHeader>Questions & Answers</QuestionHeader>
         <SearchQuestion onChange={this.searchQuestions} value={this.state.searchTerm}/>
-        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.loadMoreAnswers} />))}
-        <StyledLoadAnswers><a onClick={this.loadAnswers}>Load More Answers</a></StyledLoadAnswers>
+        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.getMoreAnswers} />))}
+        <StyledLoadAnswers><a onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
+        <StyledButtons>
+          <button onClick={this.getMoreQuestions}>More Answered Questions</button>
+          <button>Add A Question</button>
+        </StyledButtons>
       </QuestionContainer>
     );
   }
@@ -93,7 +141,8 @@ const QuestionContainer = styled.div`
     "questionHeader"
     "searchQuestion"
     "styledQuestion"
-    "styledLoadAnswers";
+    "styledLoadAnswers"
+    "styledButtons";
 `;
 
 const QuestionHeader = styled.h3`
@@ -103,6 +152,11 @@ const QuestionHeader = styled.h3`
 
 const StyledLoadAnswers = styled.div`
   grid-area: styledLoadAnswers;
+  grid-row: span 1;
+`;
+
+const StyledButtons = styled.div`
+  grid-area: styledButtons;
   grid-row: span 1;
 `;
 // the product id should be a number
