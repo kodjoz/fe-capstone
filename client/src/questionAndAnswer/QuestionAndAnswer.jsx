@@ -23,7 +23,7 @@ class QuestionAndAnswer extends React.Component {
   }
 
   getQuestions(page, count) {
-    axios.get('/api/qa/questions', {
+    return axios.get('/api/qa/questions', {
       params: {
         product_id: this.props.product_id,
         page: page,
@@ -31,12 +31,10 @@ class QuestionAndAnswer extends React.Component {
       }
     })
       .then(({ data }) => {
-
         // sort the questions by question_helpfulness
         data.results.sort((a, b) => {
           return b.question_helpfulness - a.question_helpfulness;
         });
-
         this.setState({
           questions: data.results
         });
@@ -62,6 +60,37 @@ class QuestionAndAnswer extends React.Component {
     this.setState({
       searchTerm: e.target.value
     });
+    var results = [];
+    // if the searchterm is longer than 3 begin searching questions
+    if (this.state.searchTerm.length > 2) {
+      // get more questions from the server
+      this.getQuestions(1, 999)
+      .then(() => {
+        // for each question if the question_body contains the search letters
+        for (let q = 0; q < this.state.questions.length; q++) {
+          let currentQuestion = this.state.questions[q];
+          if (currentQuestion.question_body.includes(this.state.searchTerm)) {
+            results.push(currentQuestion);
+            console.log(results);
+          }
+        }
+      })
+      .then(() => {
+        // update questions state to only show search results
+          this.setState({
+            questions: results,
+            getMoreQuestions: true,
+          });
+        });
+        // if there are no characters then reset the search
+      } else if (this.state.searchTerm === '') {
+        this.getQuestions(1, 4)
+          .then(() => {
+            this.setState({
+              getMoreQuestions: false
+              });
+          });
+      }
   }
 
   getMoreQuestions() {
