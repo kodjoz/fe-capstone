@@ -9,21 +9,30 @@ class Answer extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    var currentAnswer = this.props.answer.id;
+    if (!this.state.isHelpful) {
+      this.props.markA(currentAnswer);
+      this.setState({
+        isHelpful: true
+      });
+    } else {
+      alert('You already marked this Answer as helpful');
     }
   }
-  // takes the answers property from the question
-  // convert the keys to an array
-  // if array length is zero just return an empty string
-  // if loadMoreAnswers is clicked then render all answers
-  // else just render up to two answers
 
   render() {
 
-    if (!props.answer) {
+    if (!this.props.answer) {
       return '';
     }
 
-    let answer = props.answer;
+    let answer = this.props.answer;
     // Options needed to pretty-print the date
     let options = {
       year: 'numeric',
@@ -36,11 +45,11 @@ class Answer extends React.Component {
     return (
       <AnswerContainer>
         <div className="answer"><strong>A:</strong> {answer.body}</div>
-        <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful?  <LinkText>Yes ({answer.helpfulness})</LinkText> | <LinkText>Report</LinkText></div>
+        <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful?  <LinkText onClick={this.handleClick}>Yes ({answer.helpfulness})</LinkText> | <LinkText>Report</LinkText></div>
       </AnswerContainer>
     );
   }
-};
+}
 
 // each answer should be an object
 Answer.propTypes = {

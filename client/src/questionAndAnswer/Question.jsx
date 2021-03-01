@@ -11,7 +11,7 @@ class Question extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
-    }
+    };
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -63,7 +63,9 @@ class Question extends React.Component {
 // each question should be an object
 Question.propTypes = {
   question: PropTypes.object.isRequired,
-  getMoreAnswers: PropTypes.bool.isRequired
+  getMoreAnswers: PropTypes.bool.isRequired,
+  markQ: PropTypes.func,
+  markA: PropTypes.func
 };
 
 // style the components
