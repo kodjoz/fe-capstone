@@ -71,7 +71,7 @@ class RelatedProductsWrapper extends React.Component {
         <CarouselWrapper
           data={{}}
           render={(data) => {
-            return <OutfitCarousel data={data} />;
+            return <OutfitCarousel currentProduct={this.props.product} data={data} />;
           }} />
       </div>
     );
