@@ -1,11 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 import Answer from './Answer';
 
 class Question extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isHelpful: false,
+      isReported: false,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+  // get question helpfulness
+  // set the helpfulness based on component did mount
+  // if the state updates then query the server to get the question helpfulness
+  // send message to API to mark question as helpful
+
+  handleClick() {
+    var currentQuestion = this.props.question.question_id;
+    if (!this.state.isHelpful) {
+      console.log('Current question', currentQuestion);
+      this.props.markQ(currentQuestion);
+      this.setState({
+        isHelpful: true
+      });
+    } else {
+      alert('You already marked this question as helpful');
+      console.log('Type of ID', typeof currentQuestion);
+    }
   }
 
   render() {
@@ -19,7 +45,7 @@ class Question extends React.Component {
     // if there are no answers return an empty array, else return max 2 answers
     if (!answers.length) {
       answers = [];
-    } else if (answers.length > 2 && this.props.loadMoreAnswers === false) {
+    } else if (answers.length > 2 && this.props.getMoreAnswers === false) {
       answers = answers.slice(0, 2);
     }
 
@@ -27,8 +53,8 @@ class Question extends React.Component {
     return (
       <StyledQuestion>
         <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
-        <QuestionLinks>Helpful? Yes({question.question_helpfulness}) | Add Answer</QuestionLinks>
-        {answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
+        <QuestionLinks>Helpful? <LinkText onClick={this.handleClick}>Yes({question.question_helpfulness})</LinkText> | Add Answer</QuestionLinks>
+        {answers.map((answer) => (<Answer markA={this.props.markA} answer={answer} key={answer.id} />) )}
       </StyledQuestion>
     );
   }
@@ -37,7 +63,9 @@ class Question extends React.Component {
 // each question should be an object
 Question.propTypes = {
   question: PropTypes.object.isRequired,
-  loadMoreAnswers: PropTypes.bool.isRequired
+  getMoreAnswers: PropTypes.bool.isRequired,
+  markQ: PropTypes.func,
+  markA: PropTypes.func
 };
 
 // style the components
@@ -61,6 +89,13 @@ const QuestionBody = styled.div`
 const QuestionLinks = styled.div`
   grid-area: links;
   justify-self: end;
+`;
+
+const LinkText = styled.span`
+  text-decoration: underline;
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 // first row is two columns
