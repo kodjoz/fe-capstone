@@ -11,7 +11,7 @@ class Slide extends Component {
 
   handleButtonClick(event) {
     event.preventDefault();
-    this.props.cardButtonClick();
+    this.props.cardButtonClick(this.props.data);
   }
 
   render() {
