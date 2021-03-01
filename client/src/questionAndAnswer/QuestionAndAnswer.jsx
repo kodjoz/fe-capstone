@@ -16,10 +16,12 @@ class QuestionAndAnswer extends React.Component {
       getMoreQuestions: false,
       getMoreAnswers: false
     };
-
+    this.getQuestions = this.getQuestions.bind(this);
     this.searchQuestions = this.searchQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
+    this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
+    this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
   }
 
   getQuestions(page, count) {
@@ -106,6 +108,33 @@ class QuestionAndAnswer extends React.Component {
     });
   }
 
+
+  markQuestionHelpful(id) {
+    // set question helpfulness
+    return axios.put(`/api/qa/questions/${id}/helpful`)
+      .then(() => {
+        // send message to API to mark question as helpful, then rerender the state
+        // Only query as many questions as we already have and no more
+        this.getQuestions(1, this.state.questions.length);
+      })
+      .catch((err) => {
+        console.error('error when marking question as helpful', err);
+      });
+  }
+
+  markAnswerHelpful(id) {
+    // set answer helpfulness
+    return axios.put(`/api/qa/answers/${id}/helpful`)
+      .then(() => {
+        // rerender the state once we get the value back
+        // Only query as many questions as we already have and no more
+        this.getQuestions(1, this.state.questions.length);
+      })
+      .catch((err) => {
+        console.error('Error when marking answer as helpful', err);
+      });
+  }
+
   render() {
     let questions = this.state.questions;
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
@@ -118,9 +147,15 @@ class QuestionAndAnswer extends React.Component {
     return (
       <QuestionContainer>
         <QuestionHeader>Questions & Answers</QuestionHeader>
-        <SearchQuestion onChange={this.searchQuestions} value={this.state.searchTerm}/>
-        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.getMoreAnswers} />))}
-        <StyledLoadAnswers><a onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
+        <SearchQuestion
+          onChange={this.searchQuestions}
+          value={this.state.searchTerm}/>
+        {questions.map((question) => (<Question
+          markQ={this.markQuestionHelpful}
+          markA={this.markAnswerHelpful}
+          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} />))}
+        <StyledLoadAnswers><a
+          onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
           <button onClick={this.getMoreQuestions}>More Answered Questions</button>
           <button>Add A Question</button>
