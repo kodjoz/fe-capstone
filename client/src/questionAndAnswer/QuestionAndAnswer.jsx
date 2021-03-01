@@ -16,10 +16,11 @@ class QuestionAndAnswer extends React.Component {
       getMoreQuestions: false,
       getMoreAnswers: false
     };
-
+    this.getQuestions = this.getQuestions.bind(this);
     this.searchQuestions = this.searchQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
+    this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
   }
 
   getQuestions(page, count) {
@@ -106,6 +107,24 @@ class QuestionAndAnswer extends React.Component {
     });
   }
 
+  // get question helpfulness
+  // set the helpfulness based on component did mount
+  // if the state updates then query the server to get the question helpfulness
+  // send message to API to mark question as helpful, then rerender the state
+  markQuestionHelpful(id) {
+    return axios.put(`/api/qa/questions/${id}/helpful`)
+      .then(() => {
+        this.getQuestions(1, this.state.questions.length);
+      });
+  }
+
+  markAnswerHelpful(id) {
+    return axios.put(`/api/qa/answers/${id}/helpful`)
+      .then(() => {
+        this.getQuestions(1, this.state.questions.length);
+      });
+  }
+
   render() {
     let questions = this.state.questions;
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
@@ -118,9 +137,15 @@ class QuestionAndAnswer extends React.Component {
     return (
       <QuestionContainer>
         <QuestionHeader>Questions & Answers</QuestionHeader>
-        <SearchQuestion onChange={this.searchQuestions} value={this.state.searchTerm}/>
-        {questions.map((question) => (<Question question={question} key={question.question_id} loadMoreAnswers={this.state.getMoreAnswers} />))}
-        <StyledLoadAnswers><a onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
+        <SearchQuestion
+        onChange={this.searchQuestions}
+        value={this.state.searchTerm}/>
+        {questions.map((question) => (<Question
+        markQ={this.markQuestionHelpful}
+        markA={this.markAnswerHelpful}
+        question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} />))}
+        <StyledLoadAnswers><a
+        onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
           <button onClick={this.getMoreQuestions}>More Answered Questions</button>
           <button>Add A Question</button>
