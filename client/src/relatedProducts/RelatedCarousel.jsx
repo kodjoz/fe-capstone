@@ -10,16 +10,18 @@ class RelatedCarousel extends React.Component {
     super(props);
 
     this.state = {
-      showModal: false
+      showModal: false,
+      clickedProduct: {}
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.cardButtonClick = this.cardButtonClick.bind(this);
   }
 
-  showModal() {
+  showModal(data) {
     this.setState({
-      showModal: true
+      showModal: true,
+      clickedProduct: data
     });
   }
 
@@ -29,9 +31,9 @@ class RelatedCarousel extends React.Component {
     });
   }
 
-  cardButtonClick() {
-    console.log('clicked');
-    this.showModal();
+  cardButtonClick(event, data) {
+    console.log('clicked', data);
+    this.showModal(data);
   }
 
   render() {
@@ -49,7 +51,7 @@ class RelatedCarousel extends React.Component {
         })}
         <StyledModal show={this.state.showModal}
           handleClose={this.hideModal}
-          data={this.props.data}>
+          data={this.state.clickedProduct}>
           <p>Modal</p>
         </StyledModal>
       </>
