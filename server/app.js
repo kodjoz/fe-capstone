@@ -38,4 +38,8 @@ app.use(express.static(path.join(__dirname, '/../client/dist/')), (req, res, nex
 });
 //console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
 
+app.get('*', (req, res) => {
+  res.sendFile((path.join(__dirname, '../client/dist/index.html')));
+});
+
 module.exports = app;
