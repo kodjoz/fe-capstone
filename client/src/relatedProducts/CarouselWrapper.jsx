@@ -30,6 +30,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  padding: 10px;
 `;
 
 export default CarouselWrapper;
