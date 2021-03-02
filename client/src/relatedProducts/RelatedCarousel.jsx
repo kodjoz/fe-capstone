@@ -32,7 +32,6 @@ class RelatedCarousel extends React.Component {
   }
 
   cardButtonClick(event, data) {
-    console.log('clicked', data);
     this.showModal(data);
   }
 
