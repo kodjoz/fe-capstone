@@ -44,3 +44,4 @@ PriceDisplay.propTypes = {
 };
 
 export default PriceDisplay;
+
