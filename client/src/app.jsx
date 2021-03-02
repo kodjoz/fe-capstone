@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/home">
+          <Route exact path="/">
             <h1>Home</h1>
             <h3>
               <Link to="/products/19378">Product 19378</Link>
