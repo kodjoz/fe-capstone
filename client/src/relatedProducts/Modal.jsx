@@ -44,21 +44,21 @@ const Modal = (props) => {
         <Table>
           <thead>
             <Row>
-              <th>comparing</th>
+              <th colSpan='3'>comparing</th>
             </Row>
             <tr>
-              <th>{data.name}</th>
-              <th></th>
               <th>{currentProduct.name}</th>
+              <th></th>
+              <th>{data.name}</th>
             </tr>
           </thead>
           <tbody>
             {
               compareFeatures(data, currentProduct).map((row) => {
                 return (<Row key={row.featureName}>
-                  <Field>{row.clickedValue}</Field>
-                  <Field>{row.featureName}</Field>
                   <Field>{row.currentValue}</Field>
+                  <Field>{row.featureName}</Field>
+                  <Field>{row.clickedValue}</Field>
                 </Row>);
               })
             }
