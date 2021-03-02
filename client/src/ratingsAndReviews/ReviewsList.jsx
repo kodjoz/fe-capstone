@@ -1,7 +1,9 @@
 import React from 'react';
-import IndividualReview from './IndividualReview.jsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+
+import IndividualReview from './IndividualReview.jsx';
+import Ratings from './Ratings.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -9,6 +11,8 @@ class ReviewsList extends React.Component {
     this.state = {
       product_id: props.product_id,
       reviews: null,
+      renderedReviews: null,
+      filters: [],
       sortOrder: 'relevance'
     };
   }
@@ -28,9 +32,24 @@ class ReviewsList extends React.Component {
     })
       .then((res) => {
         // console.log('GET REQ: ', res.data.results);
-        this.setState({reviews: res.data.results});
+        this.setState({reviews: res.data.results, renderedReviews: res.data.results});
       });
   }
+
+  filterReviews(filter) {
+    //if filter exists within this.state.filters, remove from filters
+      //indexOf !== -1
+    //else, add to filters
+    //re-render renderedList with new filters
+
+    let filters = this.state.filters;
+    this.state.filters.push(filter);
+    console.log('filtering reviews');
+  }
+
+  sortAndFilter(sortOrder, filters) {
+
+  };
 
   render() {
     if (!this.state.reviews) {
@@ -39,7 +58,8 @@ class ReviewsList extends React.Component {
       return (
         <div>
           <p>#### reviews, sorted by this.state.sortOrder</p>
-          {this.state.reviews.map((review) => {
+          <div><Ratings reviews={this.state.reviews} filter={this.filterReviews.bind(this)}/></div>
+          {this.state.renderedReviews.map((review) => {
             return (<IndividualReview key={review.review_id} review={review} />);
           })}
           <button>MORE REVIEWS</button>

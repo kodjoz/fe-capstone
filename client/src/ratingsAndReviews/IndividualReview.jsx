@@ -43,7 +43,7 @@ class IndividualReview extends React.Component {
     } else {
       body = <ReviewBody>
         <span id={bodyId}>{review.body.slice(0,251)}
-          <ShowMore id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; document.getElementById(bodyShowId).style.visibility = 'hidden'; }} >Show More...</ShowMore>
+          <ShowMore id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; }} >Show More...</ShowMore>
         </span>
       </ReviewBody>;
     }
@@ -64,7 +64,7 @@ class IndividualReview extends React.Component {
         <ReviewerInfo>
           <Reviewer>@{review.reviewer_name}</Reviewer>
           <br></br>
-          <ReviewDate>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</ReviewDate>
+          <ReviewDate>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'})}</ReviewDate>
           <br></br>
           {recommend}
         </ReviewerInfo>
@@ -78,6 +78,8 @@ class IndividualReview extends React.Component {
               <Thumbnail key={review.review_id} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
             );
           })}
+          <div className="axis main-axis"></div>
+          <div className="axis cross-axis"></div>
         </Photos>
         {response}
         <Helpful>Helpful? <HelpfulVote onClick={() => { this.helpfulVote(); }}>Yes</HelpfulVote> ({review.helpfulness})</Helpful>
@@ -112,7 +114,8 @@ const SummaryExtra = styled.span`
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 5px 15% 5px 5%;
+  margin: 5px 10% 5px 5%;
+  width: 166px;
 `;
 
 const Reviewer = styled.span`
@@ -155,12 +158,18 @@ const ShowMore = styled.span`
   margin-left: 5px;
 `;
 
+// const Photos = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-contents: center;
+//   margin-bottom: 10px;
+//   padding-left: 20%;
+// `;
+
 const Photos = styled.div`
   display: flex;
-  align-items: center;
-  justify-contents: center;
+  justify-content: space-around;
   margin-bottom: 10px;
-  padding-left: 20%;
 `;
 
 const Thumbnail = styled.img`
