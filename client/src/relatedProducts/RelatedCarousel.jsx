@@ -51,7 +51,8 @@ class RelatedCarousel extends React.Component {
         })}
         <StyledModal show={this.state.showModal}
           handleClose={this.hideModal}
-          data={this.state.clickedProduct}/>
+          data={this.state.clickedProduct}
+          currentProduct={this.props.currentProduct}/>
       </>
     );
   }
@@ -70,7 +71,8 @@ const Button = styled.button `
 `;
 
 RelatedCarousel.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  currentProduct: PropTypes.object.isRequired
 };
 
 export default RelatedCarousel;
