@@ -46,16 +46,17 @@ const Modal = (props) => {
             <Row>
               <th colSpan='3'>comparing</th>
             </Row>
-            <tr>
+            <Row>
               <th>{currentProduct.name}</th>
               <th></th>
               <th>{data.name}</th>
-            </tr>
+            </Row>
           </thead>
           <tbody>
             {
               compareFeatures(data, currentProduct).map((row) => {
                 let {currentValue, featureName, clickedValue} = row;
+                //If the product's value is true, display a checkmark
                 currentValue = currentValue === 'true' ? '✓' : currentValue;
                 clickedValue = clickedValue === 'true' ? '✓' : clickedValue;
                 return (<Row key={featureName}>
@@ -83,7 +84,6 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired,
   currentProduct: PropTypes.object.isRequired,
-
 };
 
 const Row = styled.tr`
@@ -113,4 +113,3 @@ const StyledModal = styled(Modal)`
 
 
 export {StyledModal as default, compareFeatures};
-
