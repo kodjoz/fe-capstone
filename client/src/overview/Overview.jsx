@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ProductType } from './types.js';
 import axios from 'axios';
 import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
@@ -29,8 +30,29 @@ class OverviewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: props.product
+      styles: [],
+      selectedStyle: null
     };
+  }
+
+  componentDidMount() {
+    this.fetchStylesDataFromApi()
+      .then((data) => {
+        // if there are styles associated with the product
+        if (!data.results) {
+          throw Error('no styles found for product');
+        }
+        const styles = data.results;
+        // find the one style marked as default
+        const defaultStyle = styles.find(style => style['default?']);
+        this.setState({
+          styles: styles,
+          selectedStyle: defaultStyle
+        });
+      })
+      .catch((error) => {
+        console.error('Overview Error:', error);
+      });
   }
 
   fetchStylesDataFromApi() {
@@ -63,14 +85,7 @@ class OverviewContainer extends React.Component {
 
 OverviewContainer.propTypes = {
   product_id: PropTypes.number,
-  product: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    slogan: PropTypes.string,
-    description: PropTypes.string,
-    category: PropTypes.string,
-    default_price: PropTypes.string
-  })
+  product: ProductType
 };
 
 export default OverviewContainer;
