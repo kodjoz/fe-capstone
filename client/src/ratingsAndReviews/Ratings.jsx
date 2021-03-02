@@ -65,7 +65,6 @@ const Breakdown = styled.div`
   display: block;
   width: 200px;
   height: 200px;
-  float: left;
 `;
 
 const Average = styled.div`

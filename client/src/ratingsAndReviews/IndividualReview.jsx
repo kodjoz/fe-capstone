@@ -90,12 +90,13 @@ class IndividualReview extends React.Component {
 }
 
 const Review = styled.div`
-  border-bottom: 1px solid #f0f0f5;
   margin-top: 7px;
   padding-left: 10px;
   padding-top: 7px;
+  border-bottom: 1px solid #f0f0f5;
   background-color: hsl(0, 10%, 99%);
-  color: hsl(0, 5%, 30%)
+  color: hsl(0, 5%, 30%);
+  border: solid 1px #f2f2f2;
 `;
 
 const Summary = styled.div`
