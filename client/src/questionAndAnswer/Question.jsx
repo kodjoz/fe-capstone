@@ -12,7 +12,7 @@ class Question extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
-      isAddAnswerVisible: 'none',
+      isAddAnswerVisible: false,
     };
 
     this.handleHelpful = this.handleHelpful.bind(this);
@@ -45,15 +45,7 @@ class Question extends React.Component {
   }
 
   toggleAddAnswer() {
-    if (this.state.isAddAnswerVisible === 'none') {
-      this.setState({
-        isAddAnswerVisible: 'block'
-      })
-    } else {
-      this.setState({
-        isAddAnswerVisible: 'none'
-      })
-    }
+    this.setState({ isAddAnswerVisible: !this.state.isAddAnswerVisible });
   }
 
   render() {
@@ -78,10 +70,10 @@ class Question extends React.Component {
         <QuestionLinks>
           <LinkText
             onClick={this.handleReport}>
-              {!this.state.isReported ? 'Report' : 'Reported!'}
+            {!this.state.isReported ? 'Report' : 'Reported!'}
           </LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | <LinkText onClick={this.toggleAddAnswer}>Add Answer</LinkText></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
-        <AddAnswer display={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer}/>
+        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
       </StyledQuestion>
     );
   }
