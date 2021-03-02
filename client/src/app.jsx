@@ -19,15 +19,19 @@ class App extends React.Component {
           <Route exact path="/">
             <h1>Home</h1>
             <h3>
-              <Link to="/products/19378">Product 19378</Link>
+              <Link to="/products/19378">Alberto Romper (19378)</Link>
             </h3>
             <h3>
-              <Link to="/products/19089">Product 19089</Link>
+              <Link to="/products/19089">Camo Onesie (19089)</Link>
+            </h3>
+            <h3>
+              <Link to="/products/19091">Morning Joggers (19091)</Link>
             </h3>
           </Route>
           <Route exact path="/products/:id" render={(props) => {
+            const id = props.match.params.id;
             return (
-              <ProductDetailsPage product_id={parseInt(props.match.params.id)} />
+              <ProductDetailsPage key={'product-details-' + id} product_id={parseInt(id)} />
             );
           }} />
           <Route path="*">
