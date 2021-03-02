@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Modal = (props) => {
-  var { handleClose, children } = props;
+  var { handleClose } = props;
   return (
     <div className={props.className}>
       <h3>Comparing</h3>
       <section>
-        {children}
         <button type="button" onClick={handleClose}>
           close
         </button>
