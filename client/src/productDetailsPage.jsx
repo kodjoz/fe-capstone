@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import Navbar from './navbar.jsx';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
-// import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
 import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
 import Overview from './overview/Overview.jsx';
 
@@ -16,12 +16,14 @@ class ProductDetailsPage extends React.Component {
   }
 
   render() {
+    const id = this.props.product_id;
     return (
       <div>
-        <Overview product_id={this.state.product_id} product={this.state.product}/>
-        <RelatedProducts product_id={this.state.product_id} product={this.state.product}/>
-        <QuestionAndAnswer product_id={this.state.product_id}/>
-        {/* <ReviewsList product_id={this.state.product_id}/> */}
+        <Navbar />
+        <Overview key={'overview-module-' + id} product_id={id} product={this.state.product}/>
+        <RelatedProducts key={'related-module-' + id} product_id={id} product={this.state.product}/>
+        <QuestionAndAnswer key={'questions-module-' + id} product_id={id}/>
+        {/* <ReviewsList key={'reviews-module-' + id} product_id={this.props.product_id}/> */}
       </div>
     );
   }
