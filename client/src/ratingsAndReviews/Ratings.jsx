@@ -62,9 +62,7 @@ class Ratings extends React.Component {
 }
 
 const Breakdown = styled.div`
-  display: block;
-  width: 200px;
-  height: 200px;
+
 `;
 
 const Average = styled.div`

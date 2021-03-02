@@ -114,6 +114,7 @@ const RatingComponent = styled.div`
   display: flex;
   flex-direction: column;
   order: 1;
+  width: 25%;
   margin-top: 7px;
   margin-right: 7px;
   border-bottom: 1px solid #f0f0f5;

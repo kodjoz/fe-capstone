@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FactorsBreakdown = (props) => {
+const FactorsBreakdown = () => {
   return (
     <div>Factors Breakdown goes here.</div>
   );
