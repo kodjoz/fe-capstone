@@ -2,26 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-
+//Combine the features of two products into a single array of objects
+//Each object contains the feature name and value for each product being compared
 let compareFeatures = (data, currentProduct) => {
   let combinedFeatures = {};
-  //loop through clicked product's features
   for (var i = 0; i < data.features.length; i++) {
     let feature = {
       featureName: data.features[i].feature,
       clickedValue: data.features[i].value
     };
-    //if current value has that feature, add it to the object
+    //If current value has that feature, add it to the object
     currentProduct.features.forEach((currChar) => {
       if (currChar.feature === feature.featureName) {
         feature['currentValue'] = currChar.value;
       }
     });
-    //if current value doesn't have that feature, leave blank
+    //If current value doesn't have that feature, leave blank
     feature['currentValue'] = feature['currentValue'] || '';
     combinedFeatures[feature.featureName] = feature;
   }
-  //add features in the current product not shared by the clicked one
+  //Add features in the current product not shared by the clicked one
   currentProduct.features.map((feature) => {
     combinedFeatures[feature.feature] = combinedFeatures[feature.feature] ||
     {
@@ -55,10 +55,13 @@ const Modal = (props) => {
           <tbody>
             {
               compareFeatures(data, currentProduct).map((row) => {
-                return (<Row key={row.featureName}>
-                  <Field>{row.currentValue}</Field>
-                  <Field>{row.featureName}</Field>
-                  <Field>{row.clickedValue}</Field>
+                let {currentValue, featureName, clickedValue} = row;
+                currentValue = currentValue === 'true' ? '✓' : currentValue;
+                clickedValue = clickedValue === 'true' ? '✓' : clickedValue;
+                return (<Row key={featureName}>
+                  <Field>{currentValue}</Field>
+                  <Field>{featureName}</Field>
+                  <Field>{clickedValue}</Field>
                 </Row>);
               })
             }
