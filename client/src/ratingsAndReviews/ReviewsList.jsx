@@ -40,24 +40,39 @@ class ReviewsList extends React.Component {
     //if filter exists within this.state.filters, remove from filters (indexOf !== -1)
     //else, add to filters
     //re-render renderedList with new filters
-    if(filter === null) {
+    if (filter === null) {
       this.setState({filters: []});
       console.log('filtering reviews based on: ', this.state.filters);
     } else {
-      let filterLocation = this.state.filters.indexOf(filter)
+      let filterLocation = this.state.filters.indexOf(filter);
       let newFilters = this.state.filters;
-      if(filterLocation !== -1) {
+      if (filterLocation !== -1) {
         newFilters.splice(filterLocation, 1);
       } else {
         newFilters.push(filter);
       }
-      this.setState({filters: newFilters})
-      console.log('filtering reviews based on: ', this.state.filters); //setState is async, so this won't be accurate
+      this.setState({filters: newFilters}, () => {
+        this.sortAndFilter(this.state.sortOrder, this.state.filters);
+      });
     }
   }
 
   sortAndFilter(sortOrder, filters) {
-    console.log('sortOrder: ', sortOrder, 'filters: ', filters);
+    let renderedReviews = [];
+    if (filters.length === 0) {
+      renderedReviews  = this.state.reviews;
+    } else {
+      for(let i = 0; i < this.state.reviews.length; i++) {
+        let rev = this.state.reviews[i];
+        for (let j = 0; j < filters.length; j++) {
+          if (Math.floor(rev.rating) === filters[j]) {
+            renderedReviews.push(rev);
+            break;
+          }
+        }
+      }
+    }
+    this.setState({renderedReviews: renderedReviews});
   }
 
   render() {

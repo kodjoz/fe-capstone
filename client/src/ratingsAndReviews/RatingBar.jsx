@@ -14,7 +14,7 @@ const RatingBar = (props) => {
 RatingBar.propTypes = {
   stars: PropTypes.number,
   percent: PropTypes.number,
-  filter: PropTypes.func
+  newFilter: PropTypes.func
 };
 
 export default RatingBar;

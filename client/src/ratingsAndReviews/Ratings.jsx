@@ -38,8 +38,8 @@ class Ratings extends React.Component {
     let avg = this.state.avg.toString();
     avg = avg.slice(0, 3);
     let ratingFilters = null;
-    if(this.props.filters.length !== 0){
-      ratingFilters = <RatingFilters newFilter={this.props.newFilter} filters={this.props.filters} />
+    if (this.props.filters.length !== 0) {
+      ratingFilters = <RatingFilters newFilter={this.props.newFilter} filters={this.props.filters} />;
     }
 
     return (
@@ -59,7 +59,8 @@ class Ratings extends React.Component {
 
 Ratings.propTypes = {
   reviews: PropTypes.array,
-  newFilter: PropTypes.func
+  newFilter: PropTypes.func,
+  filters: PropTypes.array
 };
 
 export default Ratings;
