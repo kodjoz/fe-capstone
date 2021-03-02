@@ -1,85 +1,46 @@
 import React from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
-import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
-import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
-import Overview from './overview/Overview.jsx';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import ProductDetailsPage from './productDetailsPage.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      product_id: 19089,
-      product: null
-    };
   }
 
   render() {
     return (
-      <div>
-        <Overview product_id={this.state.product_id} product={this.state.product}/>
-        <RelatedProducts product_id={this.state.product_id} product={this.state.product}/>
-        <QuestionAndAnswer product_id={this.state.product_id}/>
-        <ReviewsList product_id={this.state.product_id}/>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/home">
+            <h1>Home</h1>
+            <h3>
+              <Link to="/products/19378">Product 19378</Link>
+            </h3>
+            <h3>
+              <Link to="/products/19089">Product 19089</Link>
+            </h3>
+          </Route>
+          <Route exact path="/products/:id" render={(props) => {
+            return (
+              <ProductDetailsPage product_id={parseInt(props.match.params.id)} />
+            );
+          }} />
+          <Route path="*">
+            <div>
+              <h1>Wildcard Route - No route matched</h1>
+              <p>ToDo: Refactor this as a 404 page with links to what they might be looking for</p>
+              <Link to="/home">Home</Link>
+            </div>
+          </Route>
+        </Switch>
+      </Router>
     );
-  }
-
-  componentDidMount() {
-    const product_id = this.state.product_id;
-    if (!product_id) {
-      return console.error('product_id missing from root app state');
-    }
-    this.fetchProductData(product_id)
-      .then((data) => {
-        this.setState({
-          product: data
-        });
-      })
-      .catch((error) => {
-        console.error('something went wrong fetching product data', error);
-      });
-  }
-
-  /**
-   * input: number id
-   * return: Promise<product data>
-   * does NOT handle errors, handle them in the calling function
-   */
-  fetchProductData(id) {
-    const productUrl = `/api/products/${id}`;
-    return axios.get(productUrl)
-      .then((results) => {
-        if (results && results.data) {
-          return results.data;
-        }
-        throw Error('error fetching product data');
-      });
   }
 }
 
-const featureTuplePropType = PropTypes.arrayOf(
-  PropTypes.shape({
-    feature: PropTypes.string,
-    value: PropTypes.string
-  })
-);
-
-App.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number,
-    campus: PropTypes.string,
-    name: PropTypes.string,
-    slogan: PropTypes.string,
-    description: PropTypes.string,
-    category: PropTypes.string,
-    default_price: PropTypes.string,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string,
-    features: PropTypes.arrayOf(featureTuplePropType)
-  })
-};
-
 export default App;
-
