@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Question from './Question';
 import SearchQuestion from './SearchQuestion';
+import AddQuestion from './AddQuestionForm';
 
 class QuestionAndAnswer extends React.Component {
   constructor(props) {
@@ -14,13 +15,17 @@ class QuestionAndAnswer extends React.Component {
       questions: [],
       searchTerm: '',
       getMoreQuestions: false,
-      getMoreAnswers: false
+      getMoreAnswers: false,
+      isAddQuestionVisible: false,
+      isAddAnswerVisible: false,
     };
+
     this.getQuestions = this.getQuestions.bind(this);
     this.searchQuestions = this.searchQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.markOrReport = this.markOrReport.bind(this);
+    this.toggleAddQuestion = this.toggleAddQuestion.bind(this);
   }
 
   getQuestions(page, count) {
@@ -121,6 +126,10 @@ class QuestionAndAnswer extends React.Component {
       });
   }
 
+  toggleAddQuestion() {
+    this.setState({ isAddQuestionVisible: !this.state.isAddQuestionVisible });
+  }
+
   render() {
     let questions = this.state.questions;
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
@@ -143,8 +152,11 @@ class QuestionAndAnswer extends React.Component {
           onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
           <button onClick={this.getMoreQuestions}>More Answered Questions</button>
-          <button>Add A Question</button>
+          <button onClick={this.toggleAddQuestion}>Add A Question</button>
         </StyledButtons>
+        {this.state.isAddQuestionVisible ? (
+          <AddQuestion product={this.props.product_id} />
+        ) : null}
       </QuestionContainer>
     );
   }
@@ -162,7 +174,8 @@ const QuestionContainer = styled.div`
     "searchQuestion"
     "styledQuestion"
     "styledLoadAnswers"
-    "styledButtons";
+    "styledButtons"
+    "addQuestion";
 `;
 
 const QuestionHeader = styled.h3`
