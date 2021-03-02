@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Answer from './Answer';
+import AddAnswer from './AddAnswerForm';
 
 class Question extends React.Component {
   constructor(props) {
@@ -11,10 +12,12 @@ class Question extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
+      isAddAnswerVisible: 'none',
     };
 
     this.handleHelpful = this.handleHelpful.bind(this);
     this.handleReport = this.handleReport.bind(this);
+    this.toggleAddAnswer = this.toggleAddAnswer.bind(this);
   }
   // get question helpfulness
   // set the helpfulness based on component did mount
@@ -41,6 +44,18 @@ class Question extends React.Component {
     }
   }
 
+  toggleAddAnswer() {
+    if (this.state.isAddAnswerVisible === 'none') {
+      this.setState({
+        isAddAnswerVisible: 'block'
+      })
+    } else {
+      this.setState({
+        isAddAnswerVisible: 'none'
+      })
+    }
+  }
+
   render() {
     // Incase this prop is empty render nothing onscreen
     if (this.props.question === undefined) {
@@ -60,8 +75,13 @@ class Question extends React.Component {
     return (
       <StyledQuestion>
         <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
-        <QuestionLinks><LinkText onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | Add Answer</QuestionLinks>
+        <QuestionLinks>
+          <LinkText
+            onClick={this.handleReport}>
+              {!this.state.isReported ? 'Report' : 'Reported!'}
+          </LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | <LinkText onClick={this.toggleAddAnswer}>Add Answer</LinkText></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
+        <AddAnswer display={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer}/>
       </StyledQuestion>
     );
   }
@@ -85,7 +105,8 @@ const StyledQuestion = styled.div`
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "answerContainer .";
+    "answerContainer ."
+    "addAnswer .";
 `;
 
 const QuestionBody = styled.div`

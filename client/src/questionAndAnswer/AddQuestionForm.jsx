@@ -8,31 +8,40 @@ class AddQuestion extends React.Component {
     super(props);
 
     this.state = {
-      form: {},
+      name: '',
+      body: '',
+      email: ''
     };
 
     this.submitQuestion = this.submitQuestion.bind(this);
+    this.updateQuestion = this.updateQuestion.bind(this);
   }
 
-  handleQuestionInput(e) {
+  updateQuestion(e) {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      form: {
-        [name]: value
-      }
+      [name]: value
     });
   }
 
   submitQuestion(e) {
     e.preventDefault();
-    return axios.post('/api/qa/question', {
-      data: this.state.form
+    return axios.post('/api/qa/questions', {
+      name: this.state.name,
+      body: this.state.body,
+      email: this.state.email,
+      product_id: this.props.product
     })
       .then(() => {
         this.setState({
-          form: {}
+          name: '',
+          body: '',
+          email: ''
         });
+      })
+      .then(() => {
+        this.props.handleSubmit();
       });
   }
 
@@ -44,7 +53,7 @@ class AddQuestion extends React.Component {
             name="name"
             maxLength="60"
             placeholder="Enter your name"
-            onChange={(e) => this.handleQuestionInput(e)}
+            onChange={this.updateQuestion}
           /></label>
         <br />
         <label>Email:
@@ -53,7 +62,7 @@ class AddQuestion extends React.Component {
             name="email"
             maxLength="60"
             placeholder="Enter your email"
-            onChange={(e) => this.handleQuestionInput(e)}
+            onChange={this.updateQuestion}
           />
         </label>
         <br />
@@ -65,7 +74,7 @@ class AddQuestion extends React.Component {
             cols="50"
             rows="4"
             placeholder="Add your question"
-            onChange={(e) => this.handleQuestionInput(e)}
+            onChange={this.updateQuestion}
           />
         </label>
         <br />
@@ -85,7 +94,8 @@ const AddQuestionForm = styled.form`
 `;
 
 AddQuestion.propTypes = {
-  product: PropTypes.number.isRequired
+  product: PropTypes.number.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default AddQuestion;
