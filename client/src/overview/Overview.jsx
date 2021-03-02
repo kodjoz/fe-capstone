@@ -6,6 +6,7 @@ import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
+import PriceDisplay from './PriceDisplay';
 import StyleSelector from './StyleSelector';
 import styled from 'styled-components';
 
@@ -33,6 +34,7 @@ class OverviewContainer extends React.Component {
       styles: [],
       selectedStyle: null
     };
+    this.setSelectedStyle = this.setSelectedStyle.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +68,13 @@ class OverviewContainer extends React.Component {
       });
   }
 
+  setSelectedStyle(styleId) {
+    let newStyle = this.state.styles.find(style => style.style_id === styleId);
+    this.setState({
+      selectedStyle: newStyle
+    });
+  }
+
   render() {
     return (
       <Grid>
@@ -74,6 +83,7 @@ class OverviewContainer extends React.Component {
         </LeftContainer>
         <RightContainer>
           <ProductDetail product={this.props.product} />
+          <PriceDisplay selectedStyle={this.state.selectedStyle} />
           <StyleSelector />
           <AddToCart />
         </RightContainer>
