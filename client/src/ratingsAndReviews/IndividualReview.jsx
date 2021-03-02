@@ -75,7 +75,7 @@ class IndividualReview extends React.Component {
         <Photos>
           {review.photos.map((photo) => {
             return (
-              <Thumbnail key={review.review_id} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
+              <Thumbnail key={photo.url} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
             );
           })}
           <div className="axis main-axis"></div>
