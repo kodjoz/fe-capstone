@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
 import ProductDescription from './ProductDescription';
@@ -30,6 +31,17 @@ class OverviewContainer extends React.Component {
     this.state = {
       product: props.product
     };
+  }
+
+  fetchStylesDataFromApi() {
+    const url = `/api/products/${this.props.product_id}/styles`;
+    return axios.get(url)
+      .then((response) => {
+        if (response && response.data) {
+          return response.data;
+        }
+        throw Error('fetching styles data failed');
+      });
   }
 
   render() {
