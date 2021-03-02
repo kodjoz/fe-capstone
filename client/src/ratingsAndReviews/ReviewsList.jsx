@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
@@ -80,21 +81,39 @@ class ReviewsList extends React.Component {
       return (<div></div>);
     } else {
       return (
-        <div>
+        <MasterComponent>
           <h3>Ratings &amp; Reviews</h3>
           <p>#### reviews, sorted by this.state.sortOrder</p>
-          <div><Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/></div>
-          {this.state.renderedReviews.map((review) => {
-            return (<IndividualReview key={review.review_id} review={review} />);
-          })}
-          <button>MORE REVIEWS</button>
-          <button>ADD A REVIEW  +</button>
-          {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
-        </div>
+          <RatingComponent>
+            <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
+          </RatingComponent>
+          <ReviewsComponent>
+            {this.state.renderedReviews.map((review) => {
+              return (<IndividualReview key={review.review_id} review={review} />);
+            })}
+            <button>MORE REVIEWS</button>
+            <button>ADD A REVIEW  +</button>
+            {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
+          </ReviewsComponent>
+        </MasterComponent>
       );
     }
   }
 }
+
+//flex-box goes here
+const MasterComponent = styled.div`
+
+`;
+
+const RatingComponent = styled.div`
+  display: block;
+  position: relative
+`;
+
+const ReviewsComponent = styled.div`
+  display: block;
+`;
 
 ReviewsList.propTypes = {
   product_id: PropTypes.number

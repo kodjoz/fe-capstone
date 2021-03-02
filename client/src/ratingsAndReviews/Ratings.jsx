@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import StarRow from '../starRow.jsx';
 import RatingBar from './RatingBar.jsx';
@@ -43,19 +44,40 @@ class Ratings extends React.Component {
     }
 
     return (
-      <div>
-        <span>Avg: {avg}<StarRow size={20} rating={this.state.avg * 20}/></span>
-        <p>{Math.round(this.state.recAvg)}% of reviewers recommend this product</p>
+      <Breakdown>
+        <Average>
+          <StarRow size={30} rating={this.state.avg * 20}/>
+          <span>{avg}</span>
+        </Average>
+        <PercentRec>{Math.round(this.state.recAvg)}% of reviewers recommend this product</PercentRec>
         <RatingBar newFilter={this.props.newFilter} stars={1} percent={(this.state.breakdown[0] * 100) / this.props.reviews.length}/>
         <RatingBar newFilter={this.props.newFilter} stars={2} percent={(this.state.breakdown[1] * 100) / this.props.reviews.length}/>
         <RatingBar newFilter={this.props.newFilter} stars={3} percent={(this.state.breakdown[2] * 100) / this.props.reviews.length}/>
         <RatingBar newFilter={this.props.newFilter} stars={4} percent={(this.state.breakdown[3] * 100) / this.props.reviews.length}/>
         <RatingBar newFilter={this.props.newFilter} stars={5} percent={(this.state.breakdown[4] * 100) / this.props.reviews.length}/>
         {ratingFilters}
-      </div>
+      </Breakdown>
     );
   }
 }
+
+const Breakdown = styled.div`
+  display: block;
+  width: 200px;
+  height: 200px;
+  float: left;
+`;
+
+const Average = styled.div`
+  font-size: 32px;
+  text-align: center;
+`;
+
+const PercentRec = styled.div`
+  font-style: italic;
+  text-align: center;
+`;
+
 
 Ratings.propTypes = {
   reviews: PropTypes.array,

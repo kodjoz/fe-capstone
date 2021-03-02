@@ -151,6 +151,7 @@ const ReviewBody = styled.span`
 `;
 
 const ShowMore = styled.span`
+  cursor: pointer;
   font-size: 0.75em;
   font-style: italic;
   text-decoration: underline;
@@ -199,6 +200,7 @@ const Helpful = styled.p`
 `;
 
 const HelpfulVote = styled.span`
+  cursor: pointer;
   font-style: normal;
   color: hsl(0, 100%, 50%);
   text-decoration: underline;
