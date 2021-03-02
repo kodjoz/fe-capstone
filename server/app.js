@@ -31,11 +31,7 @@ app.use('/api/**', proxy);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 // serve static files from the 'dist' folder
-app.use(express.static(path.join(__dirname, '/../client/dist/')), (req, res, next) => {
-  // This is needed, couldn't find any docs supporting the status that express.static is sending to the client
-  res.status(200).send('OK');
-  next();
-});
+app.use(express.static(path.join(__dirname, '/../client/dist/')));
 //console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
 
 app.get('*', (req, res) => {
