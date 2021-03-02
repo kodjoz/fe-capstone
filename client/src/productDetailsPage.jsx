@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
-import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
+// import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
 import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
 import Overview from './overview/Overview.jsx';
 
@@ -21,7 +21,7 @@ class ProductDetailsPage extends React.Component {
         <Overview product_id={this.state.product_id} product={this.state.product}/>
         <RelatedProducts product_id={this.state.product_id} product={this.state.product}/>
         <QuestionAndAnswer product_id={this.state.product_id}/>
-        <ReviewsList product_id={this.state.product_id}/>
+        {/* <ReviewsList product_id={this.state.product_id}/> */}
       </div>
     );
   }
