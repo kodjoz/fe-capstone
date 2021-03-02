@@ -17,7 +17,6 @@ class QuestionAndAnswer extends React.Component {
       getMoreQuestions: false,
       getMoreAnswers: false,
       isAddQuestionVisible: false,
-      isAddAnswerVisible: false,
     };
 
     this.getQuestions = this.getQuestions.bind(this);
@@ -128,6 +127,7 @@ class QuestionAndAnswer extends React.Component {
 
   toggleAddQuestion() {
     this.setState({ isAddQuestionVisible: !this.state.isAddQuestionVisible });
+    this.getQuestions(1, this.state.questions.length);
   }
 
   render() {
@@ -147,7 +147,7 @@ class QuestionAndAnswer extends React.Component {
           value={this.state.searchTerm}/>
         {questions.map((question) => (<Question
           markOrReport={this.markOrReport}
-          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} />))}
+          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product_id}/>))}
         <StyledLoadAnswers><a
           onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
@@ -155,7 +155,7 @@ class QuestionAndAnswer extends React.Component {
           <button onClick={this.toggleAddQuestion}>Add A Question</button>
         </StyledButtons>
         {this.state.isAddQuestionVisible ? (
-          <AddQuestion product={this.props.product_id} />
+          <AddQuestion product={this.props.product_id} handleSubmit={this.toggleAddQuestion}/>
         ) : null}
       </QuestionContainer>
     );
