@@ -20,7 +20,6 @@ Modal.propTypes = {
   className: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
-  children: PropTypes.object,
   data: PropTypes.object.isRequired
 };
 
