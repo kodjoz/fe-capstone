@@ -37,19 +37,18 @@ class ReviewsList extends React.Component {
   }
 
   filterReviews(filter) {
-    //if filter exists within this.state.filters, remove from filters
-      //indexOf !== -1
+    //if filter exists within this.state.filters, remove from filters (indexOf !== -1)
     //else, add to filters
     //re-render renderedList with new filters
 
     let filters = this.state.filters;
     this.state.filters.push(filter);
-    console.log('filtering reviews');
+    console.log('filtering reviews based on: ', filters);
   }
 
   sortAndFilter(sortOrder, filters) {
-
-  };
+    console.log('sortOrder: ', sortOrder, 'filters: ', filters);
+  }
 
   render() {
     if (!this.state.reviews) {
@@ -57,6 +56,7 @@ class ReviewsList extends React.Component {
     } else {
       return (
         <div>
+          <h3>Ratings &amp; Reviews</h3>
           <p>#### reviews, sorted by this.state.sortOrder</p>
           <div><Ratings reviews={this.state.reviews} filter={this.filterReviews.bind(this)}/></div>
           {this.state.renderedReviews.map((review) => {

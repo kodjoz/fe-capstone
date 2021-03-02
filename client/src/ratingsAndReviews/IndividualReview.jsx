@@ -23,7 +23,7 @@ class IndividualReview extends React.Component {
     if (summary.length > 60) {
       let cutoff = 60;
       for (let i = 55; i < review.summary.length; i++) {
-        if (review.summary[i] === ' '){
+        if (review.summary[i] === ' ') {
           cutoff = i;
           break;
         }
@@ -42,7 +42,7 @@ class IndividualReview extends React.Component {
       body = <p>{review.body}</p>;
     } else {
       body = <ReviewBody>
-        <span id={bodyId}>{review.body.slice(0,251)}
+        <span id={bodyId}>{review.body.slice(0, 251)}
           <ShowMore id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; }} >Show More...</ShowMore>
         </span>
       </ReviewBody>;
