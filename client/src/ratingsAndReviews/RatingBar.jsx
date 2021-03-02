@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RatingBar = (props) => {
-  return (<div onClick={()=>{ props.filter(); }}>
-    <span>{props.stars} Stars {props.percent}</span>
+  let star = 'Star';
+  if (props.stars > 1) {
+    star += 's';
+  }
+  return (<div id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
+    <span>{props.stars} {star} {props.percent}</span>
   </div>);
-}
+};
 
 RatingBar.propTypes = {
   stars: PropTypes.number,

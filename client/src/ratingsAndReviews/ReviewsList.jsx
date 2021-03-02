@@ -36,14 +36,24 @@ class ReviewsList extends React.Component {
       });
   }
 
-  filterReviews(filter) {
+  newFilter(filter) {
     //if filter exists within this.state.filters, remove from filters (indexOf !== -1)
     //else, add to filters
     //re-render renderedList with new filters
-
-    let filters = this.state.filters;
-    this.state.filters.push(filter);
-    console.log('filtering reviews based on: ', filters);
+    if(filter === null) {
+      this.setState({filters: []});
+      console.log('filtering reviews based on: ', this.state.filters);
+    } else {
+      let filterLocation = this.state.filters.indexOf(filter)
+      let newFilters = this.state.filters;
+      if(filterLocation !== -1) {
+        newFilters.splice(filterLocation, 1);
+      } else {
+        newFilters.push(filter);
+      }
+      this.setState({filters: newFilters})
+      console.log('filtering reviews based on: ', this.state.filters); //setState is async, so this won't be accurate
+    }
   }
 
   sortAndFilter(sortOrder, filters) {
@@ -58,7 +68,7 @@ class ReviewsList extends React.Component {
         <div>
           <h3>Ratings &amp; Reviews</h3>
           <p>#### reviews, sorted by this.state.sortOrder</p>
-          <div><Ratings reviews={this.state.reviews} filter={this.filterReviews.bind(this)}/></div>
+          <div><Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/></div>
           {this.state.renderedReviews.map((review) => {
             return (<IndividualReview key={review.review_id} review={review} />);
           })}
