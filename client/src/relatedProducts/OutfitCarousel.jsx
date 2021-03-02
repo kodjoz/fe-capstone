@@ -61,7 +61,6 @@ class OutfitCarousel extends React.Component {
           First Slide
           <button onClick={this.addProductClickHandler}>add to outfit</button>
         </FirstSlide>
-        {/* change to use this.state.yourOutfit once add button adds productData */}
         {Object.values(this.state.yourOutfit).map((product) => {
           return <StyledSlide data={product}
             cardButtonClick={this.removeProductClickHandler}
