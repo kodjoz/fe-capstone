@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Answer from './Answer';
+import AddAnswer from './AddAnswerForm';
 
 class Question extends React.Component {
   constructor(props) {
@@ -11,10 +12,12 @@ class Question extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
+      isAddAnswerVisible: false,
     };
 
     this.handleHelpful = this.handleHelpful.bind(this);
     this.handleReport = this.handleReport.bind(this);
+    this.toggleAddAnswer = this.toggleAddAnswer.bind(this);
   }
   // get question helpfulness
   // set the helpfulness based on component did mount
@@ -41,6 +44,10 @@ class Question extends React.Component {
     }
   }
 
+  toggleAddAnswer() {
+    this.setState({ isAddAnswerVisible: !this.state.isAddAnswerVisible });
+  }
+
   render() {
     // Incase this prop is empty render nothing onscreen
     if (this.props.question === undefined) {
@@ -60,13 +67,19 @@ class Question extends React.Component {
     return (
       <StyledQuestion>
         <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
-        <QuestionLinks><LinkText onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | Add Answer</QuestionLinks>
+        <QuestionLinks>
+          <LinkText
+            onClick={this.handleReport}>
+            {!this.state.isReported ? 'Report' : 'Reported!'}
+          </LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | <LinkText onClick={this.toggleAddAnswer}>Add Answer</LinkText></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
+        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
       </StyledQuestion>
     );
   }
 }
-//answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
+//Moving AddAnswerForm to maintenance
+
 // each question should be an object
 Question.propTypes = {
   question: PropTypes.object.isRequired,
@@ -85,7 +98,8 @@ const StyledQuestion = styled.div`
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "answerContainer .";
+    "answerContainer ."
+    "addAnswer .";
 `;
 
 const QuestionBody = styled.div`
