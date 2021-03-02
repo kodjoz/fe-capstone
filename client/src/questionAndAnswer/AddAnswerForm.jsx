@@ -20,11 +20,9 @@ class AddAnswer extends React.Component {
   submitAnswer(e) {
     e.preventDefault;
     return axios.post(`/api/qa/questions/${this.props.question.id}/answers`, {
-      data: {
-        name: this.state.name,
-        body: this.state.body,
-        email: this.state.email
-      }
+      name: this.state.name,
+      body: this.state.body,
+      email: this.state.email
     })
       .then((response) => {
         console.log('Submission response', response.status, response.statusText);
@@ -49,44 +47,39 @@ class AddAnswer extends React.Component {
         <AnswerForm>
           <h1>Submit An Answer</h1>
           <h3>Q: {this.props.question.body}</h3>
-          <form onSubmit={this.submitAnswer}>
-            <label>Name:
-              <input
-                type="text"
-                name="name"
-                maxLength="60"
-                required
-                onChange={this.updateForm}
-              />
-            </label>
-            <br />
-            <label>Email:
-              <input
-                type="email"
-                name="email"
-                maxLength="60"
-                required
-                onChange={this.updateForm}
-              />
-            </label>
-            <br />
-            <label>
-              Add an Answer:
-              <textarea
-                type="text"
-                name="body"
-                maxLength="1000"
-                required
-                onChange={this.updateForm}
-              />
-            </label>
-            <br />
+          <label>Name:
             <input
-              type="submit"
-              name="submit"
-              value="Submit"
+              type="text"
+              name="name"
+              maxLength="60"
+              required
+              onChange={this.updateForm}
             />
-          </form>
+          </label>
+          <br />
+          <label>Email:
+            <input
+              type="email"
+              name="email"
+              maxLength="60"
+              required
+              onChange={this.updateForm}
+            />
+          </label>
+          <br />
+          <label>
+            Add an Answer:
+            <textarea
+              type="text"
+              name="body"
+              maxLength="1000"
+              required
+              onChange={this.updateForm}
+            />
+          </label>
+          <br />
+          <button
+            onClick={this.submitAnswer}>Submit</button>
           <button
             onClick={this.props.handleClick}
           >Back</button>
