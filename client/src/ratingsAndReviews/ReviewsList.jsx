@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
+import FactorsBreakdown from './FactorsBreakdown.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -61,9 +62,9 @@ class ReviewsList extends React.Component {
   sortAndFilter(sortOrder, filters) {
     let renderedReviews = [];
     if (filters.length === 0) {
-      renderedReviews  = this.state.reviews;
+      renderedReviews = this.state.reviews;
     } else {
-      for(let i = 0; i < this.state.reviews.length; i++) {
+      for (let i = 0; i < this.state.reviews.length; i++) {
         let rev = this.state.reviews[i];
         for (let j = 0; j < filters.length; j++) {
           if (Math.floor(rev.rating) === filters[j]) {
@@ -81,21 +82,24 @@ class ReviewsList extends React.Component {
       return (<div></div>);
     } else {
       return (
-        <MasterComponent>
+        <div>
           <h3>Ratings &amp; Reviews</h3>
           <p>#### reviews, sorted by this.state.sortOrder</p>
-          <RatingComponent>
-            <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
-          </RatingComponent>
-          <ReviewsComponent>
-            {this.state.renderedReviews.map((review) => {
-              return (<IndividualReview key={review.review_id} review={review} />);
-            })}
-            <button>MORE REVIEWS</button>
-            <button>ADD A REVIEW  +</button>
-            {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
-          </ReviewsComponent>
-        </MasterComponent>
+          <MasterComponent>
+            <RatingComponent>
+              <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
+              <FactorsBreakdown />
+            </RatingComponent>
+            <ReviewsComponent>
+              {this.state.renderedReviews.map((review) => {
+                return (<IndividualReview key={review.review_id} review={review} />);
+              })}
+              <button>MORE REVIEWS</button>
+              <button>ADD A REVIEW  +</button>
+              {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
+            </ReviewsComponent>
+          </MasterComponent>
+        </div>
       );
     }
   }
@@ -103,16 +107,24 @@ class ReviewsList extends React.Component {
 
 //flex-box goes here
 const MasterComponent = styled.div`
-
+  display: flex;
 `;
 
 const RatingComponent = styled.div`
-  display: block;
-  position: relative
+  display: flex;
+  flex-direction: column;
+  order: 1;
+  margin-top: 7px;
+  margin-right: 7px;
+  border-bottom: 1px solid #f0f0f5;
+  background-color: hsl(0, 10%, 99%);
+  color: hsl(0, 5%, 30%);
+  border: solid 1px #f2f2f2;
+  padding: 0px 10px;
 `;
 
 const ReviewsComponent = styled.div`
-  display: block;
+  order: 2;
 `;
 
 ReviewsList.propTypes = {
