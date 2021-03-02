@@ -51,9 +51,7 @@ class RelatedCarousel extends React.Component {
         })}
         <StyledModal show={this.state.showModal}
           handleClose={this.hideModal}
-          data={this.state.clickedProduct}>
-          <p>Modal</p>
-        </StyledModal>
+          data={this.state.clickedProduct}/>
       </>
     );
   }
