@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Answer from './Answer';
-import AddAnswer from './AddAnswerForm';
+//import AddAnswer from './AddAnswerForm';
 
 class Question extends React.Component {
   constructor(props) {
@@ -73,12 +73,13 @@ class Question extends React.Component {
             {!this.state.isReported ? 'Report' : 'Reported!'}
           </LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | <LinkText onClick={this.toggleAddAnswer}>Add Answer</LinkText></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
-        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
+
       </StyledQuestion>
     );
   }
 }
-//answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
+//Moving AddAnswerForm to maintenance
+//<AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
 // each question should be an object
 Question.propTypes = {
   question: PropTypes.object.isRequired,
