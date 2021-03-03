@@ -49,7 +49,7 @@ const ModalWindow = styled.div`
 const PositionedButton = styled(Button)`
   display: inline;
   position: fixed;
-  float: right;
+  margin-left: 45%;
   opacity: 75%;
 `;
 
