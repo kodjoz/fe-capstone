@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Tile, LowPriorityText, ClickableText, Thumbnail, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 import StarRow from '../starRow.jsx';
+import ModalImage from '../ModalImage.jsx';
 
 class IndividualReview extends React.Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class IndividualReview extends React.Component {
         <Gallery>
           {review.photos.map((photo) => {
             return (
-              <Thumbnail key={photo.url} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
+              <ModalImage key={photo.url} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
             );
           })}
           <div className="axis main-axis"></div>

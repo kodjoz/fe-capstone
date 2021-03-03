@@ -15,8 +15,8 @@ const PalettePreset = {
   secondary: 'hsl(270, 80%, 96%)',
   lowPriority: 'hsl(0, 0%, 40%)',
   black: 'hsl(0, 5%, 30%)',
-  foreground: 'hsl(0, 5%, 30%)',
-  background: 'hsl(0, 5%, 30%)',
+  foreground: 'hsl(0, 15%, 99%)',
+  background: 'hsl(345, 75%, 99%);',
   borderGrey: '#f2f2f2'
 };
 
@@ -43,6 +43,12 @@ const ModuleHeaderPreset = styled.h3`
   margin-left: 3%;
   padding: 5px 0;
   text-decoration: underline 2px hsl(0, 0%, 40%);
+`;
+
+const ItalicPreset = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+  font-family: Playfair Display, serif;
+  font-style: italic;
 `;
 
 const ClickableTextPreset = styled.span`
@@ -120,3 +126,4 @@ export const Helpful = HelpfulPreset;
 export const HelpfulYes = HelpfulYesPreset;
 export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
+export const Italic = ItalicPreset;
