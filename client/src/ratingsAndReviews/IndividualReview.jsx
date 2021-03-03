@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import StarRow from '../starRow.jsx';
 import styled from 'styled-components';
 
+import { Tile, LowPriorityText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
+
 class IndividualReview extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class IndividualReview extends React.Component {
 
   render() {
     let review = this.props.review;
-    review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
+    //review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
     if (summary.length > 60) {
       let cutoff = 60;
@@ -30,11 +32,11 @@ class IndividualReview extends React.Component {
       }
       summary = <Summary><b>{review.summary.slice(0, cutoff)}...</b><br></br><SummaryExtra>...{review.summary.slice(cutoff, review.summary.length)}</SummaryExtra></Summary>;
     } else {
-      summary = <Summary>{review.summary}</Summary>;
+      summary = <Summary><b>{review.summary}</b></Summary>;
     }
 
     let body = null;
-    review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
+    //review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
 
     let bodyId = 'review' + review.review_id;
     let bodyShowId = bodyId + 'vis';
@@ -49,7 +51,7 @@ class IndividualReview extends React.Component {
     }
 
     let response = null;
-    review.response = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.';
+    //review.response = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.';
     if (review.response) {
       response = <Response><span><Seller>Seller: </Seller>{review.response}</span></Response>;
     }
@@ -62,14 +64,13 @@ class IndividualReview extends React.Component {
     return (
       <Review>
         <ReviewerInfo>
-          <Reviewer>@{review.reviewer_name}</Reviewer>
+          <Signature>@{review.reviewer_name}</Signature>
           <br></br>
           <ReviewDate>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'})}</ReviewDate>
           <br></br>
           {recommend}
         </ReviewerInfo>
         <StarRow size={20} rating={review.rating * 20} />
-        {/* <span>{review.reviewer_name}</span> */}
         <div>{summary}</div>
         <div>{body}</div>
         <Photos>
@@ -82,21 +83,20 @@ class IndividualReview extends React.Component {
           <div className="axis cross-axis"></div>
         </Photos>
         {response}
-        <Helpful>Helpful? <HelpfulVote onClick={() => { this.helpfulVote(); }}>Yes</HelpfulVote> ({review.helpfulness})</Helpful>
+        <br></br>
+        <Helpful>Helpful? <HelpfulYes onClick={() => { this.helpfulVote(); }}>Yes</HelpfulYes> ({review.helpfulness})</Helpful>
         {/* <p>{JSON.stringify(this.props.review)}</p> */}
       </Review>
     );
   }
 }
 
-const Review = styled.div`
+const Review = styled(Tile)`
   margin-top: 7px;
-  padding-left: 10px;
+  padding-left: 12px;
   padding-top: 7px;
+  padding-bottom: 7px;
   border-bottom: 1px solid #f0f0f5;
-  background-color: hsl(0, 10%, 99%);
-  color: hsl(0, 5%, 30%);
-  border: solid 1px #f2f2f2;
 `;
 
 const Summary = styled.div`
@@ -119,15 +119,8 @@ const ReviewerInfo = styled.div`
   width: 166px;
 `;
 
-const Reviewer = styled.span`
-  color: hsl(0, 100%, 60%);
-  font-size: 1.1em;
-`;
-
-const ReviewDate = styled.span`
-  font-size: 0.75em;
-  font-style: italic;
-  color: grey;
+const ReviewDate = styled(LowPriorityText)`
+  margin-top: -50px;
   margin-left: 10%;
 `;
 
@@ -160,14 +153,6 @@ const ShowMore = styled.span`
   margin-left: 5px;
 `;
 
-// const Photos = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-contents: center;
-//   margin-bottom: 10px;
-//   padding-left: 20%;
-// `;
-
 const Photos = styled.div`
   display: flex;
   justify-content: space-around;
@@ -194,17 +179,6 @@ const Response = styled.div`
   padding: 5px 10px;
   margin-left: 3%;
   width: 70%;
-`;
-
-const Helpful = styled.p`
-  font-style: italic;
-`;
-
-const HelpfulVote = styled.span`
-  cursor: pointer;
-  font-style: normal;
-  color: hsl(0, 100%, 50%);
-  text-decoration: underline;
 `;
 
 IndividualReview.propTypes = {

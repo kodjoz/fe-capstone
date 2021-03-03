@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Tile, ModuleHeader, Button } from '../globalStyles.js';
 
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
@@ -83,19 +84,20 @@ class ReviewsList extends React.Component {
     } else {
       return (
         <div>
-          <h3>Ratings &amp; Reviews</h3>
-          <p>#### reviews, sorted by this.state.sortOrder</p>
+          <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
+          {/* <p>#### reviews, sorted by this.state.sortOrder</p> */}
           <MasterComponent>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
               <FactorsBreakdown />
             </RatingComponent>
+
             <ReviewsComponent>
               {this.state.renderedReviews.map((review) => {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
-              <button>MORE REVIEWS</button>
-              <button>ADD A REVIEW  +</button>
+              <Button>MORE REVIEWS</Button>
+              <Button>ADD A REVIEW  +</Button>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
           </MasterComponent>
@@ -110,7 +112,7 @@ const MasterComponent = styled.div`
   display: flex;
 `;
 
-const RatingComponent = styled.div`
+const RatingComponent = styled(Tile)`
   display: flex;
   flex-direction: column;
   order: 1;
@@ -118,14 +120,12 @@ const RatingComponent = styled.div`
   margin-top: 7px;
   margin-right: 7px;
   border-bottom: 1px solid #f0f0f5;
-  background-color: hsl(0, 10%, 99%);
-  color: hsl(0, 5%, 30%);
-  border: solid 1px #f2f2f2;
   padding: 0px 10px;
 `;
 
 const ReviewsComponent = styled.div`
   order: 2;
+  flex-basis: 70%;
 `;
 
 ReviewsList.propTypes = {

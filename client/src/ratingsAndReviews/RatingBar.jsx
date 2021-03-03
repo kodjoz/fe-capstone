@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ClickableText } from '../globalStyles.js';
 
 const RatingBar = (props) => {
   let star = 'Star';
@@ -10,15 +11,13 @@ const RatingBar = (props) => {
     star += ' ';
   }
 
-  return (<BarFilter id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
-    <span>{props.stars} {star} {props.percent}</span>
-  </BarFilter>);
+  return (<StarBar id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
+    <span>{props.stars} {star} {Math.round(props.percent)}</span>
+  </StarBar>);
 };
 
-const BarFilter = styled.div`
-  cursor: pointer;
-  font-size: 0.8em;
-  text-decoration: underline;
+const StarBar = styled(ClickableText)`
+  display: block;
 `;
 
 RatingBar.propTypes = {
