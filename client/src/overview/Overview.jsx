@@ -4,6 +4,7 @@ import { ProductType } from './types.js';
 import axios from 'axios';
 import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
+import StarRating from './StarRating';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
 import PriceDisplay from './PriceDisplay';
@@ -32,7 +33,11 @@ class OverviewContainer extends React.Component {
     super(props);
     this.state = {
       styles: [],
-      selectedStyle: null
+      selectedStyle: null,
+      reviewData: {
+        count: 0,
+        sum: 0
+      }
     };
     this.setSelectedStyle = this.setSelectedStyle.bind(this);
   }
@@ -55,6 +60,29 @@ class OverviewContainer extends React.Component {
       .catch((error) => {
         console.error('Overview Error:', error);
       });
+    this.fetchReviewMetaDataFromApi()
+      .then((data) => {
+        // if there is no data with a ratings object something went wrong
+        if (!data.ratings) {
+          throw Error('no review metadata found for product');
+        }
+        let count = 0;
+        let sum = 0;
+        Object.entries(data.ratings)
+          .map(([key, value]) => {
+            return [parseInt(key), parseInt(value)];
+          })
+          .forEach(([key, value]) => {
+            count += value;
+            sum += (key * value);
+          });
+        this.setState({
+          reviewData: {
+            count: count,
+            sum: sum
+          }
+        });
+      });
   }
 
   fetchStylesDataFromApi() {
@@ -65,6 +93,17 @@ class OverviewContainer extends React.Component {
           return response.data;
         }
         throw Error('fetching styles data failed');
+      });
+  }
+
+  fetchReviewMetaDataFromApi() {
+    const url = `/api/reviews/meta?product_id=${this.props.product_id}`;
+    return axios.get(url)
+      .then((response) => {
+        if (response && response.data) {
+          return response.data;
+        }
+        throw Error('fetching review meta data failed');
       });
   }
 
@@ -82,6 +121,7 @@ class OverviewContainer extends React.Component {
           <ImageGallery />
         </LeftContainer>
         <RightContainer>
+          <StarRating count={this.state.reviewData.count} sum={this.state.reviewData.sum} />
           <ProductDetail product={this.props.product} />
           <PriceDisplay selectedStyle={this.state.selectedStyle} />
           <StyleSelector />
