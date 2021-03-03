@@ -13,7 +13,7 @@ const StarRating = (props) => {
 
   return (
     <div>
-      <StarRow rating={average * 20} />
+      <StarRow rating={average * 20} size={20} />
       <ClickableText>Read all {props.count} reviews</ClickableText>
     </div>
   );
