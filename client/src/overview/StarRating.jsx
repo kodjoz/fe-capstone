@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StarRow from '../starRow';
+import { ClickableText } from '../globalStyles';
 
 const StarRating = (props) => {
   // if there are no reviews, do not render this component
@@ -13,7 +14,7 @@ const StarRating = (props) => {
   return (
     <div>
       <StarRow rating={average * 20} />
-      <span to="#reviews">Read all {props.count} reviews</span>
+      <ClickableText>Read all {props.count} reviews</ClickableText>
     </div>
   );
 };
