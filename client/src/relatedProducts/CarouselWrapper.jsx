@@ -7,27 +7,61 @@ class CarouselWrapper extends React.Component {
     super(props);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
+    this.state = {
+      showLeftScroll: true,
+      showRightScroll: true
+    };
   }
 
   scrollRight() {
-    document.getElementById(this.props.name + 'Container').scrollLeft += 50;
+    this.container.scrollLeft += 200;
+    if (this.container.scrollLeft + this.container.clientWidth >= this.container.scrollWidth) {
+      this.setState({
+        showRightScroll: false,
+        showLeftScroll: true
+      });
+    } else {
+      this.setState({
+        showLeftScroll: true
+      });
+    }
   }
 
   scrollLeft() {
-    document.getElementById(this.props.name + 'Container').scrollLeft -= 50;
+    this.container.scrollLeft -= 200;
+    if (this.container.scrollLeft === 0) {
+      this.setState({
+        showRightScroll: true,
+        showLeftScroll: false
+      });
+    } else {
+      this.setState({
+        showRightScroll: true,
+      });
+    }
   }
-  //render max 4 slides
-  //have start idx
-  //on right button click, increment index
+
+  componentDidMount() {
+    this.container = document.getElementById(this.props.name + 'Container');
+    if (this.container.scrollWidth <= this.container.clientWidth) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false
+      });
+    }
+  }
+
   render() {
     return (
-      <>
-        <button onClick={this.scrollLeft}>{'<'}</button>
-        <button onClick={this.scrollRight}>{'>'}</button>
-        <Container id={this.props.name + 'Container'}>
+      <StyledCarouselWrapper>
+        <Button show={this.state.showLeftScroll}
+          onClick={this.scrollLeft}>{'<'}</Button>
+        <CarouselContainer id={this.props.name + 'Container'}>
           {this.props.render(this.props.data)}
-        </Container>
-      </>
+        </CarouselContainer>
+        <Button show={this.state.showRightScroll}
+          onClick={this.scrollRight}>{'>'}</Button>
+      </StyledCarouselWrapper>
     );
   }
 
@@ -38,7 +72,14 @@ CarouselWrapper.propTypes = {
   data: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
 };
-const Container = styled.div`
+
+const StyledCarouselWrapper = styled.div`
+  background: #e8e8e8;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+const CarouselContainer = styled.div`
   width: 80%;
   display: flex;
   flex-wrap: nowrap;
@@ -49,4 +90,14 @@ const Container = styled.div`
   position: relative;
   padding: 10px;
 `;
+
+const Button = styled.div`
+  display: ${props => props.show ? 'block' : 'none'};
+  padding: 20px;
+  margin: 0.5em;
+  background: #ededed;
+  cursor: pointer;
+`;
+
+
 export default CarouselWrapper;
