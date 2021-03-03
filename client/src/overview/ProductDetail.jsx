@@ -10,7 +10,6 @@ const ProductDetail = (props) => {
       <h4>Stars</h4>
       <h4>{props.product.category}</h4>
       <h1>{props.product.name}</h1>
-      <h4>{props.product.default_price}</h4>
     </div>
   );
 };
