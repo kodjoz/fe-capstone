@@ -47,6 +47,7 @@ class OutfitCarousel extends React.Component {
 
   addProductClickHandler(event) {
     event.preventDefault();
+    event.target.setAttribute('disabled', true);
     this.addToOutfit(this.props.currentProduct);
   }
 
@@ -61,7 +62,6 @@ class OutfitCarousel extends React.Component {
           First Slide
           <button onClick={this.addProductClickHandler}>add to outfit</button>
         </FirstSlide>
-        {/* change to use this.state.yourOutfit once add button adds productData */}
         {Object.values(this.state.yourOutfit).map((product) => {
           return <StyledSlide data={product}
             cardButtonClick={this.removeProductClickHandler}
@@ -87,8 +87,11 @@ const FirstSlide = styled.div`
   background-color: grey;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-end;
+
 `;
+
 
 
 export default OutfitCarousel;

@@ -23,7 +23,7 @@ class IndividualReview extends React.Component {
     if (summary.length > 60) {
       let cutoff = 60;
       for (let i = 55; i < review.summary.length; i++) {
-        if (review.summary[i] === ' '){
+        if (review.summary[i] === ' ') {
           cutoff = i;
           break;
         }
@@ -42,8 +42,8 @@ class IndividualReview extends React.Component {
       body = <p>{review.body}</p>;
     } else {
       body = <ReviewBody>
-        <span id={bodyId}>{review.body.slice(0,251)}
-          <ShowMore id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; document.getElementById(bodyShowId).style.visibility = 'hidden'; }} >Show More...</ShowMore>
+        <span id={bodyId}>{review.body.slice(0, 251)}
+          <ShowMore id={bodyShowId} onClick={ ()=> { document.getElementById(bodyId).innerHTML = review.body; }} >Show More...</ShowMore>
         </span>
       </ReviewBody>;
     }
@@ -64,7 +64,7 @@ class IndividualReview extends React.Component {
         <ReviewerInfo>
           <Reviewer>@{review.reviewer_name}</Reviewer>
           <br></br>
-          <ReviewDate>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</ReviewDate>
+          <ReviewDate>{new Date(review.date).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric'})}</ReviewDate>
           <br></br>
           {recommend}
         </ReviewerInfo>
@@ -75,9 +75,11 @@ class IndividualReview extends React.Component {
         <Photos>
           {review.photos.map((photo) => {
             return (
-              <Thumbnail key={review.review_id} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
+              <Thumbnail key={photo.url} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
             );
           })}
+          <div className="axis main-axis"></div>
+          <div className="axis cross-axis"></div>
         </Photos>
         {response}
         <Helpful>Helpful? <HelpfulVote onClick={() => { this.helpfulVote(); }}>Yes</HelpfulVote> ({review.helpfulness})</Helpful>
@@ -88,12 +90,13 @@ class IndividualReview extends React.Component {
 }
 
 const Review = styled.div`
-  border-bottom: 1px solid #f0f0f5;
   margin-top: 7px;
   padding-left: 10px;
   padding-top: 7px;
+  border-bottom: 1px solid #f0f0f5;
   background-color: hsl(0, 10%, 99%);
-  color: hsl(0, 5%, 30%)
+  color: hsl(0, 5%, 30%);
+  border: solid 1px #f2f2f2;
 `;
 
 const Summary = styled.div`
@@ -112,7 +115,8 @@ const SummaryExtra = styled.span`
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 5px 15% 5px 5%;
+  margin: 5px 10% 5px 5%;
+  width: 166px;
 `;
 
 const Reviewer = styled.span`
@@ -148,6 +152,7 @@ const ReviewBody = styled.span`
 `;
 
 const ShowMore = styled.span`
+  cursor: pointer;
   font-size: 0.75em;
   font-style: italic;
   text-decoration: underline;
@@ -155,12 +160,18 @@ const ShowMore = styled.span`
   margin-left: 5px;
 `;
 
+// const Photos = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-contents: center;
+//   margin-bottom: 10px;
+//   padding-left: 20%;
+// `;
+
 const Photos = styled.div`
   display: flex;
-  align-items: center;
-  justify-contents: center;
+  justify-content: space-around;
   margin-bottom: 10px;
-  padding-left: 20%;
 `;
 
 const Thumbnail = styled.img`
@@ -190,6 +201,7 @@ const Helpful = styled.p`
 `;
 
 const HelpfulVote = styled.span`
+  cursor: pointer;
   font-style: normal;
   color: hsl(0, 100%, 50%);
   text-decoration: underline;

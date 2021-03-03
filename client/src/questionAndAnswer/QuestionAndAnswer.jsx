@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Question from './Question';
 import SearchQuestion from './SearchQuestion';
+import AddQuestion from './AddQuestionForm';
 
 class QuestionAndAnswer extends React.Component {
   constructor(props) {
@@ -14,14 +15,16 @@ class QuestionAndAnswer extends React.Component {
       questions: [],
       searchTerm: '',
       getMoreQuestions: false,
-      getMoreAnswers: false
+      getMoreAnswers: false,
+      isAddQuestionVisible: false,
     };
+
     this.getQuestions = this.getQuestions.bind(this);
     this.searchQuestions = this.searchQuestions.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
-    this.markQuestionHelpful = this.markQuestionHelpful.bind(this);
-    this.markAnswerHelpful = this.markAnswerHelpful.bind(this);
+    this.markOrReport = this.markOrReport.bind(this);
+    this.toggleAddQuestion = this.toggleAddQuestion.bind(this);
   }
 
   getQuestions(page, count) {
@@ -109,9 +112,9 @@ class QuestionAndAnswer extends React.Component {
   }
 
 
-  markQuestionHelpful(id) {
+  markOrReport(endpoint, id, handler) {
     // set question helpfulness
-    return axios.put(`/api/qa/questions/${id}/helpful`)
+    return axios.put(`/api/qa/${endpoint}/${id}/${handler}`)
       .then(() => {
         // send message to API to mark question as helpful, then rerender the state
         // Only query as many questions as we already have and no more
@@ -122,17 +125,9 @@ class QuestionAndAnswer extends React.Component {
       });
   }
 
-  markAnswerHelpful(id) {
-    // set answer helpfulness
-    return axios.put(`/api/qa/answers/${id}/helpful`)
-      .then(() => {
-        // rerender the state once we get the value back
-        // Only query as many questions as we already have and no more
-        this.getQuestions(1, this.state.questions.length);
-      })
-      .catch((err) => {
-        console.error('Error when marking answer as helpful', err);
-      });
+  toggleAddQuestion() {
+    this.setState({ isAddQuestionVisible: !this.state.isAddQuestionVisible });
+    this.getQuestions(1, this.state.questions.length);
   }
 
   render() {
@@ -151,15 +146,17 @@ class QuestionAndAnswer extends React.Component {
           onChange={this.searchQuestions}
           value={this.state.searchTerm}/>
         {questions.map((question) => (<Question
-          markQ={this.markQuestionHelpful}
-          markA={this.markAnswerHelpful}
-          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} />))}
+          markOrReport={this.markOrReport}
+          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product_id}/>))}
         <StyledLoadAnswers><a
           onClick={this.getMoreAnswers}>Load More Answers</a></StyledLoadAnswers>
         <StyledButtons>
           <button onClick={this.getMoreQuestions}>More Answered Questions</button>
-          <button>Add A Question</button>
+          <button onClick={this.toggleAddQuestion}>Add A Question</button>
         </StyledButtons>
+        {this.state.isAddQuestionVisible ? (
+          <AddQuestion product={this.props.product_id} handleSubmit={this.toggleAddQuestion}/>
+        ) : null}
       </QuestionContainer>
     );
   }
@@ -177,7 +174,8 @@ const QuestionContainer = styled.div`
     "searchQuestion"
     "styledQuestion"
     "styledLoadAnswers"
-    "styledButtons";
+    "styledButtons"
+    "addQuestion";
 `;
 
 const QuestionHeader = styled.h3`

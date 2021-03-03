@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Answer from './Answer';
+import AddAnswer from './AddAnswerForm';
 
 class Question extends React.Component {
   constructor(props) {
@@ -11,27 +12,40 @@ class Question extends React.Component {
     this.state = {
       isHelpful: false,
       isReported: false,
+      isAddAnswerVisible: false,
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleHelpful = this.handleHelpful.bind(this);
+    this.handleReport = this.handleReport.bind(this);
+    this.toggleAddAnswer = this.toggleAddAnswer.bind(this);
   }
   // get question helpfulness
   // set the helpfulness based on component did mount
   // if the state updates then query the server to get the question helpfulness
   // send message to API to mark question as helpful
 
-  handleClick() {
+  handleHelpful() {
     var currentQuestion = this.props.question.question_id;
     if (!this.state.isHelpful) {
-      console.log('Current question', currentQuestion);
-      this.props.markQ(currentQuestion);
-      this.setState({
-        isHelpful: true
-      });
+      this.props.markOrReport('questions', currentQuestion, 'helpful');
+      this.setState({ isHelpful: true });
     } else {
-      alert('You already marked this question as helpful');
-      console.log('Type of ID', typeof currentQuestion);
+      alert('You already marked this question as helpful!');
     }
+  }
+
+  handleReport() {
+    var currentQuestion = this.props.question.question_id;
+    if (!this.state.isReported) {
+      this.props.markOrReport('questions', currentQuestion, 'report');
+      this.setState({ isReported: true });
+    } else {
+      alert('You already reported this question!');
+    }
+  }
+
+  toggleAddAnswer() {
+    this.setState({ isAddAnswerVisible: !this.state.isAddAnswerVisible });
   }
 
   render() {
@@ -53,19 +67,24 @@ class Question extends React.Component {
     return (
       <StyledQuestion>
         <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
-        <QuestionLinks>Helpful? <LinkText onClick={this.handleClick}>Yes({question.question_helpfulness})</LinkText> | Add Answer</QuestionLinks>
-        {answers.map((answer) => (<Answer markA={this.props.markA} answer={answer} key={answer.id} />) )}
+        <QuestionLinks>
+          <LinkText
+            onClick={this.handleReport}>
+            {!this.state.isReported ? 'Report' : 'Reported!'}
+          </LinkText> | Helpful? <LinkText onClick={this.handleHelpful}>Yes({question.question_helpfulness})</LinkText> | <LinkText onClick={this.toggleAddAnswer}>Add Answer</LinkText></QuestionLinks>
+        {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
+        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
       </StyledQuestion>
     );
   }
 }
-//answers.map((answer) => (<Answer answer={answer} key={answer.id} />) )}
+//Moving AddAnswerForm to maintenance
+
 // each question should be an object
 Question.propTypes = {
   question: PropTypes.object.isRequired,
   getMoreAnswers: PropTypes.bool.isRequired,
-  markQ: PropTypes.func,
-  markA: PropTypes.func
+  markOrReport: PropTypes.func.isRequired,
 };
 
 // style the components
@@ -79,7 +98,8 @@ const StyledQuestion = styled.div`
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "answerContainer .";
+    "answerContainer ."
+    "addAnswer .";
 `;
 
 const QuestionBody = styled.div`

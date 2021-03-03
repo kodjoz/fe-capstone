@@ -11,18 +11,31 @@ class Answer extends React.Component {
       isReported: false,
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleHelpful = this.handleHelpful.bind(this);
+    this.handleReport = this.handleReport.bind(this);
   }
 
-  handleClick() {
+  handleHelpful() {
     var currentAnswer = this.props.answer.id;
     if (!this.state.isHelpful) {
-      this.props.markA(currentAnswer);
+      this.props.markOrReport('answers', currentAnswer, 'helpful');
       this.setState({
         isHelpful: true
       });
     } else {
       alert('You already marked this Answer as helpful');
+    }
+  }
+
+  handleReport() {
+    var currentAnswer = this.props.answer.id;
+    if (!this.state.isReported) {
+      this.props.markOrReport('answers', currentAnswer, 'report');
+      this.setState({
+        isReported: true
+      });
+    } else {
+      alert('You already reported this Answer');
     }
   }
 
@@ -45,7 +58,7 @@ class Answer extends React.Component {
     return (
       <AnswerContainer>
         <div className="answer"><strong>A:</strong> {answer.body}</div>
-        <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful?  <LinkText onClick={this.handleClick}>Yes ({answer.helpfulness})</LinkText> | <LinkText>Report</LinkText></div>
+        <div className="answer-links">by {answer.answerer_name}, {prettyDate} | Helpful?  <LinkText onClick={this.handleHelpful}>Yes ({answer.helpfulness})</LinkText> | <LinkText onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</LinkText></div>
       </AnswerContainer>
     );
   }
@@ -54,7 +67,7 @@ class Answer extends React.Component {
 // each answer should be an object
 Answer.propTypes = {
   answer: PropTypes.object.isRequired,
-  markA: PropTypes.func
+  markOrReport: PropTypes.func.isRequired,
 };
 
 const AnswerContainer = styled.div`
