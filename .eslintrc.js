@@ -10,8 +10,8 @@ module.exports = {
     'eslint:recommended',
     'hackreactor',
     'plugin:react/recommended',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended'
+    'plugin:testing-library/recommended',
+    'plugin:testing-library/react'
   ],
   'globals': {
     'Atomics': 'readonly',
@@ -34,7 +34,10 @@ module.exports = {
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error'
+    'jest/valid-expect': 'error',
+    'testing-library/await-async-query': 'error',
+    'testing-library/no-await-sync-query': 'error',
+    'testing-library/no-debug': 'warn'
   },
   'settings': {
     'react': {
