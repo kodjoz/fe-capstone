@@ -87,7 +87,7 @@ class ReviewsList extends React.Component {
         <div>
           <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
           {/* <p>#### reviews, sorted by this.state.sortOrder</p> */}
-          <SortDropdown></SortDropdown>
+          {/* <SortDropdown></SortDropdown> */}
           <MasterComponent>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
