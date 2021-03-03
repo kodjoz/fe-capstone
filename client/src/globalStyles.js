@@ -5,7 +5,9 @@ const Global = createGlobalStyle`
   body {
     margin: 0 10%;
     color: hsl(0, 5%, 30%);
-    background-color: hsl(345, 75%, 99%)
+    background-color: hsl(345, 75%, 99%);
+    font-family: Garamond, Helvetica, Arial;
+    font-size: 17px;
   }
 `;
 //grey violet
@@ -17,26 +19,46 @@ const TilePreset = styled.div`
   border: solid 1px #f2f2f2;
 `;
 
-
+//different font maybe?
 const ModuleHeaderPreset = styled.h3`
-
+  font-size: 1.2em;
+  margin-left: 3%;
+  padding: 5px 0;
+  text-decoration: underline 2px hsl(0, 0%, 40%);
 `;
+
+const ClickableTextPreset = styled.span`
+  cursor: pointer;
+  font-style: italic;
+  text-decoration: underline;
+  font-size: 0.8em;
+  color: hsl(0, 0%, 40%);
+`;
+//ALT more salient red clickable color: hsl(0, 100%, 50%);
 
 const LowPriorityTextPreset = styled.span`
   font-size: 0.75em;
   font-style: italic;
-  color: grey;
-`;
-
-const ClickableTextPreset = styled.span`
-  font-style: italic;
-  text-decoration: underline;
-  font-size: 0.8em;
-  cursor: pointer;
+  color: hsl(0, 0%, 55%);
 `;
 
 const ButtonPreset = styled.button`
-color: red;
+  text-transform: uppercase;
+  background-color: hsl(0, 15%, 99%);
+  color: hsl(0, 0%, 40%);
+  border: solid 1px #f2f2f2;
+  height: 40px;
+  padding: 0 15px;
+`;
+
+const ThumbnailPreset = styled.img`
+  display: inline-block;
+  border: 1px solid #f0f0f5;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 5px;
+  width: 100px;
+  height: 100px;
 `;
 
 const HelpfulPreset = styled.div`
@@ -62,10 +84,11 @@ const SignaturePreset = styled.div`
 
 export const GlobalStyle = Global;
 export const Tile = TilePreset;
+export const ModuleHeader = ModuleHeaderPreset;
+export const ClickableText = ClickableTextPreset;
+export const LowPriorityText = LowPriorityTextPreset;
+export const Button = ButtonPreset;
+export const Thumbnail = ThumbnailPreset;
 export const Helpful = HelpfulPreset;
 export const HelpfulYes = HelpfulYesPreset;
 export const Signature = SignaturePreset;
-export const ModuleHeader = ModuleHeaderPreset;
-export const Button = ButtonPreset;
-export const ClickableText = ClickableTextPreset;
-export const LowPriorityText = LowPriorityTextPreset;

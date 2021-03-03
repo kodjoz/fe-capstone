@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import StarRow from '../starRow.jsx';
 import styled from 'styled-components';
 
-import { Tile, LowPriorityText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
+import { Tile, LowPriorityText, ClickableText, Thumbnail, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 
 class IndividualReview extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class IndividualReview extends React.Component {
     }
 
     let body = null;
-    //review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
+    // review.body = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.'; //long summary test
 
     let bodyId = 'review' + review.review_id;
     let bodyShowId = bodyId + 'vis';
@@ -71,9 +71,9 @@ class IndividualReview extends React.Component {
           {recommend}
         </ReviewerInfo>
         <StarRow size={20} rating={review.rating * 20} />
-        <div>{summary}</div>
+        {summary}
         <div>{body}</div>
-        <Photos>
+        <Gallery>
           {review.photos.map((photo) => {
             return (
               <Thumbnail key={photo.url} src={photo.url} onClick={() => { console.log('open me in a modal window!'); }} />
@@ -81,7 +81,7 @@ class IndividualReview extends React.Component {
           })}
           <div className="axis main-axis"></div>
           <div className="axis cross-axis"></div>
-        </Photos>
+        </Gallery>
         {response}
         <br></br>
         <Helpful>Helpful? <HelpfulYes onClick={() => { this.helpfulVote(); }}>Yes</HelpfulYes> ({review.helpfulness})</Helpful>
@@ -101,6 +101,7 @@ const Review = styled(Tile)`
 
 const Summary = styled.div`
   font-style: italic;
+  font-size: 1.1em;
   margin-bottom: 5px;
 `;
 
@@ -144,34 +145,20 @@ const ReviewBody = styled.span`
   margin-right: 20%;
 `;
 
-const ShowMore = styled.span`
-  cursor: pointer;
-  font-size: 0.75em;
-  font-style: italic;
-  text-decoration: underline;
-  color: #666666;
+const ShowMore = styled(ClickableText)`
   margin-left: 5px;
 `;
 
-const Photos = styled.div`
+const Gallery = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
 `;
 
-const Thumbnail = styled.img`
-  display: inline-block;
-  border: 1px solid #f0f0f5;
-  border-radius: 5px;
-  padding: 5px;
-  margin-right: 5px;
-  width: 100px;
-  height: 100px;
-`;
-
 const Seller = styled.b`
   font-style: italic;
 `;
+
 const Response = styled.div`
   display: block;
   background-color: hsl(270, 100%, 96%);

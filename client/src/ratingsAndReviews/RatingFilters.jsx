@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { ClickableText } from '../globalStyles.js';
-import StarRow from '../starRow.jsx';
+import { ClickableText, LowPriorityText } from '../globalStyles.js';
 
 const RatingFilters = (props) => {
+  var filters = props.filters.sort((a, b) => a - b);
+  //let filterString = filters.toString();
+  //filterString = filterString.slice(1, filterString.length);
+  filters = JSON.stringify(filters);
+  filters = filters.slice(1, filters.length - 1);
   return (
     <div>
-      <span>Showing Reviews Starred: { JSON.stringify(props.filters) }</span>
-      <div>
-        {props.filters.map((star) => {
-          console.log(JSON.stringify(star));
-          <StarRow size={5} rating={star * 20} />;
-        })}
-      </div>
+      <LowPriorityText>Showing Reviews Starred: { filters }</LowPriorityText>
       <br></br>
       <ClickableText onClick={()=> { props.newFilter(null); }}>Remove All Filters</ClickableText>
     </div>
   );
 };
-
-
-
 
 RatingFilters.propTypes = {
   filters: PropTypes.array,

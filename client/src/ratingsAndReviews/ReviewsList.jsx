@@ -96,11 +96,12 @@ class ReviewsList extends React.Component {
               {this.state.renderedReviews.map((review) => {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
-              <Button>MORE REVIEWS</Button>
-              <Button>ADD A REVIEW  +</Button>
+              <ReviewsButton>MORE REVIEWS</ReviewsButton>
+              <ReviewsButton>ADD A REVIEW  +</ReviewsButton>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
           </MasterComponent>
+          <Footer></Footer>
         </div>
       );
     }
@@ -128,9 +129,17 @@ const ReviewsComponent = styled.div`
   flex-basis: 70%;
 `;
 
+const ReviewsButton = styled(Button)`
+  margin-top: 7px;
+  margin-right: 7px;
+`;
+
+const Footer = styled.div`
+  padding: 15px 0;
+`;
+
 ReviewsList.propTypes = {
   product_id: PropTypes.number
 };
 
 export default ReviewsList;
-
