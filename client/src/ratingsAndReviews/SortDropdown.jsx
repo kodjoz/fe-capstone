@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, DropdownMenu } from '../globalStyles.js';
+import { DropdownMenu } from '../globalStyles.js';
 
 const SortDropdown = () => {
   return (
