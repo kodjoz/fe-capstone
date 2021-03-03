@@ -4,6 +4,7 @@ import { ProductType } from './types.js';
 import axios from 'axios';
 import AddToCart from './AddToCart';
 import ImageGallery from './ImageGallery';
+import StarRating from './StarRating';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
 import PriceDisplay from './PriceDisplay';
@@ -120,6 +121,7 @@ class OverviewContainer extends React.Component {
           <ImageGallery />
         </LeftContainer>
         <RightContainer>
+          <StarRating count={this.state.reviewData.count} sum={this.state.reviewData.sum} />
           <ProductDetail product={this.props.product} />
           <PriceDisplay selectedStyle={this.state.selectedStyle} />
           <StyleSelector />
