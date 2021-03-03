@@ -32,7 +32,11 @@ class OverviewContainer extends React.Component {
     super(props);
     this.state = {
       styles: [],
-      selectedStyle: null
+      selectedStyle: null,
+      reviewData: {
+        count: 0,
+        sum: 0
+      }
     };
     this.setSelectedStyle = this.setSelectedStyle.bind(this);
   }
@@ -54,6 +58,29 @@ class OverviewContainer extends React.Component {
       })
       .catch((error) => {
         console.error('Overview Error:', error);
+      });
+    this.fetchReviewMetaDataFromApi()
+      .then((data) => {
+        // if there is no data with a ratings object something went wrong
+        if (!data.ratings) {
+          throw Error('no review metadata found for product');
+        }
+        let count = 0;
+        let sum = 0;
+        Object.entries(data.ratings)
+          .map(([key, value]) => {
+            return [parseInt(key), parseInt(value)];
+          })
+          .forEach(([key, value]) => {
+            count += value;
+            sum += (key * value);
+          });
+        this.setState({
+          reviewData: {
+            count: count,
+            sum: sum
+          }
+        });
       });
   }
 
