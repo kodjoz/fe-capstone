@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StarRow from '../starRow.jsx';
 import styled from 'styled-components';
 
 import { Tile, LowPriorityText, ClickableText, Thumbnail, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
+import StarRow from '../starRow.jsx';
 
 class IndividualReview extends React.Component {
   constructor(props) {
@@ -161,7 +161,7 @@ const Seller = styled.b`
 
 const Response = styled.div`
   display: block;
-  background-color: hsl(270, 100%, 96%);
+  background-color: hsl(270, 80%, 96%);
   border-radius: 7px;
   padding: 5px 10px;
   margin-left: 3%;
