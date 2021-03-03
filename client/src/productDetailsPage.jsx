@@ -11,7 +11,6 @@ class ProductDetailsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: props.product_id,
       product: null
     };
   }
@@ -30,7 +29,7 @@ class ProductDetailsPage extends React.Component {
   }
 
   componentDidMount() {
-    const product_id = this.state.product_id;
+    const product_id = this.props.product_id;
     if (!product_id) {
       return console.error('product_id missing from root app state');
     }

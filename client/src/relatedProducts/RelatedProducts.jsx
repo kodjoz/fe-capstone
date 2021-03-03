@@ -66,12 +66,16 @@ class RelatedProductsWrapper extends React.Component {
         <CarouselWrapper
           data={this.state.relatedProductsData}
           render={(data) => {
-            return <RelatedCarousel data={data}/>;
+            return <RelatedCarousel
+              data={data}
+              currentProduct={this.props.product}/>;
           }}/>
         <CarouselWrapper
           data={{}}
           render={(data) => {
-            return <OutfitCarousel currentProduct={this.props.product} data={data} />;
+            return <OutfitCarousel
+              currentProduct={this.props.product}
+              data={data} />;
           }} />
       </div>
     );

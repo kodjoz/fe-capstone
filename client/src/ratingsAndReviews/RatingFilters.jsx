@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ClickableText, LowPriorityText } from '../globalStyles.js';
 
 const RatingFilters = (props) => {
+  var filters = props.filters.sort((a, b) => a - b);
+  //let filterString = filters.toString();
+  //filterString = filterString.slice(1, filterString.length);
+  filters = JSON.stringify(filters);
+  filters = filters.slice(1, filters.length - 1);
   return (
     <div>
-      <p>Showing Reviews Starred: { JSON.stringify(props.filters) }</p>
-      <p onClick={()=> { props.newFilter(null); }}>Remove All Filters</p>
+      <LowPriorityText>Showing Reviews Starred: { filters }</LowPriorityText>
+      <br></br>
+      <ClickableText onClick={()=> { props.newFilter(null); }}>Remove All Filters</ClickableText>
     </div>
   );
 };

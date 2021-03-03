@@ -22,7 +22,10 @@ const Navbar = () => {
         <Link to="/products/19378">Alberto Romper (19378)</Link>
       </NavLink>
       <NavLink>
-        <Link to="/products/19089">Camo Onesie (19089</Link>
+        <Link to="/products/19089">Camo Onesie (19089)</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/products/19090">Bright Future Sunglasses (19090)</Link>
       </NavLink>
       <NavLink>
         <Link to="/products/19091">Morning Joggers (19091)</Link>
