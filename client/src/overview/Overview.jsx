@@ -68,6 +68,17 @@ class OverviewContainer extends React.Component {
       });
   }
 
+  fetchReviewMetaDataFromApi() {
+    const url = `/api/reviews/meta?product_id=${this.props.product_id}`;
+    return axios.get(url)
+      .then((response) => {
+        if (response && response.data) {
+          return response.data;
+        }
+        throw Error('fetching review meta data failed');
+      });
+  }
+
   setSelectedStyle(styleId) {
     let newStyle = this.state.styles.find(style => style.style_id === styleId);
     this.setState({
