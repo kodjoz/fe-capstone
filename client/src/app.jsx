@@ -5,16 +5,17 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import { GlobalStyle } from './globalStyles.js';
 import ProductDetailsPage from './productDetailsPage.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <Router>
+        <GlobalStyle />
         <Switch>
           <Route exact path="/">
             <h1>Home</h1>
@@ -23,6 +24,9 @@ class App extends React.Component {
             </h3>
             <h3>
               <Link to="/products/19089">Camo Onesie (19089)</Link>
+            </h3>
+            <h3>
+              <Link to="/products/19090">Bright Future Sunglasses (19090)</Link>
             </h3>
             <h3>
               <Link to="/products/19091">Morning Joggers (19091)</Link>
