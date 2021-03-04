@@ -51,6 +51,7 @@ const PositionedButton = styled(Button)`
   position: fixed;
   margin-left: 45%;
   opacity: 75%;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`

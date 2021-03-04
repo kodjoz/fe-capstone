@@ -13,15 +13,16 @@ const RatingBar = (props) => {
   return (
     <StarRow id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
       <RowName>{props.stars} {star}</RowName>
-      <RenderedBar percent={props.percent}></RenderedBar>
+      <RenderedBar percent={props.percent} empty={100 - props.percent}></RenderedBar>
     </StarRow>
   );
 };
 
 const RenderedBar = (props) => {
   return (
-    <Bar percent={props.percent}>
+    <Bar percent={props.percent} empty={100 - props.percent}>
       <Full percent={props.percent}></Full>
+      <Empty empty={props.empty}></Empty>
     </Bar>
   );
 };
@@ -29,9 +30,15 @@ const RenderedBar = (props) => {
 const StarRow = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-left: 5px;
+  cursor: pointer;
+  width: 100%;
+  &:hover {
+    background-color: hsla(0, 0%, 95%, 50%);
+  }
 `;
-const RowName = styled(ClickableText)`
 
+const RowName = styled(ClickableText)`
 `;
 
 const Bar = styled.div`
@@ -40,12 +47,20 @@ const Bar = styled.div`
   height: 10px;
   flex-basis: 50%;
   border: 1px solid hsl(0, 0%, 40%);
+  display: flex;
 `;
 
 const Full = styled.div`
   height: 99%;
   width: ${props => props.percent}%;
   background: hsl(0, 100%, 60%);
+`;
+
+const Empty = styled.div`
+  display: inline;
+  height: 99%;
+  width: ${props => props.empty}%;
+  background: hsla(0, 0%, 85%, 60%);
 `;
 
 RatingBar.propTypes = {
@@ -55,7 +70,8 @@ RatingBar.propTypes = {
 };
 
 RenderedBar.propTypes = {
-  percent: PropTypes.number
+  percent: PropTypes.number,
+  empty: PropTypes.number
 };
 
 export default RatingBar;
