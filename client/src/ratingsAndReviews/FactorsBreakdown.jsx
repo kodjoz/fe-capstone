@@ -1,21 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Palette } from '../globalStyles.js';
+import FactorBar from './FactorBar.jsx';
 
 const FactorsBreakdown = () => {
   return (
     <Breakdown>
       <Title>Factors</Title>
-      <Title2>Factors</Title2>
-      <Title3>Factors</Title3>
-      <Title4>Factors</Title4>
-      <Title5>Factors</Title5>
-      <Title6>Factors</Title6>
-      <Title7>Factors</Title7>
-      <Factor>
-        <Name>Size</Name>
-
-      </Factor>
+      <FactorBar name={'Size'} range={['too small', 'just right', 'too wide']}></FactorBar>
+      <FactorBar name={'Width'} range={['too narrow', 'just right', 'too wide']}></FactorBar>
+      <FactorBar name={'Comfort'} range={['uncomfortable', 'so-so', 'perfect']}></FactorBar>
+      <FactorBar name={'Quality'} range={['poor', 'as expected', 'perfect']}></FactorBar>
+      <FactorBar name={'Length'} range={['runs short', 'just right', 'runs long']}></FactorBar>
+      <FactorBar name={'Size'} range={['runs tight', 'just right', 'runs long']}></FactorBar>
     </Breakdown>
   );
 };
@@ -26,39 +23,9 @@ const Breakdown = styled.div`
 `;
 
 const Title = styled.div`
-  text-decoration: underline;
-  color: ${Palette.black};
+margin-bottom: 5px;
+text-decoration: underline;
+color: ${Palette.black};
 `;
-// const Title2 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.secondary};
-// `;
-// const Title3 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.lowPriority};
-// `;
-// const Title4 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.black};
-// `;
-// const Title5 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.foreground};
-// `;
-// const Title6 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.background};
-// `;
-// const Title7 = styled.div`
-//   text-decoration: underline;
-//   color: ${Palette.borderGrey};
-// `;
-
-
-const Factor = styled.div`
-`;
-
-const Name = styled.span``;
-
 
 export default FactorsBreakdown;

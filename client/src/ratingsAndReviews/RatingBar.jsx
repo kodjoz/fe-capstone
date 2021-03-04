@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ClickableText } from '../globalStyles.js';
+import { Palette, ClickableText } from '../globalStyles.js';
 
 const RatingBar = (props) => {
   let star = 'Star';
@@ -46,7 +46,7 @@ const Bar = styled.div`
   margin-right: 15%;
   height: 10px;
   flex-basis: 50%;
-  border: 1px solid hsl(0, 0%, 40%);
+  border: 1px solid ${Palette.borderGrey};
   display: flex;
 `;
 
