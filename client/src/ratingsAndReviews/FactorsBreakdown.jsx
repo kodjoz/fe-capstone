@@ -27,32 +27,32 @@ const Breakdown = styled.div`
 
 const Title = styled.div`
   text-decoration: underline;
-  color: ${Palette.primary};
-`;
-const Title2 = styled.div`
-  text-decoration: underline;
-  color: ${Palette.secondary};
-`;
-const Title3 = styled.div`
-  text-decoration: underline;
-  color: ${Palette.lowPriority};
-`;
-const Title4 = styled.div`
-  text-decoration: underline;
   color: ${Palette.black};
 `;
-const Title5 = styled.div`
-  text-decoration: underline;
-  color: ${Palette.foreground};
-`;
-const Title6 = styled.div`
-  text-decoration: underline;
-  color: ${Palette.background};
-`;
-const Title7 = styled.div`
-  text-decoration: underline;
-  color: ${Palette.borderGrey};
-`;
+// const Title2 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.secondary};
+// `;
+// const Title3 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.lowPriority};
+// `;
+// const Title4 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.black};
+// `;
+// const Title5 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.foreground};
+// `;
+// const Title6 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.background};
+// `;
+// const Title7 = styled.div`
+//   text-decoration: underline;
+//   color: ${Palette.borderGrey};
+// `;
 
 
 const Factor = styled.div`
