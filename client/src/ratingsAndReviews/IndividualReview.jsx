@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Tile, LowPriorityText, ClickableText, Thumbnail, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
+import { Tile, LowPriorityText, ClickableText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 import StarRow from '../starRow.jsx';
 import ModalImage from '../ModalImage.jsx';
 
@@ -112,7 +112,7 @@ const SummaryExtra = styled.span`
   line-height: 50%;
   color: grey;
   margin-top: -5px;
-  `;
+`;
 
 const ReviewerInfo = styled.div`
   display: inline-block;
@@ -127,7 +127,9 @@ const ReviewDate = styled(LowPriorityText)`
 `;
 
 const Recommend = styled.div`
-  margin-top: -5px;
+  display: flex;
+  flex-direction: row;
+
 `;
 
 const RedCheck = styled.span`

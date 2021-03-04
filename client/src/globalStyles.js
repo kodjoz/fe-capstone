@@ -45,6 +45,7 @@ const ModuleHeaderPreset = styled.h3`
   text-decoration: underline 2px hsl(0, 0%, 40%);
 `;
 
+//font not finalized, all I know is I don't want it to be Garamond
 const ItalicPreset = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
   font-family: Playfair Display, serif;
@@ -91,6 +92,7 @@ const ThumbnailPreset = styled.img`
   margin-right: 5px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 `;
 
 const HelpfulPreset = styled.div`

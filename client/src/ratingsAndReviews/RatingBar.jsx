@@ -10,20 +10,52 @@ const RatingBar = (props) => {
   } else {
     star += ' ';
   }
-
-  return (<StarBar id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
-    <span>{props.stars} {star} {Math.round(props.percent)}</span>
-  </StarBar>);
+  return (
+    <StarRow id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
+      <RowName>{props.stars} {star}</RowName>
+      <RenderedBar percent={props.percent}></RenderedBar>
+    </StarRow>
+  );
 };
 
-const StarBar = styled(ClickableText)`
-  display: block;
+const RenderedBar = (props) => {
+  return (
+    <Bar percent={props.percent}>
+      <Full percent={props.percent}></Full>
+    </Bar>
+  );
+};
+
+const StarRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const RowName = styled(ClickableText)`
+
+`;
+
+const Bar = styled.div`
+  margin-top: 2px;
+  margin-right: 15%;
+  height: 10px;
+  flex-basis: 50%;
+  border: 1px solid hsl(0, 0%, 40%);
+`;
+
+const Full = styled.div`
+  height: 99%;
+  width: ${props => props.percent}%;
+  background: hsl(0, 100%, 60%);
 `;
 
 RatingBar.propTypes = {
   stars: PropTypes.number,
   percent: PropTypes.number,
   newFilter: PropTypes.func
+};
+
+RenderedBar.propTypes = {
+  percent: PropTypes.number
 };
 
 export default RatingBar;

@@ -7,7 +7,7 @@ import { Tile, ModuleHeader, Button } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
-import SortDropdown from './SortDropdown.jsx';
+//import SortDropdown from './SortDropdown.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
