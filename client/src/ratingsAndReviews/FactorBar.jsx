@@ -19,13 +19,31 @@ const FactorBar = (props) => {
 };
 
 const Factor = styled.div`
+padding-bottom: 5px;
+`;
+
+const Name = styled.span`
+  display: block;
+  font-style: italic;
+  margin-bottom: 10px;
+`;
+
+const Indicator = styled.div`
+  position: relative;
+  z-index: 2;
+  font-size: 1.25em;
+  color: ${Palette.primary};
+  margin-top: -20px;
+  margin-left: 50%;
 `;
 
 const FullBar = styled.div`
+  position: relative;
+  z-index: 1;
   width: 100%;
-  margin-top: 3px;
   display: flex;
   justify-content: space-between;
+  margin-top: -12px;
 `;
 
 const Bar = styled.div`
@@ -34,18 +52,6 @@ const Bar = styled.div`
   height: 7px;
   border: 1px solid ${Palette.borderGrey};
   display: flex;
-`;
-
-const Indicator = styled.span`
-  display: inline;
-  font-size: 1.25em;
-  color: ${Palette.primary};
-  margin-left: 50%;
-`;
-
-const Name = styled.span`
-  display: block;
-  font-style: italic;
 `;
 
 const Values = styled.div`
