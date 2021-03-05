@@ -47,7 +47,7 @@ const ModuleHeaderPreset = styled.h3`
   text-decoration: underline 2px hsl(0, 0%, 40%);
 `;
 
-//NOTE: font not finalized, all I know is I don't want it to be Garamond
+//NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
 const ItalicPreset = styled.span`
   font-style: italic;
 `;
