@@ -68,7 +68,7 @@ class Answer extends React.Component {
             );
           }) : null}
         </Gallery>
-        <AnswerLinks>by {answer.answerer_name}, {prettyDate} | <Helpful>Helpful? </Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes ({answer.helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</HelpfulYes></AnswerLinks>
+        <AnswerLinks>by {answer.answerer_name}, <time>{prettyDate}</time> | <Helpful>Helpful? </Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes ({answer.helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</HelpfulYes></AnswerLinks>
       </AnswerWrapper>
     );
   }
