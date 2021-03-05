@@ -7,7 +7,7 @@ import ImageGallery from './ImageGallery';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
 import PriceDisplay from './PriceDisplay';
-import StyleSelector from './StyleSelector';
+import StyleSelector from './styles/StyleSelector';
 import styled from 'styled-components';
 
 const Grid = styled.div`
@@ -84,7 +84,9 @@ class OverviewContainer extends React.Component {
         <RightContainer>
           <ProductDetail product={this.props.product} />
           <PriceDisplay selectedStyle={this.state.selectedStyle} />
-          <StyleSelector />
+          <StyleSelector
+            styles={this.state.styles}
+            selectedStyle={this.state.selectedStyle }/>
           <AddToCart />
         </RightContainer>
         <ProductDescription product={this.props.product}/>
