@@ -54,29 +54,14 @@ const Bar = styled.div`
   display: flex;
 `;
 
-// const Values = styled.div`
-//   width: 100%;
-//   padding: 0 2px;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-// `;
-// const Value = styled.span`
-//   font-size: 0.8em;
-//   color: hsl(0, 0%, 40%);
-//   font-style: italic;
-// `;
-
 const Values = styled.div`
   width: 100%;
-  padding: 0 2px;
   display: grid;
 `;
 const Value = styled.span`
   font-size: 0.8em;
   color: hsl(0, 0%, 40%);
   font-style: italic;
-  text-align: center;
 `;
 
 const Value1 = styled(Value)`
@@ -84,18 +69,21 @@ const Value1 = styled(Value)`
   grid-row-end: 1;
   grid-column-start: 1;
   grid-column-end: 1;
+  text-align: left;
 `;
 const Value2 = styled(Value)`
   grid-row-start: 1;
   grid-row-end: 1;
   grid-column-start: 2;
   grid-column-end: 2;
+  text-align: center;
 `;
 const Value3 = styled(Value)`
   grid-row-start: 1;
   grid-row-end: 1;
   grid-column-start: 3;
   grid-column-end: 3;
+  text-align: right;
 `;
 FactorBar.propTypes = {
   name: PropTypes.string,
