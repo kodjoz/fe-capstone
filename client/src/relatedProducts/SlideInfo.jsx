@@ -5,25 +5,35 @@ import StarRow from '../starRow.jsx';
 
 
 const SlideInfo = (props) => {
+  let average = 0;
+  if (props.reviewData) {
+    average = (props.reviewData.sum / props.reviewData.count) * 20;
+  }
   return (
     <div className={props.className}>
-      <div> {props.data.category} </div>
-      <div> {props.data.name} </div>
-      <div> {props.data.default_price} </div>
-      <StarRow size={20}></StarRow>
+      <p> {props.data.category} </p>
+      <p> {props.data.name} </p>
+      <p> {props.data.default_price} </p>
+      <StarRow rating={average} size={20}></StarRow>
     </div>
   );
 };
 
 SlideInfo.propTypes = {
   className: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  reviewData: PropTypes.object.isRequired
 };
 
 const StyledSlideInfo = styled(SlideInfo)`
   width: 200px;
   height: 100px;
-  background-color: #B0A8B9;
+  background: linear-gradient(0deg, #000 30%, #99999944 100%);
+
+  p {
+    color: white;
+    margin: 0;
+  }
 `;
 
 export default StyledSlideInfo;
