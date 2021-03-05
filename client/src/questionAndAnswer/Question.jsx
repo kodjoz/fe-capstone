@@ -52,11 +52,8 @@ class Question extends React.Component {
 
   render() {
     // Incase this prop is empty render nothing onscreen
-    if (this.props.question === undefined) {
-      return '';
-    }
-    // Create aliases
-    let question = this.props.question;
+     // Create aliases
+    let question = !this.props.question ? '' : this.props.question;
     let answers = Object.values(question.answers).sort((a, b) => { return b.helpfulness - a.helpfulness; });
     // if there are no answers return an empty array, else return max 2 answers
     if (!answers.length) {
@@ -75,7 +72,7 @@ class Question extends React.Component {
             {!this.state.isReported ? 'Report' : 'Reported!'}
           </HelpfulYes> | <Helpful>Helpful?</Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes({question.question_helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.toggleAddAnswer}>Add Answer</HelpfulYes></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
-        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
+        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } product={this.props.product} />
       </QuestionWrapper>
     );
   }
@@ -84,9 +81,10 @@ class Question extends React.Component {
 
 // each question should be an object
 Question.propTypes = {
-  question: PropTypes.object.isRequired,
+  question: PropTypes.object,
   getMoreAnswers: PropTypes.bool.isRequired,
   markOrReport: PropTypes.func.isRequired,
+  product: PropTypes.object
 };
 
 // style the components

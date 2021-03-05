@@ -77,7 +77,6 @@ class QuestionAndAnswer extends React.Component {
             let currentQuestion = this.state.questions[q];
             if (currentQuestion.question_body.includes(this.state.searchTerm)) {
               results.push(currentQuestion);
-              console.log(results);
             }
           }
         })
@@ -133,6 +132,8 @@ class QuestionAndAnswer extends React.Component {
 
   render() {
     let questions = this.state.questions;
+    let product = this.props.product;
+    console.log(product);
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
     if (!questions.length) {
       questions = [];
@@ -148,7 +149,7 @@ class QuestionAndAnswer extends React.Component {
           value={this.state.searchTerm}/>
         {questions.map((question) => (<Question
           markOrReport={this.markOrReport}
-          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product_id}/>))}
+          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />))}
         <StyledLoadAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></StyledLoadAnswers>
         <MoreInfo>
@@ -211,7 +212,8 @@ const MoreInfo = styled.section`
 
 // the product id should be a number
 QuestionAndAnswer.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  product: PropTypes.object
 };
 // deleted my branch on accident
 export default QuestionAndAnswer;
