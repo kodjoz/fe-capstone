@@ -9,6 +9,7 @@ const StyleThumbnail = (props) => {
   return (
     <div style={{
       backgroundImage: `url(${thumbUrl})`,
+      backgroundSize: 'cover',
       width: '4rem',
       height: '4rem',
       border: '1px solid black',
