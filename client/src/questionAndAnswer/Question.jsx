@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Answer from './Answer';
 import AddAnswer from './AddAnswerForm';
-import { Helpful, HelpfulYes } from '../globalStyles.js';
+import { Helpful, HelpfulYes, Tile } from '../globalStyles.js';
 
 
 class Question extends React.Component {
@@ -67,8 +67,8 @@ class Question extends React.Component {
 
     // render a question
     return (
-      <StyledQuestion>
-        <QuestionBody><strong>Q: {question.question_body}</strong></QuestionBody>
+      <QuestionWrapper>
+        <QuestionSummary>Q: {question.question_body}</QuestionSummary>
         <QuestionLinks>
           <HelpfulYes
             onClick={this.handleReport}>
@@ -76,7 +76,7 @@ class Question extends React.Component {
           </HelpfulYes> | <Helpful>Helpful?</Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes({question.question_helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.toggleAddAnswer}>Add Answer</HelpfulYes></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
         <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } />
-      </StyledQuestion>
+      </QuestionWrapper>
     );
   }
 }
@@ -90,7 +90,7 @@ Question.propTypes = {
 };
 
 // style the components
-const StyledQuestion = styled.section`
+const QuestionWrapper = styled(Tile)`
   grid-area: styledQuestion;
   grid-row: span 1;
   display: inline-grid;
@@ -102,13 +102,21 @@ const StyledQuestion = styled.section`
     "question links"
     "answerContainer ."
     "addAnswer .";
+
+  margin-top: 0.44rem;
+  margin-bottom: 0.75rem;
+  padding: 7px 12px 7px 0;
 `;
 
-const QuestionBody = styled.span`
+const QuestionSummary = styled.span`
   grid-area: question;
+  font-size: 1.05em;
+  font-weight: bold;
+  margin-top: -5px;
+  margin-bottom: -7px;
 `;
 
-const QuestionLinks = styled.div`
+const QuestionLinks = styled.span`
   grid-area: links;
   justify-self: end;
 `;
