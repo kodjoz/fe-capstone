@@ -30,25 +30,25 @@ class QuestionAndAnswer extends React.Component {
 
   getQuestions(page, count) {
     if (this.props.product_id) {
-    return axios.get('/api/qa/questions', {
-      params: {
-        product_id: this.props.product_id,
-        page: page,
-        count: count
-      }
-    })
-      .then(({ data }) => {
-        // sort the questions by question_helpfulness
-        data.results.sort((a, b) => {
-          return b.question_helpfulness - a.question_helpfulness;
-        });
-        this.setState({
-          questions: data.results
-        });
+      return axios.get('/api/qa/questions', {
+        params: {
+          product_id: this.props.product_id,
+          page: page,
+          count: count
+        }
       })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then(({ data }) => {
+          // sort the questions by question_helpfulness
+          data.results.sort((a, b) => {
+            return b.question_helpfulness - a.question_helpfulness;
+          });
+          this.setState({
+            questions: data.results
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       return '';
     }
@@ -154,11 +154,11 @@ class QuestionAndAnswer extends React.Component {
         <SearchQuestion
           onChange={this.searchQuestions}
           value={this.state.searchTerm}/>
-          <QuestionList loadAnswers={this.state.getMoreAnswers} loadQuestions={this.state.getMoreQuestions}>
-            {this.state.questions ? questions.map((question) => (<Question
-              markOrReport={this.markOrReport}
-              question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />)) : null}
-          </QuestionList>
+        <QuestionList loadAnswers={this.state.getMoreAnswers} loadQuestions={this.state.getMoreQuestions}>
+          {this.state.questions ? questions.map((question) => (<Question
+            markOrReport={this.markOrReport}
+            question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />)) : null}
+        </QuestionList>
         <MoreAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></MoreAnswers>
         <MoreInfo>
