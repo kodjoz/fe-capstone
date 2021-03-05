@@ -93,30 +93,30 @@ class IndividualReview extends React.Component {
 }
 
 const Review = styled(Tile)`
-  margin-top: 7px;
-  padding-left: 12px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  margin-top: 0.7rem;
+  padding-left: 1.2rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
   border-bottom: 1px solid #f0f0f5;
 `;
 
 const Summary = styled(Italic)`
   font-size: 1.05em;
-  margin-top: -3px;
-  margin-bottom: -5px;
+  margin-top: -0.3rem;
+  margin-bottom: -0.3rem;
 `;
 
 const SummaryExtra = styled(Italic)`
   font-size: 0.75em;
   color: grey;
-  margin-top: -5px;
+  margin-top: --0.5rem;
 `;
 
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 5px 5% 5px 5%;
-  width: 175px;
+  margin: 0.5rem 5% 0.5rem 5%;
+  width: 17.5rem;
 `;
 
 const ReviewDate = styled(LowPriorityText)`
@@ -125,7 +125,7 @@ const ReviewDate = styled(LowPriorityText)`
 `;
 
 const Recommend = styled.div`
-  margin-top: -4px;
+  margin-top: -0.4rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -139,12 +139,12 @@ const RedCheck = styled.div`
 
 const RecText = styled.span`
   font-size: 0.9em;
-  padding-left: 2px;
+  padding-left: 0.2rem;
 `;
 
 const ReviewBody = styled.span`
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   margin-right: 20%;
 `;
 
@@ -155,7 +155,7 @@ const ShowMore = styled(ClickableText)`
 const Gallery = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 const Seller = styled.b`
@@ -165,8 +165,8 @@ const Seller = styled.b`
 const Response = styled.div`
   display: block;
   background-color: hsl(270, 80%, 96%);
-  border-radius: 5px;
-  padding: 5px 10px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
   margin-left: 3%;
   width: 70%;
 `;
