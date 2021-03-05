@@ -27,6 +27,7 @@ const SearchBar = styled.input`
   padding: 10px 15px;
   margin: 8px 0;
   text-transform: uppercase;
+  color: ${Palette.black};
   border: 1px solid ${Palette.borderGrey};
 `;
 
