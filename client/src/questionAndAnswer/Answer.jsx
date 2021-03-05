@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Thumbnail, Helpful, HelpfulYes } from '../globalStyles.js';
+import ModalImage from '../ModalImage.jsx';
+import { Gallery, Helpful, HelpfulYes } from '../globalStyles.js';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class Answer extends React.Component {
         <Gallery>
           {answer.photos.length !== 0 ? answer.photos.map((photo) => {
             return (
-              <Thumbnail src={photo} key={photo} onClick={() => console.log('Info', photo)} />
+              <ModalImage src={photo} key={photo} onClick={() => console.log('Info', photo)} />
             );
           }) : null}
         </Gallery>
@@ -79,11 +80,7 @@ Answer.propTypes = {
   markOrReport: PropTypes.func.isRequired,
 };
 
-const Gallery = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-`;
+
 
 const AnswerContainer = styled.div`
   grid-area: answerContainer;
