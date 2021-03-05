@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette, ClickableText } from '../globalStyles.js';
+import { Palette } from '../globalStyles.js';
 
 const FactorBar = (props) => {
   return (
@@ -55,13 +55,15 @@ const Bar = styled.div`
 `;
 
 const Values = styled.div`
-  width: 100%
+  width: 100%;
+  padding: 0 2px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
-const Value = styled(ClickableText)`
-  text-decoration: none;
+const Value = styled.span`
+  font-size: 0.8em;
+  color: hsl(0, 0%, 40%);
   font-style: italic;
 `;
 
