@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Question from './Question';
 import SearchQuestion from './SearchQuestion';
 import AddQuestion from './AddQuestionForm';
+import { Button } from '../globalStyles.js';
 
 class QuestionAndAnswer extends React.Component {
   constructor(props) {
@@ -76,7 +77,6 @@ class QuestionAndAnswer extends React.Component {
             let currentQuestion = this.state.questions[q];
             if (currentQuestion.question_body.includes(this.state.searchTerm)) {
               results.push(currentQuestion);
-              console.log(results);
             }
           }
         })
@@ -132,6 +132,8 @@ class QuestionAndAnswer extends React.Component {
 
   render() {
     let questions = this.state.questions;
+    let product = this.props.product;
+    console.log(product);
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
     if (!questions.length) {
       questions = [];
@@ -147,13 +149,13 @@ class QuestionAndAnswer extends React.Component {
           value={this.state.searchTerm}/>
         {questions.map((question) => (<Question
           markOrReport={this.markOrReport}
-          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product_id}/>))}
+          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />))}
         <StyledLoadAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></StyledLoadAnswers>
-        <StyledButtons>
-          <button onClick={this.getMoreQuestions}>More Answered Questions</button>
-          <button onClick={this.toggleAddQuestion}>Add A Question</button>
-        </StyledButtons>
+        <MoreInfo>
+          <Button onClick={this.getMoreQuestions}>More Answered Questions</Button>
+          <Button onClick={this.toggleAddQuestion}>Add A Question</Button>
+        </MoreInfo>
         {this.state.isAddQuestionVisible ? (
           <AddQuestion product={this.props.product_id} handleSubmit={this.toggleAddQuestion}/>
         ) : null}
@@ -163,7 +165,7 @@ class QuestionAndAnswer extends React.Component {
 }
 
 // style the question module
-const QuestionContainer = styled.div`
+const QuestionContainer = styled.main`
   display: grid;
   grid-template-columns: 66%
   grid-template-rows: auto;
@@ -188,13 +190,30 @@ const StyledLoadAnswers = styled.div`
   grid-row: span 1;
 `;
 
-const StyledButtons = styled.div`
+const MoreInfo = styled.section`
   grid-area: styledButtons;
   grid-row: span 1;
 `;
+
+// const Button = styled.button`
+//   text-transform: uppercase;
+//   padding: 15px;
+//   margin-top: 10px;
+//   margin-right: 10px;
+//   color: ${Palette.black};
+//   background-color: ${Palette.background};
+//   border: 2px solid ${Palette.secondary};
+//   border-radius: 5px;
+
+//   &:hover {
+//     border: 2px solid ${Palette.primary};
+//   }
+// `;
+
 // the product id should be a number
 QuestionAndAnswer.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  product: PropTypes.object
 };
 // deleted my branch on accident
 export default QuestionAndAnswer;
