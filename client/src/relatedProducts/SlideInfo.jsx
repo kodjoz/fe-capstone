@@ -22,7 +22,7 @@ const SlideInfo = (props) => {
 SlideInfo.propTypes = {
   className: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  reviewData: PropTypes.object.isRequired
+  reviewData: PropTypes.object
 };
 
 const StyledSlideInfo = styled(SlideInfo)`
