@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ModalImage from '../ModalImage.jsx';
-import { Gallery, Helpful, HelpfulYes, Tile } from '../globalStyles.js';
+import { Gallery, Helpful, HelpfulYes } from '../globalStyles.js';
 
 class Answer extends React.Component {
   constructor(props) {
