@@ -89,7 +89,7 @@ Question.propTypes = {
 
 // style the components
 const QuestionWrapper = styled(Tile)`
-  grid-area: styledQuestion;
+  grid-area: styled-question;
   grid-row: span 1;
   display: inline-grid;
   grid-template-columns: 70% 30%;
@@ -98,7 +98,7 @@ const QuestionWrapper = styled(Tile)`
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "answerWrapper ."
+    "answer-wrapper ."
     "addAnswer .";
 
   margin-top: 0.44rem;
