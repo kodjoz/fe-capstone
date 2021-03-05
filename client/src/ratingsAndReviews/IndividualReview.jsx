@@ -115,7 +115,7 @@ const SummaryExtra = styled(Italic)`
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 0.5rem 5% 0.5rem 5%;
+  margin: 0.2rem 5% 0.5rem 5%;
   width: 17.5rem;
 `;
 

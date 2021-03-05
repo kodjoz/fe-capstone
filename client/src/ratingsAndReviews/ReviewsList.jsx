@@ -7,6 +7,7 @@ import { Tile, ModuleHeader, Button } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
+import SortDropdown from './SortDropdown.jsx';
 //import SortDropdown from './SortDropdown.jsx';
 
 class ReviewsList extends React.Component {
@@ -87,7 +88,7 @@ class ReviewsList extends React.Component {
         <div>
           <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
           {/* <p>#### reviews, sorted by this.state.sortOrder</p> */}
-          {/* <SortDropdown></SortDropdown> */}
+          <SortDropdown></SortDropdown>
           <MasterComponent>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
