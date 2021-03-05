@@ -71,6 +71,7 @@ const Average = styled.div`
 `;
 
 const PercentRec = styled.div`
+  margin-bottom: 5px;
   font-style: italic;
   text-align: center;
 `;

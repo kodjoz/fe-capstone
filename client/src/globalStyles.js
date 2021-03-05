@@ -2,16 +2,16 @@ import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
 
 //Color Palette:
-//Red: hsl(0, 100%, 60%) //<- used for salient or 'flavorful' elements
-//Pastel Purple: hsl(270, 80%, 96%) //<- secondary salient text color
-//Off-Black: hsl(0, 5%, 30%) //<- used for main text
-//Grey: hsl(0, 0%, 40%) //<- used for clickable and low-priority text
-//(Background) Red-Tinged Grey: hsl(0, 5%, 30%)
-//(Foreground) Red-Tinged White: hsl(0, 15%, 99%)
-//(Borders) White-Grey: #f2f2f2
+//Primary/Red: hsl(0, 100%, 60%) //<- used for salient or 'flavorful' elements
+//Secondary/Pastel Purple: hsl(270, 80%, 96%) //<- secondary salient text color
+//Low-Priority/Grey: hsl(0, 0%, 40%) //<- used for clickable and low-priority text
+//Black (Off-Black): hsl(0, 5%, 30%) //<- used for main text, body text defaults to this unless overridden
+//Page Background/Red-Tinged Grey: hsl(0, 5%, 30%)
+//Page Foreground/Red-Tinged White: hsl(0, 15%, 99%) //<- Tiles of content use this as background-color
+//Borders/White-Grey: #f2f2f2
 
 const PalettePreset = {
-  primary: 'hsl(270, 80%, 96%)',
+  primary: 'hsl(0, 100%, 60%)',
   secondary: 'hsl(270, 80%, 96%)',
   lowPriority: 'hsl(0, 0%, 40%)',
   black: 'hsl(0, 5%, 30%)',
@@ -45,9 +45,8 @@ const ModuleHeaderPreset = styled.h3`
   text-decoration: underline 2px hsl(0, 0%, 40%);
 `;
 
-const ItalicPreset = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
-  font-family: Playfair Display, serif;
+//NOTE: font not finalized, all I know is I don't want it to be Garamond
+const ItalicPreset = styled.span`
   font-style: italic;
 `;
 
@@ -72,6 +71,7 @@ const ButtonPreset = styled.button`
   border: solid 1px #f2f2f2;
   height: 40px;
   padding: 0 15px;
+  cursor: pointer;
 `;
 
 const DropdownMenuPreset = styled.select`
@@ -91,6 +91,7 @@ const ThumbnailPreset = styled.img`
   margin-right: 5px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 `;
 
 const HelpfulPreset = styled.div`
@@ -107,9 +108,9 @@ const HelpfulYesPreset = styled.div`
 `;
 
 const SignaturePreset = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+  font-family: Tangerine, cursive;
   display: inline-block;
-  @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
-  font-family: 'Sacramento', cursive;
   font-size: 20px;
   color: hsl(0, 100%, 60%);
 `;
