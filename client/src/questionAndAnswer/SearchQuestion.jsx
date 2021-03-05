@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Palette } from '../globalStyles.js';
 
 const SearchQuestion = (props) => {
   // create an input field
@@ -9,17 +10,24 @@ const SearchQuestion = (props) => {
   // pass in all the questions as props so we can search each question
   // update the visible question???
   return (
-    <StyledSearch type="text"
-      placeholder="Have a question? Search for answers..."
-      onChange={props.onChange}
-      value={props.value}
-    ></StyledSearch>
+    <React.Fragment>
+      <SearchBar type="text"
+        placeholder="Have a question? Search for answers..."
+        onChange={props.onChange}
+        value={props.value}
+      ></SearchBar>
+    </React.Fragment>
   );
 };
 
-const StyledSearch = styled.input`
+const SearchBar = styled.input`
   grid-area: searchQuestion;
   grid-row: span 1;
+  width: 100%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  text-transform: uppercase;
+  border: 1px solid ${Palette.borderGrey};
 `;
 
 SearchQuestion.propTypes = {
