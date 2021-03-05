@@ -21,7 +21,7 @@ const SearchQuestion = (props) => {
 };
 
 const SearchBar = styled.input`
-  grid-area: searchQuestion;
+  grid-area: search-question;
   grid-row: span 1;
   width: 100%;
   padding: 10px 15px;
