@@ -7,7 +7,6 @@ const ProductDetail = (props) => {
   }
   return (
     <div>
-      <h4>Stars</h4>
       <h4>{props.product.category}</h4>
       <h1>{props.product.name}</h1>
     </div>
