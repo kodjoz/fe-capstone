@@ -100,7 +100,7 @@ const QuestionWrapper = styled(Tile)`
   grid-auto-flow: column;
   grid-template-areas:
     "question links"
-    "answerContainer ."
+    "answerWrapper ."
     "addAnswer .";
 
   margin-top: 0.44rem;
