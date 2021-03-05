@@ -126,7 +126,8 @@ class OverviewContainer extends React.Component {
           <PriceDisplay selectedStyle={this.state.selectedStyle} />
           <StyleSelector
             styles={this.state.styles}
-            selectedStyle={this.state.selectedStyle }/>
+            selectedStyle={this.state.selectedStyle}
+            setStyle={this.setSelectedStyle} />
           <AddToCart />
         </RightContainer>
         <ProductDescription product={this.props.product}/>

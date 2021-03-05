@@ -19,7 +19,11 @@ const ThumbnailRows = (props) => {
   const selectedId = props.selectedStyle.style_id;
   const styleIcons = props.styles.map((style) => {
     return (
-      <StyleThumbnail key={style.style_id} style={style} selectedId={selectedId}/>
+      <StyleThumbnail
+        key={style.style_id}
+        style={style}
+        selectedId={selectedId}
+        setStyle={props.setStyle} />
     );
   });
 
@@ -32,7 +36,8 @@ const ThumbnailRows = (props) => {
 
 ThumbnailRows.propTypes = {
   selectedStyle: StyleType,
-  styles: PropTypes.arrayOf(StyleType)
+  styles: PropTypes.arrayOf(StyleType),
+  setStyle: PropTypes.func
 };
 
 export default ThumbnailRows;

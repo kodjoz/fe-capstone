@@ -26,14 +26,18 @@ const StyleSelector = (props) => {
         <BoldSpan>style &gt;</BoldSpan>
         {props.selectedStyle.name}
       </Header>
-      <ThumbnailRows selectedStyle={props.selectedStyle} styles={props.styles} />
+      <ThumbnailRows
+        selectedStyle={props.selectedStyle}
+        styles={props.styles}
+        setStyle={props.setStyle} />
     </div>
   );
 };
 
 StyleSelector.propTypes = {
   selectedStyle: StyleType,
-  styles: PropTypes.arrayOf(StyleType)
+  styles: PropTypes.arrayOf(StyleType),
+  setStyle: PropTypes.func
 };
 
 export default StyleSelector;
