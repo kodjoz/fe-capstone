@@ -49,9 +49,11 @@ class OverviewContainer extends React.Component {
         if (!data.results) {
           throw Error('no styles found for product');
         }
-        const styles = data.results;
-        // find the one style marked as default
-        const defaultStyle = styles.find(style => style['default?']);
+        // move the default item to the front of the array if not already there
+        const styles = data.results.sort((a) => {
+          return a['default?'] ? 1 : 0;
+        });
+        const defaultStyle = styles[0];
         this.setState({
           styles: styles,
           selectedStyle: defaultStyle
