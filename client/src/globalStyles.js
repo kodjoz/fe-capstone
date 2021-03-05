@@ -26,11 +26,10 @@ const GlobalPreset = createGlobalStyle`
     color: hsl(0, 5%, 30%);
     background-color: hsl(345, 75%, 99%);
     font-family: Garamond, Helvetica, Arial;
-    font-size: 17px;
-  }
+    font-size: 106.25%;
+  },
 `;
-//violet: hsl(259, 80%, 98%)
-//navy: hsl(240, 15%, 90%)
+//note: font-size of 106.25% equates to 17px, since default is 16px
 
 const TilePreset = styled.div`
   background-color: hsl(0, 15%, 99%);
@@ -39,7 +38,7 @@ const TilePreset = styled.div`
 
 //different font maybe?
 const ModuleHeaderPreset = styled.h3`
-  font-size: 1.2em;
+  font-size: 1.2rem;
   margin-left: 3%;
   padding: 5px 0;
   text-decoration: underline 2px hsl(0, 0%, 40%);
@@ -53,13 +52,13 @@ const ItalicPreset = styled.span`
 const ClickableTextPreset = styled.span`
   cursor: pointer;
   text-decoration: underline;
-  font-size: 0.8em;
+  font-size: 0.9rem;
   color: hsl(0, 0%, 40%);
 `;
 //ALT more salient red clickable color: hsl(0, 100%, 50%);
 
 const LowPriorityTextPreset = styled.span`
-  font-size: 0.75em;
+  font-size: 0.75rem;
   font-style: italic;
   color: hsl(0, 0%, 55%);
 `;
@@ -111,7 +110,7 @@ const SignaturePreset = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
   font-family: Tangerine, cursive;
   display: inline-block;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: hsl(0, 100%, 60%);
 `;
 
