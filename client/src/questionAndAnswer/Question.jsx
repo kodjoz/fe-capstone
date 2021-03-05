@@ -90,7 +90,7 @@ Question.propTypes = {
 };
 
 // style the components
-const StyledQuestion = styled.div`
+const StyledQuestion = styled.section`
   grid-area: styledQuestion;
   grid-row: span 1;
   display: inline-grid;
@@ -104,7 +104,7 @@ const StyledQuestion = styled.div`
     "addAnswer .";
 `;
 
-const QuestionBody = styled.div`
+const QuestionBody = styled.span`
   grid-area: question;
 `;
 
