@@ -117,6 +117,11 @@ const SignaturePreset = styled.div`
 
 const ModalBackgroundPreset = styled.div`
   background-color: hsla(0, 0%, 40%, 75%);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 `;
 
 export const GlobalStyle = GlobalPreset;
