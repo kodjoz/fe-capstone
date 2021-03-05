@@ -77,7 +77,7 @@ class Answer extends React.Component {
 // each answer should be an object
 
 const AnswerWrapper = styled.div`
-  grid-area: answerWrapper;
+  grid-area: answer-wrapper;
   grid-row: span 1;
   margin-top: 7px;
   margin-left: 5px;
