@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Palette } from '../globalStyles.js';
 
@@ -7,14 +8,16 @@ class SortDropdown extends React.Component {
     super(props);
     this.state = {
       active: false,
-      sortOrder: 'relevance'
+      sortOrder: this.props.sortOrder
     };
   }
+
   render() {
     let menu = <DropdownHead onClick={()=>{ this.setState({active: !this.state.active}); }}><div>{this.state.sortOrder}</div><Indicator>&#9662;</Indicator></DropdownHead>;
-    let relevanceButton = <Button>Relevance</Button>;
-    let helpfulnessButton = <Button>Helpfulness</Button>;
-    let newestButton = <Button>Newest</Button>;
+    let relevanceButton = <Button onClick={()=>{this.props.newSort('relevance'); }}>Relevance</Button>;
+    let helpfulnessButton = <Button onClick={()=>{this.props.newSort('helpfulness'); }}>Helpfulness</Button>;
+    let newestButton = <Button onClick={()=>{this.props.newSort('newest'); }}>Newest</Button>;
+
     if (this.state.active) {
       if (this.state.sortOrder === 'relevance') {
         menu = <DropdownMenu>
@@ -36,6 +39,7 @@ class SortDropdown extends React.Component {
         </DropdownMenu>;
       }
     }
+
     return (
       <div>
         {menu}
@@ -52,13 +56,7 @@ const DropdownMenu = styled.div`
   height: 12rem;
   width: 14rem;
 `;
-// text-transform: uppercase;
-//   background-color: hsl(0, 15%, 99%);
-//   color: hsl(0, 0%, 40%);
-//   border: solid 1px #f2f2f2;
-//   height: 4rem;
-//   padding: 0 1.5rem;
-//   cursor: pointer;
+
 const DropdownHead = styled(Button)`
   display: flex;
   align-items: center;
@@ -77,19 +75,9 @@ const UpIndicator = styled(Indicator)`
   margin-top: 0.2rem;
 `;
 
-// const DummyFlex = styled.div`
-//   flex-basis: 100%;
-//   justify-content: flex-end;
-//   align-content: flex-end;
-//   align-items: flex-end;
-// `;
-
-// return (
-//   <DummyFlex><DropdownMenu name="Relevance" value="Relevance">
-//     <option>Relevance</option>
-//     <option>Helpfulness</option>
-//     <option>Newest</option>
-//   </DropdownMenu></DummyFlex>
-// );
+SortDropdown.propTypes = {
+  newSort: propTypes.func,
+  sortOrder: propTypes.string
+};
 
 export default SortDropdown;

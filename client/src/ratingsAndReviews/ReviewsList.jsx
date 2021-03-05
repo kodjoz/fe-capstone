@@ -62,6 +62,18 @@ class ReviewsList extends React.Component {
     }
   }
 
+  newSort(sort) {
+    this.setState({sortOrder: sort}, () => {
+      let sortOrder = 'relevant';
+      if (sort === 'helpfulness') { sortOrder = 'helpful'; }
+      if (sort === 'newest') { sortOrder = 'newest'; }
+      this.getReviews(sortOrder)
+        .then(()=> {
+          this.sortAndFilter(this.state.sortOrder, this.state.filters);
+        });
+    });
+  }
+
   sortAndFilter(sortOrder, filters) {
     let renderedReviews = [];
     if (filters.length === 0) {
@@ -87,8 +99,7 @@ class ReviewsList extends React.Component {
       return (
         <div>
           <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
-          {/* <p>#### reviews, sorted by this.state.sortOrder</p> */}
-          <SortDropdown></SortDropdown>
+          <SortDropdown newSort={this.newSort.bind(this)} sortOrder={this.state.sortOrder}></SortDropdown>
           <MasterComponent>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
