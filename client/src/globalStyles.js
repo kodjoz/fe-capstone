@@ -85,6 +85,12 @@ const DropdownMenuPreset = styled.select`
   padding: 0 1.5rem;
 `;
 
+const GalleryPreset = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+`;
+
 const ThumbnailPreset = styled.img`
   display: inline-block;
   border: 1px solid #f0f0f5;
@@ -134,6 +140,7 @@ export const LowPriorityText = LowPriorityTextPreset;
 export const Button = ButtonPreset;
 export const DropdownMenu = DropdownMenuPreset;
 export const Thumbnail = ThumbnailPreset;
+export const Gallery = GalleryPreset;
 export const Helpful = HelpfulPreset;
 export const HelpfulYes = HelpfulYesPreset;
 export const Signature = SignaturePreset;

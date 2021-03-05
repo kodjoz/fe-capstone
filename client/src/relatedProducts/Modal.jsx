@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Button, Tile } from '../globalStyles.js';
 
 //Combine the features of two products into a single array of objects
 //Each object contains the feature name and value for each product being compared
@@ -40,19 +41,16 @@ const Modal = (props) => {
   }
   return (
     <div className={props.className}>
-      <section>
+      <ModalTable>
+        <h3>Comparing</h3>
         <Table>
           <thead>
             <Row>
-              <th colSpan='3'>comparing</th>
-            </Row>
-            <Row>
               <th>{currentProduct.name}</th>
-              <th></th>
               <th>{data.name}</th>
             </Row>
           </thead>
-          <tbody>
+          <TableBody>
             {
               compareFeatures(data, currentProduct).map((row) => {
                 let {currentValue, featureName, clickedValue} = row;
@@ -60,20 +58,20 @@ const Modal = (props) => {
                 currentValue = currentValue === 'true' ? '✓' : currentValue;
                 clickedValue = clickedValue === 'true' ? '✓' : clickedValue;
                 return (<Row key={featureName}>
-                  <Field>{currentValue}</Field>
-                  <Field>{featureName}</Field>
-                  <Field>{clickedValue}</Field>
+                  <Field width='10%'>{currentValue}</Field>
+                  <Field width='80%'>{featureName}</Field>
+                  <Field width='10%'>{clickedValue}</Field>
                 </Row>);
               })
             }
-          </tbody>
+          </TableBody>
         </Table>
-      </section>
-      <section>
-        <button type="button" onClick={handleClose}>
+        <section>
+          <Button type="button" onClick={handleClose}>
           close
-        </button>
-      </section>
+          </Button>
+        </section>
+      </ModalTable>
     </div>
   );
 };
@@ -90,24 +88,46 @@ const Row = styled.tr`
   padding: 0.5rem;
 `;
 
+//pass in width prop -- 80% or 10%
 const Field = styled.td`
+  width: ${props => props.width};
+  padding: 1em;
   border: 1px solid black;
-  padding: 0.5rem;
 `;
 
 const Table = styled.table`
-  padding: 0.5rem;
+  border-collase: separate;
+  border-spacing: 1em;
+  padding: 1rem;
+  display: block;
+  cellspacing: 1em;
+`;
+
+const TableBody = styled.tbody`
+  display: block;
+  overflow-y: auto;
+  max-height: 80%;
+`;
+
+const ModalTable = styled(Tile)`
+position: fixed;
+  background: white;
+  width: 70%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const StyledModal = styled(Modal)`
   display: ${props => props.show ? 'block' : 'none'};
-  position: absolute;
+  position: fixed;
   z-index: 1;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  background: #f2f2f2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
 `;
 
 
