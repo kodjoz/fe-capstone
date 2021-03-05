@@ -7,7 +7,7 @@ import { Tile, ModuleHeader, Button } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
-import SortDropdown from './SortDropdown.jsx';
+//import SortDropdown from './SortDropdown.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -123,7 +123,7 @@ const RatingComponent = styled(Tile)`
   margin-top: 7px;
   margin-right: 7px;
   border-bottom: 1px solid #f0f0f5;
-  padding: 0px 10px;
+  padding: 0 10px 10px 10px;
 `;
 
 const ReviewsComponent = styled.div`

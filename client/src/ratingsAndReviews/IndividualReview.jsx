@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Tile, LowPriorityText, ClickableText, Thumbnail, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
+import { Tile, Italic, LowPriorityText, ClickableText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 import StarRow from '../starRow.jsx';
 import ModalImage from '../ModalImage.jsx';
 
@@ -21,7 +21,7 @@ class IndividualReview extends React.Component {
 
   render() {
     let review = this.props.review;
-    //review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
+    // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
     if (summary.length > 60) {
       let cutoff = 60;
@@ -52,7 +52,7 @@ class IndividualReview extends React.Component {
     }
 
     let response = null;
-    //review.response = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.';
+    // review.response = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity, it was the shrekson of light, it was the shrekson of darkness, it was  the swamp of hope, it was the farquaad of shrekspair.';
     if (review.response) {
       response = <Response><span><Seller>Seller: </Seller>{review.response}</span></Response>;
     }
@@ -100,37 +100,39 @@ const Review = styled(Tile)`
   border-bottom: 1px solid #f0f0f5;
 `;
 
-const Summary = styled.div`
-  font-style: italic;
-  font-size: 1.1em;
-  margin-bottom: 5px;
+const Summary = styled(Italic)`
+  font-size: 1.05em;
+  margin-top: -3px;
+  margin-bottom: -5px;
 `;
 
-const SummaryExtra = styled.span`
+const SummaryExtra = styled(Italic)`
   font-size: 0.75em;
-  font-style: italic;
-  line-height: 50%;
   color: grey;
   margin-top: -5px;
-  `;
+`;
 
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 5px 10% 5px 5%;
-  width: 166px;
+  margin: 5px 5% 5px 5%;
+  width: 175px;
 `;
 
 const ReviewDate = styled(LowPriorityText)`
   margin-top: -50px;
-  margin-left: 10%;
+  margin-left: 12%;
 `;
 
 const Recommend = styled.div`
-  margin-top: -5px;
+  margin-top: -4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-basis: 100%;
 `;
 
-const RedCheck = styled.span`
+const RedCheck = styled.div`
   color: hsl(0, 100%, 60%);
   font-size: 1.2em;
 `;
@@ -163,7 +165,7 @@ const Seller = styled.b`
 const Response = styled.div`
   display: block;
   background-color: hsl(270, 80%, 96%);
-  border-radius: 7px;
+  border-radius: 5px;
   padding: 5px 10px;
   margin-left: 3%;
   width: 70%;

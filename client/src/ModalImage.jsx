@@ -49,8 +49,9 @@ const ModalWindow = styled.div`
 const PositionedButton = styled(Button)`
   display: inline;
   position: fixed;
-  float: right;
+  margin-left: 45%;
   opacity: 75%;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`
@@ -62,6 +63,7 @@ const ImageWrapper = styled.div`
   border: solid 15px hsl(0, 15%, 99%);
   border-radius: 7px;
 `;
+
 const FullImage = styled.img`
   display: inline;
   height: 100%;
