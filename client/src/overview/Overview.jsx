@@ -8,7 +8,7 @@ import StarRating from './StarRating';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
 import PriceDisplay from './PriceDisplay';
-import StyleSelector from './StyleSelector';
+import StyleSelector from './styles/StyleSelector';
 import styled from 'styled-components';
 
 const Grid = styled.div`
@@ -49,9 +49,11 @@ class OverviewContainer extends React.Component {
         if (!data.results) {
           throw Error('no styles found for product');
         }
-        const styles = data.results;
-        // find the one style marked as default
-        const defaultStyle = styles.find(style => style['default?']);
+        // move the default item to the front of the array if not already there
+        const styles = data.results.sort((a) => {
+          return a['default?'] ? 1 : 0;
+        });
+        const defaultStyle = styles[0];
         this.setState({
           styles: styles,
           selectedStyle: defaultStyle
@@ -124,7 +126,10 @@ class OverviewContainer extends React.Component {
           <StarRating count={this.state.reviewData.count} sum={this.state.reviewData.sum} />
           <ProductDetail product={this.props.product} />
           <PriceDisplay selectedStyle={this.state.selectedStyle} />
-          <StyleSelector />
+          <StyleSelector
+            styles={this.state.styles}
+            selectedStyle={this.state.selectedStyle}
+            setStyle={this.setSelectedStyle} />
           <AddToCart />
         </RightContainer>
         <ProductDescription product={this.props.product}/>
