@@ -115,6 +115,10 @@ const SignaturePreset = styled.div`
   color: hsl(0, 100%, 60%);
 `;
 
+const ModalBackgroundPreset = styled.div`
+  background-color: hsla(0, 0%, 40%, 75%);
+`;
+
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
 export const ModuleHeader = ModuleHeaderPreset;
@@ -128,3 +132,4 @@ export const HelpfulYes = HelpfulYesPreset;
 export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
+export const ModalBackground = ModalBackgroundPreset;
