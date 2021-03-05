@@ -62,7 +62,6 @@ class QuestionAndAnswer extends React.Component {
 
   // type in a term and update the state
   searchQuestions(e) {
-    // console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     });
@@ -132,8 +131,6 @@ class QuestionAndAnswer extends React.Component {
 
   render() {
     let questions = this.state.questions;
-    let product = this.props.product;
-    console.log(product);
     // if there are no questions pass in an empty array, else if there are more than four questions only pass the first four
     if (!questions.length) {
       questions = [];
@@ -149,16 +146,22 @@ class QuestionAndAnswer extends React.Component {
           value={this.state.searchTerm}/>
         {questions.map((question) => (<Question
           markOrReport={this.markOrReport}
-          question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />))}
+          question={question}
+          key={question.question_id}
+          getMoreAnswers={this.state.getMoreAnswers}
+          product={this.props.product} />))}
         <StyledLoadAnswers><a
-          onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></StyledLoadAnswers>
+          onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a>
+        </StyledLoadAnswers>
         <MoreInfo>
           <Button onClick={this.getMoreQuestions}>More Answered Questions</Button>
           <Button onClick={this.toggleAddQuestion}>Add A Question</Button>
         </MoreInfo>
-        {this.state.isAddQuestionVisible ? (
-          <AddQuestion product={this.props.product_id} handleSubmit={this.toggleAddQuestion}/>
-        ) : null}
+        <AddQuestion
+          product={this.props.product}
+          handleClick={this.toggleAddQuestion}
+          toggle={this.state.isAddQuestionVisible}
+        />
       </QuestionContainer>
     );
   }
