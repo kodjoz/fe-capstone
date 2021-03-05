@@ -101,7 +101,7 @@ const Review = styled(Tile)`
 `;
 
 const Summary = styled(Italic)`
-  font-size: 1.1em;
+  font-size: 1.05em;
   margin-top: -3px;
   margin-bottom: -5px;
 `;
@@ -115,19 +115,20 @@ const SummaryExtra = styled(Italic)`
 const ReviewerInfo = styled.div`
   display: inline-block;
   float: right;
-  margin: 5px 10% 5px 5%;
-  width: 166px;
+  margin: 5px 5% 5px 5%;
+  width: 175px;
 `;
 
 const ReviewDate = styled(LowPriorityText)`
-  margin-top: -5px;
-  margin-left: 10%;
+  margin-top: -50px;
+  margin-left: 12%;
 `;
 
 const Recommend = styled.div`
+  margin-top: -4px;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  align-items: center;
   flex-basis: 100%;
 `;
 
@@ -136,7 +137,7 @@ const RedCheck = styled.div`
   font-size: 1.2em;
 `;
 
-const RecText = styled.div`
+const RecText = styled.span`
   font-size: 0.9em;
   padding-left: 2px;
 `;
@@ -164,7 +165,7 @@ const Seller = styled.b`
 const Response = styled.div`
   display: block;
   background-color: hsl(270, 80%, 96%);
-  border-radius: 7px;
+  border-radius: 5px;
   padding: 5px 10px;
   margin-left: 3%;
   width: 70%;
