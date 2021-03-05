@@ -52,7 +52,7 @@ class Question extends React.Component {
 
   render() {
     // Incase this prop is empty render nothing onscreen
-     // Create aliases
+    // Create aliases
     let question = !this.props.question ? '' : this.props.question;
     let answers = Object.values(question.answers).sort((a, b) => { return b.helpfulness - a.helpfulness; });
     // if there are no answers return an empty array, else return max 2 answers
