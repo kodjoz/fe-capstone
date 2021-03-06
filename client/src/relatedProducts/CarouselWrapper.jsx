@@ -10,6 +10,7 @@ class CarouselWrapper extends React.Component {
     this.state = {
       showLeftScroll: true,
       showRightScroll: true,
+      scrollWidth: 0
     };
   }
 
@@ -57,9 +58,21 @@ class CarouselWrapper extends React.Component {
 
   componentDidMount() {
     this.container = document.getElementById(this.props.name + 'Container');
+    if (this.props.name === 'yourOutfit') {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false,
+      });
+      return;
+    }
   }
 
   render() {
+    if (document.getElementById(this.props.name + 'Container')) {
+      this.container = document.getElementById(this.props.name + 'Container');
+      console.log('render scroll width:', this.container.scrollWidth);
+      console.log('render client width:', this.container.clientWidth);
+    }
     return (
       <StyledCarouselWrapper>
         <LeftCarouselButton show={this.state.showLeftScroll}
@@ -101,7 +114,7 @@ const CarouselContainer = styled.div`
 
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
- position: absolute;
+  position: absolute;
   cursor: pointer;
   top: 50%;
   z-index: 1;
@@ -110,6 +123,11 @@ const CarouselButton = styled.button`
   border-radius: 15px;
   border: none;
   padding: 0.5rem;
+
+  &:hover{
+    display: block;
+  }
+
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
