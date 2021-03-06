@@ -47,7 +47,7 @@ class AddAnswer extends React.Component {
       <AnswerModal display={showModal}>
         <FormWrapper>
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
-          <CurrentQuestion>Q: {this.props.question.body}</CurrentQuestion>
+          <Subtitle>Q: {this.props.question.body}</Subtitle>
           <GridLabel gridArea="name-input">What is your nickname?:<br />
             <FormInput
               type="text"
@@ -132,10 +132,9 @@ const Title = styled.h1`
   grid-row: span 1;
 `;
 
-const CurrentQuestion = styled.h2`
+const Subtitle = styled.h2`
   grid-area: subtitle;
   grid-row: span 1;
-  font-weight: bold;
 `;
 
 const SubmitAnswer = styled.section`
