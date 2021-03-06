@@ -73,7 +73,7 @@ class AddQuestion extends React.Component {
               type="email" required
               name="email"
               maxLength="60"
-              placeholder="Enter your email"
+              placeholder="Why did you like the product or not?"
               onChange={this.updateQuestion}
             /><br />
             <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
