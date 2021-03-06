@@ -57,7 +57,7 @@ class AddReviewModal extends React.Component {
       );
     }
   }
-};
+}
 
 const ReviewsButton = styled(Button)`
   margin-top: 0.7rem;
