@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from '../globalStyles.js';
+import { ModalBackground, FormInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -57,39 +57,39 @@ class AddQuestion extends React.Component {
         <AddQuestionForm onSubmit={this.submitQuestion}>
           <Title>Ask Your Question</Title>
           <CurrentProduct>About {product}</CurrentProduct>
-          <Name>What is your nickname?:<br />
+          <GridLabel gridArea="name-input">What is your nickname?:<br />
             <FormInput
               type="text" required
               name="name"
               maxLength="60"
               placeholder="Example: jackson11!"
               onChange={this.updateQuestion}
-            />
-            <span>For privacy reasons, do not use your full name or email address</span>
-          </Name>
+            /><br />
+            <LowPriorityText>For privacy reasons, do not use your full name or email address</LowPriorityText>
+          </GridLabel>
           <br />
-          <Email>Your email:
+          <GridLabel gridArea="email-input">Your email:<br />
             <FormInput
               type="email" required
               name="email"
               maxLength="60"
               placeholder="Enter your email"
               onChange={this.updateQuestion}
-            />
-            <span>For authentication reasons, you will not be emailed</span>
-          </Email>
+            /><br />
+            <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
+          </GridLabel>
           <br />
-          <BodyLabel>Question:
-            <textarea
+          <GridLabel gridArea="body-text">Question:<br />
+            <TextArea
               type="text" required
               name="body"
               maxLength="1000"
-              cols="50"
+              cols="60"
               rows="4"
               placeholder="Add your question"
               onChange={this.updateQuestion}
             />
-          </BodyLabel>
+          </GridLabel>
           <SubmitAnswer>
             <Button
               onClick={this.submitQuestion}>Submit</Button>
@@ -103,15 +103,9 @@ class AddQuestion extends React.Component {
   }
 }
 
-const QuestionModal = styled.main.attrs(props => ({
+const QuestionModal = styled(ModalBackground).attrs(props => ({
   display: props.display || 'none',
 }))`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
   display: ${props => props.display};
 `;
 
@@ -143,7 +137,7 @@ const AddQuestionForm = styled.form`
     "subtitle"
     "name-input"
     "email-input"
-    "body-input"
+    "body-text"
     "submit-question";
 `;
 
@@ -156,28 +150,6 @@ const CurrentProduct = styled.h2`
   grid-area: subtitle;
   grid-row: span 1;
   font-weight: bold;
-`;
-
-const Name = styled.label`
-  grid-area: name-input;
-  grid-row: span 1;
-`;
-
-const Email = styled.label`
-  grid-area: email-input;
-  grid-row: span 1;
-`;
-
-const BodyLabel = styled.label`
-  grid-area: body-input;
-  grid-row: span 1;
-`;
-
-const FormInput = styled.input`
-  grid-row: span 1;
-  width: 90%;
-  padding: 10px 15px;
-  margin: 8px 0;
 `;
 
 const SubmitAnswer = styled.section`
