@@ -29,7 +29,7 @@ class ReviewsList extends React.Component {
 
   getReviews(sortOrder) {
     //if(!sortOrder){sort order = 'newest';}
-    axios.get('/api/reviews', {
+    return axios.get('/api/reviews', {
       params: {
         product_id: this.state.product_id,
         sort: sortOrder

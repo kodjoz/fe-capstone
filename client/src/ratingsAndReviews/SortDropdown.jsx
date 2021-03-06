@@ -12,11 +12,17 @@ class SortDropdown extends React.Component {
     };
   }
 
+  applySort(sort) {
+    this.setState({active: false, sortOrder: sort}, () => {
+      this.props.newSort(sort);
+    });
+  }
+
   render() {
     let menu = <DropdownHead onClick={()=>{ this.setState({active: !this.state.active}); }}><div>{this.state.sortOrder}</div><Indicator>&#9662;</Indicator></DropdownHead>;
-    let relevanceButton = <Button onClick={()=>{this.props.newSort('relevance'); }}>Relevance</Button>;
-    let helpfulnessButton = <Button onClick={()=>{this.props.newSort('helpfulness'); }}>Helpfulness</Button>;
-    let newestButton = <Button onClick={()=>{this.props.newSort('newest'); }}>Newest</Button>;
+    let relevanceButton = <Button onClick={()=>{ this.applySort('relevance'); }}>Relevance</Button>;
+    let helpfulnessButton = <Button onClick={()=>{ this.applySort('helpfulness'); }}>Helpfulness</Button>;
+    let newestButton = <Button onClick={()=>{ this.applySort('newest'); }}>Newest</Button>;
 
     if (this.state.active) {
       if (this.state.sortOrder === 'relevance') {
