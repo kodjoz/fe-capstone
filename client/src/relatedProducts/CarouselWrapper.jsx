@@ -78,7 +78,6 @@ CarouselWrapper.propTypes = {
 };
 
 const StyledCarouselWrapper = styled.div`
-  background: #e8e8e8;
   display: flex;
   flex-direction: row;
   align-items: center;

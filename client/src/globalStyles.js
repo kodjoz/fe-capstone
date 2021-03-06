@@ -28,6 +28,10 @@ const GlobalPreset = createGlobalStyle`
     font-family: Garamond, Helvetica, Arial;
     font-size: 17px;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 //violet: hsl(259, 80%, 98%)
 //navy: hsl(240, 15%, 90%)
