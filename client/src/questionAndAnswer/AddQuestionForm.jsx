@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
+import { Palette, ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -113,18 +113,13 @@ const QuestionModal = styled(ModalBackground).attrs(props => ({
 
 const AddQuestionForm = styled.form`
   position: fixed;
-  background: white;
+  background: ${Palette.background};
   width: 50%;
   height: auto;
   top: 50%
-  position: fixed;
-  background: white;
-  width: 50%;
-  height: auto;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid hsl(0, 15%, 99%);
+  border: 15px solid ${Palette.modalBorderWhite};
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
