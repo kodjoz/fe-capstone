@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ModalBackground, GridLabel, FormInput, TextArea, Button, LowPriorityText } from '../globalStyles';
+import { ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class AddAnswer extends React.Component {
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
           <Subtitle>Q: {this.props.question.body}</Subtitle>
           <GridLabel gridArea="name-input">What is your nickname?:<br />
-            <FormInput
+            <FormTextInput
               type="text"
               name="name"
               maxLength="60"
@@ -61,7 +61,7 @@ class AddAnswer extends React.Component {
             <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
           </GridLabel>
           <GridLabel gridArea="email-input">Email:<br />
-            <FormInput
+            <FormTextInput
               type="email"
               name="email"
               maxLength="60"
@@ -84,6 +84,7 @@ class AddAnswer extends React.Component {
           </GridLabel>
           <SubmitAnswer>
             <Button
+              type="button"
               onClick={this.submitAnswer}>Submit</Button>
             <Button
               onClick={this.props.handleClick}

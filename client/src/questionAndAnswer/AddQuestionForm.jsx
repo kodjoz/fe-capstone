@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ModalBackground, FormInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
+import { ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -58,7 +58,7 @@ class AddQuestion extends React.Component {
           <Title>Ask Your Question</Title>
           <CurrentProduct>About {product}</CurrentProduct>
           <GridLabel gridArea="name-input">What is your nickname?:<br />
-            <FormInput
+            <FormTextInput
               type="text" required
               name="name"
               maxLength="60"
@@ -69,7 +69,7 @@ class AddQuestion extends React.Component {
           </GridLabel>
           <br />
           <GridLabel gridArea="email-input">Your email:<br />
-            <FormInput
+            <FormTextInput
               type="email" required
               name="email"
               maxLength="60"
@@ -92,8 +92,10 @@ class AddQuestion extends React.Component {
           </GridLabel>
           <SubmitAnswer>
             <Button
+              type="button"
               onClick={this.submitQuestion}>Submit</Button>
             <Button
+              type="button"
               onClick={this.props.handleClick}
             >Back</Button>
           </SubmitAnswer>

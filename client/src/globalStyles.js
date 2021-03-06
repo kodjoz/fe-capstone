@@ -136,7 +136,7 @@ const ModalBackgroundPreset = styled.div`
   left: 0;
 `;
 
-const FormInputPreset = styled.input`
+const FormTextInputPreset = styled.input`
   font-family: Garamond, Helvetica, Arial;
   width: 33%;
   padding: 10px 10px;
@@ -170,6 +170,6 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
-export const FormInput = FormInputPreset;
+export const FormTextInput = FormTextInputPreset;
 export const TextArea = TextAreaPreset;
 export const GridLabel = GridLabelPreset;
