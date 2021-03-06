@@ -45,6 +45,10 @@ const StyledSlideInfo = styled(SlideInfo)`
     color: white;
     margin: 0;
   }
+
+  &:hover {
+    height: 120px;
+  }
 `;
 
 export default StyledSlideInfo;

@@ -117,7 +117,7 @@ Slide.propTypes = {
 const StyledSlide = styled.div`
   background-image: url("${props => props.thumburl}");
   background-repeat: no-repeat;
-  background-size: 'cover'
+  background-size: cover;
   margin: 10px;
   width: 200px;
   height: 300px;
