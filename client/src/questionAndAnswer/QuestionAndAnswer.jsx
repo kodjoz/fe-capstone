@@ -66,7 +66,6 @@ class QuestionAndAnswer extends React.Component {
 
   // type in a term and update the state
   searchQuestions(e) {
-    // console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     });
@@ -165,9 +164,11 @@ class QuestionAndAnswer extends React.Component {
           <Button onClick={this.getMoreQuestions}>More Answered Questions</Button>
           <Button onClick={this.toggleAddQuestion}>Add A Question</Button>
         </MoreInfo>
-        {this.state.isAddQuestionVisible ? (
-          <AddQuestion product={this.props.product_id} handleSubmit={this.toggleAddQuestion}/>
-        ) : null}
+        <AddQuestion
+          product={this.props.product}
+          handleClick={this.toggleAddQuestion}
+          toggle={this.state.isAddQuestionVisible}
+        />
       </QuestionContainer>
     );
   }
