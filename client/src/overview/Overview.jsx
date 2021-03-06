@@ -99,8 +99,12 @@ class OverviewContainer extends React.Component {
   }
 
   fetchReviewMetaDataFromApi() {
-    const url = `/api/reviews/meta?product_id=${this.props.product_id}`;
-    return axios.get(url)
+    const url = '/api/reviews/meta';
+    return axios.get(url, {
+      params: {
+        product_id: this.props.product_id
+      }
+    })
       .then((response) => {
         if (response && response.data) {
           return response.data;
