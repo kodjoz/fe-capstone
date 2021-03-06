@@ -20,15 +20,24 @@ class AddAnswer extends React.Component {
 
   submitAnswer(e) {
     e.preventDefault;
-    return axios.post(`/api/qa/questions/${this.props.question.id}/answers`, {
-      name: this.state.name,
-      body: this.state.body,
-      email: this.state.email
-    })
-      .then((response) => {
-        console.log('Submission response', response.status, response.statusText);
+    if (!this.state.name) {
+      alert('You must enter the following: name');
+    } else if (!this.state.email) {
+      alert('You must enter the following: email');
+    } else if (!this.state.body) {
+      alert('You must enter the following: body');
+    } else {
+      return axios.post(`/api/qa/questions/${this.props.question.id}/answers`, {
+        name: this.state.name,
+        body: this.state.body,
+        email: this.state.email
       })
-      .then(() => { this.props.handleClick(); });
+        .then((response) => {
+          console.log('Submission response', response.status, response.statusText);
+        })
+        .then(() => { this.props.handleClick(); })
+        .catch((err) => { console.error('Error while submitting an answer', err); });
+    }
   }
 
   updateForm(e) {

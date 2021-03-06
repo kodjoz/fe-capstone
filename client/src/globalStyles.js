@@ -18,7 +18,15 @@ const PalettePreset = {
   foreground: 'hsl(0, 15%, 99%)',
   background: 'hsl(345, 75%, 99%);',
   borderGrey: '#f2f2f2',
-  modalBorderWhite: 'hsl(0, 15%, 99%)'
+  modalBorderWhite: 'hsl(0, 15%, 99%)',
+  thumbnailBorder: '#f0f0f5',
+  modalBackground: 'hsla(0, 0 %, 40 %, 75 %)'
+};
+
+//Note: this is a google font, linked in dist/index.html
+const FontsPreset = {
+  primary: 'Playfair Display, serif',
+  original: 'Garamond, Helvetica, Arial'
 };
 
 //NOTE: an rem here will represent 16px. If html's font-size were set to 62.5% (10px), each rem would be 10px, and 1.6rem would be 16px
@@ -28,9 +36,9 @@ const GlobalPreset = createGlobalStyle`
   }
   body {
     margin: 0 10%;
-    color: hsl(0, 5%, 30%);
-    background-color: hsl(345, 75%, 99%);
-    font-family: Garamond, Helvetica, Arial;
+    color: ${PalettePreset.black};
+    background-color: ${PalettePreset.background};
+    font-family: ${FontsPreset.original};
     font-size: 170%;
   }
 
@@ -40,8 +48,8 @@ const GlobalPreset = createGlobalStyle`
 `;
 
 const TilePreset = styled.div`
-  background-color: hsl(0, 15%, 99%);
-  border: solid 1px #f2f2f2;
+  background-color: ${PalettePreset.foreground};
+  border: solid 1px ${PalettePreset.borderGrey};
 `;
 
 //different font maybe?
@@ -49,7 +57,7 @@ const ModuleHeaderPreset = styled.h3`
   font-size: 2rem;
   margin-left: 3%;
   padding: 0.5rem 0;
-  text-decoration: underline 2px hsl(0, 0%, 40%);
+  text-decoration: underline 2px ${PalettePreset.lowPriority};
 `;
 
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
@@ -61,21 +69,21 @@ const ClickableTextPreset = styled.span`
   cursor: pointer;
   text-decoration: underline;
   font-size: 1.45rem;
-  color: hsl(0, 0%, 40%);
+  color: ${PalettePreset.black};
 `;
 //ALT more salient red clickable color: hsl(0, 100%, 50%);
 
 const LowPriorityTextPreset = styled.span`
   font-size: 1.2rem;
   font-style: italic;
-  color: hsl(0, 0%, 55%);
+  color: ${PalettePreset.lowPriority};
 `;
 
 const ButtonPreset = styled.button`
   text-transform: uppercase;
-  background-color: hsl(0, 15%, 99%);
-  color: hsl(0, 0%, 40%);
-  border: solid 1px #f2f2f2;
+  background-color: ${PalettePreset.foreground};
+  color: ${PalettePreset.lowPriority};
+  border: solid 1px ${PalettePreset.borderGrey};
   height: 4rem;
   padding: 0 1.5rem;
   cursor: pointer;
@@ -86,9 +94,9 @@ const ButtonPreset = styled.button`
 
 const DropdownMenuPreset = styled.select`
   text-transform: uppercase;
-  background-color: hsl(0, 15%, 99%);
-  color: hsl(0, 0%, 40%);
-  border: solid 1px #f2f2f2;
+  background-color: ${PalettePreset.foreground};
+  color: ${PalettePreset.lowPriority};
+  border: solid 1px ${PalettePreset.borderGrey};
   height: 4rem;
   padding: 0 1.5rem;
 `;
@@ -101,7 +109,7 @@ const GalleryPreset = styled.div`
 
 const ThumbnailPreset = styled.img`
   display: inline-block;
-  border: 1px solid #f0f0f5;
+  border: 1px solid ${PalettePreset.thumbnailBorder};
   border-radius: 5px;
   padding: 0.5rem;
   margin-right: 0.5rem;
@@ -119,20 +127,20 @@ const HelpfulYesPreset = styled.div`
   display: inline;
   cursor: pointer;
   font-style: normal;
-  color: hsl(0, 100%, 50%);
+  color: ${PalettePreset.primary};
   text-decoration: underline;
 `;
 
 const SignaturePreset = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+  @import url('https://FontsPreset.googleapis.com/css2?family=Tangerine&display=swap');
   font-family: Tangerine, cursive;
   display: inline-block;
   font-size: 2rem;
-  color: hsl(0, 100%, 60%);
+  color: ${PalettePreset.primary};
 `;
 
 const ModalBackgroundPreset = styled.div`
-  background-color: hsla(0, 0%, 40%, 75%);
+  background-color: ${PalettePreset.modalBackground};
   position: fixed;
   width: 100%;
   height: 100%;
@@ -175,6 +183,8 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
+export const Fonts = FontsPreset;
 export const FormTextInput = FormTextInputPreset;
 export const TextArea = TextAreaPreset;
 export const GridLabel = GridLabelPreset;
+
