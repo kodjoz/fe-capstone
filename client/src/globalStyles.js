@@ -140,6 +140,25 @@ const ModalBackgroundPreset = styled.div`
   z-index: 100;
 `;
 
+const FormTextInputPreset = styled.input`
+  font-family: Garamond, Helvetica, Arial;
+  width: 33%;
+  padding: 10px 10px;
+  margin: 8px 0;
+`;
+
+const TextAreaPreset = styled.textarea`
+  font-family: Garamond, Helvetica, Arial;
+  resize: none;
+  padding: 10px 15px;
+  border: 1px solid ${PalettePreset.black};
+`;
+
+const GridLabelPreset = styled.label`
+  grid-area: ${props => props.gridArea ? props.gridArea : ''};
+  grid-row: span 1;
+`;
+
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
 export const ModuleHeader = ModuleHeaderPreset;
@@ -155,3 +174,6 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
+export const FormTextInput = FormTextInputPreset;
+export const TextArea = TextAreaPreset;
+export const GridLabel = GridLabelPreset;
