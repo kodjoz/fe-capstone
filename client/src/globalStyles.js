@@ -23,7 +23,7 @@ const PalettePreset = {
 };
 
 //Note: this is a google font, linked in dist/index.html
-const Fonts = {
+const FontsPreset = {
   primary: 'Playfair Display, serif',
   original: 'Garamond, Helvetica, Arial'
 };
@@ -37,7 +37,7 @@ const GlobalPreset = createGlobalStyle`
     margin: 0 10%;
     color: ${PalettePreset.black};
     background-color: ${PalettePreset.background};
-    font-family: ${Fonts.original};
+    font-family: ${FontsPreset.original};
     font-size: 170%;
   }
 
@@ -131,7 +131,7 @@ const HelpfulYesPreset = styled.div`
 `;
 
 const SignaturePreset = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+  @import url('https://FontsPreset.googleapis.com/css2?family=Tangerine&display=swap');
   font-family: Tangerine, cursive;
   display: inline-block;
   font-size: 2rem;
@@ -163,3 +163,4 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
+export const Fonts = FontsPreset;
