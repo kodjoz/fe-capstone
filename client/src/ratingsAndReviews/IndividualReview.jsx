@@ -86,7 +86,7 @@ class IndividualReview extends React.Component {
         {response}
         <br></br>
         <Helpful>Helpful? <HelpfulYes onClick={() => { this.helpfulVote(); }}>Yes</HelpfulYes> ({review.helpfulness})</Helpful>
-        <p>{JSON.stringify(this.props.review)}</p>
+        {/* <p>{JSON.stringify(this.props.review)}</p> */}
       </Review>
     );
   }
