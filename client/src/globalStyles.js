@@ -18,6 +18,7 @@ const PalettePreset = {
   foreground: 'hsl(0, 15%, 99%)',
   background: 'hsl(345, 75%, 99%);',
   borderGrey: '#f2f2f2',
+  modalBorderWhite: 'hsl(0, 15%, 99%)',
   thumbnailBorder: '#f0f0f5',
   modalBackground: 'hsla(0, 0 %, 40 %, 75 %)'
 };
