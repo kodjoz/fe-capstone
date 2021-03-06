@@ -8,7 +8,7 @@ import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
 import SortDropdown from './SortDropdown.jsx';
-//import SortDropdown from './SortDropdown.jsx';
+import AddReviewModal from './AddReviewModal.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class ReviewsList extends React.Component {
       reviews: null,
       renderedReviews: null,
       filters: [],
-      sortOrder: 'relevance'
+      sortOrder: 'relevance',
     };
   }
 
@@ -94,7 +94,7 @@ class ReviewsList extends React.Component {
 
   render() {
     if (!this.state.reviews) {
-      return (<div></div>);
+      return (<AddReviewModal></AddReviewModal>);
     } else {
       return (
         <div>
@@ -111,7 +111,7 @@ class ReviewsList extends React.Component {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
               <ReviewsButton>MORE REVIEWS</ReviewsButton>
-              <ReviewsButton>ADD A REVIEW  +</ReviewsButton>
+              <AddReviewModal></AddReviewModal>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
           </RatingsReviewsPanel>
