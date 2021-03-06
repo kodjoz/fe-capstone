@@ -127,13 +127,32 @@ const SignaturePreset = styled.div`
   color: hsl(0, 100%, 60%);
 `;
 
-const ModalBackgroundPreset = styled.div`
+const ModalBackgroundPreset = styled.main`
   background-color: hsla(0, 0%, 40%, 75%);
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+`;
+
+const FormInputPreset = styled.input`
+  font-family: Garamond, Helvetica, Arial;
+  width: 33%;
+  padding: 10px 10px;
+  margin: 8px 0;
+`;
+
+const TextAreaPreset = styled.textarea`
+  font-family: Garamond, Helvetica, Arial;
+  resize: none;
+  padding: 10px 15px;
+  border: 1px solid ${PalettePreset.black};
+`;
+
+const GridLabelPreset = styled.label`
+  grid-area: ${props => props.gridArea ? props.gridArea : ''};
+  grid-row: span 1;
 `;
 
 export const GlobalStyle = GlobalPreset;
@@ -151,3 +170,6 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
+export const FormInput = FormInputPreset;
+export const TextArea = TextAreaPreset;
+export const GridLabel = GridLabelPreset;
