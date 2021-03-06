@@ -35,14 +35,14 @@ path = `${prefix}/19089/styles`;
 handler = rest.get(path, (req, res, ctx) => {
   return res(ctx.json(product19089styles));
 });
-products.push(product19089styles);
+products.push(handler);
 
 const product19378styles = require('./19378-styles.json');
 path = `${prefix}/19378/styles`;
 handler = rest.get(path, (req, res, ctx) => {
   return res(ctx.json(product19378styles));
 });
-products.push(product19378styles);
+products.push(handler);
 
 // API endpoint:
 // /api/products/:id/related
@@ -51,7 +51,7 @@ path = `${prefix}/19089/related`;
 handler = rest.get(path, (req, res, ctx) => {
   return res(ctx.json(related19089));
 });
-products.push(related19089);
+products.push(handler);
 
 
 const related19378 = require('./19378-related.json');
@@ -59,5 +59,6 @@ path = `${prefix}/19378/related`;
 handler = rest.get(path, (req, res, ctx) => {
   return res(ctx.json(related19378));
 });
+products.push(handler);
 
 export default products;
