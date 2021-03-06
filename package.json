@@ -4,7 +4,8 @@
   "description": "Front-end capstone project for HackReactor HR-RFE1",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles --coverage -c jest.react.config.js",
+    "test-server": "jest --detectOpenHandles --coverage -c jest.server.config.js",
     "build": "webpack --watch --config webpack.config.js",
     "start": "nodemon server/index.js",
     "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor/precourse-pomander/master/bin/install | bash"
@@ -65,12 +66,5 @@
   },
   "resolutions": {
     "styled-components": "^5"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/client/src/relatedProducts/relProd.test.js",
-      "<rootDir>/client/src/relatedProducts/Modal.test.js",
-      "<rootDir>/tests"
-    ]
   }
 }
