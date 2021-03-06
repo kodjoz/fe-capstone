@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import StarRow from '../StarRow.jsx';
+import StarRow from '../starRow.jsx';
 import { Button, Tile, ModalBackground, Italic, Palette } from '../globalStyles';
 
 

@@ -153,10 +153,15 @@ class QuestionAndAnswer extends React.Component {
         <SearchQuestion
           onChange={this.searchQuestions}
           value={this.state.searchTerm}/>
-        <QuestionList loadAnswers={this.state.getMoreAnswers} loadQuestions={this.state.getMoreQuestions}>
+        <QuestionList
+          loadAnswers={this.state.getMoreAnswers}
+          loadQuestions={this.state.getMoreQuestions}>
           {this.state.questions ? questions.map((question) => (<Question
+            key={question.question_id}
             markOrReport={this.markOrReport}
-            question={question} key={question.question_id} getMoreAnswers={this.state.getMoreAnswers} product={this.props.product} />)) : null}
+            getMoreAnswers={this.state.getMoreAnswers}
+            question={question}
+            product={this.props.product} />)) : null}
         </QuestionList>
         <MoreAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></MoreAnswers>
