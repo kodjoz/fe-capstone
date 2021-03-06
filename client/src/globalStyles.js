@@ -127,7 +127,7 @@ const SignaturePreset = styled.div`
   color: hsl(0, 100%, 60%);
 `;
 
-const ModalBackgroundPreset = styled.main`
+const ModalBackgroundPreset = styled.div`
   background-color: hsla(0, 0%, 40%, 75%);
   position: fixed;
   width: 100%;
