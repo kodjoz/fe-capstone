@@ -9,26 +9,40 @@ class CarouselWrapper extends React.Component {
     this.scrollLeft = this.scrollLeft.bind(this);
     this.state = {
       showLeftScroll: true,
-      showRightScroll: true
+      showRightScroll: true,
     };
   }
 
   scrollRight() {
     this.container.scrollLeft += 200;
+    if (this.container.scrollWidth <= this.container.clientWidth) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false,
+      });
+      return;
+    }
     if (this.container.scrollLeft + this.container.clientWidth >= this.container.scrollWidth) {
       this.setState({
         showRightScroll: false,
-        showLeftScroll: true
+        showLeftScroll: true,
       });
     } else {
       this.setState({
-        showLeftScroll: true
+        showLeftScroll: true,
       });
     }
   }
 
   scrollLeft() {
     this.container.scrollLeft -= 200;
+    if (this.container.scrollWidth <= this.container.clientWidth) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false,
+      });
+      return;
+    }
     if (this.container.scrollLeft === 0) {
       this.setState({
         showRightScroll: true,
@@ -43,28 +57,18 @@ class CarouselWrapper extends React.Component {
 
   componentDidMount() {
     this.container = document.getElementById(this.props.name + 'Container');
-    // if (this.container.scrollWidth <= this.container.clientWidth) {
-    //   this.setState({
-    //     showLeftScroll: false,
-    //     showRightScroll: false
-    //   });
-    // }
-    // this.setState({
-    //   scrollWidth: this.container.scrollWidth,
-    //   clientWidth: this.container.clientWidth
-    // });
   }
 
   render() {
     return (
       <StyledCarouselWrapper>
-        <Button show={this.state.showLeftScroll}
-          onClick={this.scrollLeft}>{'<'}</Button>
+        <LeftCarouselButton show={this.state.showLeftScroll}
+          onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
         <CarouselContainer id={this.props.name + 'Container'}>
           {this.props.render(this.props.data)}
         </CarouselContainer>
-        <Button show={this.state.showRightScroll}
-          onClick={this.scrollRight}>{'>'}</Button>
+        <RightCarouselButton show={this.state.showRightScroll}
+          onClick={this.scrollRight}>{'>'}</RightCarouselButton>
       </StyledCarouselWrapper>
     );
   }
@@ -81,6 +85,7 @@ const StyledCarouselWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 `;
 const CarouselContainer = styled.div`
   width: 80%;
@@ -94,12 +99,28 @@ const CarouselContainer = styled.div`
   padding: 10px;
 `;
 
-const Button = styled.button`
+const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
   padding: 20px;
   margin: 0.5em;
   background: #ededed;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transition: transform 0.1s ease-in-out;
+  background: white;
+  border-radius: 15px;
+  border: none;
+  transform: translate(-100%, -50%);
+`;
+
+const LeftCarouselButton = styled(CarouselButton)`
+  left: 0;
+`;
+
+const RightCarouselButton = styled(CarouselButton)`
+  right: 0;
 `;
 
 
