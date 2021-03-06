@@ -46,6 +46,7 @@ class AddAnswer extends React.Component {
     return (
       <AnswerModal display={showModal}>
         <FormWrapper>
+
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
           <Subtitle>Q: {this.props.question.body}</Subtitle>
           <GridLabel gridArea="name-input">What is your nickname?:<br />
