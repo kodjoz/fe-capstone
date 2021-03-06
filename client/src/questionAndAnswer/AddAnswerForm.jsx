@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from '../globalStyles';
+import { ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -48,10 +48,9 @@ class AddAnswer extends React.Component {
         <FormWrapper>
 
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
-          <CurrentQuestion>Q: {this.props.question.body}</CurrentQuestion>
-
-          <Name>What is your nickname?:<br />
-            <FormInput
+          <Subtitle>Q: {this.props.question.body}</Subtitle>
+          <GridLabel gridArea="name-input">What is your nickname?:<br />
+            <FormTextInput
               type="text"
               name="name"
               maxLength="60"
@@ -59,10 +58,10 @@ class AddAnswer extends React.Component {
               placeholder="Example: jack543!"
               onChange={this.updateForm}
             /><br />
-            <span>For privacy reasons, do not use your full name or email</span>
-          </Name>
-          <Email>Email:<br />
-            <FormInput
+            <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
+          </GridLabel>
+          <GridLabel gridArea="email-input">Email:<br />
+            <FormTextInput
               type="email"
               name="email"
               maxLength="60"
@@ -70,20 +69,22 @@ class AddAnswer extends React.Component {
               placeholder="Example: jack@email.com"
               onChange={this.updateForm}
             /><br />
-            <span>For authentication reasons, you will not be emailed</span>
-          </Email>
-          <BodyLabel>
+            <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
+          </GridLabel>
+          <GridLabel gridArea="body-text">
             Add an Answer:<br />
-            <FormInput
-              type="text"
+            <TextArea
               name="body"
               maxLength="1000"
+              cols="60"
+              rows="6"
               required
               onChange={this.updateForm}
             />
-          </BodyLabel>
+          </GridLabel>
           <SubmitAnswer>
             <Button
+              type="button"
               onClick={this.submitAnswer}>Submit</Button>
             <Button
               onClick={this.props.handleClick}
@@ -95,15 +96,9 @@ class AddAnswer extends React.Component {
   }
 }
 
-const AnswerModal = styled.main.attrs(props => ({
+const AnswerModal = styled(ModalBackground).attrs(props => ({
   display: props.display || 'none',
 }))`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
   display: ${props => props.display};
 `;
 
@@ -130,7 +125,7 @@ const FormWrapper = styled.section`
     "subtitle"
     "name-input"
     "email-input"
-    "body-input"
+    "body-text"
     "submit-answer";
 `;
 
@@ -139,31 +134,8 @@ const Title = styled.h1`
   grid-row: span 1;
 `;
 
-const CurrentQuestion = styled.h2`
+const Subtitle = styled.h2`
   grid-area: subtitle;
-  grid-row: span 1;
-  font-weight: bold;
-`;
-
-const FormInput = styled.input`
-  grid-row: span 1;
-  width: 90%;
-  padding: 10px 15px;
-  margin: 8px 0;
-`;
-
-const Name = styled.label`
-  grid-area: name-input;
-  grid-row: span 1;
-`;
-
-const Email = styled.label`
-  grid-area: email-input;
-  grid-row: span 1;
-`;
-
-const BodyLabel = styled.label`
-  grid-area: body-input;
   grid-row: span 1;
 `;
 
