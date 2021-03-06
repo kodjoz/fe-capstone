@@ -20,9 +20,9 @@ class SortDropdown extends React.Component {
 
   render() {
     let menu = <DropdownHead onClick={()=>{ this.setState({active: !this.state.active}); }}><div>{this.state.sortOrder}</div><Indicator>&#9662;</Indicator></DropdownHead>;
-    let relevanceButton = <Button onClick={()=>{ this.applySort('relevance'); }}>Relevance</Button>;
-    let helpfulnessButton = <Button onClick={()=>{ this.applySort('helpfulness'); }}>Helpfulness</Button>;
-    let newestButton = <Button onClick={()=>{ this.applySort('newest'); }}>Newest</Button>;
+    let relevanceButton = <DropdownItem onClick={()=>{ this.applySort('relevance'); }}>Relevance</DropdownItem>;
+    let helpfulnessButton = <DropdownItem onClick={()=>{ this.applySort('helpfulness'); }}>Helpfulness</DropdownItem>;
+    let newestButton = <DropdownItem onClick={()=>{ this.applySort('newest'); }}>Newest</DropdownItem>;
 
     if (this.state.active) {
       if (this.state.sortOrder === 'relevance') {
@@ -55,19 +55,25 @@ class SortDropdown extends React.Component {
   }
 }
 
-//position me rightward, either here or in ReviewsList
+//position me rightward, NOT here but in ReviewsList
 const DropdownMenu = styled.div`
   display: flex;
   flex-direction: column;
   height: 12rem;
-  width: 14rem;
+  width: 16rem;
 `;
 
 const DropdownHead = styled(Button)`
+  width: 16rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+`;
+
+const DropdownItem = styled(Button)`
+  text-align: left;
 `;
 
 const Indicator = styled.div`
