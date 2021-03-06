@@ -19,13 +19,13 @@ const FactorBar = (props) => {
 };
 
 const Factor = styled.div`
-padding-bottom: 5px;
+padding-bottom: 0.5rem;
 `;
 
 const Name = styled.span`
   display: block;
   font-style: italic;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 const Indicator = styled.div`
@@ -33,7 +33,7 @@ const Indicator = styled.div`
   z-index: 2;
   font-size: 1.25em;
   color: ${Palette.primary};
-  margin-top: -20px;
+  margin-top: -2rem;
   margin-left: 50%;
 `;
 
@@ -43,13 +43,13 @@ const FullBar = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: -12px;
+  margin-top: -1.2rem;
 `;
 
 const Bar = styled.div`
   background-color: hsla(0, 0%, 85%, 60%);
   width: 31.5%;
-  height: 7px;
+  height: 0.7rem;
   border: 1px solid ${Palette.borderGrey};
   display: flex;
 `;

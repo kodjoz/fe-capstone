@@ -7,6 +7,7 @@ import { Tile, ModuleHeader, Button } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
+import SortDropdown from './SortDropdown.jsx';
 //import SortDropdown from './SortDropdown.jsx';
 
 class ReviewsList extends React.Component {
@@ -28,7 +29,7 @@ class ReviewsList extends React.Component {
 
   getReviews(sortOrder) {
     //if(!sortOrder){sort order = 'newest';}
-    axios.get('/api/reviews', {
+    return axios.get('/api/reviews', {
       params: {
         product_id: this.state.product_id,
         sort: sortOrder
@@ -61,6 +62,18 @@ class ReviewsList extends React.Component {
     }
   }
 
+  newSort(sort) {
+    this.setState({sortOrder: sort}, () => {
+      let sortOrder = 'relevant';
+      if (sort === 'helpfulness') { sortOrder = 'helpful'; }
+      if (sort === 'newest') { sortOrder = 'newest'; }
+      this.getReviews(sortOrder)
+        .then(()=> {
+          this.sortAndFilter(this.state.sortOrder, this.state.filters);
+        });
+    });
+  }
+
   sortAndFilter(sortOrder, filters) {
     let renderedReviews = [];
     if (filters.length === 0) {
@@ -86,9 +99,8 @@ class ReviewsList extends React.Component {
       return (
         <div>
           <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
-          {/* <p>#### reviews, sorted by this.state.sortOrder</p> */}
-          {/* <SortDropdown></SortDropdown> */}
-          <MasterComponent>
+          <SortWrap><SortDropdown newSort={this.newSort.bind(this)} sortOrder={this.state.sortOrder}></SortDropdown></SortWrap>
+          <RatingsReviewsPanel>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
               <FactorsBreakdown />
@@ -102,7 +114,7 @@ class ReviewsList extends React.Component {
               <ReviewsButton>ADD A REVIEW  +</ReviewsButton>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
-          </MasterComponent>
+          </RatingsReviewsPanel>
           <Footer></Footer>
         </div>
       );
@@ -110,8 +122,16 @@ class ReviewsList extends React.Component {
   }
 }
 
-//flex-box goes here
-const MasterComponent = styled.div`
+const SortWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.7rem;
+  position: relative;
+  height: 4rem;
+  overflow: visible;
+`;
+
+const RatingsReviewsPanel = styled.div`
   display: flex;
 `;
 
@@ -120,10 +140,10 @@ const RatingComponent = styled(Tile)`
   flex-direction: column;
   order: 1;
   width: 25%;
-  margin-top: 7px;
-  margin-right: 7px;
+  margin-top: 0.7rem;
+  margin-right: 0.7rem;
   border-bottom: 1px solid #f0f0f5;
-  padding: 0 10px 10px 10px;
+  padding: 0 1rem 1rem 1rem;
 `;
 
 const ReviewsComponent = styled.div`
@@ -132,12 +152,12 @@ const ReviewsComponent = styled.div`
 `;
 
 const ReviewsButton = styled(Button)`
-  margin-top: 7px;
-  margin-right: 7px;
+  margin-top: 0.7rem;
+  margin-right: 0.7rem;
 `;
 
 const Footer = styled.div`
-  padding: 15px 0;
+  padding: 1.5rem 0;
 `;
 
 ReviewsList.propTypes = {

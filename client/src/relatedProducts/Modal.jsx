@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Button, Tile } from '../globalStyles.js';
+import { Button, Tile, LowPriorityText } from '../globalStyles.js';
 
 //Combine the features of two products into a single array of objects
 //Each object contains the feature name and value for each product being compared
@@ -42,14 +42,13 @@ const Modal = (props) => {
   return (
     <div className={props.className}>
       <ModalTable>
-        <h3>Comparing</h3>
+        <CloseButton type="button" onClick={handleClose}>x</CloseButton>
+        <LowPriorityText>Comparing</LowPriorityText>
+        <HeaderRow>
+          <p>{currentProduct.name}</p>
+          <p>{data.name}</p>
+        </HeaderRow>
         <Table>
-          <thead>
-            <Row>
-              <th>{currentProduct.name}</th>
-              <th>{data.name}</th>
-            </Row>
-          </thead>
           <TableBody>
             {
               compareFeatures(data, currentProduct).map((row) => {
@@ -66,11 +65,6 @@ const Modal = (props) => {
             }
           </TableBody>
         </Table>
-        <section>
-          <Button type="button" onClick={handleClose}>
-          close
-          </Button>
-        </section>
       </ModalTable>
     </div>
   );
@@ -88,17 +82,33 @@ const Row = styled.tr`
   padding: 0.5rem;
 `;
 
+const HeaderRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25em;
+  position: sticky;
+  top: 2.5em;
+  background: #FFFFFF66;
+
+  p {
+    padding: 0.5em;
+    background: #FFFFFF88;
+    margin: 0;
+  }
+`;
+
 //pass in width prop -- 80% or 10%
 const Field = styled.td`
   width: ${props => props.width};
-  padding: 1em;
-  border: 1px solid black;
+  padding: 0.5em;
+  text-align: center;
 `;
 
 const Table = styled.table`
   border-collase: separate;
-  border-spacing: 1em;
-  padding: 1rem;
+  border-spacing: 0.5em;
+  padding: 0.5rem;
   display: block;
   cellspacing: 1em;
 `;
@@ -110,10 +120,11 @@ const TableBody = styled.tbody`
 `;
 
 const ModalTable = styled(Tile)`
-position: fixed;
+  position: fixed;
   background: white;
-  width: 70%;
-  height: auto;
+  width: 50%;
+  height: 50%;
+  overflow-y: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -128,6 +139,13 @@ const StyledModal = styled(Modal)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+`;
+
+const CloseButton = styled(Button)`
+  position: sticky;
+  top: 5%;
+  left: 90%;
+  z-index: 1;
 `;
 
 
