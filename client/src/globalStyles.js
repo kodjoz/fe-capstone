@@ -182,6 +182,8 @@ export const Signature = SignaturePreset;
 export const Palette = PalettePreset;
 export const Italic = ItalicPreset;
 export const ModalBackground = ModalBackgroundPreset;
+export const Fonts = FontsPreset;
 export const FormTextInput = FormTextInputPreset;
 export const TextArea = TextAreaPreset;
 export const GridLabel = GridLabelPreset;
+
