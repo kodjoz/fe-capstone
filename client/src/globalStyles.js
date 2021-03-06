@@ -19,7 +19,7 @@ const PalettePreset = {
   background: 'hsl(345, 75%, 99%);',
   borderGrey: '#f2f2f2',
   thumbnailBorder: '#f0f0f5',
-  modalBackground: 'hsla(0, 0 %, 40 %, 75 %)'
+  modalBackground: 'hsla(0, 0%, 40%, 75%)'
 };
 
 //Note: this is a google font, linked in dist/index.html
@@ -159,7 +159,8 @@ const TextAreaPreset = styled.textarea`
   font-family: Garamond, Helvetica, Arial;
   resize: none;
   padding: 10px 15px;
-  border: 1px solid ${PalettePreset.black};
+  color: ${PalettePreset.lowPriority};
+  border: 1px solid ${PalettePreset.borderGrey};
 `;
 
 const GridLabelPreset = styled.label`

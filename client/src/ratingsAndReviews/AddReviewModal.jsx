@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import StarRow from '../starRow.jsx';
-import { Button, Tile, ModalBackground, Italic, Palette } from '../globalStyles';
+import { Button, Tile, ModalBackground, Italic, Palette, TextArea } from '../globalStyles';
 
 
 class AddReviewModal extends React.Component {
@@ -33,7 +33,7 @@ class AddReviewModal extends React.Component {
               <Heading>Characteristics<Asterisk>&#42;</Asterisk></Heading>
               <p>?????</p>
               <Heading>Review Summary</Heading>
-              <AddSummary id="add-summary" onClick={()=>{ document.getElementById('add-summary').value = ''; }}>Example: Best. Purchase. Ever!</AddSummary>
+              <TextArea id="add-summary" onClick={()=>{ document.getElementById('add-summary').value = ''; }}>Example: Best. Purchase. Ever!</TextArea>
               <Heading>Tell us how you felt about the product<Asterisk>&#42;</Asterisk></Heading>
               <AddBody id="add-body" onClick={()=>{ document.getElementById('add-body').value = ''; }}>Example: It was the best of shoes, it was the worst of shoes...</AddBody>
               <Heading>Show us your style! Add product photos below:</Heading>
