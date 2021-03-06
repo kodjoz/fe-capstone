@@ -1,0 +1,25 @@
+{
+  "id": 19378,
+  "campus": "hr-rfe",
+  "name": "Alberto Romper",
+  "slogan": "Voluptatibus sunt neque repellendus.",
+  "description": "Dolor deleniti blanditiis fugit et aut quisquam eius provident. Quasi labore vel ipsum numquam mollitia et. Accusamus asperiores a nisi.",
+  "category": "Romper",
+  "default_price": "826.00",
+  "created_at": "2021-02-23T19:24:34.674Z",
+  "updated_at": "2021-02-23T19:24:34.674Z",
+  "features": [
+      {
+          "feature": "Sustainably Sourced",
+          "value": null
+      },
+      {
+          "feature": "Green Leaf Certified",
+          "value": null
+      },
+      {
+          "feature": "Cut",
+          "value": "\"Skinny\""
+      }
+  ]
+}
