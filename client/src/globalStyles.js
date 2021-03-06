@@ -86,6 +86,9 @@ const ButtonPreset = styled.button`
   height: 4rem;
   padding: 0 1.5rem;
   cursor: pointer;
+  &:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
 `;
 
 const DropdownMenuPreset = styled.select`
@@ -142,6 +145,7 @@ const ModalBackgroundPreset = styled.div`
   height: 100%;
   top: 0;
   left: 0;
+  z-index: 100;
 `;
 
 export const GlobalStyle = GlobalPreset;

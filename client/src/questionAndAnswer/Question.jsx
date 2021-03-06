@@ -72,7 +72,11 @@ class Question extends React.Component {
             {!this.state.isReported ? 'Report' : 'Reported!'}
           </HelpfulYes> | <Helpful>Helpful?</Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes({question.question_helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.toggleAddAnswer}>Add Answer</HelpfulYes></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
-        <AddAnswer toggle={this.state.isAddAnswerVisible} handleClick={this.toggleAddAnswer} question={ {body: question.question_body, id: question.question_id} } product={this.props.product} />
+        <AddAnswer
+          toggle={this.state.isAddAnswerVisible}
+          handleClick={this.toggleAddAnswer}
+          question={ {body: question.question_body, id: question.question_id} }
+          product={this.props.product} />
       </QuestionWrapper>
     );
   }
