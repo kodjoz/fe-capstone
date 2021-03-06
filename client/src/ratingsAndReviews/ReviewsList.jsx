@@ -99,8 +99,8 @@ class ReviewsList extends React.Component {
       return (
         <div>
           <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
-          <SortDropdown newSort={this.newSort.bind(this)} sortOrder={this.state.sortOrder}></SortDropdown>
-          <MasterComponent>
+          <SortWrap><SortDropdown newSort={this.newSort.bind(this)} sortOrder={this.state.sortOrder}></SortDropdown></SortWrap>
+          <RatingsReviewsPanel>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
               <FactorsBreakdown />
@@ -114,7 +114,7 @@ class ReviewsList extends React.Component {
               <ReviewsButton>ADD A REVIEW  +</ReviewsButton>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
-          </MasterComponent>
+          </RatingsReviewsPanel>
           <Footer></Footer>
         </div>
       );
@@ -122,8 +122,16 @@ class ReviewsList extends React.Component {
   }
 }
 
-//flex-box goes here
-const MasterComponent = styled.div`
+const SortWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.5rem;
+  position: relative;
+  height: 4rem;
+  overflow: visible;
+`;
+
+const RatingsReviewsPanel = styled.div`
   display: flex;
 `;
 
