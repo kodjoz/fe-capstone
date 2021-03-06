@@ -3,7 +3,7 @@ import { setupServer } from 'msw/node';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Overview from './Overview';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import handlers from './../mocks/products';
 
 const productData = require('../mocks/products/19089.json');
@@ -31,11 +31,13 @@ afterAll(() => {
 
 it('renders the Overview module', async () => {
   render(
-    <MemoryRouter>
+    <BrowserRouter>
       <Overview product_id={19089} product={productData} />
-    </MemoryRouter>
+    </BrowserRouter>
   );
+  // wait for appearance inside an assertion
+  // test that the API call in componentDidMount succeeds and updates link to "Read all 2 reviews"
   await waitFor(() => {
-    expect(screen.getByText('Camo Onesie')).toBeInTheDocument();
+    expect(screen.getByText('Read all 2 reviews')).toBeTruthy();
   });
 });
