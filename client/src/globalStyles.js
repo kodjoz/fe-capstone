@@ -17,7 +17,8 @@ const PalettePreset = {
   black: 'hsl(0, 5%, 30%)',
   foreground: 'hsl(0, 15%, 99%)',
   background: 'hsl(345, 75%, 99%);',
-  borderGrey: '#f2f2f2'
+  borderGrey: '#f2f2f2',
+  modalBorderWhite: 'hsl(0, 15%, 99%)'
 };
 
 //NOTE: an rem here will represent 16px. If html's font-size were set to 62.5% (10px), each rem would be 10px, and 1.6rem would be 16px
