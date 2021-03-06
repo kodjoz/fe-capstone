@@ -18,3 +18,4 @@ it('renders a product slogan and description', () => {
   const descriptionResult = getByText(dummyData.description);
   expect(descriptionResult).toBeTruthy();
 });
+
