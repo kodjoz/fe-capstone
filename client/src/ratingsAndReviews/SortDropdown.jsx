@@ -70,10 +70,16 @@ const DropdownHead = styled(Button)`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  &:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
 `;
 
 const DropdownItem = styled(Button)`
   text-align: left;
+  &:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
 `;
 
 const Indicator = styled.div`

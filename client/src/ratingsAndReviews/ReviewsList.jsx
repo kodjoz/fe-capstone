@@ -125,7 +125,7 @@ class ReviewsList extends React.Component {
 const SortWrap = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 0.5rem;
+  margin-right: 0.7rem;
   position: relative;
   height: 4rem;
   overflow: visible;
