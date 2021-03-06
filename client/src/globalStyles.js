@@ -20,21 +20,23 @@ const PalettePreset = {
   borderGrey: '#f2f2f2'
 };
 
+//NOTE: an rem here will represent 16px. If html's font-size were set to 62.5% (10px), each rem would be 10px, and 1.6rem would be 16px
 const GlobalPreset = createGlobalStyle`
+  html {
+    font-size: 62.5%;
+  }
   body {
     margin: 0 10%;
     color: hsl(0, 5%, 30%);
     background-color: hsl(345, 75%, 99%);
     font-family: Garamond, Helvetica, Arial;
-    font-size: 17px;
+    font-size: 170%;
   }
 
   a {
     text-decoration: none;
   }
 `;
-//violet: hsl(259, 80%, 98%)
-//navy: hsl(240, 15%, 90%)
 
 const TilePreset = styled.div`
   background-color: hsl(0, 15%, 99%);
@@ -43,13 +45,13 @@ const TilePreset = styled.div`
 
 //different font maybe?
 const ModuleHeaderPreset = styled.h3`
-  font-size: 1.2em;
+  font-size: 2rem;
   margin-left: 3%;
-  padding: 5px 0;
+  padding: 0.5rem 0;
   text-decoration: underline 2px hsl(0, 0%, 40%);
 `;
 
-//NOTE: font not finalized, all I know is I don't want it to be Garamond
+//NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
 const ItalicPreset = styled.span`
   font-style: italic;
 `;
@@ -57,13 +59,13 @@ const ItalicPreset = styled.span`
 const ClickableTextPreset = styled.span`
   cursor: pointer;
   text-decoration: underline;
-  font-size: 0.8em;
+  font-size: 1.45rem;
   color: hsl(0, 0%, 40%);
 `;
 //ALT more salient red clickable color: hsl(0, 100%, 50%);
 
 const LowPriorityTextPreset = styled.span`
-  font-size: 0.75em;
+  font-size: 1.2rem;
   font-style: italic;
   color: hsl(0, 0%, 55%);
 `;
@@ -73,8 +75,8 @@ const ButtonPreset = styled.button`
   background-color: hsl(0, 15%, 99%);
   color: hsl(0, 0%, 40%);
   border: solid 1px #f2f2f2;
-  height: 40px;
-  padding: 0 15px;
+  height: 4rem;
+  padding: 0 1.5rem;
   cursor: pointer;
 `;
 
@@ -83,8 +85,8 @@ const DropdownMenuPreset = styled.select`
   background-color: hsl(0, 15%, 99%);
   color: hsl(0, 0%, 40%);
   border: solid 1px #f2f2f2;
-  height: 40px;
-  padding: 0 15px;
+  height: 4rem;
+  padding: 0 1.5rem;
 `;
 
 const GalleryPreset = styled.div`
@@ -97,10 +99,10 @@ const ThumbnailPreset = styled.img`
   display: inline-block;
   border: 1px solid #f0f0f5;
   border-radius: 5px;
-  padding: 5px;
-  margin-right: 5px;
-  width: 100px;
-  height: 100px;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  width: 10rem;
+  height: 10rem;
   cursor: pointer;
 `;
 
@@ -121,7 +123,7 @@ const SignaturePreset = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
   font-family: Tangerine, cursive;
   display: inline-block;
-  font-size: 20px;
+  font-size: 2rem;
   color: hsl(0, 100%, 60%);
 `;
 

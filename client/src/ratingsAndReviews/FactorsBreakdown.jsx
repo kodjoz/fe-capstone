@@ -18,12 +18,12 @@ const FactorsBreakdown = () => {
 };
 
 const Breakdown = styled.div`
-  margin-top: 15px;
-  padding-left: 5px;
+  margin-top: 1.5rem;
+  padding-left: 0.5rem;
 `;
 
 const Title = styled.div`
-margin-bottom: 5px;
+margin-bottom: 0.5rem;
 text-decoration: underline;
 color: ${Palette.black};
 `;

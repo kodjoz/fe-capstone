@@ -42,9 +42,9 @@ const RowName = styled(ClickableText)`
 `;
 
 const Bar = styled.div`
-  margin-top: 2px;
+  margin-top: 0.2rem;
   margin-right: 15%;
-  height: 10px;
+  height: 1rem;
   flex-basis: 50%;
   border: 1px solid ${Palette.borderGrey};
   display: flex;
