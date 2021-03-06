@@ -88,7 +88,7 @@ const StyledCarouselWrapper = styled.div`
   position: relative;
 `;
 const CarouselContainer = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -101,18 +101,15 @@ const CarouselContainer = styled.div`
 
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
-  padding: 20px;
-  margin: 0.5em;
-  background: #ededed;
+ position: absolute;
   cursor: pointer;
-  position: absolute;
   top: 50%;
   z-index: 1;
   transition: transform 0.1s ease-in-out;
   background: white;
   border-radius: 15px;
   border: none;
-  transform: translate(-100%, -50%);
+  padding: 0.5rem;
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
