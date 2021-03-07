@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
+import { Palette, ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -30,22 +30,31 @@ class AddQuestion extends React.Component {
 
   submitQuestion(e) {
     e.preventDefault();
-    return axios.post('/api/qa/questions', {
-      name: this.state.name,
-      body: this.state.body,
-      email: this.state.email,
-      product_id: this.props.product
-    })
-      .then(() => {
-        this.setState({
-          name: '',
-          body: '',
-          email: ''
-        });
+    if (!this.state.name) {
+      alert('You must enter the following: name');
+    } else if (!this.state.email) {
+      alert('You must enter the following: email');
+    } else if (!this.state.body) {
+      alert('You must enter the following: body');
+    } else {
+      return axios.post('/api/qa/questions', {
+        name: this.state.name,
+        body: this.state.body,
+        email: this.state.email,
+        product_id: this.props.product
       })
-      .then(() => {
-        this.props.handleClick();
-      });
+        .then(() => {
+          this.setState({
+            name: '',
+            body: '',
+            email: ''
+          });
+        })
+        .then(() => {
+          this.props.handleClick();
+        })
+        .catch(err => console.error('Error while submitting this question', err));
+    }
   }
 
   render() {
@@ -59,7 +68,8 @@ class AddQuestion extends React.Component {
           <CurrentProduct>About {product}</CurrentProduct>
           <GridLabel gridArea="name-input">What is your nickname?:<br />
             <FormTextInput
-              type="text" required
+              type="text"
+              required
               name="name"
               maxLength="60"
               placeholder="Example: jackson11!"
@@ -70,10 +80,11 @@ class AddQuestion extends React.Component {
           <br />
           <GridLabel gridArea="email-input">Your email:<br />
             <FormTextInput
-              type="email" required
+              type="email"
+              required
               name="email"
               maxLength="60"
-              placeholder="Enter your email"
+              placeholder="Why did you like this product or not?"
               onChange={this.updateQuestion}
             /><br />
             <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
@@ -81,7 +92,8 @@ class AddQuestion extends React.Component {
           <br />
           <GridLabel gridArea="body-text">Question:<br />
             <TextArea
-              type="text" required
+              type="text"
+              required
               name="body"
               maxLength="1000"
               cols="60"
@@ -113,18 +125,13 @@ const QuestionModal = styled(ModalBackground).attrs(props => ({
 
 const AddQuestionForm = styled.form`
   position: fixed;
-  background: white;
+  background: ${Palette.background};
   width: 50%;
   height: auto;
   top: 50%
-  position: fixed;
-  background: white;
-  width: 50%;
-  height: auto;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid hsl(0, 15%, 99%);
+  border: 15px solid ${Palette.modalBorderWhite};
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
