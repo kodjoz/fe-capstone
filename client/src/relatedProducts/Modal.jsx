@@ -89,12 +89,11 @@ const HeaderRow = styled.div`
   padding: 0.25em;
   position: sticky;
   top: 2.5em;
-  background: #FFFFFF88;
+  background: ${props => props.theme.midLight};
 
   p {
     font-weight: bold;
     padding: 0.5em;
-    background: ${props => props.theme.topLayer};
     margin: 0;
   }
 `;
@@ -129,6 +128,10 @@ const ModalTable = styled(Tile)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+   > span {
+    padding: 1rem;
+  }
 `;
 
 const StyledModal = styled(Modal)`
@@ -147,6 +150,8 @@ const CloseButton = styled(Button)`
   top: 5%;
   left: 90%;
   z-index: 1;
+  padding: 0 0.75rem;
+  height: 2rem;
 `;
 
 
