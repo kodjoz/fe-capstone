@@ -20,7 +20,7 @@ const PalettePreset = {
   borderGrey: '#f2f2f2',
   modalBorderWhite: 'hsl(0, 15%, 99%)',
   thumbnailBorder: '#f0f0f5',
-  modalBackground: 'hsla(0, 0 %, 40 %, 75 %)'
+  modalBackground: 'hsla(0, 0%, 40%, 75%)'
 };
 
 //Note: this is a google font, linked in dist/index.html
@@ -163,12 +163,15 @@ const FormTextInputPreset = styled.input`
   width: 33%;
   padding: 10px 10px;
   margin: 8px 0;
+  border: 1px solid ${PalettePreset.borderGrey};
+  color: ${PalettePreset.lowPriority};
 `;
 
 const TextAreaPreset = styled.textarea`
   font-family: Garamond, Helvetica, Arial;
   resize: none;
   padding: 10px 15px;
+  color: ${PalettePreset.lowPriority};
   border: 1px solid ${({ theme }) => theme.primary};;
 `;
 
