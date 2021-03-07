@@ -10,6 +10,22 @@ const CarouselContainer = styled.div`
   position: relative;
 `;
 
+const ArrowButton = styled.button`
+  border: none;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+`;
+
+const ArrowButtonLeft = styled(ArrowButton)`
+  left: 1rem;
+`;
+
+const ArrowButtonRight = styled(ArrowButton)`
+  right: 1rem;
+`;
+
 const ImageGallery = (props) => {
   if (!props || !props.selectedStyle) {
     return null;
@@ -17,6 +33,8 @@ const ImageGallery = (props) => {
   return (
     <CarouselContainer>
       <ImageList photos={props.selectedStyle.photos} />
+      <ArrowButtonLeft>&lt;</ArrowButtonLeft>
+      <ArrowButtonRight>&gt;</ArrowButtonRight>
     </CarouselContainer>
   );
 };

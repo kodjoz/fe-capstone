@@ -7,6 +7,7 @@ const ImageDiv = styled.div`
   height: 100%;
   background-image: url('${props => props.url}');
   background-size: cover;
+  background-position: center;
   flex: 0 0 auto;
 `;
 
