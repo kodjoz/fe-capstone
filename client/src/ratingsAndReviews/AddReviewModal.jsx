@@ -35,8 +35,9 @@ class AddReviewModal extends React.Component {
     this.setState({'characteristics': characteristics});
   }
 
-  submitReview(button) {
-    button.preventDefault;
+  submitReview(submit) {
+    submit.preventDefault;
+    console.log('submitting review');
     return axios.post('/api/reviews', {
       params: {
         product_id: this.props.product_id,
@@ -50,7 +51,7 @@ class AddReviewModal extends React.Component {
       }
     })
       .then((result) => {
-        console.log(result);
+        console.log('axios post: ', JSON.stringify(result));
         this.setState({active: !this.state.active});
       });
   }
@@ -65,7 +66,7 @@ class AddReviewModal extends React.Component {
             <CloseButton onClick={()=>{ this.setState({active: false}); }}>X</CloseButton>
             <Title>Write Your Review</Title>
             <br></br>
-            <Subtitle>About {this.props.productName}</Subtitle>
+            <ProductName>About {this.props.product.name}</ProductName>
             <Form>
               <Heading>Rating<Asterisk>&#42;</Asterisk></Heading>
               <StarRow name={'rating'} size={15} rating={0}></StarRow>
@@ -202,6 +203,10 @@ const Subtitle = styled(Italic)`
   color: ${Palette.lowPriorityText};
 `;
 
+const ProductName = styled(Subtitle)`
+  font-size: 1.5rem;
+`;
+
 const Form = styled.form`
   margin-left: 1rem;
 `;
@@ -219,7 +224,7 @@ const Characteristic = styled(Heading)`
 `;
 
 const Asterisk = styled.span`
-  color: ${Palette.primary};
+  color: ${({ theme }) => theme.primary};
   font-size: 1.7rem;
 `;
 
@@ -259,7 +264,7 @@ const Padding = styled.div`
 AddReviewModal.propTypes = {
   product_id: PropTypes.number,
   characteristics: PropTypes.array,
-  productName: PropTypes.string,
+  product: PropTypes.object,
 };
 
 export default AddReviewModal;
