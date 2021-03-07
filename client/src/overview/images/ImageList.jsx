@@ -9,6 +9,8 @@ const ImageFrame = styled.div`
   border: 1px solid red;
   position: relative;
   display: flex;
+  flex-wrap: no-wrap;
+  overflow: auto;
 `;
 
 const ImageList = (props) => {
