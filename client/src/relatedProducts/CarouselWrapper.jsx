@@ -81,6 +81,7 @@ const StyledCarouselWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 4em;
 `;
 const CarouselContainer = styled.div`
   width: 80%;
@@ -92,14 +93,19 @@ const CarouselContainer = styled.div`
   justify-content: flex-start;
   position: relative;
   padding: 10px;
+  background-color: ${props => props.theme.midLayer}
 `;
 
 const Button = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
   padding: 20px;
   margin: 0.5em;
-  background: #ededed;
+  background: ${props => props.theme.topLayer}
   cursor: pointer;
+
+  &hover {
+    background: ${props => props.theme.midLayer}
+  }
 `;
 
 
