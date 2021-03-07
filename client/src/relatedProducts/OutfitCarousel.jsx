@@ -83,7 +83,7 @@ OutfitCarousel.propTypes = {
 const FirstSlide = styled.div`
   width: 200px;
   height: 300px;
-  background-color: grey;
+  background-color: ${props => props.theme.topLayer};
   margin: 0.5em;
   cursor: pointer;
   display: flex;
@@ -91,9 +91,14 @@ const FirstSlide = styled.div`
   justify-content: center;
 
   p {
-    color: white;
+    ${props => props.theme.primaryText};
     font-size: 1em;
   }
+
+   &:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+   }
 `;
 
 const Button = styled.button`

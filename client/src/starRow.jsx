@@ -11,7 +11,7 @@ const StyledStarRow = styled.div`
 
   &::before {
     content: '★★★★★';
-   background: linear-gradient(90deg, hsl(0, 100%, 60%) ${props => props.rating}%, #D8DCD6 ${props => props.rating}%);
+   background: linear-gradient(90deg, ${props => props.theme.primary} ${props => props.rating}%, #D8DCD6 ${props => props.rating}%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

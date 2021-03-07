@@ -127,6 +127,11 @@ const StyledSlide = styled.div`
   justify-content: flex-end;
   position: relative;
   margin: 0.5em;
+
+  &:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+   }
 `;
 
 export default Slide;
