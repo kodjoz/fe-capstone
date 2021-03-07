@@ -89,7 +89,7 @@ const FirstSlide = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 2 0 auto;
+  flex: 0 0 auto;
 
   p {
     ${props => props.theme.primaryText};
