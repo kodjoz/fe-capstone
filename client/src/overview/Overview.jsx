@@ -20,6 +20,7 @@ grid-column-gap: 1rem;
 const LeftContainer = styled.div`
 grid-column-start: 1;
 grid-column-end: 2;
+min-height: 700px;
 `;
 
 const RightContainer = styled.div`
@@ -124,7 +125,7 @@ class OverviewContainer extends React.Component {
     return (
       <Grid>
         <LeftContainer>
-          <ImageGallery />
+          <ImageGallery selectedStyle={this.state.selectedStyle}/>
         </LeftContainer>
         <RightContainer>
           <StarRating count={this.state.reviewData.count} sum={this.state.reviewData.sum} />
