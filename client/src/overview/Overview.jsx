@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ProductType } from './types.js';
 import axios from 'axios';
 import AddToCart from './AddToCart';
-import ImageGallery from './ImageGallery';
+import ImageGallery from './images/ImageGallery';
 import StarRating from './StarRating';
 import ProductDescription from './ProductDescription';
 import ProductDetail from './ProductDetail';
