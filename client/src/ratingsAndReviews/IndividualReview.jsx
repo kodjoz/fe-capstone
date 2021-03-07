@@ -12,6 +12,7 @@ class IndividualReview extends React.Component {
     super(props);
     this.state = {
       helpfulRated: false,
+      reported: false
     };
   }
 
@@ -38,11 +39,15 @@ class IndividualReview extends React.Component {
       }
     })
       .then(()=>{
-        document.getElementById(this.props.review.review_id).style.visibility = 'hidden'; //doesn't do what you'd think...
+        this.setState({reported: true});
+        //document.getElementById(this.props.review.review_id).style.visibility = 'hidden'; //doesn't do what you'd think...
       });
   }
 
   render() {
+    if (this.state.reported) {
+      return (<div></div>);
+    }
     let review = this.props.review;
     // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
