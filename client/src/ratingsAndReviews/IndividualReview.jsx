@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import { Tile, Italic, LowPriorityText, ClickableText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 import StarRow from '../starRow.jsx';
@@ -15,8 +16,18 @@ class IndividualReview extends React.Component {
   }
 
   helpfulVote() {
-    if (this.state.helpfulRated === false) { this.props.review.helpfulness++; }
-    this.setState({helpfulRated: true});
+    if (this.state.helpfulRated === false) {
+      let url = `/api/reviews/${this.props.review.review_id}/helpful`;
+      axios.put(url, {
+        params: {
+          review_id: this.props.review.review_id
+        }
+      })
+        .then(() => {
+          this.props.review.helpfulness++;
+          this.setState({helpfulRated: true});
+        });
+    }
   }
 
   render() {
@@ -172,7 +183,7 @@ const Response = styled.div`
 `;
 
 IndividualReview.propTypes = {
-  review: PropTypes.object
+  review: PropTypes.object,
 };
 
 export default IndividualReview;
