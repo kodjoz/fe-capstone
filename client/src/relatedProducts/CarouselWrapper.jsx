@@ -60,8 +60,7 @@ class CarouselWrapper extends React.Component {
     this.container = document.getElementById(this.props.name + 'Container');
     if (this.props.name === 'yourOutfit') {
       this.setState({
-        showLeftScroll: false,
-        showRightScroll: false,
+        showLeftScroll: false
       });
       return;
     }
@@ -70,8 +69,6 @@ class CarouselWrapper extends React.Component {
   render() {
     if (document.getElementById(this.props.name + 'Container')) {
       this.container = document.getElementById(this.props.name + 'Container');
-      console.log('render scroll width:', this.container.scrollWidth);
-      console.log('render client width:', this.container.clientWidth);
     }
     return (
       <StyledCarouselWrapper>
