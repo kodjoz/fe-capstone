@@ -12,7 +12,7 @@ const SearchQuestion = (props) => {
   return (
     <React.Fragment>
       <SearchBar type="text"
-        placeholder="Have a question? Search for answers..."
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
         onChange={props.onChange}
         value={props.value}
       ></SearchBar>
@@ -26,7 +26,6 @@ const SearchBar = styled.input`
   width: 100%;
   padding: 10px 15px;
   margin: 8px 0;
-  text-transform: uppercase;
   color: ${Palette.black};
   border: 1px solid ${Palette.borderGrey};
 `;
