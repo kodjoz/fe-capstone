@@ -124,7 +124,7 @@ const CarouselButton = styled.button`
   border: none;
   padding: 0.5rem;
 
-  &hover {
+  &:hover {
     background: ${props => props.theme.midLayer}
   }
 
