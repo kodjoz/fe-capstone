@@ -95,7 +95,9 @@ const StyledCarouselWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 4em;
   position: relative;
+
 `;
 const CarouselContainer = styled.div`
   width: 100%;
@@ -107,6 +109,7 @@ const CarouselContainer = styled.div`
   justify-content: flex-start;
   position: relative;
   padding: 10px;
+  background-color: ${props => props.theme.midLayer}
 `;
 
 const CarouselButton = styled.button`
@@ -121,8 +124,8 @@ const CarouselButton = styled.button`
   border: none;
   padding: 0.5rem;
 
-  &:hover{
-    display: block;
+  &hover {
+    background: ${props => props.theme.midLayer}
   }
 
 `;
@@ -133,6 +136,7 @@ const LeftCarouselButton = styled(CarouselButton)`
 
 const RightCarouselButton = styled(CarouselButton)`
   right: 0;
+
 `;
 
 

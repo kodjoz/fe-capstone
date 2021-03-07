@@ -39,16 +39,16 @@ const SalePrice = styled.p`
 const StyledSlideInfo = styled(SlideInfo)`
   width: 200px;
   height: 100px;
-  background: linear-gradient(0deg, #000 30%, #99999944 100%);
+  background: linear-gradient(0deg, #181818 30%, #99999988 100%);
 
   p {
     color: white;
     margin: 0;
   }
-
-  &:hover {
-    height: 120px;
-  }
+   &:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+   }
 `;
 
 export default StyledSlideInfo;
