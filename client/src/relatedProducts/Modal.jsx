@@ -89,11 +89,12 @@ const HeaderRow = styled.div`
   padding: 0.25em;
   position: sticky;
   top: 2.5em;
-  background: #FFFFFF66;
+  background: #FFFFFF88;
 
   p {
+    font-weight: bold;
     padding: 0.5em;
-    background: #FFFFFF88;
+    background: ${props => props.theme.topLayer};
     margin: 0;
   }
 `;
@@ -121,9 +122,9 @@ const TableBody = styled.tbody`
 
 const ModalTable = styled(Tile)`
   position: fixed;
-  background: white;
   width: 50%;
-  height: 50%;
+  height: auto;
+  max-height: 50%;
   overflow-y: scroll;
   top: 50%;
   left: 50%;
