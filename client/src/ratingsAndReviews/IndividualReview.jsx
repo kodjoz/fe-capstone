@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import { Tile, Italic, LowPriorityText, ClickableText, Signature, Helpful, HelpfulYes } from '../globalStyles.js';
 import StarRow from '../starRow.jsx';
@@ -11,15 +12,42 @@ class IndividualReview extends React.Component {
     super(props);
     this.state = {
       helpfulRated: false,
+      reported: false
     };
   }
 
   helpfulVote() {
-    if (this.state.helpfulRated === false) { this.props.review.helpfulness++; }
-    this.setState({helpfulRated: true});
+    if (this.state.helpfulRated === false) {
+      let url = `/api/reviews/${this.props.review.review_id}/helpful`;
+      axios.put(url, {
+        params: {
+          review_id: this.props.review.review_id
+        }
+      })
+        .then(() => {
+          this.props.review.helpfulness++;
+          this.setState({helpfulRated: true});
+        });
+    }
+  }
+
+  report() {
+    let url = `/api/reviews/${this.props.review.review_id}/report`;
+    axios.put(url, {
+      params: {
+        review_id: this.props.review.review_id
+      }
+    })
+      .then(()=>{
+        this.setState({reported: true});
+        //document.getElementById(this.props.review.review_id).style.visibility = 'hidden'; //doesn't do what you'd think...
+      });
   }
 
   render() {
+    if (this.state.reported) {
+      return (<div></div>);
+    }
     let review = this.props.review;
     // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
     let summary = review.summary;
@@ -63,7 +91,7 @@ class IndividualReview extends React.Component {
     }
 
     return (
-      <Review>
+      <Review id={this.props.review.review_id}>
         <ReviewerInfo>
           <Signature>@{review.reviewer_name}</Signature>
           <br></br>
@@ -86,6 +114,7 @@ class IndividualReview extends React.Component {
         {response}
         <br></br>
         <Helpful>Helpful? <HelpfulYes onClick={() => { this.helpfulVote(); }}>Yes</HelpfulYes> ({review.helpfulness})</Helpful>
+        <HelpfulNo onClick={() => { this.report(); }}>Report</HelpfulNo>
         {/* <p>{JSON.stringify(this.props.review)}</p> */}
       </Review>
     );
@@ -171,8 +200,14 @@ const Response = styled.div`
   width: 70%;
 `;
 
+const HelpfulNo = styled(HelpfulYes)`
+  position: relative;
+  float: right;
+  margin-right: 2.5%;
+`;
+
 IndividualReview.propTypes = {
-  review: PropTypes.object
+  review: PropTypes.object,
 };
 
 export default IndividualReview;

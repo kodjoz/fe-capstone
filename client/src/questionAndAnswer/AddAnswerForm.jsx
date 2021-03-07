@@ -106,7 +106,7 @@ class AddAnswer extends React.Component {
 }
 
 const AnswerModal = styled(ModalBackground).attrs(props => ({
-  display: props.display || 'none',
+  display: props.display,
 }))`
   display: ${props => props.display};
 `;

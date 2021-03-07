@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -7,14 +8,17 @@ import {
 } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles.js';
 import ProductDetailsPage from './productDetailsPage.jsx';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './theme';
+import { useTheme } from './useTheme.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <Router>
+let App = () => {
+  const [theme, toggleTheme] = useTheme();
+  const currentTheme = theme === 'light' ? lightTheme : darkTheme;
+
+  return (
+    <Router>
+      <ThemeProvider theme={currentTheme}>
         <GlobalStyle />
         <Switch>
           <Route exact path="/">
@@ -35,7 +39,10 @@ class App extends React.Component {
           <Route exact path="/products/:id" render={(props) => {
             const id = props.match.params.id;
             return (
-              <ProductDetailsPage key={'product-details-' + id} product_id={parseInt(id)} />
+              <ProductDetailsPage
+                toggleTheme={toggleTheme}
+                key={'product-details-' + id}
+                product_id={parseInt(id)} />
             );
           }} />
           <Route path="*">
@@ -46,9 +53,10 @@ class App extends React.Component {
             </div>
           </Route>
         </Switch>
-      </Router>
-    );
-  }
-}
+      </ThemeProvider>
+    </Router>
+  );
+
+};
 
 export default App;
