@@ -25,31 +25,35 @@ const PalettePreset = {
 
 //Note: this is a google font, linked in dist/index.html
 const FontsPreset = {
-  primary: 'Playfair Display, serif',
+  primary: 'Merriweather, serif',
   original: 'Garamond, Helvetica, Arial'
 };
 
 //NOTE: an rem here will represent 16px. If html's font-size were set to 62.5% (10px), each rem would be 10px, and 1.6rem would be 16px
 const GlobalPreset = createGlobalStyle`
+  * {
+    border-radius: 4px;
+  }
   html {
     font-size: 62.5%;
   }
   body {
     margin: 0 10%;
-    color: ${PalettePreset.black};
-    background-color: ${PalettePreset.background};
-    font-family: ${FontsPreset.original};
-    font-size: 170%;
+    color: ${({ theme }) => theme.primaryText};
+    background-color: ${({ theme }) => theme.background};
+    font-family: ${FontsPreset.primary};
+    font-size: 120%;
+    border-radius: 10px;
   }
 
   a {
     text-decoration: none;
+    color: ${({ theme }) => theme.primaryText};
   }
 `;
 
 const TilePreset = styled.div`
-  background-color: ${PalettePreset.foreground};
-  border: solid 1px ${PalettePreset.borderGrey};
+  background-color: ${({ theme }) => theme.midLayer};
 `;
 
 //different font maybe?
@@ -57,7 +61,7 @@ const ModuleHeaderPreset = styled.h3`
   font-size: 2rem;
   margin-left: 3%;
   padding: 0.5rem 0;
-  text-decoration: underline 2px ${PalettePreset.lowPriority};
+  text-decoration: underline 2px ${({ theme }) => theme.lowPriorityText};
 `;
 
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
@@ -69,36 +73,41 @@ const ClickableTextPreset = styled.span`
   cursor: pointer;
   text-decoration: underline;
   font-size: 1.45rem;
-  color: ${PalettePreset.black};
+  color: ${({ theme }) => theme.secondaryText};
 `;
 //ALT more salient red clickable color: hsl(0, 100%, 50%);
 
 const LowPriorityTextPreset = styled.span`
   font-size: 1.2rem;
   font-style: italic;
-  color: ${PalettePreset.lowPriority};
+  color: ${({ theme }) => theme.lowPriorityText};
 `;
 
 const ButtonPreset = styled.button`
   text-transform: uppercase;
-  background-color: ${PalettePreset.foreground};
-  color: ${PalettePreset.lowPriority};
-  border: solid 1px ${PalettePreset.borderGrey};
+  background-color: ${({ theme }) => theme.topLayer};
+  color: ${({ theme }) => theme.lowPriorityText};
+  border: none;
   height: 4rem;
   padding: 0 1.5rem;
   cursor: pointer;
   &:hover {
-    background-color: hsl(0, 0%, 95%);
+    background-color: ${({ theme }) => theme.midLight};
+    color: ${({ theme }) => theme.secondaryText};
   }
 `;
 
 const DropdownMenuPreset = styled.select`
   text-transform: uppercase;
-  background-color: ${PalettePreset.foreground};
-  color: ${PalettePreset.lowPriority};
-  border: solid 1px ${PalettePreset.borderGrey};
+  background-color: ${({ theme }) => theme.topLayer};
+  color: ${({ theme }) => theme.lowPriorityText};
+  border: none;
   height: 4rem;
   padding: 0 1.5rem;
+  &:hover {
+    background-color: ${({ theme }) => theme.midLight};
+    color: ${({ theme }) => theme.secondaryText};
+  }
 `;
 
 const GalleryPreset = styled.div`
@@ -109,7 +118,7 @@ const GalleryPreset = styled.div`
 
 const ThumbnailPreset = styled.img`
   display: inline-block;
-  border: 1px solid ${PalettePreset.thumbnailBorder};
+  border: 1px solid ${({ theme }) => theme.borders};
   border-radius: 5px;
   padding: 0.5rem;
   margin-right: 0.5rem;
@@ -127,7 +136,7 @@ const HelpfulYesPreset = styled.div`
   display: inline;
   cursor: pointer;
   font-style: normal;
-  color: ${PalettePreset.primary};
+  color: ${({ theme }) => theme.primaryText};
   text-decoration: underline;
 `;
 
@@ -136,7 +145,7 @@ const SignaturePreset = styled.div`
   font-family: Tangerine, cursive;
   display: inline-block;
   font-size: 2rem;
-  color: ${PalettePreset.primary};
+  color: ${({ theme }) => theme.primaryText};
 `;
 
 const ModalBackgroundPreset = styled.div`
@@ -160,7 +169,7 @@ const TextAreaPreset = styled.textarea`
   font-family: Garamond, Helvetica, Arial;
   resize: none;
   padding: 10px 15px;
-  border: 1px solid ${PalettePreset.black};
+  border: 1px solid ${({ theme }) => theme.primary};;
 `;
 
 const GridLabelPreset = styled.label`
