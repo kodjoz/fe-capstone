@@ -1,16 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import { StyleType } from '../types.js';
+import ImageList from './ImageList';
 
-const ImagePlaceholder = styled.div`
+const CarouselContainer = styled.div`
+  height: 100%;
   width: 100%;
-  background-color: #ccc;
-  height: 300px;
+  background-color: #ddd;
+  position: relative;
 `;
 
-const ImageGallery = () => {
+const ImageGallery = (props) => {
+  if (!props || !props.selectedStyle) {
+    return null;
+  }
   return (
-    <ImagePlaceholder />
+    <CarouselContainer>
+      <ImageList photos={props.selectedStyle.photos} />
+    </CarouselContainer>
   );
+};
+
+ImageGallery.propTypes = {
+  selectedStyle: StyleType
 };
 
 export default ImageGallery;
