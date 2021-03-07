@@ -14,6 +14,7 @@ class QuestionAndAnswer extends React.Component {
 
     this.state = {
       questions: [],
+      questionResults: [],
       searchTerm: '',
       getMoreQuestions: false,
       getMoreAnswers: false,
@@ -43,78 +44,75 @@ class QuestionAndAnswer extends React.Component {
             return b.question_helpfulness - a.question_helpfulness;
           });
           this.setState({
-            questions: data.results
+            questions: data.results,
           });
         })
-        .catch((err) => {
-          console.error(err);
-        });
+        .catch((err) => { console.error(err); });
     } else {
       return '';
     }
   }
 
   componentDidMount() {
-    this.getQuestions(1, 4);
+    this.getQuestions(1, 999)
+      .then(() => {
+        this.setState({ questionResults: this.state.questions.slice(0, 4) });
+      });
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      this.getQuestions(1, 4);
+      this.getQuestions(1, 999)
+        .then(() => this.setState({ questionResults: this.state.questions.slice(0, 4) }));
     }
   }
 
   // type in a term and update the state
   searchQuestions(e) {
     this.setState({
-      searchTerm: e.target.value
+      searchTerm: e.target.value.toLowerCase(),
     });
-    var results = [];
-    // if the searchterm is longer than 3 begin searching questions
+
+    let searchResults = [];
+
     if (this.state.searchTerm.length > 2) {
-      // get more questions from the server
-      this.getQuestions(1, 999)
-        .then(() => {
-          // for each question if the question_body contains the search letters
-          for (let q = 0; q < this.state.questions.length; q++) {
-            let currentQuestion = this.state.questions[q];
-            if (currentQuestion.question_body.includes(this.state.searchTerm)) {
-              results.push(currentQuestion);
-            }
-          }
-        })
-        .then(() => {
-        // update questions state to only show search results
-          this.setState({
-            questions: results,
-            getMoreQuestions: true,
-          });
-        });
-      // if there are no characters then reset the search
-    } else if (this.state.searchTerm.length < 2) {
-      this.getQuestions(1, 4)
-        .then(() => {
-          this.setState({
-            getMoreQuestions: false
-          });
-        });
+      this.state.questions.forEach((question) => {
+        // if the question contains the search term add to question results
+        let lowerCaseQuestion = question.question_body.toLowerCase();
+        if (lowerCaseQuestion.includes(this.state.searchTerm)) {
+          searchResults.push(question);
+        }
+      });
+      this.setState({ questionResults: searchResults });
+    } else {
+      this.setState({ questionResults: this.state.questions.slice(0, 4)} );
     }
   }
 
   getMoreQuestions() {
-    this.setState({
-      getMoreQuestions: !this.state.getMoreQuestions
-    });
-    this.getQuestions(1, 999);
+    let currentLength = this.state.questionResults.length;
+    let totalLength = this.state.questions.length;
 
+    if (currentLength < totalLength) {
+      console.log('Is current length less than total length?', currentLength < totalLength);
+      console.log('Current length before', currentLength);
+      this.setState({ questionResults: this.state.questions.slice(0, currentLength + 2)} );
+      console.log('Current length after', currentLength + 2);
+    } else {
+      alert('There are no more questions available from the server');
+      this.setState({ questionResults: this.state.questions.slice(0, 4)} );
+    }
 
   }
   // if the user wants to load more answers click on the button and update the state
   getMoreAnswers() {
-    this.setState({
-      getMoreAnswers: !this.state.getMoreAnswers
-    });
-    this.getQuestions(1, 999);
+    this.getQuestions(1, 999)
+      .then(() => {
+        this.setState({
+          getMoreAnswers: !this.state.getMoreAnswers
+        });
+      })
+      .catch((err) => { console.error('There was an error getting more answers', err); });
   }
 
   markOrReport(endpoint, id, handler) {
@@ -136,15 +134,8 @@ class QuestionAndAnswer extends React.Component {
   }
 
   render() {
-    var questions = this.state.questions ? this.state.questions.slice(0, 4) : null;
-
-    if (this.state.getMoreQuestions && this.state.questions.length > 4) {
-      questions.concat(this.state.questions.slice(4, 2));
-    } else if (this.state.questions.length === questions.length) {
-      questions = this.state.questions.slice(0, 4);
-    }
-
-
+    // control for loading the page
+    var questions = !this.state.questionResults ? '' : this.state.questionResults;
 
     // render our module
     return (
@@ -156,12 +147,12 @@ class QuestionAndAnswer extends React.Component {
         <QuestionList
           loadAnswers={this.state.getMoreAnswers}
           loadQuestions={this.state.getMoreQuestions}>
-          {this.state.questions ? questions.map((question) => (<Question
+          {questions.map((question) => (<Question
             key={question.question_id}
             markOrReport={this.markOrReport}
             getMoreAnswers={this.state.getMoreAnswers}
             question={question}
-            product={this.props.product} />)) : null}
+            product={this.props.product} />))}
         </QuestionList>
         <MoreAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></MoreAnswers>
@@ -191,8 +182,7 @@ const QuestionContainer = styled.main`
     "search-question"
     "question-list"
     "styledLoadAnswers"
-    "styledButtons"
-    "addQuestion";
+    "styledButtons";
 `;
 
 const QuestionHeader = styled.h3`
@@ -221,21 +211,6 @@ const MoreInfo = styled.section`
   grid-area: styledButtons;
   grid-row: span 1;
 `;
-
-// const Button = styled.button`
-//   text-transform: uppercase;
-//   padding: 15px;
-//   margin-top: 10px;
-//   margin-right: 10px;
-//   color: ${Palette.black};
-//   background-color: ${Palette.background};
-//   border: 2px solid ${Palette.secondary};
-//   border-radius: 5px;
-
-//   &:hover {
-//     border: 2px solid ${Palette.primary};
-//   }
-// `;
 
 // the product id should be a number
 QuestionAndAnswer.propTypes = {
