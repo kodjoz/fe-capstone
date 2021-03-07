@@ -11,7 +11,7 @@ const ImageDiv = styled.div`
   background-position: center;
   flex: 0 0 auto;
   transform: translateX(-${props => props.offset}px);
-  transition: transform 1s ease-in-out;
+  transition: transform .5s ease-in-out;
 `;
 
 const Image = (props) => {

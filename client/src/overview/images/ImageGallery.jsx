@@ -59,6 +59,8 @@ class ImageGallery extends React.Component {
     if (this.props && this.props.selectedStyle && this.containerRef) {
       const displayWidth = this.containerRef.current.getBoundingClientRect().width;
       const imageIndex = this.state.imageIndex;
+      const showLeftArrow = this.state.imageIndex > 0;
+      const showRightArrow = this.state.imageIndex < this.props.selectedStyle.photos.length - 1;
       console.log(`w: ${displayWidth}, i: ${imageIndex}`);
       innerComponents = (
         <React.Fragment>
@@ -66,8 +68,8 @@ class ImageGallery extends React.Component {
             photos={this.props.selectedStyle.photos}
             displayWidth={displayWidth}
             imageIndex={imageIndex} />
-          <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft>
-          <ArrowButtonRight onClick={() => this.nextImage()} >&gt;</ArrowButtonRight>
+          { showLeftArrow && <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft> }
+          { showRightArrow && <ArrowButtonRight onClick={() => this.nextImage()} >&gt;</ArrowButtonRight> }
         </React.Fragment>
       );
     } else {
