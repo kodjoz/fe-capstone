@@ -69,12 +69,11 @@ const Button = styled.button `
   background: none;
   border-radius: 3px;
   border: none;
-  width: 25%;
   position: absolute;
   top: 0%;
   left: 80%;
   cursor: pointer;
-
+  background: rgba(0,0,0,0.19);
 `;
 
 RelatedCarousel.propTypes = {
