@@ -17,6 +17,7 @@ class ReviewsList extends React.Component {
       product_id: props.product_id,
       reviews: null,
       renderedReviews: null,
+      metadata: null,
       filters: [],
       sortOrder: 'relevance',
     };
@@ -25,10 +26,22 @@ class ReviewsList extends React.Component {
   componentDidMount() {
     //get reviews
     this.getReviews(this.state.sortOrder);
+    this.getMetadata();
+  }
+
+  getMetadata() {
+    axios.get('/api/reviews/meta', {
+      params: {
+        product_id: this.state.product_id
+      }
+    })
+      .then((res) => {
+        //console.log('meta: ', res.data);
+        this.setState({metadata: res.data});
+      });
   }
 
   getReviews(sortOrder) {
-    //if(!sortOrder){sort order = 'newest';}
     return axios.get('/api/reviews', {
       params: {
         product_id: this.state.product_id,
@@ -47,7 +60,7 @@ class ReviewsList extends React.Component {
     //re-render renderedList with new filters
     if (filter === null) {
       this.setState({filters: []});
-      console.log('filtering reviews based on: ', this.state.filters);
+      //console.log('filtering reviews based on: ', this.state.filters);
     } else {
       let filterLocation = this.state.filters.indexOf(filter);
       let newFilters = this.state.filters;
@@ -93,8 +106,17 @@ class ReviewsList extends React.Component {
   }
 
   render() {
+    let characteristics = [];
+    //NOTE: characteristics will take array of objects, each object contains characteristic name, id, & value
+    //e.g. [{name: "Width", "id": 15, "value": 3.5000},{name: "Comfort", "id": 16, "value": 4.0000}]
+    if (this.state.metadata) {
+      for (var key in this.state.metadata.characteristics) {
+        var item = this.state.metadata.characteristics;
+        characteristics.push({name: key, id: item[key]['id'], value: item[key]['value']});
+      }
+    }
     if (!this.state.reviews) {
-      return (<AddReviewModal></AddReviewModal>);
+      return (<AddReviewModal product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>);
     } else {
       return (
         <div>
@@ -103,7 +125,7 @@ class ReviewsList extends React.Component {
           <RatingsReviewsPanel>
             <RatingComponent>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
-              <FactorsBreakdown />
+              <FactorsBreakdown characteristics={characteristics}/>
             </RatingComponent>
 
             <ReviewsComponent>
@@ -111,7 +133,7 @@ class ReviewsList extends React.Component {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
               <ReviewsButton>MORE REVIEWS</ReviewsButton>
-              <AddReviewModal></AddReviewModal>
+              <AddReviewModal product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
           </RatingsReviewsPanel>

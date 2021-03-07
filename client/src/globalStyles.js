@@ -153,6 +153,8 @@ const FormTextInputPreset = styled.input`
   width: 33%;
   padding: 10px 10px;
   margin: 8px 0;
+  border: 1px solid ${PalettePreset.borderGrey};
+  color: ${PalettePreset.lowPriority};
 `;
 
 const TextAreaPreset = styled.textarea`
