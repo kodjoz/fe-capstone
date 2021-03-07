@@ -131,11 +131,11 @@ const CarouselButton = styled.button`
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
-  left: -2;
+  left: -2%;
 `;
 
 const RightCarouselButton = styled(CarouselButton)`
-  right: -2;
+  right: -2%;
 
 `;
 
