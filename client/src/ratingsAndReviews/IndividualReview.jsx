@@ -30,6 +30,18 @@ class IndividualReview extends React.Component {
     }
   }
 
+  report() {
+    let url = `/api/reviews/${this.props.review.review_id}/report`;
+    axios.put(url, {
+      params: {
+        review_id: this.props.review.review_id
+      }
+    })
+      .then(()=>{
+        document.getElementById(this.props.review.review_id).style.visibility = 'hidden'; //doesn't do what you'd think...
+      });
+  }
+
   render() {
     let review = this.props.review;
     // review.summary = 'It was the best of shreks, it was the worst of shreks, it was the age of shrekdom, it was the age of shrekishness, it was the epoch of shreklief, it was the epoch of inshrekulity'; //long summary test
@@ -74,7 +86,7 @@ class IndividualReview extends React.Component {
     }
 
     return (
-      <Review>
+      <Review id={this.props.review.review_id}>
         <ReviewerInfo>
           <Signature>@{review.reviewer_name}</Signature>
           <br></br>
@@ -97,6 +109,7 @@ class IndividualReview extends React.Component {
         {response}
         <br></br>
         <Helpful>Helpful? <HelpfulYes onClick={() => { this.helpfulVote(); }}>Yes</HelpfulYes> ({review.helpfulness})</Helpful>
+        <HelpfulNo onClick={() => { this.report(); }}>Report</HelpfulNo>
         {/* <p>{JSON.stringify(this.props.review)}</p> */}
       </Review>
     );
@@ -180,6 +193,12 @@ const Response = styled.div`
   padding: 0.5rem 1rem;
   margin-left: 3%;
   width: 70%;
+`;
+
+const HelpfulNo = styled(HelpfulYes)`
+  position: relative;
+  float: right;
+  margin-right: 2.5%;
 `;
 
 IndividualReview.propTypes = {
