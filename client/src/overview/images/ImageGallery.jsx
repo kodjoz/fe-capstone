@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { StyleType } from '../types.js';
 import ImageList from './ImageList';
+import ImageIconList from './ImageIconList';
 
 const ArrowButton = styled.button`
   border: none;
@@ -67,6 +68,9 @@ class ImageGallery extends React.Component {
           <ImageList
             photos={this.props.selectedStyle.photos}
             displayWidth={displayWidth}
+            imageIndex={imageIndex} />
+          <ImageIconList
+            photos={this.props.selectedStyle.photos}
             imageIndex={imageIndex} />
           { showLeftArrow && <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft> }
           { showRightArrow && <ArrowButtonRight onClick={() => this.nextImage()} >&gt;</ArrowButtonRight> }

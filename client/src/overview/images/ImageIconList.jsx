@@ -1,12 +1,38 @@
 import React from 'react';
-// import ImageIcon from './ImageIcon';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { PhotoArray } from '../types';
+import ImageIcon from './ImageIcon';
 
-const ImageIconList = () => {
+const IconListFrame = styled.div`
+  width: 80px;
+  position: absolute;
+  top: 2rem;
+  height: 80%;
+  left: 2rem;
+`;
+
+const ImageIconList = (props) => {
+
+  const icons = props.photos.map((photo) => {
+    return (
+      <ImageIcon
+        key={photo.thumbnail_url}
+        photo={photo}
+        offset={0} />
+    );
+  });
+
   return (
-    <div>
-
-    </div>
+    <IconListFrame>
+      {icons}
+    </IconListFrame>
   );
+};
+
+ImageIconList.propTypes = {
+  photos: PhotoArray,
+  imageIndex: PropTypes.number
 };
 
 export default ImageIconList;
