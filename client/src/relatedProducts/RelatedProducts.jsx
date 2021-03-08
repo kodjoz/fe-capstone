@@ -55,12 +55,14 @@ class RelatedProductsWrapper extends React.Component {
     this.getRelatedProducts();
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.state.isLoading || !(this.props.product_id === nextProps.product_id);
+  }
 
   render() {
     if (this.state.isLoading) {
       return <div>RELATED LOADING</div>;
     }
-
     return (
       <div>
         <ModuleHeader>Related Products</ModuleHeader>

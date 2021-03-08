@@ -7,6 +7,7 @@ class CarouselWrapper extends React.Component {
     super(props);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
+    this.checkScroll = this.checkScroll.bind(this);
     this.state = {
       showLeftScroll: false,
       showRightScroll: true,
@@ -55,18 +56,24 @@ class CarouselWrapper extends React.Component {
   }
 
   componentDidMount() {
-    if (this.ref.current && this.ref.current.children.length < 4) {
+    if (this.ref.current.children.length < 4) {
       this.setState({
         showLeftScroll: false,
         showRightScroll: false
       });
     }
-
+    console.log(this.ref.current.attributes.id, this.ref.current.children.length);
+    console.log(this.ref.current.attributes.id, this.ref.current.clientWidth);
+    console.log(this.ref.current.attributes.id, this.ref.current.scrollWidth);
   }
 
   render() {
+    if (this.ref.current) {
+      console.log(this.ref.current.attributes.id, 'children', this.ref.current.children.length);
+    }
     return (
-      <StyledCarouselWrapper>
+      <StyledCarouselWrapper
+        onMouseEnter={this.checkScroll}>
         <LeftCarouselButton show={this.state.showLeftScroll}
           onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
         <CarouselContainer
