@@ -30,7 +30,7 @@ class OutfitCarousel extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.yourOutfit !== nextState.yourOutfit;
+    return this.state !== nextState;
   }
 
   removeFromOutfit(product) {
@@ -60,6 +60,7 @@ class OutfitCarousel extends React.Component {
   }
 
   render() {
+    console.log('rerendering outfit');
     return (
       <>
         <FirstSlide onClick={this.addProductClickHandler}>

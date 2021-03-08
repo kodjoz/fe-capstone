@@ -34,8 +34,8 @@ class RelatedCarousel extends React.Component {
     this.showModal(data);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.state.isLoading || !(this.props.data === nextProps.data);
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(this.props.data === nextProps.data) || (this.state.showModal !== nextState.showModal);
   }
 
   render() {
