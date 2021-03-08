@@ -5,6 +5,10 @@ const PhotoType = PropTypes.shape({
   url: PropTypes.string
 });
 
+const PhotoArray = PropTypes.arrayOf(
+  PhotoType
+);
+
 const StyleType = PropTypes.shape({
   style_id: PropTypes.number,
   name: PropTypes.string,
@@ -31,6 +35,7 @@ const ProductType = PropTypes.shape({
 
 export {
   PhotoType,
+  PhotoArray,
   StyleType,
   FeatureType,
   ProductType
