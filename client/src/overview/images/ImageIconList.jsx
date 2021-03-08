@@ -14,11 +14,13 @@ const IconListFrame = styled.div`
 
 const ImageIconList = (props) => {
 
-  const icons = props.photos.map((photo) => {
+  const icons = props.photos.map((photo, index) => {
+    const isSelected = index === props.imageIndex;
     return (
       <ImageIcon
         key={photo.thumbnail_url}
         photo={photo}
+        isSelected={isSelected}
         offset={0} />
     );
   });
