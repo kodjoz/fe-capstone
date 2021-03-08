@@ -6,6 +6,12 @@ import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
 import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
 import Overview from './overview/Overview.jsx';
+import withClickLogger from './shared/withClickLogger.jsx';
+
+const OverviewWithClickLogger = withClickLogger(Overview);
+const RelatedProductsWithClickLogger = withClickLogger(RelatedProducts);
+const QuestionAndAnswerWithClickLogger = withClickLogger(QuestionAndAnswer);
+const ReviewsListWithClickLogger = withClickLogger(ReviewsList);
 
 class ProductDetailsPage extends React.Component {
   constructor(props) {
@@ -53,10 +59,22 @@ class ProductDetailsPage extends React.Component {
       <div>
         <button onClick={this.props.toggleTheme}>Toggle Theme</button>
         <Navbar />
-        <Overview key={'overview-module-' + id} product_id={id} product={this.state.product}/>
-        <RelatedProducts key={'related-module-' + id} product_id={id} product={this.state.product}/>
-        <QuestionAndAnswer key={'questions-module-' + id} product_id={id} product={this.state.product} />
-        <ReviewsList key={'reviews-module-' + id} product_id={this.props.product_id} product={this.state.product}/>
+        <OverviewWithClickLogger
+          key={'overview-module-' + id}
+          product_id={id}
+          product={this.state.product}/>
+        <RelatedProductsWithClickLogger
+          key={'related-module-' + id}
+          product_id={id}
+          product={this.state.product}/>
+        <QuestionAndAnswerWithClickLogger
+          key={'questions-module-' + id}
+          product_id={id}
+          product={this.state.product} />
+        <ReviewsListWithClickLogger
+          key={'reviews-module-' + id}
+          product_id={this.props.product_id}
+          product={this.state.product}/>
       </div>
     );
   }
