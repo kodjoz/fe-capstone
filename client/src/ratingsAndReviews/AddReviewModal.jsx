@@ -37,11 +37,13 @@ class AddReviewModal extends React.Component {
     this.setState({'characteristics': characteristics});
   }
 
-  addPhoto() {
+  addPhoto(button) {
+    button.preventDefault();
     //push url string to state's photos array, then
     this.setState({photosUploaded: this.state.photosUploaded + 1}, () => {
       if (this.state.photosUploaded >= 5) {
         document.getElementById('upload-photo-btn').style.visibility = 'hidden';
+        document.getElementById('upload-photo-btn').style.height = '1px';
         document.getElementById('upload-limit-reached').style.visibility = 'visible';
       }
     });
@@ -159,8 +161,9 @@ class AddReviewModal extends React.Component {
               <Sidenote>Minimum review length:  {this.state.body.length}/50</Sidenote>
               {/* <Sidenote>Minimum review length: {50 - document.getElementById('rev-body').value.length / 50}</Sidenote> */}
               <Heading>Show us your style! Add product photos below:</Heading>
+              <br></br>
               <UploadLimitReached id={'upload-limit-reached'}>Max. 5 photos limit reached - thanks for sharing!</UploadLimitReached>
-              <FormButton name={'images'} id={'upload-photo-btn'} onClick={this.addPhoto.bind(this)}>Upload Images</FormButton>
+              <UploadButton name={'images'} id={'upload-photo-btn'} onClick={this.addPhoto.bind(this)}>Upload Images</UploadButton>
               <Heading>Tell us your nickname<Asterisk>&#42;</Asterisk></Heading>
               <AddFormTextInput
                 required
@@ -188,7 +191,7 @@ class AddReviewModal extends React.Component {
               <Padding></Padding>
               <Heading>Told us everything we need to know?</Heading>
               <Padding></Padding>
-              <FormButton onClick={this.submitReview.bind(this)}>Submit Review</FormButton>
+              <SubmitButton onClick={this.submitReview.bind(this)}>Submit Review</SubmitButton>
               <Heading></Heading>
             </Form>
           </ReviewForm>
@@ -273,12 +276,17 @@ const AddFormTextInput = styled(FormTextInput)`
   width: 75%;
 `;
 
-const FormButton = styled(Button)`
+const SubmitButton = styled(Button)`
   background-color: white;
   font-size: 1.1rem;
   &:hover {
     background-color: hsl(0, 0%, 95%);
   }
+`;
+
+const UploadButton = styled(SubmitButton)`
+  margin-top: -2em;
+  margin-bottom: 2em;
 `;
 
 const Sidenote = styled(Italic)`
@@ -294,6 +302,7 @@ const Padding = styled.div`
 
 const UploadLimitReached = styled(Sidenote)`
   visibility: hidden;
+  display: block;
 `;
 
 AddReviewModal.propTypes = {

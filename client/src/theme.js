@@ -1,15 +1,15 @@
 export const lightTheme = {
-  primary: '#CF6679',
-  secondary: '#008786',
-  background: '#F0F0F0',
-  midLayer: '#F5F5F5',
+  primary: 'hsl(0, 80%, 60%)',
+  secondary: 'hsl(270, 80%, 96%)',
+  background: 'hsl(345, 5%, 97%);',
+  midLayer: 'hsl(0, 15%, 99%)',
   midLight: '#F8F8F8',
   topLayer: '#FFF',
   error: '#CF6679',
-  primaryText: '#000',
-  secondaryText: '#8A0000',
-  lowPriorityText: '#610000',
-  borders: '#1F000000'
+  primaryText: 'hsl(0, 5%, 30%)',
+  secondaryText: 'hsl(0, 0%, 40%)',
+  lowPriorityText: 'hsl(0, 0%, 40%)',
+  borders: '#f2f2f2'
 };
 
 export const darkTheme = {

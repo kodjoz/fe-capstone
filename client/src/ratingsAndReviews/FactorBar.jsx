@@ -19,7 +19,7 @@ const FactorBar = (props) => {
 };
 
 const Factor = styled.div`
-padding-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 `;
 
 const Name = styled.span`
@@ -39,6 +39,7 @@ const Indicator = styled.div`
 `;
 
 const FullBar = styled.div`
+  border-radius: 0;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -48,6 +49,7 @@ const FullBar = styled.div`
 `;
 
 const Bar = styled.div`
+  border-radius: 0;
   background-color: hsla(0, 0%, 85%, 60%);
   width: 31.5%;
   height: 0.7rem;
