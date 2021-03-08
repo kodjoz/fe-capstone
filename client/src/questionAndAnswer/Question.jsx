@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import Answer from './Answer';
+import { HelpfulLink } from './Answer';
 import AddAnswer from './AddAnswerForm';
 import { Helpful, HelpfulYes, Tile } from '../globalStyles.js';
 
@@ -17,8 +18,6 @@ class Question extends React.Component {
       isAddAnswerVisible: false,
     };
 
-    //this.handleHelpfulOrReport = this.handleHelpfulOrReport.bind(this);
-    //this.handleReport = this.handleReport.bind(this);
     this.toggleAddAnswer = this.toggleAddAnswer.bind(this);
   }
   // get question helpfulness
@@ -114,10 +113,6 @@ const QuestionSummary = styled.span`
 const QuestionLinks = styled.span`
   grid-area: links;
   justify-self: end;
-`;
-
-const HelpfulLink = styled(HelpfulYes)`
-  text-decoration: ${props => props.underline};
 `;
 
 // first row is two columns
