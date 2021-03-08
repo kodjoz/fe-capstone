@@ -89,6 +89,7 @@ const FirstSlide = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
 
   p {
     ${props => props.theme.primaryText};
@@ -106,11 +107,11 @@ const Button = styled.button`
   color: white;
   background: none;
   border: none;
-  width: 25%;
   position: absolute;
-  top: 0%;
+  top: 2%;
   left: 80%;
   cursor: pointer;
+  background: rgba(0,0,0,0.19);
 `;
 
 
