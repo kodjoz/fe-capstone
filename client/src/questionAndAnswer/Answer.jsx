@@ -13,32 +13,17 @@ class Answer extends React.Component {
       isHelpful: false,
       isReported: false,
     };
-
-    this.handleHelpful = this.handleHelpful.bind(this);
-    this.handleReport = this.handleReport.bind(this);
   }
 
-  handleHelpful() {
+  handleHelpfulOrReport(endpoint) {
     var currentAnswer = this.props.answer.id;
-    if (!this.state.isHelpful) {
-      this.props.markOrReport('answers', currentAnswer, 'helpful');
-      this.setState({
-        isHelpful: true
-      });
-    } else {
-      alert('You already marked this Answer as helpful');
-    }
-  }
 
-  handleReport() {
-    var currentAnswer = this.props.answer.id;
-    if (!this.state.isReported) {
-      this.props.markOrReport('answers', currentAnswer, 'report');
-      this.setState({
-        isReported: true
-      });
-    } else {
-      alert('You already reported this Answer');
+    if (endpoint === 'helpful') {
+      this.props.markOrReport('answers', currentAnswer, endpoint);
+      this.setState({ isHelpful: true });
+    } else if (endpoint === 'report') {
+      this.props.markOrReport('answers', currentAnswer, endpoint);
+      this.setState({ isReported: true });
     }
   }
 
@@ -68,7 +53,11 @@ class Answer extends React.Component {
             );
           }) : null}
         </Gallery>
-        <AnswerLinks>by {answer.answerer_name}, <time>{prettyDate}</time> | <Helpful>Helpful? </Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes ({answer.helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.handleReport}>{!this.state.isReported ? 'Report' : 'Reported!'}</HelpfulYes></AnswerLinks>
+        <AnswerLinks>by {answer.answerer_name}, <time>{prettyDate}</time> | <Helpful>Helpful? </Helpful> <HelpfulLinkPreset
+          onClick={() => this.handleHelpfulOrReport('helpful')}
+          underline={this.state.isHelpful ? 'none' : 'underline'}>Yes ({answer.helpfulness})</HelpfulLinkPreset> | <HelpfulLinkPreset
+          onClick={() => this.handleHelpfulOrReport('report')}
+          underline={this.state.isReported ? 'none' : 'underline'}>{!this.state.isReported ? 'Report' : 'Reported!'}</HelpfulLinkPreset></AnswerLinks>
       </AnswerWrapper>
     );
   }
@@ -93,9 +82,15 @@ const AnswerLinks = styled.span`
   font-size: .8em;
 `;
 
+const HelpfulLinkPreset = styled(HelpfulYes)`
+  text-decoration: ${props => props.underline};
+`;
+
+
 Answer.propTypes = {
   answer: PropTypes.object.isRequired,
   markOrReport: PropTypes.func.isRequired,
 };
 // accidentally deleted my branch
+export const HelpfulLink = HelpfulLinkPreset;
 export default Answer;
