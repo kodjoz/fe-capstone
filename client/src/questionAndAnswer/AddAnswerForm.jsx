@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette, ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
+import { ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -113,13 +113,13 @@ const AnswerModal = styled(ModalBackground).attrs(props => ({
 
 const FormWrapper = styled.section`
   position: fixed;
-  background: ${Palette.background};
+  background: ${ ({ theme }) => theme.topLayer};
   width: 50%;
   height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid ${Palette.modalBorderWhite};
+  border: 15px solid ${ ({ theme }) => theme.borders};
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;

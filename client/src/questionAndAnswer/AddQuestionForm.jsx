@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Palette, ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
+import { ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -41,7 +41,7 @@ class AddQuestion extends React.Component {
         name: this.state.name,
         body: this.state.body,
         email: this.state.email,
-        product_id: this.props.product
+        product_id: this.props.product.id
       })
         .then(() => {
           this.setState({
@@ -123,13 +123,13 @@ const QuestionModal = styled(ModalBackground).attrs(props => ({
 
 const QuestionWrapper = styled.section`
   position: fixed;
-  background: ${Palette.background};
+  background: ${({ theme }) => theme.topLayer};
   width: 50%;
   height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid ${Palette.modalBorderWhite};
+  border: 15px solid ${({ theme }) => theme.borders};
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
