@@ -107,7 +107,12 @@ class ReviewsList extends React.Component {
   }
 
   moreReviews() {
-    this.setState({display: this.state.display + 2});
+    if (this.state.display >= this.state.reviews.length) {
+      alert ('All reviews have been loaded!');
+      //document.getElementById('move-reviews').style.visibility = 'hidden';
+    } else {
+      this.setState({display: this.state.display + 2});
+    }
   }
 
   render() {
@@ -142,7 +147,7 @@ class ReviewsList extends React.Component {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
               <FooterButtons>
-                <ReviewsButton onClick={this.moreReviews.bind(this)}>MORE REVIEWS</ReviewsButton>
+                <ReviewsButton id={'more-reviews'} onClick={this.moreReviews.bind(this)}>MORE REVIEWS</ReviewsButton>
                 <AddReviewModal product={this.props.product} product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
               </FooterButtons>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
