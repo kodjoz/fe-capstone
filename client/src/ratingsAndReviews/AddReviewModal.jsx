@@ -18,6 +18,7 @@ class AddReviewModal extends React.Component {
       body: ' ',
       characteristics: {}, //object of characteristic_ids & associated 1-5 values
       photos: [], //array of urls
+      photosUploaded: 0,
       name: null,
       email: null,
     };
@@ -34,6 +35,16 @@ class AddReviewModal extends React.Component {
     let id = tag.target.id.slice(0, tag.target.id.length - 1);
     characteristics[id] = parseInt(tag.target.value);
     this.setState({'characteristics': characteristics});
+  }
+
+  addPhoto() {
+    //push url string to state's photos array, then
+    this.setState({photosUploaded: this.state.photosUploaded + 1}, () => {
+      if (this.state.photosUploaded >= 5) {
+        document.getElementById('upload-photo-btn').style.visibility = 'hidden';
+        document.getElementById('upload-limit-reached').style.visibility = 'visible';
+      }
+    });
   }
 
   submitReview(submit) {
@@ -148,7 +159,8 @@ class AddReviewModal extends React.Component {
               <Sidenote>Minimum review length:  {this.state.body.length}/50</Sidenote>
               {/* <Sidenote>Minimum review length: {50 - document.getElementById('rev-body').value.length / 50}</Sidenote> */}
               <Heading>Show us your style! Add product photos below:</Heading>
-              <FormButton name={'images'} onClick={()=>{ console.log('you thought it was functionality, but it was I, FAILURE!'); }}>Upload Images</FormButton>
+              <UploadLimitReached id={'upload-limit-reached'}>Max. 5 photos limit reached - thanks for sharing!</UploadLimitReached>
+              <FormButton name={'images'} id={'upload-photo-btn'} onClick={this.addPhoto.bind(this)}>Upload Images</FormButton>
               <Heading>Tell us your nickname<Asterisk>&#42;</Asterisk></Heading>
               <AddFormTextInput
                 required
@@ -278,6 +290,10 @@ const Sidenote = styled(Italic)`
 
 const Padding = styled.div`
   height: 0.25rem;
+`;
+
+const UploadLimitReached = styled(Sidenote)`
+  visibility: hidden;
 `;
 
 AddReviewModal.propTypes = {
