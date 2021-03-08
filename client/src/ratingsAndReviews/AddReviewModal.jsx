@@ -17,7 +17,7 @@ class AddReviewModal extends React.Component {
       summary: null,
       body: ' ',
       characteristics: {}, //object of characteristic_ids & associated 1-5 values
-      images: [], //array of urls
+      photos: [], //array of urls
       name: null,
       email: null,
     };
@@ -31,21 +31,34 @@ class AddReviewModal extends React.Component {
 
   setCharacteristic(tag) {
     let characteristics = Object.assign({}, this.state.characteristics);
-    characteristics[tag.target.name] = tag.target.value;
+    let id = tag.target.id.slice(0, tag.target.id.length - 1);
+    characteristics[id] = parseInt(tag.target.value);
     this.setState({'characteristics': characteristics});
   }
 
   submitReview(submit) {
-    submit.preventDefault;
-    console.log('submitting review');
+    submit.preventDefault();
+    let recommended = this.state.recommend === 'true';
+    console.log(
+      'productid: ', typeof this.state.product_id,
+      ' rating: ', typeof parseInt(this.state.rating),
+      ' summary: ', typeof this.state.summary,
+      ' body: ', typeof this.state.body,
+      ' recommend: ', typeof recommended, 'val: ', recommended,
+      ' name: ', typeof this.state.name,
+      ' email: ', typeof this.state.email,
+      ' photos: ', typeof this.state.photos,
+      ' characteristics ', typeof this.state.characteristics, 'vals: ', JSON.stringify(this.state.characteristics)
+    );
     return axios.post('/api/reviews', {
       params: {
         product_id: this.props.product_id,
-        rating: this.state.rating,
+        rating: parseInt(this.state.rating),
         summary: this.state.summary,
         body: this.state.body,
-        recommend: this.state.recommend,
+        recommend: recommended,
         name: this.state.name,
+        email: this.state.email,
         photos: this.state.photos,
         characteristics: this.state.characteristics
       }
@@ -53,6 +66,11 @@ class AddReviewModal extends React.Component {
       .then((result) => {
         console.log('axios post: ', JSON.stringify(result));
         this.setState({active: !this.state.active});
+      })
+      .catch((error) => {
+        console.error('Error posting review: ', error);
+        console.error('Error contents: ', JSON.stringify(error));
+        alert('Failed to post review');
       });
   }
 
@@ -88,21 +106,22 @@ class AddReviewModal extends React.Component {
               <Heading>Characteristics<Asterisk>&#42;</Asterisk></Heading>
               {/* NOTE: characteristics will take array of objects, each object contains characteristic name, id, & value
                 //e.g. [{name: "Width", "id": 15, "value": 3.5000},{name: "Comfort", "id": 16, "value": 4.0000}]
+
               */}
               {this.props.characteristics.map((characteristic) => {
                 return (
                   <div key={JSON.stringify(characteristic.id) + this.props.product_id.toString()}>
                     <Characteristic>{characteristic.name}</Characteristic>
-                    <input required type='radio' name={characteristic.name} id={characteristic.name + '1'} value={1} onClick={this.setCharacteristic} />
-                    <RadioLabel htmlFor={characteristic + '1'} value={1}>1</RadioLabel>
-                    <input required type='radio' name={characteristic.name} id={characteristic.name + '2'} value={2} onClick={this.setCharacteristic} />
-                    <RadioLabel htmlFor={characteristic + '2'} value={2}>2</RadioLabel>
-                    <input required type='radio' name={characteristic.name} id={characteristic.name + '3'} value={3} onClick={this.setCharacteristic} />
-                    <RadioLabel htmlFor={characteristic + '3'} value={3}>3</RadioLabel>
-                    <input required type='radio' name={characteristic.name} id={characteristic.name + '4'} value={4} onClick={this.setCharacteristic} />
-                    <RadioLabel htmlFor={characteristic + '4'} value={4}>4</RadioLabel>
-                    <input required type='radio' name={characteristic.name} id={characteristic.name + '5'} value={5} onClick={this.setCharacteristic} />
-                    <RadioLabel htmlFor={characteristic.name + '5'} value={5}>5</RadioLabel>
+                    <input required type='radio' name={characteristic.name} id={characteristic.id + '1'} value={1} onClick={this.setCharacteristic} />
+                    <RadioLabel htmlFor={characteristic.id} value={1}>1</RadioLabel>
+                    <input required type='radio' name={characteristic.name} id={characteristic.id + '2'} value={2} onClick={this.setCharacteristic} />
+                    <RadioLabel htmlFor={characteristic.id} value={2}>2</RadioLabel>
+                    <input required type='radio' name={characteristic.name} id={characteristic.id + '3'} value={3} onClick={this.setCharacteristic} />
+                    <RadioLabel htmlFor={characteristic.id} value={3}>3</RadioLabel>
+                    <input required type='radio' name={characteristic.name} id={characteristic.id + '4'} value={4} onClick={this.setCharacteristic} />
+                    <RadioLabel htmlFor={characteristic.id} value={4}>4</RadioLabel>
+                    <input required type='radio' name={characteristic.name} id={characteristic.id + '5'} value={5} onClick={this.setCharacteristic} />
+                    <RadioLabel htmlFor={characteristic.id} value={5}>5</RadioLabel>
                   </div>
                 );
               })}
