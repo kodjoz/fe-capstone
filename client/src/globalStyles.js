@@ -25,14 +25,15 @@ const PalettePreset = {
 
 //Note: this is a google font, linked in dist/index.html
 const FontsPreset = {
-  primary: 'Merriweather, serif',
+  primary: 'Garamond, Merriweather',
+  alternate: 'Merriweather, serif',
   original: 'Garamond, Helvetica, Arial'
 };
 
 //NOTE: an rem here will represent 16px. If html's font-size were set to 62.5% (10px), each rem would be 10px, and 1.6rem would be 16px
 const GlobalPreset = createGlobalStyle`
   * {
-    border-radius: 4px;
+    border-radius: 5px;
   }
   html {
     font-size: 62.5%;
@@ -42,8 +43,8 @@ const GlobalPreset = createGlobalStyle`
     color: ${({ theme }) => theme.primaryText};
     background-color: ${({ theme }) => theme.background};
     font-family: ${FontsPreset.primary};
-    font-size: 120%;
-    border-radius: 10px;
+    font-size: 160%;
+    border-radius: 5px;
   }
 
   a {
@@ -54,6 +55,7 @@ const GlobalPreset = createGlobalStyle`
 
 const TilePreset = styled.div`
   background-color: ${({ theme }) => theme.midLayer};
+  border: 1px solid ${({ theme }) => theme.borders};
 `;
 
 //different font maybe?
@@ -85,9 +87,9 @@ const LowPriorityTextPreset = styled.span`
 
 const ButtonPreset = styled.button`
   text-transform: uppercase;
-  background-color: ${({ theme }) => theme.topLayer};
+  background-color: ${({ theme }) => theme.midLayer};
+  border: 1px solid ${({ theme }) => theme.borders};
   color: ${({ theme }) => theme.lowPriorityText};
-  border: none;
   height: 4rem;
   padding: 0 1.5rem;
   cursor: pointer;
@@ -136,16 +138,15 @@ const HelpfulYesPreset = styled.div`
   display: inline;
   cursor: pointer;
   font-style: normal;
-  color: ${({ theme }) => theme.primaryText};
+  color: ${({ theme }) => theme.primary};
   text-decoration: underline;
 `;
 
 const SignaturePreset = styled.div`
-  @import url('https://FontsPreset.googleapis.com/css2?family=Tangerine&display=swap');
-  font-family: Tangerine, cursive;
+  font-family: ${FontsPreset.alternate};
   display: inline-block;
-  font-size: 2rem;
-  color: ${({ theme }) => theme.primaryText};
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.primary};
 `;
 
 const ModalBackgroundPreset = styled.div`
@@ -172,7 +173,7 @@ const TextAreaPreset = styled.textarea`
   resize: none;
   padding: 10px 15px;
   color: ${PalettePreset.lowPriority};
-  border: 1px solid ${({ theme }) => theme.primary};;
+  border: 1px solid ${({ theme }) => theme.borders};
 `;
 
 const GridLabelPreset = styled.label`

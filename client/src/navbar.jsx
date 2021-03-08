@@ -30,6 +30,9 @@ const Navbar = () => {
       <NavLink>
         <Link to="/products/19091">Morning Joggers (19091)</Link>
       </NavLink>
+      <NavLink>
+        <Link to="/products/19191">Jarred Shirt (19191)</Link>
+      </NavLink>
     </NavContainer>
   );
 };

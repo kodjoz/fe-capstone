@@ -12,7 +12,7 @@ import StyleSelector from './styles/StyleSelector';
 import styled from 'styled-components';
 
 const Grid = styled.div`
-border: 1px solid #ddd;
+border: 1px solid ${({ theme }) => theme.borders};
 display: grid;
 grid-column-gap: 1rem;
 `;

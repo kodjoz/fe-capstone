@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette, ClickableText, LowPriorityText } from '../globalStyles.js';
+import { ClickableText, LowPriorityText } from '../globalStyles.js';
 
 const RatingBar = (props) => {
   let star = 'Star';
@@ -31,6 +31,7 @@ const RenderedBar = (props) => {
 const StarRow = styled.div`
   display: flex;
   justify-content: space-between;
+  align-content: center;
   padding-left: 0.5rem;
   cursor: pointer;
   width: 100%;
@@ -45,20 +46,23 @@ const RowName = styled(ClickableText)`
 `;
 
 const Bar = styled.div`
+  border-radius: 0;
   height: 1rem;
   flex-basis: 45%;
   align-self: flex-end;
-  border: 1px solid ${Palette.borderGrey};
+  border: 1px solid ${({ theme }) => theme.borders};
   display: flex;
 `;
 
 const Full = styled.div`
+  border-radius: 0;
   height: 99%;
   width: ${props => props.percent}%;
   background: ${({ theme }) => theme.primary};
 `;
 
 const Empty = styled.div`
+  border-radius: 0;
   display: inline;
   height: 99%;
   width: ${props => props.empty}%;
@@ -66,7 +70,7 @@ const Empty = styled.div`
 `;
 
 const Percentage = styled(LowPriorityText)`
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   flex-basis: 15%;
   text-align: right;
 `;

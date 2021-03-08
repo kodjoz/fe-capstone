@@ -107,10 +107,7 @@ class ReviewsList extends React.Component {
   }
 
   moreReviews() {
-    console.log('moreReviews: ', this.state.display);
-    this.setState({display: this.state.display + 2}, ()=>{
-      console.log('now: ', this.state.display);
-    });
+    this.setState({display: this.state.display + 2});
   }
 
   render() {

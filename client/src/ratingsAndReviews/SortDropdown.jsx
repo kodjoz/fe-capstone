@@ -64,6 +64,7 @@ const DropdownMenu = styled.div`
 `;
 
 const DropdownHead = styled(Button)`
+  border-radius: 0;
   width: 16rem;
   height: 4rem;
   display: flex;
@@ -77,6 +78,8 @@ const DropdownHead = styled(Button)`
 
 const DropdownItem = styled(Button)`
   text-align: left;
+  margin-top: -1px;
+  border-radius: 0;
   &:hover {
     background-color: hsl(0, 0%, 95%);
   }
