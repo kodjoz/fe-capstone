@@ -55,13 +55,13 @@ class CarouselWrapper extends React.Component {
   }
 
   componentDidMount() {
-    if (this.ref.current && this.ref.current.children.length < 5) {
+    if (this.ref.current && this.ref.current.children.length < 4) {
       this.setState({
         showLeftScroll: false,
         showRightScroll: false
       });
     }
-    console.log(this.ref);
+
   }
 
   render() {
@@ -97,7 +97,6 @@ const StyledCarouselWrapper = styled.div`
   width: 80%;
 `;
 const CarouselContainer = styled.div`
-  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -111,7 +110,6 @@ const CarouselContainer = styled.div`
 
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
-  position: absolute;
   cursor: pointer;
   top: 50%;
   z-index: 1;
