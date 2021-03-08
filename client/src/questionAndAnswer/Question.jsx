@@ -17,8 +17,8 @@ class Question extends React.Component {
       isAddAnswerVisible: false,
     };
 
-    this.handleHelpful = this.handleHelpful.bind(this);
-    this.handleReport = this.handleReport.bind(this);
+    //this.handleHelpfulOrReport = this.handleHelpfulOrReport.bind(this);
+    //this.handleReport = this.handleReport.bind(this);
     this.toggleAddAnswer = this.toggleAddAnswer.bind(this);
   }
   // get question helpfulness
@@ -26,23 +26,15 @@ class Question extends React.Component {
   // if the state updates then query the server to get the question helpfulness
   // send message to API to mark question as helpful
 
-  handleHelpful() {
+  handleHelpfulOrReport(endpoint) {
     var currentQuestion = this.props.question.question_id;
-    if (!this.state.isHelpful) {
-      this.props.markOrReport('questions', currentQuestion, 'helpful');
-      this.setState({ isHelpful: true });
-    } else {
-      alert('You already marked this question as helpful!');
-    }
-  }
 
-  handleReport() {
-    var currentQuestion = this.props.question.question_id;
-    if (!this.state.isReported) {
-      this.props.markOrReport('questions', currentQuestion, 'report');
+    if (endpoint === 'helpful') {
+      this.props.markOrReport('questions', currentQuestion, endpoint);
+      this.setState({ isHelpful: true });
+    } else if (endpoint === 'report') {
+      this.props.markOrReport('questions', currentQuestion, endpoint);
       this.setState({ isReported: true });
-    } else {
-      alert('You already reported this question!');
     }
   }
 
@@ -67,10 +59,11 @@ class Question extends React.Component {
       <QuestionWrapper>
         <QuestionSummary>Q: {question.question_body}</QuestionSummary>
         <QuestionLinks>
-          <HelpfulYes
-            onClick={this.handleReport}>
+          <HelpfulLink
+            onClick={() => this.handleHelpfulOrReport('report')}
+            underline={this.state.isReported ? 'none' : 'underline'}>
             {!this.state.isReported ? 'Report' : 'Reported!'}
-          </HelpfulYes> | <Helpful>Helpful?</Helpful> <HelpfulYes onClick={this.handleHelpful}>Yes({question.question_helpfulness})</HelpfulYes> | <HelpfulYes onClick={this.toggleAddAnswer}>Add Answer</HelpfulYes></QuestionLinks>
+          </HelpfulLink> | <Helpful>Helpful?</Helpful> <HelpfulLink underline={this.state.isReported ? 'none' : 'underline'} onClick={() => this.handleHelpfulOrReport('helpful')}>Yes({question.question_helpfulness})</HelpfulLink> | <HelpfulYes onClick={this.toggleAddAnswer}>Add Answer</HelpfulYes></QuestionLinks>
         {answers.map((answer) => (<Answer markOrReport={this.props.markOrReport} answer={answer} key={answer.id} />) )}
         <AddAnswer
           toggle={this.state.isAddAnswerVisible}
@@ -121,6 +114,10 @@ const QuestionSummary = styled.span`
 const QuestionLinks = styled.span`
   grid-area: links;
   justify-self: end;
+`;
+
+const HelpfulLink = styled(HelpfulYes)`
+  text-decoration: ${props => props.underline};
 `;
 
 // first row is two columns
