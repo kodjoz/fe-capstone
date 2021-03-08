@@ -56,7 +56,7 @@ class ProductDetailsPage extends React.Component {
         <Overview key={'overview-module-' + id} product_id={id} product={this.state.product}/>
         <RelatedProducts key={'related-module-' + id} product_id={id} product={this.state.product}/>
         <QuestionAndAnswer key={'questions-module-' + id} product_id={id} product={this.state.product} />
-        <ReviewsList key={'reviews-module-' + id} product_id={this.props.product_id}/>
+        <ReviewsList key={'reviews-module-' + id} product_id={this.props.product_id} product={this.state.product}/>
       </div>
     );
   }

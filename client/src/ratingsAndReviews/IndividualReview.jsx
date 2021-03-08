@@ -40,7 +40,6 @@ class IndividualReview extends React.Component {
     })
       .then(()=>{
         this.setState({reported: true});
-        //document.getElementById(this.props.review.review_id).style.visibility = 'hidden'; //doesn't do what you'd think...
       });
   }
 
@@ -91,7 +90,7 @@ class IndividualReview extends React.Component {
     }
 
     return (
-      <Review id={this.props.review.review_id}>
+      <Review>
         <ReviewerInfo>
           <Signature>@{review.reviewer_name}</Signature>
           <br></br>
@@ -162,7 +161,7 @@ const Recommend = styled.div`
 `;
 
 const RedCheck = styled.div`
-  color: hsl(0, 100%, 60%);
+  color: ${({ theme }) => theme.primary};
   font-size: 1.2em;
 `;
 
@@ -193,7 +192,7 @@ const Seller = styled.b`
 
 const Response = styled.div`
   display: block;
-  background-color: hsl(270, 80%, 96%);
+  background-color: ${({ theme }) => theme.secondary};
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   margin-left: 3%;
