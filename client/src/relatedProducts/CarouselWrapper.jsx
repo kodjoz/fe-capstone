@@ -119,7 +119,6 @@ const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
   cursor: pointer;
   top: 50%;
-  z-index: 1;
   transition: transform 0.1s ease-in-out;
   background: ${props => props.theme.topLayer}
   border-radius: 15px;
