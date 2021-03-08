@@ -73,7 +73,8 @@ class ProductDetailsPage extends React.Component {
           product={this.state.product} />
         <ReviewsListWithClickLogger
           key={'reviews-module-' + id}
-          product_id={this.props.product_id}/>
+          product_id={this.props.product_id}
+          product={this.state.product}/>
       </div>
     );
   }

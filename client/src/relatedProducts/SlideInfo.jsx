@@ -39,7 +39,7 @@ const SalePrice = styled.p`
 const StyledSlideInfo = styled(SlideInfo)`
   width: 200px;
   height: 100px;
-  background: linear-gradient(0deg, #181818 30%, #99999988 100%);
+  background: linear-gradient(0deg, #181818 30%, #50505088 100%);
 
   p {
     color: white;

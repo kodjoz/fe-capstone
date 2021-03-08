@@ -119,23 +119,24 @@ const CarouselButton = styled.button`
   top: 50%;
   z-index: 1;
   transition: transform 0.1s ease-in-out;
-  background: white;
+  background: ${props => props.theme.topLayer}
   border-radius: 15px;
   border: none;
   padding: 0.5rem;
 
-  &hover {
-    background: ${props => props.theme.midLayer}
+  &:hover {
+    background: ${props => props.theme.midLight};
+    color: ${props => props.theme.primaryText};
   }
 
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
-  left: 0;
+  left: -2%;
 `;
 
 const RightCarouselButton = styled(CarouselButton)`
-  right: 0;
+  right: -2%;
 
 `;
 

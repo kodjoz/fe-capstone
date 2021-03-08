@@ -33,7 +33,7 @@ const Indicator = styled.div`
   position: relative;
   z-index: 2;
   font-size: 1.25em;
-  color: ${Palette.primary};
+  color: ${({ theme }) => theme.primary};
   margin-top: -2rem;
   margin-left: ${props => props.value}%;
 `;

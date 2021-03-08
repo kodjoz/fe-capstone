@@ -17,6 +17,7 @@ class ReviewsList extends React.Component {
       product_id: props.product_id,
       reviews: null,
       renderedReviews: null,
+      display: 2,
       metadata: null,
       filters: [],
       sortOrder: 'relevance',
@@ -105,8 +106,19 @@ class ReviewsList extends React.Component {
     this.setState({renderedReviews: renderedReviews});
   }
 
+  moreReviews() {
+    console.log('moreReviews: ', this.state.display);
+    this.setState({display: this.state.display + 2}, ()=>{
+      console.log('now: ', this.state.display);
+    });
+  }
+
   render() {
     let characteristics = [];
+    let displayedReviews = [];
+    if (this.state.renderedReviews) {
+      displayedReviews = this.state.renderedReviews.slice(0, this.state.display);
+    }
     //NOTE: characteristics will take array of objects, each object contains characteristic name, id, & value
     //e.g. [{name: "Width", "id": 15, "value": 3.5000},{name: "Comfort", "id": 16, "value": 4.0000}]
     if (this.state.metadata) {
@@ -129,11 +141,13 @@ class ReviewsList extends React.Component {
             </RatingComponent>
 
             <ReviewsComponent>
-              {this.state.renderedReviews.map((review) => {
+              {displayedReviews.map((review) => {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
-              <ReviewsButton>MORE REVIEWS</ReviewsButton>
-              <AddReviewModal product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
+              <FooterButtons>
+                <ReviewsButton onClick={this.moreReviews.bind(this)}>MORE REVIEWS</ReviewsButton>
+                <AddReviewModal product={this.props.product} product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
+              </FooterButtons>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
             </ReviewsComponent>
           </RatingsReviewsPanel>
@@ -171,6 +185,14 @@ const RatingComponent = styled(Tile)`
 const ReviewsComponent = styled.div`
   order: 2;
   flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+`;
+//NOTE: need to set a height in order for overflow to work
+
+const FooterButtons = styled.div`
+  display: flex;
 `;
 
 const ReviewsButton = styled(Button)`
@@ -183,7 +205,8 @@ const Footer = styled.div`
 `;
 
 ReviewsList.propTypes = {
-  product_id: PropTypes.number
+  product_id: PropTypes.number,
+  product: PropTypes.object
 };
 
 export default ReviewsList;

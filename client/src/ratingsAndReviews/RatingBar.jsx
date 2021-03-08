@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette, ClickableText } from '../globalStyles.js';
+import { Palette, ClickableText, LowPriorityText } from '../globalStyles.js';
 
 const RatingBar = (props) => {
   let star = 'Star';
@@ -14,6 +14,7 @@ const RatingBar = (props) => {
     <StarRow id={props.stars} onClick={()=>{ props.newFilter(props.stars); }}>
       <RowName>{props.stars} {star}</RowName>
       <RenderedBar percent={props.percent} empty={100 - props.percent}></RenderedBar>
+      <Percentage>{Math.round(props.percent)}%</Percentage>
     </StarRow>
   );
 };
@@ -30,7 +31,7 @@ const RenderedBar = (props) => {
 const StarRow = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-left: 5px;
+  padding-left: 0.5rem;
   cursor: pointer;
   width: 100%;
   &:hover {
@@ -39,13 +40,14 @@ const StarRow = styled.div`
 `;
 
 const RowName = styled(ClickableText)`
+  flex-basis: 25%;
+  align-self: flex-start;
 `;
 
 const Bar = styled.div`
-  margin-top: 0.2rem;
-  margin-right: 15%;
   height: 1rem;
-  flex-basis: 50%;
+  flex-basis: 45%;
+  align-self: flex-end;
   border: 1px solid ${Palette.borderGrey};
   display: flex;
 `;
@@ -53,7 +55,7 @@ const Bar = styled.div`
 const Full = styled.div`
   height: 99%;
   width: ${props => props.percent}%;
-  background: hsl(0, 100%, 60%);
+  background: ${({ theme }) => theme.primary};
 `;
 
 const Empty = styled.div`
@@ -61,6 +63,12 @@ const Empty = styled.div`
   height: 99%;
   width: ${props => props.empty}%;
   background: hsla(0, 0%, 85%, 60%);
+`;
+
+const Percentage = styled(LowPriorityText)`
+  margin-top: 0.3rem;
+  flex-basis: 15%;
+  text-align: right;
 `;
 
 RatingBar.propTypes = {
