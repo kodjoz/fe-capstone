@@ -8,73 +8,70 @@ class CarouselWrapper extends React.Component {
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
     this.state = {
-      showLeftScroll: true,
+      showLeftScroll: false,
       showRightScroll: true,
       scrollWidth: 0
     };
+
+    this.ref = React.createRef();
+  }
+
+  checkScroll() {
+    if (this.ref.current.scrollWidth <= this.ref.current.clientWidth) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false,
+      });
+      return;
+    }
+    if (this.ref.current.scrollLeft === 0) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: true
+      });
+      return;
+    }
+    if (this.ref.current.scrollLeft + this.ref.current.clientWidth >= this.ref.current.scrollWidth) {
+      this.setState({
+        showRightScroll: false,
+        showLeftScroll: true,
+      });
+      return;
+    }
+    this.setState({
+      showRightScroll: true,
+      showLeftScroll: true,
+    });
   }
 
   scrollRight() {
-    this.container.scrollLeft += 200;
-    if (this.container.scrollWidth <= this.container.clientWidth) {
-      this.setState({
-        showLeftScroll: false,
-        showRightScroll: false,
-      });
-      return;
-    }
-    if (this.container.scrollLeft + this.container.clientWidth >= this.container.scrollWidth) {
-      this.setState({
-        showRightScroll: false,
-        showLeftScroll: true,
-      });
-    } else {
-      this.setState({
-        showLeftScroll: true,
-      });
-    }
+    this.ref.current.scrollLeft += this.ref.current.firstChild.clientWidth;
+    this.checkScroll();
   }
 
   scrollLeft() {
-    this.container.scrollLeft -= 200;
-    if (this.container.scrollWidth <= this.container.clientWidth) {
-      this.setState({
-        showLeftScroll: false,
-        showRightScroll: false,
-      });
-      return;
-    }
-    if (this.container.scrollLeft === 0) {
-      this.setState({
-        showRightScroll: true,
-        showLeftScroll: false
-      });
-    } else {
-      this.setState({
-        showRightScroll: true,
-      });
-    }
+    this.ref.current.scrollLeft -= this.ref.current.firstChild.clientWidth;
+    this.checkScroll();
   }
 
   componentDidMount() {
-    this.container = document.getElementById(this.props.name + 'Container');
-    if (this.props.name === 'yourOutfit') {
+    if (this.ref.current && this.ref.current.children.length < 5) {
       this.setState({
-        showLeftScroll: false
+        showLeftScroll: false,
+        showRightScroll: false
       });
-      return;
     }
+    console.log(this.ref);
   }
 
   render() {
-    if (document.getElementById(this.props.name + 'Container')) {
-      this.container = document.getElementById(this.props.name + 'Container');
-    }
     return (
       <StyledCarouselWrapper>
         <LeftCarouselButton show={this.state.showLeftScroll}
           onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
-        <CarouselContainer id={this.props.name + 'Container'}>
+        <CarouselContainer
+          id={this.props.name + 'Container'}
+          ref={this.ref}>
           {this.props.render(this.props.data)}
         </CarouselContainer>
         <RightCarouselButton show={this.state.showRightScroll}
@@ -97,7 +94,7 @@ const StyledCarouselWrapper = styled.div`
   align-items: center;
   margin-top: 4em;
   position: relative;
-
+  width: 80%;
 `;
 const CarouselContainer = styled.div`
   width: 100%;
