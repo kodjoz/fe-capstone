@@ -16,8 +16,12 @@ const ImageIconList = (props) => {
 
   const icons = props.photos.map((photo, index) => {
     const isSelected = index === props.imageIndex;
+    const selectImage = () => {
+      props.setImageIndex(index);
+    };
     return (
       <ImageIcon
+        selectImage={selectImage}
         key={photo.thumbnail_url}
         photo={photo}
         isSelected={isSelected}
@@ -33,6 +37,7 @@ const ImageIconList = (props) => {
 };
 
 ImageIconList.propTypes = {
+  setImageIndex: PropTypes.func,
   photos: PhotoArray,
   imageIndex: PropTypes.number
 };

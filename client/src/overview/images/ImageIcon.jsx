@@ -12,6 +12,7 @@ const IconDiv = styled.div`
   background-size: cover;
   background-position: center;
   border: 1px solid black;
+  cursor: pointer;
 `;
 
 const Underline = styled.div`
@@ -24,7 +25,9 @@ const Underline = styled.div`
 const ImageIcon = (props) => {
   return (
     <React.Fragment>
-      <IconDiv url={props.photo.thumbnail_url}>
+      <IconDiv
+        onClick={() => props.selectImage()}
+        url={props.photo.thumbnail_url}>
       </IconDiv>
       {props.isSelected && <Underline />}
     </React.Fragment>
@@ -32,6 +35,7 @@ const ImageIcon = (props) => {
 };
 
 ImageIcon.propTypes = {
+  selectImage: PropTypes.func,
   photo: PhotoType,
   isSelected: PropTypes.bool,
   offset: PropTypes.number

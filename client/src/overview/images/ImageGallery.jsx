@@ -13,7 +13,7 @@ const ArrowButton = styled.button`
 `;
 
 const ArrowButtonLeft = styled(ArrowButton)`
-  left: 1rem;
+  left: 120px;
 `;
 
 const ArrowButtonRight = styled(ArrowButton)`
@@ -28,6 +28,7 @@ class ImageGallery extends React.Component {
     this.state = {
       imageIndex: 0
     };
+    this.setImageIndex = this.setImageIndex.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +71,7 @@ class ImageGallery extends React.Component {
             displayWidth={displayWidth}
             imageIndex={imageIndex} />
           <ImageIconList
+            setImageIndex={this.setImageIndex}
             photos={this.props.selectedStyle.photos}
             imageIndex={imageIndex} />
           { showLeftArrow && <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft> }
