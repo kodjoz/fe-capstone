@@ -59,17 +59,19 @@ class AddQuestion extends React.Component {
 
   render() {
     let showModal = this.props.toggle ? 'block' : 'none';
-    let product = this.props.product ? this.props.product.name : null;
+    let product = this.props.product ? this.props.product : '';
+    let randomValue = Math.random();
 
     return (
       <QuestionModal display={showModal}>
         <QuestionWrapper>
           <Title>Ask Your Question</Title>
-          <CurrentProduct>About {product}</CurrentProduct>
-          <GridLabel gridArea="name-input">What is your nickname?:<br />
+          <CurrentProduct>About {product.name}</CurrentProduct>
+          <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
             <FormTextInput
               type="text"
               required
+              id={'name' + randomValue.id}
               name="name"
               maxLength="60"
               placeholder="Example: jackson11!"
@@ -77,10 +79,11 @@ class AddQuestion extends React.Component {
             /><br />
             <LowPriorityText>For privacy reasons, do not use your full name or email address</LowPriorityText>
           </GridLabel>
-          <GridLabel gridArea="email-input">Your email:<br />
+          <GridLabel gridArea="email-input" htmlFor={'email' + randomValue}>Your email:<br />
             <FormTextInput
               type="email"
               required
+              id={'email' + randomValue}
               name="email"
               maxLength="60"
               placeholder="Why did you like this product or not?"
@@ -88,10 +91,11 @@ class AddQuestion extends React.Component {
             /><br />
             <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
           </GridLabel>
-          <GridLabel gridArea="body-text">Question:<br />
+          <GridLabel gridArea="body-text" htmlFor={'body' + randomValue}>Question:<br />
             <TextArea
               type="text"
               required
+              id={'body' + randomValue}
               name="body"
               maxLength="1000"
               cols="60"
