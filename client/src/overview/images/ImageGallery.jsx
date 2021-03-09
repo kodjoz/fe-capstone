@@ -35,7 +35,7 @@ class ImageGallery extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.containerRef.current.getBoundingClientRect());
+    // console.log(this.containerRef.current.getBoundingClientRect());
   }
 
   setImageIndex(index) {
