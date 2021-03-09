@@ -25,6 +25,11 @@ const ArrowButton = styled.button`
   height: ${props => props.height}px;
 `;
 
+const ArrowPlaceholder = styled.div`
+  border: none;
+  height: ${props => props.height}px;
+`;
+
 const ThumbnailTrack = styled.div`
   // height: 80%;
   // border: 1px solid yellow;
@@ -64,23 +69,16 @@ const ImageIconList = (props) => {
     );
   });
 
-
-
+  const topElement = props.thumbnailsIndex < 1 ? <ArrowPlaceholder height={oneSeventh} /> : <ArrowButton height={oneSeventh} onClick={props.scrollUp}>▲</ArrowButton>;
+  const maxThumbnailIndex = Math.ceil(props.photos.length / 7) - 1;
+  const bottomElement = props.thumbnailsIndex < maxThumbnailIndex ? <ArrowButton height={oneSeventh} onClick={props.scrollDown}>▼</ArrowButton> : <ArrowPlaceholder height={oneSeventh} />;
   return (
     <IconListFrame>
-      <ArrowButton
-        height={oneSeventh}
-        onClick={props.scrollUp}>
-      ▲
-      </ArrowButton>
+      {topElement}
       <ThumbnailTrack height={trackHeight}>
         {icons}
       </ThumbnailTrack>
-      <ArrowButton
-        height={oneSeventh}
-        onClick={props.scrollDown}>
-      ▼
-      </ArrowButton>
+      {bottomElement}
     </IconListFrame>
   );
 };
