@@ -55,10 +55,6 @@ class RelatedProductsWrapper extends React.Component {
     this.getRelatedProducts();
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.state.isLoading || !(this.props.product_id === nextProps.product_id);
-  }
-
   render() {
     if (this.state.isLoading) {
       return <div>RELATED LOADING</div>;
@@ -67,7 +63,7 @@ class RelatedProductsWrapper extends React.Component {
       <div>
         <ModuleHeader>Related Products</ModuleHeader>
         <CarouselWrapper
-          name='relatedProd'
+          name='Related Products'
           data={this.state.relatedProductsData}
           render={(data) => {
             return <RelatedCarousel
@@ -75,7 +71,7 @@ class RelatedProductsWrapper extends React.Component {
               currentProduct={this.props.product}/>;
           }}/>
         <CarouselWrapper
-          name='yourOutfit'
+          name='Your Outfit'
           data={{}}
           render={(data) => {
             return <OutfitCarousel

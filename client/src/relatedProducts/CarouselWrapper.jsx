@@ -74,13 +74,16 @@ class CarouselWrapper extends React.Component {
     return (
       <StyledCarouselWrapper
         onMouseEnter={this.checkScroll}>
-        <LeftCarouselButton show={this.state.showLeftScroll}
-          onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
+        <Label>
+          <h3>{this.props.name}</h3>
+        </Label>
         <CarouselContainer
           id={this.props.name + 'Container'}
           ref={this.ref}>
           {this.props.render(this.props.data)}
         </CarouselContainer>
+        <LeftCarouselButton show={this.state.showLeftScroll}
+          onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
         <RightCarouselButton show={this.state.showRightScroll}
           onClick={this.scrollRight}>{'>'}</RightCarouselButton>
       </StyledCarouselWrapper>
@@ -95,13 +98,35 @@ CarouselWrapper.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
+const Label = styled.div`
+  width: 15rem;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -30px;
+  background-color: ${props => props.theme.primary};
+
+  h3 {
+    color: ${props => props.theme.topLayer};
+    transform-origin: 0 0;
+    transform: rotate(270deg);
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    width: 350px;
+    margin-left: 4px;
+  }
+`;
+
+
 const StyledCarouselWrapper = styled.div`
+  border-radius: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 4em;
   position: relative;
-  width: 80%;
 `;
 const CarouselContainer = styled.div`
   display: flex;
@@ -117,28 +142,32 @@ const CarouselContainer = styled.div`
 
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
+  background: ${props => props.theme.midLayer};
   cursor: pointer;
-  top: 50%;
   transition: transform 0.1s ease-in-out;
-  background: ${props => props.theme.topLayer}
-  border-radius: 15px;
+  border-radius: 0px;
   border: none;
   padding: 0.5rem;
+  position: absolute;
+  height: 100%;
+  width: 5%;
+  z-index: 1;
+  opacity: 0.8;
 
   &:hover {
     background: ${props => props.theme.midLight};
     color: ${props => props.theme.primaryText};
+    opacity: 1;
   }
 
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
-  left: -2%;
+  left: 0%;
 `;
 
 const RightCarouselButton = styled(CarouselButton)`
-  right: -2%;
-
+  right: 0%;
 `;
 
 
