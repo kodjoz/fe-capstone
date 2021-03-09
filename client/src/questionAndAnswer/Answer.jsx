@@ -64,7 +64,7 @@ class Answer extends React.Component {
         <Gallery>
           {answer.photos.length !== 0 ? answer.photos.map((photo) => {
             return (
-              <ModalImage src={photo} key={photo} onClick={() => console.log('Info', photo)} />
+              <ModalImage src={photo} key={photo} />
             );
           }) : null}
         </Gallery>
