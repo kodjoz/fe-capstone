@@ -62,15 +62,9 @@ class CarouselWrapper extends React.Component {
         showRightScroll: false
       });
     }
-    console.log(this.ref.current.attributes.id, this.ref.current.children.length);
-    console.log(this.ref.current.attributes.id, this.ref.current.clientWidth);
-    console.log(this.ref.current.attributes.id, this.ref.current.scrollWidth);
   }
 
   render() {
-    if (this.ref.current) {
-      console.log(this.ref.current.attributes.id, 'children', this.ref.current.children.length);
-    }
     return (
       <StyledCarouselWrapper
         onMouseEnter={this.checkScroll}>
@@ -129,6 +123,7 @@ const StyledCarouselWrapper = styled.div`
   position: relative;
 `;
 const CarouselContainer = styled.div`
+  border-radius: 0px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -143,6 +138,7 @@ const CarouselContainer = styled.div`
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
   background: ${props => props.theme.midLayer};
+  color: ${props => props.theme.secondaryText};
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
   border-radius: 0px;
@@ -153,10 +149,10 @@ const CarouselButton = styled.button`
   width: 5%;
   z-index: 1;
   opacity: 0.8;
+  font-size: 3rem;
 
   &:hover {
     background: ${props => props.theme.midLight};
-    color: ${props => props.theme.primaryText};
     opacity: 1;
   }
 

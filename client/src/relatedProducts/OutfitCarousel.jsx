@@ -60,7 +60,6 @@ class OutfitCarousel extends React.Component {
   }
 
   render() {
-    console.log('rerendering outfit');
     return (
       <>
         <FirstSlide onClick={this.addProductClickHandler}>
