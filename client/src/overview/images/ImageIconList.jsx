@@ -22,6 +22,7 @@ const ArrowButton = styled.button`
   font-size: 3rem;
   background: transparent;
   text-align: center;
+  color: #fff;
   height: ${props => props.height}px;
 `;
 
