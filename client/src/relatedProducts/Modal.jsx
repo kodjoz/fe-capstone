@@ -34,41 +34,51 @@ let compareFeatures = (data, currentProduct) => {
   return Object.values(combinedFeatures);
 };
 
-const Modal = (props) => {
+const Modal = React.forwardRef((props, ref) => {
+
+
   const { handleClose, data, currentProduct } = props;
-  if (!props.show) {
-    return <div></div>;
+  let table = <div></div>;
+  if (props.show) {
+    table = (<Table>
+      <TableBody>
+        {
+          compareFeatures(data, currentProduct).map((row) => {
+            let { currentValue, featureName, clickedValue } = row;
+            //If the product's value is true, display a checkmark
+            currentValue = currentValue === 'true' ? '✓' : currentValue;
+            clickedValue = clickedValue === 'true' ? '✓' : clickedValue;
+            return (<Row key={featureName}>
+              <Field width='10%'>{currentValue}</Field>
+              <Field width='80%'>{featureName}</Field>
+              <Field width='10%'>{clickedValue}</Field>
+            </Row>);
+          })
+        }
+      </TableBody>
+    </Table>);
   }
+
   return (
     <div className={props.className}>
       <ModalTable>
-        <CloseButton type="button" onClick={handleClose}>x</CloseButton>
+        <CloseButton
+          ref={ref}
+          type="button"
+          onClick={handleClose}>x</CloseButton>
         <LowPriorityText>Comparing</LowPriorityText>
         <HeaderRow>
           <p>{currentProduct.name}</p>
           <p>{data.name}</p>
         </HeaderRow>
-        <Table>
-          <TableBody>
-            {
-              compareFeatures(data, currentProduct).map((row) => {
-                let {currentValue, featureName, clickedValue} = row;
-                //If the product's value is true, display a checkmark
-                currentValue = currentValue === 'true' ? '✓' : currentValue;
-                clickedValue = clickedValue === 'true' ? '✓' : clickedValue;
-                return (<Row key={featureName}>
-                  <Field width='10%'>{currentValue}</Field>
-                  <Field width='80%'>{featureName}</Field>
-                  <Field width='10%'>{clickedValue}</Field>
-                </Row>);
-              })
-            }
-          </TableBody>
-        </Table>
+        {table}
       </ModalTable>
     </div>
   );
-};
+});
+
+
+Modal.displayName = 'Modal';
 
 Modal.propTypes = {
   className: PropTypes.string.isRequired,
@@ -152,8 +162,9 @@ const CloseButton = styled(Button)`
   z-index: 1;
   padding: 0 0.75rem;
   height: 2rem;
+  tab-index: 1;
 `;
 
 
 
-export {StyledModal as default, compareFeatures};
+export { StyledModal as default, compareFeatures };
