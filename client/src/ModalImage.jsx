@@ -20,6 +20,7 @@ class ModalImage extends React.Component {
       return (
         <Thumbnail
           src={this.props.src}
+          alt="Customer image upload thumbnail"
           onClick={this.displayModal.bind(this)}
         />
       );
@@ -30,6 +31,7 @@ class ModalImage extends React.Component {
           <PositionedButton>X</PositionedButton>
           <FullImage
             src={this.props.src}
+            alt="Customer image upload full-size"
           />
         </ImageWrapper>
       </ModalWindow>
