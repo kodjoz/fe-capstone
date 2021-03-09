@@ -9,10 +9,18 @@ class ModalImage extends React.Component {
     this.state = {
       active: false
     };
+
+    this.ref = React.createRef();
   }
 
   displayModal() {
     this.setState({active: !this.state.active});
+  }
+
+  componentDidUpdate() {
+    if (this.state.active) {
+      this.ref.current.focus();
+    }
   }
 
   render() {
@@ -27,7 +35,8 @@ class ModalImage extends React.Component {
     return (
       <ModalWindow onClick={this.displayModal.bind(this)}>
         <ImageWrapper>
-          <PositionedButton>X</PositionedButton>
+          <PositionedButton
+            ref={this.ref}>X</PositionedButton>
           <FullImage
             src={this.props.src}
           />
