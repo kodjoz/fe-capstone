@@ -45,11 +45,25 @@ class ImageGallery extends React.Component {
   }
 
   nextImage() {
-    this.setState((prev) => ({imageIndex: prev.imageIndex + 1}));
+    this.setState((prev) => {
+      let imageIndex = prev.imageIndex + 1;
+      let thumbnailIndex = Math.floor(imageIndex / 7);
+      return {
+        imageIndex: imageIndex,
+        thumbnailsIndex: thumbnailIndex
+      };
+    });
   }
 
   previousImage() {
-    this.setState((prev) => ({imageIndex: prev.imageIndex - 1}));
+    this.setState((prev) => {
+      let imageIndex = prev.imageIndex - 1;
+      let thumbnailIndex = Math.floor(imageIndex / 7);
+      return {
+        imageIndex: imageIndex,
+        thumbnailsIndex: thumbnailIndex
+      };
+    });
   }
 
   scrollIconsUp() {

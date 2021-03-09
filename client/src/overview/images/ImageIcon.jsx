@@ -18,7 +18,7 @@ const IconDiv = styled.div`
   cursor: pointer;
   transform: translateY(-${props => props.offset}px);
   transition: transform: .5s ease-in-out;
-  box-shadow: ${props => props.isSelected ? '2px 2px 2px 2px rgba(0,0,0,0.8)' : 'none'};
+  box-shadow: ${props => props.isSelected ? '2px 2px 2px 2px rgba(255,0,0,0.8)' : 'none'};
 `;
 
 const ImageIcon = (props) => {
