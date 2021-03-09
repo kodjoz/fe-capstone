@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { StyleType } from '../types.js';
 import ImageList from './ImageList';
+import ImageIconList from './ImageIconList';
 
 const ArrowButton = styled.button`
   border: none;
@@ -12,7 +13,7 @@ const ArrowButton = styled.button`
 `;
 
 const ArrowButtonLeft = styled(ArrowButton)`
-  left: 1rem;
+  left: 120px;
 `;
 
 const ArrowButtonRight = styled(ArrowButton)`
@@ -25,12 +26,16 @@ class ImageGallery extends React.Component {
     super(props);
     this.containerRef = React.createRef();
     this.state = {
-      imageIndex: 0
+      imageIndex: 0,
+      thumbnailsIndex: 0
     };
+    this.setImageIndex = this.setImageIndex.bind(this);
+    this.scrollIconsUp = this.scrollIconsUp.bind(this);
+    this.scrollIconsDown = this.scrollIconsDown.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.containerRef.current.getBoundingClientRect());
+    // console.log(this.containerRef.current.getBoundingClientRect());
   }
 
   setImageIndex(index) {
@@ -40,11 +45,33 @@ class ImageGallery extends React.Component {
   }
 
   nextImage() {
-    this.setState((prev) => ({imageIndex: prev.imageIndex + 1}));
+    this.setState((prev) => {
+      let imageIndex = prev.imageIndex + 1;
+      let thumbnailIndex = Math.floor(imageIndex / 7);
+      return {
+        imageIndex: imageIndex,
+        thumbnailsIndex: thumbnailIndex
+      };
+    });
   }
 
   previousImage() {
-    this.setState((prev) => ({imageIndex: prev.imageIndex - 1}));
+    this.setState((prev) => {
+      let imageIndex = prev.imageIndex - 1;
+      let thumbnailIndex = Math.floor(imageIndex / 7);
+      return {
+        imageIndex: imageIndex,
+        thumbnailsIndex: thumbnailIndex
+      };
+    });
+  }
+
+  scrollIconsUp() {
+    this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex - 1}));
+  }
+
+  scrollIconsDown() {
+    this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex + 1}));
   }
 
   render() {
@@ -57,16 +84,26 @@ class ImageGallery extends React.Component {
 
     let innerComponents;
     if (this.props && this.props.selectedStyle && this.containerRef) {
-      const displayWidth = this.containerRef.current.getBoundingClientRect().width;
+      const boundingRectangle = this.containerRef.current.getBoundingClientRect();
+      const displayWidth = boundingRectangle.width;
+      const displayHeight = boundingRectangle.height;
       const imageIndex = this.state.imageIndex;
+      const thumbnailsIndex = this.state.thumbnailsIndex;
       const showLeftArrow = this.state.imageIndex > 0;
       const showRightArrow = this.state.imageIndex < this.props.selectedStyle.photos.length - 1;
-      console.log(`w: ${displayWidth}, i: ${imageIndex}`);
       innerComponents = (
         <React.Fragment>
           <ImageList
             photos={this.props.selectedStyle.photos}
             displayWidth={displayWidth}
+            imageIndex={imageIndex} />
+          <ImageIconList
+            setImageIndex={this.setImageIndex}
+            scrollUp={this.scrollIconsUp}
+            scrollDown={this.scrollIconsDown}
+            photos={this.props.selectedStyle.photos}
+            displayHeight={displayHeight}
+            thumbnailsIndex={thumbnailsIndex}
             imageIndex={imageIndex} />
           { showLeftArrow && <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft> }
           { showRightArrow && <ArrowButtonRight onClick={() => this.nextImage()} >&gt;</ArrowButtonRight> }

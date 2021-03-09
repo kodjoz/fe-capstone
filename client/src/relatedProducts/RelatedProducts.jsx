@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import CarouselWrapper from './CarouselWrapper.jsx';
 import RelatedCarousel from './RelatedCarousel.jsx';
 import OutfitCarousel from './OutfitCarousel.jsx';
-import { ModuleHeader } from '../globalStyles.js';
 
 class RelatedProductsWrapper extends React.Component {
   constructor(props) {
@@ -55,17 +54,14 @@ class RelatedProductsWrapper extends React.Component {
     this.getRelatedProducts();
   }
 
-
   render() {
     if (this.state.isLoading) {
       return <div>RELATED LOADING</div>;
     }
-
     return (
       <div>
-        <ModuleHeader>Related Products</ModuleHeader>
         <CarouselWrapper
-          name='relatedProd'
+          name='Related Products'
           data={this.state.relatedProductsData}
           render={(data) => {
             return <RelatedCarousel
@@ -73,7 +69,7 @@ class RelatedProductsWrapper extends React.Component {
               currentProduct={this.props.product}/>;
           }}/>
         <CarouselWrapper
-          name='yourOutfit'
+          name='Your Outfit'
           data={{}}
           render={(data) => {
             return <OutfitCarousel

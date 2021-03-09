@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette, ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
+import { ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -51,16 +51,17 @@ class AddAnswer extends React.Component {
 
   render() {
     let showModal = this.props.toggle ? 'block' : 'none';
+    let randomValue = Math.random();
 
     return (
       <AnswerModal display={showModal}>
         <FormWrapper>
-
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
           <Subtitle>Q: {this.props.question.body}</Subtitle>
-          <GridLabel gridArea="name-input">What is your nickname?:<br />
+          <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
             <FormTextInput
               type="text"
+              id={'name' + randomValue}
               name="name"
               maxLength="60"
               required
@@ -69,9 +70,10 @@ class AddAnswer extends React.Component {
             /><br />
             <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
           </GridLabel>
-          <GridLabel gridArea="email-input">Email:<br />
+          <GridLabel gridArea="email-input" htmlFor={'email' + randomValue}>Email:<br />
             <FormTextInput
               type="email"
+              id={'email' + randomValue}
               name="email"
               maxLength="60"
               required
@@ -80,9 +82,10 @@ class AddAnswer extends React.Component {
             /><br />
             <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
           </GridLabel>
-          <GridLabel gridArea="body-text">
+          <GridLabel gridArea="body-text" htmlFor={'body' + randomValue}>
             Add an Answer:<br />
             <TextArea
+              id={'body' + randomValue}
               name="body"
               maxLength="1000"
               cols="60"
@@ -113,13 +116,13 @@ const AnswerModal = styled(ModalBackground).attrs(props => ({
 
 const FormWrapper = styled.section`
   position: fixed;
-  background: ${({ theme }) => theme.topLayer};
+  background: ${ ({ theme }) => theme.topLayer};
   width: 50%;
   height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid ${Palette.modalBorderWhite};
+  border: 15px solid ${ ({ theme }) => theme.borders};
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
