@@ -46,7 +46,9 @@ class Ratings extends React.Component {
     return (
       <Breakdown>
         <Average>
-          <StarRow size={30} rating={this.state.avg * 20}/>
+          <StarWrapper>
+            <StarRow size={30} rating={this.state.avg * 20}/>
+          </StarWrapper>
           <span>{avg}</span>
         </Average>
         <PercentRec>{Math.round(this.state.recAvg)}% of reviewers recommend this product</PercentRec>
@@ -63,6 +65,13 @@ class Ratings extends React.Component {
 
 const Breakdown = styled.div`
 
+`;
+
+const StarWrapper = styled.div`
+  display: flex;
+  flex-shrink: 1;
+  flex-basis: fit-content;
+  justify-content: center;
 `;
 
 const Average = styled.div`

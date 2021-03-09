@@ -113,7 +113,7 @@ const AnswerModal = styled(ModalBackground).attrs(props => ({
 
 const FormWrapper = styled.section`
   position: fixed;
-  background: ${Palette.background};
+  background: ${({ theme }) => theme.topLayer};
   width: 50%;
   height: auto;
   top: 50%;
