@@ -142,7 +142,7 @@ class QuestionAndAnswer extends React.Component {
           onChange={this.searchQuestions}
           value={this.state.searchTerm}/>
         <QuestionList
-          loadAnswers={this.state.getMoreAnswers}
+          loadAnswers={this.state.getMoreAnswers ? true : false}
           loadQuestions={this.state.getMoreQuestions}>
           {questions.map((question) => (<Question
             key={question.question_id}
@@ -195,7 +195,7 @@ const QuestionList = styled.section`
   display: inline-grid;
   grid-row: span 1;
   overflow: auto;
-  height: ${props => props.loadAnswers ? '50%' : 'auto'};
+  height: 50vh;
   grid-template-areas:
     "styled-question";
 
