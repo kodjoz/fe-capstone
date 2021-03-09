@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import CarouselWrapper from './CarouselWrapper.jsx';
 import RelatedCarousel from './RelatedCarousel.jsx';
 import OutfitCarousel from './OutfitCarousel.jsx';
-import { ModuleHeader } from '../globalStyles.js';
 
 class RelatedProductsWrapper extends React.Component {
   constructor(props) {
@@ -61,7 +60,6 @@ class RelatedProductsWrapper extends React.Component {
     }
     return (
       <div>
-        <ModuleHeader>Related Products</ModuleHeader>
         <CarouselWrapper
           name='Related Products'
           data={this.state.relatedProductsData}
