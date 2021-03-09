@@ -26,9 +26,12 @@ class ImageGallery extends React.Component {
     super(props);
     this.containerRef = React.createRef();
     this.state = {
-      imageIndex: 0
+      imageIndex: 0,
+      thumbnailsIndex: 0
     };
     this.setImageIndex = this.setImageIndex.bind(this);
+    this.scrollIconsUp = this.scrollIconsUp.bind(this);
+    this.scrollIconsDown = this.scrollIconsDown.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +52,14 @@ class ImageGallery extends React.Component {
     this.setState((prev) => ({imageIndex: prev.imageIndex - 1}));
   }
 
+  scrollIconsUp() {
+    this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex - 1}));
+  }
+
+  scrollIconsDown() {
+    this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex + 1}));
+  }
+
   render() {
     const style = {
       height: '100%',
@@ -59,11 +70,13 @@ class ImageGallery extends React.Component {
 
     let innerComponents;
     if (this.props && this.props.selectedStyle && this.containerRef) {
-      const displayWidth = this.containerRef.current.getBoundingClientRect().width;
+      const boundingRectangle = this.containerRef.current.getBoundingClientRect();
+      const displayWidth = boundingRectangle.width;
+      const displayHeight = boundingRectangle.height;
       const imageIndex = this.state.imageIndex;
+      const thumbnailsIndex = this.state.thumbnailsIndex;
       const showLeftArrow = this.state.imageIndex > 0;
       const showRightArrow = this.state.imageIndex < this.props.selectedStyle.photos.length - 1;
-      console.log(`w: ${displayWidth}, i: ${imageIndex}`);
       innerComponents = (
         <React.Fragment>
           <ImageList
@@ -72,7 +85,11 @@ class ImageGallery extends React.Component {
             imageIndex={imageIndex} />
           <ImageIconList
             setImageIndex={this.setImageIndex}
+            scrollUp={this.scrollIconsUp}
+            scrollDown={this.scrollIconsDown}
             photos={this.props.selectedStyle.photos}
+            displayHeight={displayHeight}
+            thumbnailsIndex={thumbnailsIndex}
             imageIndex={imageIndex} />
           { showLeftArrow && <ArrowButtonLeft onClick={() => this.previousImage()}>&lt;</ArrowButtonLeft> }
           { showRightArrow && <ArrowButtonRight onClick={() => this.nextImage()} >&gt;</ArrowButtonRight> }
