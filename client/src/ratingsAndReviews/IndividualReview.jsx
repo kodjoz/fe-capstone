@@ -20,9 +20,7 @@ class IndividualReview extends React.Component {
     if (this.state.helpfulRated === false) {
       let url = `/api/reviews/${this.props.review.review_id}/helpful`;
       axios.put(url, {
-        params: {
-          review_id: this.props.review.review_id
-        }
+        //put request doesn't actually need anything, since it's pulling the review_id from within the URL
       })
         .then(() => {
           this.props.review.helpfulness++;
@@ -34,9 +32,7 @@ class IndividualReview extends React.Component {
   report() {
     let url = `/api/reviews/${this.props.review.review_id}/report`;
     axios.put(url, {
-      params: {
-        review_id: this.props.review.review_id
-      }
+
     })
       .then(()=>{
         this.setState({reported: true});

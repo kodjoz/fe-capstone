@@ -107,7 +107,12 @@ class ReviewsList extends React.Component {
   }
 
   moreReviews() {
-    this.setState({display: this.state.display + 2});
+    if (this.state.display >= this.state.reviews.length) {
+      alert ('All reviews have been loaded!');
+      //document.getElementById('move-reviews').style.visibility = 'hidden';
+    } else {
+      this.setState({display: this.state.display + 2});
+    }
   }
 
   render() {
@@ -142,7 +147,7 @@ class ReviewsList extends React.Component {
                 return (<IndividualReview key={review.review_id} review={review} />);
               })}
               <FooterButtons>
-                <ReviewsButton onClick={this.moreReviews.bind(this)}>MORE REVIEWS</ReviewsButton>
+                <ReviewsButton id={'more-reviews'} onClick={this.moreReviews.bind(this)}>MORE REVIEWS</ReviewsButton>
                 <AddReviewModal product={this.props.product} product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
               </FooterButtons>
               {/* First two reviews should render plus if more reviews exist a button should render to expand ReviewsList w two add'l reviews */}
@@ -172,7 +177,7 @@ const RatingComponent = styled(Tile)`
   display: flex;
   flex-direction: column;
   order: 1;
-  width: 25%;
+  width: 30%;
   margin-top: 0.7rem;
   margin-right: 0.7rem;
   border-bottom: 1px solid #f0f0f5;
@@ -181,12 +186,15 @@ const RatingComponent = styled(Tile)`
 
 const ReviewsComponent = styled.div`
   order: 2;
-  flex-basis: 70%;
+  flex-basis: 65%;
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  height: 60vh;
 `;
 //NOTE: need to set a height in order for overflow to work
+  //1vh unit equates to 1% of the height of the viewport
+
 
 const FooterButtons = styled.div`
   display: flex;

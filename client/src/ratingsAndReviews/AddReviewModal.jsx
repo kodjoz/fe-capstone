@@ -17,7 +17,7 @@ class AddReviewModal extends React.Component {
       summary: null,
       body: ' ',
       characteristics: {}, //object of characteristic_ids & associated 1-5 values
-      photos: [], //array of urls
+      photos: ['zsefvzuskehbfvzs'], //array of urls
       photosUploaded: 0,
       name: null,
       email: null,
@@ -53,35 +53,36 @@ class AddReviewModal extends React.Component {
     submit.preventDefault();
     let recommended = this.state.recommend === 'true';
     console.log(
-      'productid: ', typeof this.state.product_id,
-      ' rating: ', typeof parseInt(this.state.rating),
-      ' summary: ', typeof this.state.summary,
-      ' body: ', typeof this.state.body,
-      ' recommend: ', typeof recommended, 'val: ', recommended,
-      ' name: ', typeof this.state.name,
-      ' email: ', typeof this.state.email,
+      'productid: ', typeof this.state.product_id === 'number',
+      ' rating: ', typeof parseInt(this.state.rating) === 'number', 'val: ', parseInt(this.state.rating),
+      ' summary: ', typeof this.state.summary === 'string',
+      ' body: ', typeof this.state.body === 'string',
+      ' recommend: ', typeof recommended === 'boolean',
+      ' name: ', typeof this.state.name === 'string',
+      ' email: ', typeof this.state.email === 'string',
       ' photos: ', typeof this.state.photos,
-      ' characteristics ', typeof this.state.characteristics, 'vals: ', JSON.stringify(this.state.characteristics)
+      ' characteristics: ', typeof this.state.characteristics === 'object',
+      ' characteristic value: ', typeof this.state.characteristics[64401] === 'number',
+      'characteristics full vals: ', JSON.stringify(this.state.characteristics)
     );
+
     return axios.post('/api/reviews', {
-      params: {
-        product_id: this.props.product_id,
-        rating: parseInt(this.state.rating),
-        summary: this.state.summary,
-        body: this.state.body,
-        recommend: recommended,
-        name: this.state.name,
-        email: this.state.email,
-        photos: this.state.photos,
-        characteristics: this.state.characteristics
-      }
+      product_id: parseInt(this.props.product_id),
+      rating: parseInt(this.state.rating),
+      summary: this.state.summary,
+      body: this.state.body,
+      recommend: recommended,
+      name: this.state.name,
+      photos: this.state.photos,
+      email: this.state.email,
+      characteristics: this.state.characteristics
     })
       .then((result) => {
         console.log('axios post: ', JSON.stringify(result));
         this.setState({active: !this.state.active});
       })
       .catch((error) => {
-        console.error('Error posting review: ', error);
+        console.error('Error posting review: ', error.response.data);
         console.error('Error contents: ', JSON.stringify(error));
         alert('Failed to post review');
       });
@@ -91,6 +92,12 @@ class AddReviewModal extends React.Component {
     if (!this.state.active) {
       return (<ReviewsButton onClick={()=>{ this.setState({active: !this.state.active}); }}>ADD A REVIEW  +</ReviewsButton>);
     } else {
+      let minBody;
+      if (this.state.body.length < 50) {
+        minBody = <SidenoteWarning>Minimum review length:  {this.state.body.length}/50</SidenoteWarning>;
+      } else {
+        minBody = <Sidenote>Minimum length reached!</Sidenote>;
+      }
       return (
         <ModalBackground>
           <ReviewForm>
@@ -157,8 +164,7 @@ class AddReviewModal extends React.Component {
                 onChange={this.setChanges}
               />
               <br></br>
-              <Sidenote>Minimum length reached</Sidenote>
-              <Sidenote>Minimum review length:  {this.state.body.length}/50</Sidenote>
+              {minBody}
               {/* <Sidenote>Minimum review length: {50 - document.getElementById('rev-body').value.length / 50}</Sidenote> */}
               <Heading>Show us your style! Add product photos below:</Heading>
               <br></br>
@@ -293,7 +299,11 @@ const Sidenote = styled(Italic)`
   font-size: 1.25rem;
   margin-top: -2rem;
   margin-bottom: 2rem;
-  color: ${Palette.lowPriorityText};
+  color: ${({ theme }) => theme.lowPriorityText};
+`;
+
+const SidenoteWarning = styled(Sidenote)`
+  color: ${({ theme }) => theme.primary}
 `;
 
 const Padding = styled.div`

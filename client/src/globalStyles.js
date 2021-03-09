@@ -145,8 +145,10 @@ const HelpfulYesPreset = styled.a`
 const SignaturePreset = styled.div`
   font-family: ${FontsPreset.alternate};
   display: inline-block;
-  font-size: 1.5rem;
-  color: ${({ theme }) => theme.primary};
+  margin-left: -0.3rem;
+  margin-top: 0.3rem;
+  font-size: 1.7rem;
+  color: ${({ theme }) => theme.lowPriority};
 `;
 
 const ModalBackgroundPreset = styled.div`
