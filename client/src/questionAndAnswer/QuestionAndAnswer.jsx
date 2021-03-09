@@ -94,15 +94,8 @@ class QuestionAndAnswer extends React.Component {
     let totalLength = this.state.questions.length;
 
     if (currentLength < totalLength) {
-      console.log('Is current length less than total length?', currentLength < totalLength);
-      console.log('Current length before', currentLength);
       this.setState({ questionResults: this.state.questions.slice(0, currentLength + 2)} );
-      console.log('Current length after', currentLength + 2);
-    } else {
-      alert('There are no more questions available from the server');
-      this.setState({ questionResults: this.state.questions.slice(0, 4)} );
     }
-
   }
   // if the user wants to load more answers click on the button and update the state
   getMoreAnswers() {
@@ -121,7 +114,11 @@ class QuestionAndAnswer extends React.Component {
       .then(() => {
         // send message to API to mark question as helpful, then rerender the state
         // Only query as many questions as we already have and no more
-        this.getQuestions(1, this.state.questions.length);
+        var totalLength = this.state.questions.length;
+        var visibleLength = this.state.questionResults.length;
+
+        return this.getQuestions(1, totalLength)
+          .then(() => this.setState({ questionResults: this.state.questions.slice(0, visibleLength)}));
       })
       .catch((err) => {
         console.error('error when marking question as helpful', err);
@@ -145,7 +142,7 @@ class QuestionAndAnswer extends React.Component {
           onChange={this.searchQuestions}
           value={this.state.searchTerm}/>
         <QuestionList
-          loadAnswers={this.state.getMoreAnswers}
+          loadAnswers={this.state.getMoreAnswers ? true : false}
           loadQuestions={this.state.getMoreQuestions}>
           {questions.map((question) => (<Question
             key={question.question_id}
@@ -157,7 +154,10 @@ class QuestionAndAnswer extends React.Component {
         <MoreAnswers><a
           onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></MoreAnswers>
         <MoreInfo>
-          <Button onClick={this.getMoreQuestions}>More Answered Questions</Button>
+          <MoreQuestionsButton
+            onClick={this.getMoreQuestions}
+            display={this.state.questions.length === this.state.questionResults.length ? 'none' : 'auto'}
+          >More Answered Questions</MoreQuestionsButton>
           <Button onClick={this.toggleAddQuestion}>Add A Question</Button>
         </MoreInfo>
         <AddQuestion
@@ -195,7 +195,7 @@ const QuestionList = styled.section`
   display: inline-grid;
   grid-row: span 1;
   overflow: auto;
-  height: ${props => props.loadAnswers ? '50%' : 'auto'};
+  height: 50vh;
   grid-template-areas:
     "styled-question";
 
@@ -205,6 +205,10 @@ const QuestionList = styled.section`
 const MoreAnswers = styled.div`
   grid-area: styledLoadAnswers;
   grid-row: span 1;
+`;
+
+const MoreQuestionsButton = styled(Button)`
+  display: ${props => props.display}
 `;
 
 const MoreInfo = styled.section`
