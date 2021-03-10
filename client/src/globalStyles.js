@@ -63,7 +63,6 @@ const ModuleHeaderPreset = styled.h3`
   font-size: 2rem;
   margin-left: 3%;
   padding: 0.5rem 0;
-  text-decoration: underline 2px ${({ theme }) => theme.lowPriorityText};
 `;
 
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
