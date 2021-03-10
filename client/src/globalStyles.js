@@ -137,7 +137,7 @@ const HelpfulYesPreset = styled.a`
   display: inline;
   cursor: pointer;
   font-style: normal;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primaryDark};
   text-decoration: underline;
 `;
 
