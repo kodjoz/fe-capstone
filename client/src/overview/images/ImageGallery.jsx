@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { StyleType } from '../types.js';
 import ImageList from './ImageList';
 import ImageIconList from './ImageIconList';
+import Modal from './expanded/Modal';
 
 const ArrowButton = styled.button`
   border: none;
@@ -27,11 +28,15 @@ class ImageGallery extends React.Component {
     this.containerRef = React.createRef();
     this.state = {
       imageIndex: 0,
-      thumbnailsIndex: 0
+      thumbnailsIndex: 0,
+      zoomedView: false,
+      expandedView: true
     };
     this.setImageIndex = this.setImageIndex.bind(this);
     this.scrollIconsUp = this.scrollIconsUp.bind(this);
     this.scrollIconsDown = this.scrollIconsDown.bind(this);
+    this.setExpandedView = this.setExpandedView.bind(this);
+    this.setZoomedView = this.setZoomedView.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +77,18 @@ class ImageGallery extends React.Component {
 
   scrollIconsDown() {
     this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex + 1}));
+  }
+
+  setExpandedView(val) {
+    this.setState({
+      expandedView: val
+    });
+  }
+
+  setZoomedView(val) {
+    this.setState({
+      zoomedView: val
+    });
   }
 
   render() {
@@ -115,11 +132,18 @@ class ImageGallery extends React.Component {
 
 
     return (
-      <div
-        style={style}
-        ref={this.containerRef}>
-        {innerComponents}
-      </div>
+      <React.Fragment>
+        <Modal
+          setExpandedView={this.setExpandedView}
+          setZoomedView={this.setZoomedView}
+          show={this.state.expandedView}
+          zoom={this.state.zoomedView} />
+        <div
+          style={style}
+          ref={this.containerRef}>
+          {innerComponents}
+        </div>
+      </React.Fragment>
     );
   }
 
