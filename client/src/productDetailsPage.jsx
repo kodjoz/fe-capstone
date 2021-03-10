@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Navbar from './navbar.jsx';
+import ThemeSlider from './ThemeSlider';
+
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import ReviewsList from './ratingsAndReviews/ReviewsList.jsx';
 import QuestionAndAnswer from './questionAndAnswer/QuestionAndAnswer.jsx';
@@ -57,7 +59,7 @@ class ProductDetailsPage extends React.Component {
     const id = this.props.product_id;
     return (
       <div>
-        <button onClick={this.props.toggleTheme}>Toggle Theme</button>
+        <ThemeSlider handleClick={this.props.toggleTheme} />
         <Navbar />
         <OverviewWithClickLogger
           key={'overview-module-' + id}
@@ -86,6 +88,8 @@ const featureTuplePropType = PropTypes.arrayOf(
     value: PropTypes.string
   })
 );
+
+
 
 ProductDetailsPage.propTypes = {
   product_id: PropTypes.number,
