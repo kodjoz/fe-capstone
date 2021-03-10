@@ -100,6 +100,7 @@ class ImageGallery extends React.Component {
     };
 
     let innerComponents;
+    let photos;
     if (this.props && this.props.selectedStyle && this.containerRef) {
       const boundingRectangle = this.containerRef.current.getBoundingClientRect();
       const displayWidth = boundingRectangle.width;
@@ -108,6 +109,7 @@ class ImageGallery extends React.Component {
       const thumbnailsIndex = this.state.thumbnailsIndex;
       const showLeftArrow = this.state.imageIndex > 0;
       const showRightArrow = this.state.imageIndex < this.props.selectedStyle.photos.length - 1;
+      photos = this.props.selectedStyle.photos;
       innerComponents = (
         <React.Fragment>
           <ImageList
@@ -128,12 +130,15 @@ class ImageGallery extends React.Component {
       );
     } else {
       innerComponents = '';
+      photos = [];
     }
 
 
     return (
       <React.Fragment>
         <Modal
+          photos={photos}
+          imageIndex={this.state.imageIndex}
           setExpandedView={this.setExpandedView}
           setZoomedView={this.setZoomedView}
           show={this.state.expandedView}
