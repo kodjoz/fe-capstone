@@ -29,6 +29,10 @@ class OutfitCarousel extends React.Component {
     window.localStorage.setItem('relatedProducts', JSON.stringify(this.state));
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state !== nextState;
+  }
+
   removeFromOutfit(product) {
     let currentOutfit = this.state.yourOutfit;
     delete currentOutfit[product.id];

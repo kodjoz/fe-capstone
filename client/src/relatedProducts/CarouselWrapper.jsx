@@ -7,76 +7,77 @@ class CarouselWrapper extends React.Component {
     super(props);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
+    this.checkScroll = this.checkScroll.bind(this);
     this.state = {
-      showLeftScroll: true,
+      showLeftScroll: false,
       showRightScroll: true,
       scrollWidth: 0
     };
+
+    this.ref = React.createRef();
+  }
+
+  checkScroll() {
+    if (this.ref.current.scrollWidth <= this.ref.current.clientWidth) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: false,
+      });
+      return;
+    }
+    if (this.ref.current.scrollLeft === 0) {
+      this.setState({
+        showLeftScroll: false,
+        showRightScroll: true
+      });
+      return;
+    }
+    if (this.ref.current.scrollLeft + this.ref.current.clientWidth >= this.ref.current.scrollWidth) {
+      this.setState({
+        showRightScroll: false,
+        showLeftScroll: true,
+      });
+      return;
+    }
+    this.setState({
+      showRightScroll: true,
+      showLeftScroll: true,
+    });
   }
 
   scrollRight() {
-    this.container.scrollLeft += 200;
-    if (this.container.scrollWidth <= this.container.clientWidth) {
-      this.setState({
-        showLeftScroll: false,
-        showRightScroll: false,
-      });
-      return;
-    }
-    if (this.container.scrollLeft + this.container.clientWidth >= this.container.scrollWidth) {
-      this.setState({
-        showRightScroll: false,
-        showLeftScroll: true,
-      });
-    } else {
-      this.setState({
-        showLeftScroll: true,
-      });
-    }
+    this.ref.current.scrollLeft += this.ref.current.firstChild.clientWidth;
+    this.checkScroll();
   }
 
   scrollLeft() {
-    this.container.scrollLeft -= 200;
-    if (this.container.scrollWidth <= this.container.clientWidth) {
-      this.setState({
-        showLeftScroll: false,
-        showRightScroll: false,
-      });
-      return;
-    }
-    if (this.container.scrollLeft === 0) {
-      this.setState({
-        showRightScroll: true,
-        showLeftScroll: false
-      });
-    } else {
-      this.setState({
-        showRightScroll: true,
-      });
-    }
+    this.ref.current.scrollLeft -= this.ref.current.firstChild.clientWidth;
+    this.checkScroll();
   }
 
   componentDidMount() {
-    this.container = document.getElementById(this.props.name + 'Container');
-    if (this.props.name === 'yourOutfit') {
+    if (this.ref.current.children.length < 4) {
       this.setState({
-        showLeftScroll: false
+        showLeftScroll: false,
+        showRightScroll: false
       });
-      return;
     }
   }
 
   render() {
-    if (document.getElementById(this.props.name + 'Container')) {
-      this.container = document.getElementById(this.props.name + 'Container');
-    }
     return (
-      <StyledCarouselWrapper>
-        <LeftCarouselButton show={this.state.showLeftScroll}
-          onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
-        <CarouselContainer id={this.props.name + 'Container'}>
+      <StyledCarouselWrapper
+        onMouseEnter={this.checkScroll}>
+        <Label>
+          <h3>{this.props.name}</h3>
+        </Label>
+        <CarouselContainer
+          id={this.props.name + 'Container'}
+          ref={this.ref}>
           {this.props.render(this.props.data)}
         </CarouselContainer>
+        <LeftCarouselButton show={this.state.showLeftScroll}
+          onClick={this.scrollLeft}>{'<'}</LeftCarouselButton>
         <RightCarouselButton show={this.state.showRightScroll}
           onClick={this.scrollRight}>{'>'}</RightCarouselButton>
       </StyledCarouselWrapper>
@@ -91,16 +92,38 @@ CarouselWrapper.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
+const Label = styled.div`
+  width: 15rem;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -30px;
+  background-color: ${props => props.theme.primary};
+
+  h3 {
+    color: ${props => props.theme.topLayer};
+    transform-origin: 0 0;
+    transform: rotate(270deg);
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    width: 350px;
+    margin-left: 4px;
+  }
+`;
+
+
 const StyledCarouselWrapper = styled.div`
+  border-radius: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 4em;
   position: relative;
-
 `;
 const CarouselContainer = styled.div`
-  width: 100%;
+  border-radius: 0px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
@@ -114,30 +137,33 @@ const CarouselContainer = styled.div`
 
 const CarouselButton = styled.button`
   display: ${props => props.show ? 'block' : 'none'};
-  position: absolute;
+  background: ${props => props.theme.midLayer};
+  color: ${props => props.theme.secondaryText};
   cursor: pointer;
-  top: 50%;
-  z-index: 1;
   transition: transform 0.1s ease-in-out;
-  background: ${props => props.theme.topLayer}
-  border-radius: 15px;
+  border-radius: 0px;
   border: none;
   padding: 0.5rem;
+  position: absolute;
+  height: 100%;
+  width: 5%;
+  z-index: 1;
+  opacity: 0.8;
+  font-size: 3rem;
 
   &:hover {
     background: ${props => props.theme.midLight};
-    color: ${props => props.theme.primaryText};
+    opacity: 1;
   }
 
 `;
 
 const LeftCarouselButton = styled(CarouselButton)`
-  left: -2%;
+  left: 0%;
 `;
 
 const RightCarouselButton = styled(CarouselButton)`
-  right: -2%;
-
+  right: 0%;
 `;
 
 

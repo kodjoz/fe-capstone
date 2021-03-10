@@ -11,7 +11,10 @@ const SearchQuestion = (props) => {
   // update the visible question???
   return (
     <React.Fragment>
-      <SearchBar type="text"
+      <SearchBar
+        type="text"
+        title="Search questions"
+        id="search"
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
         onChange={props.onChange}
         value={props.value}
@@ -23,7 +26,7 @@ const SearchQuestion = (props) => {
 const SearchBar = styled.input`
   grid-area: search-question;
   grid-row: span 1;
-  width: 100%;
+  width: 98%;
   padding: 10px 15px;
   margin: 8px 0;
   color: ${Palette.black};

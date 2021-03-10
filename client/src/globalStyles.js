@@ -133,7 +133,7 @@ const HelpfulPreset = styled.div`
   font-style: italic;
 `;
 
-const HelpfulYesPreset = styled.div`
+const HelpfulYesPreset = styled.a`
   display: inline;
   cursor: pointer;
   font-style: normal;
