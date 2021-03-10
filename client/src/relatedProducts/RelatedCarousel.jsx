@@ -15,6 +15,8 @@ class RelatedCarousel extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.cardButtonClick = this.cardButtonClick.bind(this);
+
+    this.modalRef = React.createRef();
   }
 
   showModal(data) {
@@ -37,6 +39,11 @@ class RelatedCarousel extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return !(this.props.data === nextProps.data) || (this.state.showModal !== nextState.showModal);
   }
+  componentDidUpdate() {
+    if (this.state.showModal) {
+      this.modalRef.current.focus();
+    }
+  }
 
   render() {
     return (
@@ -57,6 +64,7 @@ class RelatedCarousel extends React.Component {
 
 
         <StyledModal
+          ref={this.modalRef}
           id='related-products-modal'
           show={this.state.showModal}
           handleClose={this.hideModal}

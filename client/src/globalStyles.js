@@ -182,6 +182,27 @@ const GridLabelPreset = styled.label`
   grid-row: span 1;
 `;
 
+const LabelPreset = styled.div`
+  width: 15rem;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -30px;
+  background-color: ${props => props.theme.primary};
+
+  h3 {
+    color: ${props => props.theme.topLayer};
+    transform-origin: 0 0;
+    transform: rotate(270deg);
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    width: 350px;
+    margin-left: 4px;
+  }
+`;
+
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
 export const ModuleHeader = ModuleHeaderPreset;
@@ -201,4 +222,5 @@ export const Fonts = FontsPreset;
 export const FormTextInput = FormTextInputPreset;
 export const TextArea = TextAreaPreset;
 export const GridLabel = GridLabelPreset;
+export const Label = LabelPreset;
 
