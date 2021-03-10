@@ -2,7 +2,7 @@ import React from 'react';
 // import styled from 'styled-components';
 import { StyleType } from '../types.js';
 import ImageIconList from './ImageIconList';
-// import Modal from './expanded/Modal';
+import Modal from './expanded/Modal';
 import Carousel from './carousel/Carousel';
 
 class ImageGallery extends React.Component {
@@ -21,8 +21,7 @@ class ImageGallery extends React.Component {
     this.scrollIconsDown = this.scrollIconsDown.bind(this);
     this.setExpandedView = this.setExpandedView.bind(this);
     this.setZoomedView = this.setZoomedView.bind(this);
-    this.nextImage = this.nextImage.bind(this);
-    this.previousImage = this.previousImage.bind(this);
+    this.walkImage = this.walkImage.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +56,18 @@ class ImageGallery extends React.Component {
     });
   }
 
+  walkImage(isForward) {
+    let step = isForward ? 1 : -1;
+    this.setState((prev) => {
+      let imageIndex = prev.imageIndex + step;
+      let thumbnailIndex = Math.floor(imageIndex / 7);
+      return {
+        imageIndex: imageIndex,
+        thumbnailIndex: thumbnailIndex
+      };
+    });
+  }
+
   scrollIconsUp() {
     this.setState((prev) => ({thumbnailsIndex: prev.thumbnailsIndex - 1}));
   }
@@ -85,38 +96,48 @@ class ImageGallery extends React.Component {
       position: 'relative'
     };
 
-    let carousel = '';
+    let photos = [];
+    let dimensions = {
+      width: 100, height: 100
+    };
+
     if (this.props && this.props.selectedStyle && this.containerRef) {
       const container = this.containerRef.current.getBoundingClientRect();
-      carousel = (
-        <Carousel
-          photos={this.props.selectedStyle.photos}
-          containerWidth={container.width}
-          containerHeight={container.height}
-          imageIndex={this.state.imageIndex}
-          setImageIndex={this.setImageIndex}
-          nextImage={this.nextImage}
-          previousImage={this.previousImage}>
-          <ImageIconList
-            photos={this.props.selectedStyle.photos}
-            imageIndex={this.state.imageIndex}
-            setImageIndex={this.setImageIndex}
-            scrollUp={this.scrollIconsUp}
-            scrollDown={this.scrollIconsDown}
-            displayHeight={container.height}
-            thumbnailsIndex={this.state.thumbnailsIndex} >
-          </ImageIconList>
-        </Carousel>
-      );
+      photos = this.props.selectedStyle.photos;
+      dimensions.width = container.width;
+      dimensions.height = container.height;
     }
 
     return (
       <React.Fragment>
-        <div
-          style={style}
-          ref={this.containerRef}>
-          {carousel}
+        <div style={style} ref={this.containerRef}>
+          <Carousel
+            photos={photos}
+            dimensions={dimensions}
+            imageIndex={this.state.imageIndex}
+            setImageIndex={this.setImageIndex}
+            walkImage={this.walkImage} >
+            <ImageIconList
+              photos={photos}
+              imageIndex={this.state.imageIndex}
+              setImageIndex={this.setImageIndex}
+              scrollUp={this.scrollIconsUp}
+              scrollDown={this.scrollIconsDown}
+              displayHeight={dimensions.height}
+              thumbnailsIndex={this.state.thumbnailsIndex} >
+            </ImageIconList>
+          </Carousel>
         </div>
+        <Modal photos={photos}
+          imageIndex={this.state.imageIndex}
+          show={this.state.expandedView}
+          zoom={this.state.zoomedView}
+          setImageIndex={this.setImageIndex}
+          setExpandedView={this.setExpandedView}
+          setZoomedView={this.setZoomedView}/>
+        <button onClick={() => {
+          this.setExpandedView(true);
+        }}>Expand</button>
       </React.Fragment>
     );
   }

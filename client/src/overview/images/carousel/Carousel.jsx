@@ -13,20 +13,28 @@ const Carousel = (props) => {
   const showLeftArrow = props.imageIndex > 0;
   const showRightArrow = props.imageIndex < (props.photos.length - 1);
 
+  const previousImage = () => {
+    props.walkImage(false);
+  };
+
+  const nextImage = () => {
+    props.walkImage(true);
+  };
+
   return (
     <React.Fragment>
       <ImageList photos={props.photos}
-        displayWidth={props.containerWidth}
+        displayWidth={props.dimensions.width}
         imageIndex={props.imageIndex} />
       {props.children}
       <ArrowButtonLeft
         show={showLeftArrow}
-        onClick={props.previousImage}>
+        onClick={previousImage}>
         &lt;
       </ArrowButtonLeft>
       <ArrowButtonRight
         show={showRightArrow}
-        onClick={props.nextImage}>
+        onClick={nextImage}>
         &gt;
       </ArrowButtonRight>
     </React.Fragment>
@@ -36,12 +44,13 @@ const Carousel = (props) => {
 Carousel.propTypes = {
   children: PropTypes.element,
   photos: PhotoArray,
-  containerWidth: PropTypes.number,
-  containerHeight: PropTypes.number,
+  dimensions: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  }),
   imageIndex: PropTypes.number,
   setImageIndex: PropTypes.func,
-  nextImage: PropTypes.func,
-  previousImage: PropTypes.func
+  walkImage: PropTypes.func,
 };
 
 export default Carousel;

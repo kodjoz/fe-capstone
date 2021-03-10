@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { PhotoArray } from '../../types';
 import IconIndicatorList from './IconIndicatorList';
+import Carousel from '../carousel/Carousel';
 
 const ContentDiv = styled.div`
   position: fixed;
@@ -30,7 +31,9 @@ const ModalContent = (props) => {
       <CloseButton onClick={closeModal}>
         Close
       </CloseButton>
-      <h1>Content Div</h1>
+      <Carousel >
+
+      </Carousel>
       <IconIndicatorList
         setImageIndex={props.setImageIndex}
         photos={props.photos}
