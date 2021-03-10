@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Question from './Question';
 import SearchQuestion from './SearchQuestion';
 import AddQuestion from './AddQuestionForm';
-import { Button } from '../globalStyles.js';
+import { Button, ClickableText } from '../globalStyles.js';
 
 class QuestionAndAnswer extends React.Component {
   constructor(props) {
@@ -151,8 +151,8 @@ class QuestionAndAnswer extends React.Component {
             question={question}
             product={this.props.product} />))}
         </QuestionList>
-        <MoreAnswers><a
-          onClick={this.getMoreAnswers}>{this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</a></MoreAnswers>
+        <MoreAnswers onClick={this.getMoreAnswers}>
+          {this.state.getMoreAnswers ? 'Collapse Answers' : 'See More Answers'}</MoreAnswers>
         <MoreInfo>
           <MoreQuestionsButton
             onClick={this.getMoreQuestions}
@@ -173,7 +173,7 @@ class QuestionAndAnswer extends React.Component {
 // style the question module
 const QuestionContainer = styled.main`
   display: grid;
-  grid-template-columns: 66%
+  grid-template-columns: 100%;
   grid-template-rows: auto;
   grid-auto-columns: 100%;
   grid-auto-flow: column;
@@ -181,11 +181,11 @@ const QuestionContainer = styled.main`
     "question-header"
     "search-question"
     "question-list"
-    "styledLoadAnswers"
+    "more-answers"
     "styledButtons";
 `;
 
-const QuestionHeader = styled.h3`
+const QuestionHeader = styled.h1`
   grid-area: question-header;
   grid-row: span 1;
 `;
@@ -202,13 +202,20 @@ const QuestionList = styled.section`
 
 `;
 
-const MoreAnswers = styled.div`
-  grid-area: styledLoadAnswers;
+const MoreAnswers = styled(ClickableText)`
+  grid-area: more-answers;
   grid-row: span 1;
+  font-weight bold;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.primary};
+  margin-top: 0.7rem;
+  padding: 0.7rem 1.2rem 0.7rem 0;
+
 `;
 
 const MoreQuestionsButton = styled(Button)`
-  display: ${props => props.display}
+  display: ${props => props.display};
+  margin-right: 0.7rem;
 `;
 
 const MoreInfo = styled.section`
