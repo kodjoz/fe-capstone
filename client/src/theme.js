@@ -1,5 +1,6 @@
 export const lightTheme = {
   primary: 'hsl(0, 80%, 60%)',
+  primaryDark: 'hsl(0, 100%, 45%)',
   secondary: 'hsl(270, 80%, 96%)',
   background: 'hsl(345, 5%, 97%);',
   midLayer: 'hsl(0, 15%, 99%)',
@@ -14,6 +15,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   primary: '#BB86FC', //light purple
+  primaryDark: '#BB86FC',
   secondary: '#03DAC6', //tealish green
   background: '#121212', //dark grey
   midLayer: '#202020', //slightly less dark grey
