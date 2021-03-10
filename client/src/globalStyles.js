@@ -54,6 +54,7 @@ const GlobalPreset = createGlobalStyle`
 `;
 
 const TilePreset = styled.div`
+  border-radius: 0;
   background-color: ${({ theme }) => theme.midLayer};
   border: 1px solid ${({ theme }) => theme.borders};
 `;
@@ -92,19 +93,6 @@ const ButtonPreset = styled.button`
   height: 4rem;
   padding: 0 1.5rem;
   cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.midLight};
-    color: ${({ theme }) => theme.secondaryText};
-  }
-`;
-
-const DropdownMenuPreset = styled.select`
-  text-transform: uppercase;
-  background-color: ${({ theme }) => theme.topLayer};
-  color: ${({ theme }) => theme.lowPriorityText};
-  border: none;
-  height: 4rem;
-  padding: 0 1.5rem;
   &:hover {
     background-color: ${({ theme }) => theme.midLight};
     color: ${({ theme }) => theme.secondaryText};
@@ -209,7 +197,6 @@ export const ModuleHeader = ModuleHeaderPreset;
 export const ClickableText = ClickableTextPreset;
 export const LowPriorityText = LowPriorityTextPreset;
 export const Button = ButtonPreset;
-export const DropdownMenu = DropdownMenuPreset;
 export const Thumbnail = ThumbnailPreset;
 export const Gallery = GalleryPreset;
 export const Helpful = HelpfulPreset;

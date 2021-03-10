@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Tile, ModuleHeader, Button } from '../globalStyles.js';
+import { Tile, ModuleHeader, Button, Label } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
@@ -134,10 +134,11 @@ class ReviewsList extends React.Component {
     } else {
       return (
         <div>
-          <ModuleHeader>Ratings &amp; Reviews</ModuleHeader>
+          <br></br>
           <SortWrap><SortDropdown newSort={this.newSort.bind(this)} sortOrder={this.state.sortOrder}></SortDropdown></SortWrap>
           <RatingsReviewsPanel>
             <RatingComponent>
+              <HeaderLabel><h3>Ratings &amp; Reviews</h3></HeaderLabel>
               <Ratings reviews={this.state.reviews} filters={this.state.filters} newFilter={this.newFilter.bind(this)}/>
               <FactorsBreakdown characteristics={characteristics}/>
             </RatingComponent>
@@ -174,10 +175,11 @@ const RatingsReviewsPanel = styled.div`
 `;
 
 const RatingComponent = styled(Tile)`
+  position: relative;
   display: flex;
   flex-direction: column;
   order: 1;
-  width: 30%;
+  width: 25%;
   margin-top: 0.7rem;
   margin-right: 0.7rem;
   border-bottom: 1px solid #f0f0f5;
@@ -186,7 +188,7 @@ const RatingComponent = styled(Tile)`
 
 const ReviewsComponent = styled.div`
   order: 2;
-  flex-basis: 65%;
+  flex-basis: 75%;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -207,6 +209,10 @@ const ReviewsButton = styled(Button)`
 
 const Footer = styled.div`
   padding: 1.5rem 0;
+`;
+
+const HeaderLabel = styled(Label)`
+  z-index: -1;
 `;
 
 ReviewsList.propTypes = {
