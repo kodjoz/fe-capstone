@@ -20,6 +20,7 @@ const Modal = (props) => {
         photos={props.photos}
         imageIndex={props.imageIndex}
         zoom={props.zoom}
+        setImageIndex={props.setImageIndex}
         setExpandedView={props.setExpandedView}
         setZoomedView={props.setZoomedView}>
       </ModalContent>
@@ -32,6 +33,7 @@ Modal.propTypes = {
   imageIndex: PropTypes.number,
   show: PropTypes.bool,
   zoom: PropTypes.bool,
+  setImageIndex: PropTypes.func,
   setExpandedView: PropTypes.func,
   setZoomedView: PropTypes.func
 };

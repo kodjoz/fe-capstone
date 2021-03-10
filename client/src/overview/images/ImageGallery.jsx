@@ -139,6 +139,7 @@ class ImageGallery extends React.Component {
         <Modal
           photos={photos}
           imageIndex={this.state.imageIndex}
+          setImageIndex={this.setImageIndex}
           setExpandedView={this.setExpandedView}
           setZoomedView={this.setZoomedView}
           show={this.state.expandedView}

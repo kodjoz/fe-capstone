@@ -32,6 +32,7 @@ const ModalContent = (props) => {
       </CloseButton>
       <h1>Content Div</h1>
       <IconIndicatorList
+        setImageIndex={props.setImageIndex}
         photos={props.photos}
         selectedIndex={props.imageIndex}/>
     </ContentDiv>
@@ -42,6 +43,7 @@ ModalContent.propTypes = {
   photos: PhotoArray,
   imageIndex: PropTypes.number,
   zoom: PropTypes.bool,
+  setImageIndex: PropTypes.func,
   setExpandedView: PropTypes.func,
   setZoomedView: PropTypes.func
 };

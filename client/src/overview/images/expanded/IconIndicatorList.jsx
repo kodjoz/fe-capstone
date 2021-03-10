@@ -6,6 +6,9 @@ import { PhotoArray } from '../../types';
 const IndicatorsDiv = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `;
 
 const Icon = styled.div`
@@ -14,14 +17,19 @@ const Icon = styled.div`
   border-radius: 50%;
   background-color: ${props => props.selected ? 'red' : 'black'};
   margin: 2rem;
+  cursor: pointer;
 `;
 
 const IconIndicatorList = (props) => {
 
   const icons = props.photos.map((val, index) => {
     let selected = index === props.selectedIndex;
+    const updateSelected = () => props.setImageIndex(index);
     return (
-      <Icon key={val.url} selected={selected} />
+      <Icon
+        onClick={updateSelected}
+        key={val.url}
+        selected={selected} />
     );
   });
 
@@ -34,7 +42,8 @@ const IconIndicatorList = (props) => {
 
 IconIndicatorList.propTypes = {
   photos: PhotoArray,
-  selectedIndex: PropTypes.number
+  selectedIndex: PropTypes.number,
+  setImageIndex: PropTypes.func
 };
 
 export default IconIndicatorList;
