@@ -54,6 +54,13 @@ class RelatedProductsWrapper extends React.Component {
     this.getRelatedProducts();
   }
 
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = () => {
+      return;
+    };
+  }
+
   render() {
     if (this.state.isLoading) {
       return <div>RELATED LOADING</div>;
