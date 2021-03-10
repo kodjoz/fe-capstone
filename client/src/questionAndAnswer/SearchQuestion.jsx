@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Palette } from '../globalStyles.js';
 
 const SearchQuestion = (props) => {
   // create an input field
@@ -26,11 +25,10 @@ const SearchQuestion = (props) => {
 const SearchBar = styled.input`
   grid-area: search-question;
   grid-row: span 1;
-  width: 98%;
   padding: 10px 15px;
   margin: 8px 0;
-  color: ${Palette.black};
-  border: 1px solid ${Palette.borderGrey};
+  color: ${({ theme }) => theme.primaryText};
+  border: 1px solid${({ theme }) => theme.borders};
 `;
 
 SearchQuestion.propTypes = {

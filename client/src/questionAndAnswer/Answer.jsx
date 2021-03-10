@@ -69,13 +69,12 @@ const AnswerWrapper = styled.div`
   grid-area: answer-wrapper;
   grid-row: span 1;
   margin-top: 7px;
-  margin-left: 5px;
 `;
 
 const AnswerSummary = styled.span`
   font-size: 1.05em;
-  margin-top: -5px;
-  margin-bottom: -7px;
+  margin-right: 20%
+  margin-bottom: 1rem;
 `;
 
 const AnswerLinks = styled.span`

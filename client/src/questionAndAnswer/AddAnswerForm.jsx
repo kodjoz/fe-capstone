@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
+import { Tile, ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class AddAnswer extends React.Component {
 
     return (
       <AnswerModal display={showModal}>
-        <FormWrapper>
+        <AnswerWrapper>
           <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
           <Subtitle>Q: {this.props.question.body}</Subtitle>
           <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
@@ -95,14 +95,14 @@ class AddAnswer extends React.Component {
             />
           </GridLabel>
           <SubmitAnswer>
-            <Button
+            <FormButton
               type="button"
-              onClick={this.submitAnswer}>Submit</Button>
-            <Button
+              onClick={this.submitAnswer}>Submit</FormButton>
+            <FormButton
               onClick={this.props.handleClick}
-            >Back</Button>
+            >Back</FormButton>
           </SubmitAnswer>
-        </FormWrapper>
+        </AnswerWrapper>
       </AnswerModal>
     );
   }
@@ -114,7 +114,7 @@ const AnswerModal = styled(ModalBackground).attrs(props => ({
   display: ${props => props.display};
 `;
 
-const FormWrapper = styled.section`
+const AnswerWrapper = styled(Tile)`
   position: fixed;
   background: ${ ({ theme }) => theme.topLayer};
   width: 50%;
@@ -122,10 +122,9 @@ const FormWrapper = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid ${ ({ theme }) => theme.borders};
-  border-radius: 7px;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding-left: 1.2rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 
   display: grid;
   row-gap: 7px;
@@ -154,6 +153,10 @@ const Subtitle = styled.h2`
 const SubmitAnswer = styled.section`
   grid-area: submit-answer;
   grid-row: span 1;
+`;
+
+const FormButton = styled(Button)`
+  margin-right: 0.7rem;
 `;
 
 AddAnswer.propTypes = {

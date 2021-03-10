@@ -97,17 +97,18 @@ const QuestionWrapper = styled(Tile)`
     "answer-wrapper ."
     "addAnswer .";
 
-  margin-top: 0.44rem;
-  margin-bottom: 0.75rem;
-  padding: 7px 12px 7px 0;
+    margin-top: 0.7rem;
+    padding-left: 1.2rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
 `;
 
 const QuestionSummary = styled.span`
   grid-area: question;
   font-size: 1.05em;
   font-weight: bold;
-  margin-top: -5px;
-  margin-bottom: -7px;
+  margin-top: -0.3rem;
+  margin-bottom: -0.3rem;
 `;
 
 const QuestionLinks = styled.span`

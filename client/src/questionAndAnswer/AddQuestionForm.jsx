@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
+import { Tile, ModalBackground, FormTextInput, TextArea, Button, LowPriorityText, GridLabel } from '../globalStyles.js';
 
 
 class AddQuestion extends React.Component {
@@ -105,13 +105,13 @@ class AddQuestion extends React.Component {
             />
           </GridLabel>
           <SubmitQuestion>
-            <Button
+            <FormButton
               type="button"
-              onClick={this.submitQuestion}>Submit</Button>
-            <Button
+              onClick={this.submitQuestion}>Submit</FormButton>
+            <FormButton
               type="button"
               onClick={this.props.handleClick}
-            >Back</Button>
+            >Back</FormButton>
           </SubmitQuestion>
         </QuestionWrapper>
       </QuestionModal>
@@ -125,7 +125,7 @@ const QuestionModal = styled(ModalBackground).attrs(props => ({
   display: ${props => props.display};
 `;
 
-const QuestionWrapper = styled.section`
+const QuestionWrapper = styled(Tile)`
   position: fixed;
   background: ${({ theme }) => theme.topLayer};
   width: 50%;
@@ -133,11 +133,9 @@ const QuestionWrapper = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 15px solid ${({ theme }) => theme.borders};
-  border-radius: 7px;
-  margin-left: 5px;
-  margin-right: 5px;
-
+  padding-left: 1.2rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
   display: grid;
   row-gap: 7px;
   grid-template-columns: 100%;
@@ -166,6 +164,10 @@ const CurrentProduct = styled.h2`
 const SubmitQuestion = styled.section`
   grid-area: submit-question;
   grid-row: span 1;
+`;
+
+const FormButton = styled(Button)`
+  margin-right: 0.7rem;
 `;
 
 AddQuestion.propTypes = {
