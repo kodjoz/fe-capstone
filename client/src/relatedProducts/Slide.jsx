@@ -27,7 +27,7 @@ class Slide extends Component {
           return response.data;
         }
       }).catch(() => {
-        throw Error('fetching styles data failed');
+        throw Error('fetching styles data failed', this.props.data.id);
       });
   }
 
