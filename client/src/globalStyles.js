@@ -54,16 +54,8 @@ const GlobalPreset = createGlobalStyle`
 `;
 
 const TilePreset = styled.div`
-  border-radius: 0;
   background-color: ${({ theme }) => theme.midLayer};
   border: 1px solid ${({ theme }) => theme.borders};
-`;
-
-//different font maybe?
-const ModuleHeaderPreset = styled.h3`
-  font-size: 2rem;
-  margin-left: 3%;
-  padding: 0.5rem 0;
 `;
 
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
@@ -193,7 +185,6 @@ const LabelPreset = styled.div`
 
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
-export const ModuleHeader = ModuleHeaderPreset;
 export const ClickableText = ClickableTextPreset;
 export const LowPriorityText = LowPriorityTextPreset;
 export const Button = ButtonPreset;
