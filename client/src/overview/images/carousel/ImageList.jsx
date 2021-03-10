@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from './Image';
-import { PhotoArray } from '../types';
+import { PhotoArray } from '../../types';
 import styled from 'styled-components';
 
 const ImageFrame = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { PhotoType } from '../types';
+import { PhotoType } from '../../types';
 
 const ImageDiv = styled.div`
   width: 100%;

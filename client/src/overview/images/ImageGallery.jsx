@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { StyleType } from '../types.js';
-import ImageList from './ImageList';
+import ImageList from './carousel/ImageList';
 import ImageIconList from './ImageIconList';
 import Modal from './expanded/Modal';
 
