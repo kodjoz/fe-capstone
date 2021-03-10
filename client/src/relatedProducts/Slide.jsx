@@ -26,6 +26,7 @@ class Slide extends Component {
         if (response && response.data) {
           return response.data;
         }
+      }).catch(() => {
         throw Error('fetching styles data failed');
       });
   }
@@ -37,6 +38,7 @@ class Slide extends Component {
         if (response && response.data) {
           return response.data;
         }
+      }).catch(() => {
         throw Error('fetching review meta data failed');
       });
   }
@@ -60,7 +62,7 @@ class Slide extends Component {
         });
       })
       .catch((error) => {
-        console.error('Overview Error:', error);
+        console.error('Slide Error:', error);
       });
     this.fetchReviewMetaDataFromApi()
       .then((data) => {
