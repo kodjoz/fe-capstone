@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Thumbnail, Button, ModalBackground, Palette } from './globalStyles.js';
+import { Thumbnail, Button, ModalBackground} from './globalStyles.js';
 import styled from 'styled-components';
 
 class ModalImage extends React.Component {
@@ -52,6 +52,9 @@ class ModalImage extends React.Component {
 
 const ModalWindow = styled(ModalBackground)`
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   top: 0;
@@ -60,16 +63,21 @@ const ModalWindow = styled(ModalBackground)`
 
 const ImageWrapper = styled.div`
   z-index: 100;
-  position: fixed;
   display: flex;
   flex-direction: column;
-  top: 25%;
-  left: 25%;
-  height: 100%;
-  max-height: 60vh;
-  max-width: 50vw;
+
+  max-height: 50vh;
+  max-width: 65vw;
   border: solid 15px ${({ theme }) => theme.midLayer};
   border-radius: 5px;
+`;
+
+const FullImage = styled.img`
+  border-radius: 0;
+  display: inline;
+  height: 50vh;
+  width:
+  object-fit: cover;
 `;
 
 const PositionedButton = styled(Button)`
@@ -78,15 +86,6 @@ const PositionedButton = styled(Button)`
   opacity: 75%;
   cursor: pointer;
   align-self: flex-end;
-`;
-
-
-const FullImage = styled.img`
-  border-radius: 0;
-  display: inline;
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
 `;
 
 const Border = styled.div`
