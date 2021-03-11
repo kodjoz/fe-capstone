@@ -121,7 +121,6 @@ class Slide extends Component {
 
 Slide.propTypes = {
   data: PropTypes.object.isRequired,
-  render: PropTypes.func.isRequired,
   cardButtonClick: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired
 };
