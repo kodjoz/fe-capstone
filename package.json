@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest -i --detectOpenHandles --coverage -c jest.react.config.js",
     "test-server": "jest --detectOpenHandles --coverage -c jest.server.config.js",
-    "build": "webpack --watch --config webpack.config.js",
+    "build": "webpack --watch --config webpack.dev.js",
+    "build-production": "webpack --config webpack.prod.js",
     "start": "nodemon server/index.js",
     "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor/precourse-pomander/master/bin/install | bash"
   },
