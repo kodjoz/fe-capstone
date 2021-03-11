@@ -56,26 +56,28 @@ const ModalWindow = styled(ModalBackground)`
   left: 0;
 `;
 
-const PositionedButton = styled(Button)`
-  display: inline;
-  position: fixed;
-  margin-left: 45%;
-  opacity: 75%;
-  cursor: pointer;
-`;
-
 const ImageWrapper = styled.div`
   z-index: 100;
   position: fixed;
   top: 25%;
   left: 25%;
-  height: 50%;
-  width: 50%;
+  max-height: 60vh;
+  max-width: 60vh;
   border: solid 15px ${Palette.foreground};
-  border-radius: 1px;
+  border-radius: 5px;
 `;
 
+const PositionedButton = styled(Button)`
+  display: inline;
+  position: absolute;
+  margin-left: 91%;
+  opacity: 75%;
+  cursor: pointer;
+`;
+
+
 const FullImage = styled.img`
+  border-radius: 0;
   display: inline;
   height: 100%;
   width: 100%;
