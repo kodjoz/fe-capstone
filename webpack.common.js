@@ -1,13 +1,13 @@
 const path = require('path');
 
-const entry_file = path.join(__dirname, 'client', 'src', 'index.js');
-const output_dir = path.join(__dirname, 'client', 'dist');
+const entryFile = path.join(__dirname, 'client', 'src', 'index.js');
+const outputDir = path.join(__dirname, 'client', 'dist');
 
 module.exports = {
-  entry: entry_file,
+  entry: entryFile,
   output: {
     filename: 'bundle.js',
-    path: output_dir
+    path: outputDir
   },
   module: {
     rules: [
@@ -20,8 +20,7 @@ module.exports = {
       }
     ]
   },
-  mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx']
   }
-}
+};

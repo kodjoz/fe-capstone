@@ -23,6 +23,18 @@ Start the server:
 npm start
 ````
 
+## Deployment
+To deploy the app compile the build with the production script:
+
+````
+npm run build-production
+````
+
+Start the server:
+````
+npm start
+````
+
 ## Testing
 This project tests using Jest for both the server and the front end. The frond end also makes use of React Testing Library and MSW (Mock Service Workers). The use of MSW means that test API calls do not need the Express server running.
 

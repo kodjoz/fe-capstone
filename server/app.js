@@ -32,7 +32,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 // serve static files from the 'dist' folder
 app.use(express.static(path.join(__dirname, '/../client/dist/')));
-//console.log('Path to static files', path.join(__dirname, '/../client/dist/'))
 
 app.get('*', (req, res) => {
   res.sendFile((path.join(__dirname, '../client/dist/index.html')));
