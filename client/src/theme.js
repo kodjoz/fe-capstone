@@ -26,6 +26,6 @@ export const darkTheme = {
   primaryText: '#F8F8F8', //white
   secondaryText: '#D3D3D3', //slightly less white
   lowPriorityText: '#C0C0C0', //even less white
-  borders: '#3b3b3f',
+  borders: '#93949a',
   accentTile: '#303030'
 };
