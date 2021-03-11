@@ -25,7 +25,7 @@ class ThemeSlider extends React.Component {
       <SlideWrapper>
         <FontAwesomeIcon icon={faSun} size='lg' color="orange" />
         <Switch htmlFor="toggleTheme">
-          <Slide id="toggleTheme" type="checkbox" onClick={this.handleClick}></Slide>
+          <Slide title="Switch between light and dark theme" id="toggleTheme" type="checkbox" onClick={this.handleClick}></Slide>
           <Slider slideClicked={this.state.isClicked}></Slider>
         </Switch>
         <FontAwesomeIcon icon={faMoon} size='lg' color={this.state.isClicked ? 'white' : 'darkblue'}/>
