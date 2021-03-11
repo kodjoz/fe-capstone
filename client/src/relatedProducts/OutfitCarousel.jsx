@@ -85,7 +85,7 @@ OutfitCarousel.propTypes = {
 const FirstSlide = styled.div`
   width: 200px;
   height: 300px;
-  background-color: ${props => props.theme.topLayer};
+  background-color: ${props => props.theme.accentTile};
   margin: 0.5em;
   cursor: pointer;
   display: flex;

@@ -9,7 +9,8 @@ export const lightTheme = {
   primaryText: 'hsl(0, 5%, 30%)',
   secondaryText: 'hsl(0, 0%, 40%)',
   lowPriorityText: 'hsl(0, 0%, 40%)',
-  borders: '#f2f2f2'
+  borders: '#f2f2f2',
+  accentTile: '#f4f4f5'
 };
 
 export const darkTheme = {
@@ -23,5 +24,6 @@ export const darkTheme = {
   primaryText: '#F8F8F8', //white
   secondaryText: '#D3D3D3', //slightly less white
   lowPriorityText: '#C0C0C0', //even less white
-  borders: '#F8F8F8'
+  borders: '#3b3b3f',
+  accentTile: '#303030'
 };
