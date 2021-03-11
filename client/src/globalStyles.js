@@ -58,14 +58,6 @@ const TilePreset = styled.div`
   border: 1px solid ${({ theme }) => theme.borders};
 `;
 
-//different font maybe?
-const ModuleHeaderPreset = styled.h3`
-  font-size: 2rem;
-  margin-left: 3%;
-  padding: 0.5rem 0;
-  text-decoration: underline 2px ${({ theme }) => theme.lowPriorityText};
-`;
-
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
 const ItalicPreset = styled.span`
   font-style: italic;
@@ -99,19 +91,6 @@ const ButtonPreset = styled.button`
   }
 `;
 
-const DropdownMenuPreset = styled.select`
-  text-transform: uppercase;
-  background-color: ${({ theme }) => theme.topLayer};
-  color: ${({ theme }) => theme.lowPriorityText};
-  border: none;
-  height: 4rem;
-  padding: 0 1.5rem;
-  &:hover {
-    background-color: ${({ theme }) => theme.midLight};
-    color: ${({ theme }) => theme.secondaryText};
-  }
-`;
-
 const GalleryPreset = styled.div`
   display: flex;
   justify-content: space-around;
@@ -138,7 +117,7 @@ const HelpfulYesPreset = styled.a`
   display: inline;
   cursor: pointer;
   font-style: normal;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primaryDark};
   text-decoration: underline;
 `;
 
@@ -206,11 +185,9 @@ const LabelPreset = styled.div`
 
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
-export const ModuleHeader = ModuleHeaderPreset;
 export const ClickableText = ClickableTextPreset;
 export const LowPriorityText = LowPriorityTextPreset;
 export const Button = ButtonPreset;
-export const DropdownMenu = DropdownMenuPreset;
 export const Thumbnail = ThumbnailPreset;
 export const Gallery = GalleryPreset;
 export const Helpful = HelpfulPreset;

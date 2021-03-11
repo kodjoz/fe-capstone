@@ -17,7 +17,7 @@ class AddReviewModal extends React.Component {
       summary: null,
       body: ' ',
       characteristics: {}, //object of characteristic_ids & associated 1-5 values
-      photos: ['zsefvzuskehbfvzs'], //array of urls
+      photos: [], //array of urls
       photosUploaded: 0,
       name: null,
       email: null,
@@ -37,16 +37,25 @@ class AddReviewModal extends React.Component {
     this.setState({'characteristics': characteristics});
   }
 
-  addPhoto(button) {
-    button.preventDefault();
+  addPhoto(event) {
     //push url string to state's photos array, then
-    this.setState({photosUploaded: this.state.photosUploaded + 1}, () => {
-      if (this.state.photosUploaded >= 5) {
-        document.getElementById('upload-photo-btn').style.visibility = 'hidden';
-        document.getElementById('upload-photo-btn').style.height = '1px';
-        document.getElementById('upload-limit-reached').style.visibility = 'visible';
-      }
+    console.log('photo(s) added: ', event.target.files);
+    console.log('photo(s) added, stringify: ', JSON.stringify(event.target.files));
+    console.log('event files length:', event.target.files.length);
+    let photos = this.state.photos;
+    for (var key in event.target.files) {
+      if (photos.length < 5) { photos.push(event.target.files[key]); }
+    }
+    this.setState({photos: photos}, () => {
+      console.log('state photos: ', this.state.photos);
     });
+    // this.setState({photosUploaded: this.state.photosUploaded + 1}, () => {
+    //   if (this.state.photosUploaded >= 5) {
+    //     document.getElementById('upload-photo-btn').style.visibility = 'hidden';
+    //     document.getElementById('upload-photo-btn').style.height = '1px';
+    //     document.getElementById('upload-limit-reached').style.visibility = 'visible';
+    //   }
+    // });
   }
 
   submitReview(submit) {
@@ -60,7 +69,8 @@ class AddReviewModal extends React.Component {
       ' recommend: ', typeof recommended === 'boolean',
       ' name: ', typeof this.state.name === 'string',
       ' email: ', typeof this.state.email === 'string',
-      ' photos: ', typeof this.state.photos,
+      ' photos: ', typeof this.state.photos === 'object',
+      ' photo: ', typeof this.state.photos[0] === 'string',
       ' characteristics: ', typeof this.state.characteristics === 'object',
       ' characteristic value: ', typeof this.state.characteristics[64401] === 'number',
       'characteristics full vals: ', JSON.stringify(this.state.characteristics)
@@ -92,6 +102,12 @@ class AddReviewModal extends React.Component {
     if (!this.state.active) {
       return (<ReviewsButton onClick={()=>{ this.setState({active: !this.state.active}); }}>ADD A REVIEW  +</ReviewsButton>);
     } else {
+      let photoUploads;
+      if (this.state.photos.length < 5) {
+        photoUploads = <UploadPhoto type='file' accept='image/*' multiple onChange={this.addPhoto.bind(this)}/>;
+      } else {
+        photoUploads = <UploadLimitReached>Max. 5 photos limit reached - thanks for sharing!</UploadLimitReached>;
+      }
       let minBody;
       if (this.state.body.length < 50) {
         minBody = <SidenoteWarning>Minimum review length:  {this.state.body.length}/50</SidenoteWarning>;
@@ -108,15 +124,15 @@ class AddReviewModal extends React.Component {
             <Form>
               <Heading>Rating<Asterisk>&#42;</Asterisk></Heading>
               <StarRow name={'rating'} size={15} rating={0}></StarRow>
-              <input required type='radio' name='rating' value={1} onClick={this.setChanges} />
+              <input required type='radio' id={'rating1'} name='rating' value={1} onClick={this.setChanges} />
               <RadioLabel htmlFor={'rating1'} value={1}>1</RadioLabel>
-              <input required type='radio' name='rating' value={2} onClick={this.setChanges} />
+              <input required type='radio' id={'rating2'} name='rating' value={2} onClick={this.setChanges} />
               <RadioLabel htmlFor={'rating2'} value={2}>2</RadioLabel>
-              <input required type='radio' name='rating' value={3} onClick={this.setChanges} />
+              <input required type='radio' id={'rating3'} name='rating' value={3} onClick={this.setChanges} />
               <RadioLabel htmlFor={'rating3'} value={3}>3</RadioLabel>
-              <input required type='radio' name='rating' value={4} onClick={this.setChanges} />
+              <input required type='radio' id={'rating4'} name='rating' value={4} onClick={this.setChanges} />
               <RadioLabel htmlFor={'rating4'} value={4}>4</RadioLabel>
-              <input required type='radio' name='rating' value={5} onClick={this.setChanges} />
+              <input required type='radio' id={'rating5'} name='rating' value={5} onClick={this.setChanges} />
               <RadioLabel htmlFor={'rating5'} value={5}>5</RadioLabel>
               <Heading>Do you recommend this product? <Asterisk>&#42;</Asterisk></Heading>
               <input required type="radio" name='recommend' value={true} id="recommend-yes" onClick={this.setChanges} />
@@ -124,10 +140,6 @@ class AddReviewModal extends React.Component {
               <input required type="radio" name='recommend' value={false} onClick={this.setChanges} id="recommend-no" />
               <RadioLabel htmlFor="recommend-no" value={false}>No</RadioLabel>
               <Heading>Characteristics<Asterisk>&#42;</Asterisk></Heading>
-              {/* NOTE: characteristics will take array of objects, each object contains characteristic name, id, & value
-                //e.g. [{name: "Width", "id": 15, "value": 3.5000},{name: "Comfort", "id": 16, "value": 4.0000}]
-
-              */}
               {this.props.characteristics.map((characteristic) => {
                 return (
                   <div key={JSON.stringify(characteristic.id) + this.props.product_id.toString()}>
@@ -165,11 +177,11 @@ class AddReviewModal extends React.Component {
               />
               <br></br>
               {minBody}
-              {/* <Sidenote>Minimum review length: {50 - document.getElementById('rev-body').value.length / 50}</Sidenote> */}
               <Heading>Show us your style! Add product photos below:</Heading>
               <br></br>
-              <UploadLimitReached id={'upload-limit-reached'}>Max. 5 photos limit reached - thanks for sharing!</UploadLimitReached>
-              <UploadButton name={'images'} id={'upload-photo-btn'} onClick={this.addPhoto.bind(this)}>Upload Images</UploadButton>
+              {photoUploads}
+              {/* <input type='file' onChange={this.addPhoto.bind(this)}/> */}
+              {/* <UploadPhoto name={'images'} id={'upload-photo-btn'} onClick={this.addPhoto.bind(this)}>Upload Images</UploadPhoto> */}
               <Heading>Tell us your nickname<Asterisk>&#42;</Asterisk></Heading>
               <AddFormTextInput
                 required
@@ -290,9 +302,21 @@ const SubmitButton = styled(Button)`
   }
 `;
 
-const UploadButton = styled(SubmitButton)`
+//FIX ME!!!
+const UploadPhoto = styled.input`
   margin-top: -2em;
   margin-bottom: 2em;
+  text-transform: uppercase;
+  background-color: ${({ theme }) => theme.midLayer};
+  border: 1px solid ${({ theme }) => theme.borders};
+  color: ${({ theme }) => theme.lowPriorityText};
+  height: 4rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.midLight};
+    color: ${({ theme }) => theme.secondaryText};
+  }
 `;
 
 const Sidenote = styled(Italic)`
@@ -311,8 +335,9 @@ const Padding = styled.div`
 `;
 
 const UploadLimitReached = styled(Sidenote)`
-  visibility: hidden;
+  margin-top: 0.5rem;
   display: block;
+  font-size: 90%;
 `;
 
 AddReviewModal.propTypes = {
