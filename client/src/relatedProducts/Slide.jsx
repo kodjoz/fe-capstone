@@ -104,7 +104,9 @@ class Slide extends Component {
     return (
       <StyledSlide thumburl={thumb}>
         <Link to={{ pathname: `/products/${this.props.data.id}` }} key={this.props.data.id}>
-          {this.props.render(this.handleButtonClick)}
+          <Button onClick={this.handleButtonClick}>
+            {this.props.buttonText}
+          </Button>
           <StyledSlideInfo
             data={this.props.data}
             reviewData={this.state.reviewData}
@@ -120,7 +122,8 @@ class Slide extends Component {
 Slide.propTypes = {
   data: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
-  cardButtonClick: PropTypes.func.isRequired
+  cardButtonClick: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired
 };
 
 const StyledSlide = styled.div`
@@ -141,6 +144,19 @@ const StyledSlide = styled.div`
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
    }
+`;
+
+const Button = styled.button`
+  font-size: 1em;
+  color: white;
+  background: none;
+  border-radius: 3px;
+  border: none;
+  position: absolute;
+  top: 0%;
+  left: 80%;
+  cursor: pointer;
+  background: rgba(0,0,0,0.19);
 `;
 
 export default Slide;
