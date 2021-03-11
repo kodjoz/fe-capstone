@@ -26,31 +26,7 @@ class ImageGallery extends React.Component {
   }
 
   setImageIndex(index) {
-    this.setState({
-      imageIndex: index
-    });
-  }
-
-  nextImage() {
-    this.setState((prev) => {
-      let imageIndex = prev.imageIndex + 1;
-      let thumbnailIndex = Math.floor(imageIndex / 7);
-      return {
-        imageIndex: imageIndex,
-        thumbnailsIndex: thumbnailIndex
-      };
-    });
-  }
-
-  previousImage() {
-    this.setState((prev) => {
-      let imageIndex = prev.imageIndex - 1;
-      let thumbnailIndex = Math.floor(imageIndex / 7);
-      return {
-        imageIndex: imageIndex,
-        thumbnailsIndex: thumbnailIndex
-      };
-    });
+    this.setState({ imageIndex: index });
   }
 
   walkImage(isForward) {
@@ -58,10 +34,7 @@ class ImageGallery extends React.Component {
     this.setState((prev) => {
       let imageIndex = prev.imageIndex + step;
       let thumbnailIndex = Math.floor(imageIndex / 7);
-      return {
-        imageIndex: imageIndex,
-        thumbnailIndex: thumbnailIndex
-      };
+      return { imageIndex, thumbnailIndex };
     });
   }
 
@@ -74,15 +47,11 @@ class ImageGallery extends React.Component {
   }
 
   setExpandedView(val) {
-    this.setState({
-      expandedView: val
-    });
+    this.setState({ expandedView: val });
   }
 
   setZoomedView(val) {
-    this.setState({
-      zoomedView: val
-    });
+    this.setState({ zoomedView: val });
   }
 
   render() {
