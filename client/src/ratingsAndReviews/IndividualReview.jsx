@@ -157,7 +157,7 @@ const Recommend = styled.div`
 `;
 
 const RedCheck = styled.div`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primaryDark};
   font-size: 1.2em;
 `;
 
