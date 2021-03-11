@@ -12,7 +12,6 @@ const Modal = (props) => {
     }
   };
 
-  if (!props.show) { return null; }
   return (
     <ModalBackground onClick={closeModal}>
       <ModalContent setExpandedView={props.setExpandedView}>
@@ -23,7 +22,6 @@ const Modal = (props) => {
 };
 
 Modal.propTypes = {
-  show: PropTypes.bool,
   children: PropTypes.element,
   setExpandedView: PropTypes.func
 };

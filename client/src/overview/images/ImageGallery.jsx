@@ -2,16 +2,16 @@ import React from 'react';
 // import styled from 'styled-components';
 import { StyleType } from '../types.js';
 import ImageIconList from './ImageIconList';
-import Modal from './expanded/Modal';
+import ExpandedCarousel from './expanded/ExpandedCarousel';
+// import Modal from './expanded/Modal';
 import Carousel from './carousel/Carousel';
-import IconIndicatorList from './expanded/IconIndicatorList';
+// import IconIndicatorList from './expanded/IconIndicatorList';
 
 class ImageGallery extends React.Component {
 
   constructor(props) {
     super(props);
     this.containerRef = React.createRef();
-    this.modalRef = React.createRef();
     this.state = {
       imageIndex: 0,
       thumbnailsIndex: 0,
@@ -75,18 +75,6 @@ class ImageGallery extends React.Component {
       dimensions.height = container.height;
     }
 
-
-    let modalDimensions = {
-      width: 1,
-      height: 1
-    };
-    if (this.modalRef && this.modalRef.current) {
-      const modalContainer = this.modalRef.current.getBoundingClientRect();
-      modalDimensions.width = modalContainer.width;
-      modalDimensions.height = modalContainer.height;
-    }
-    console.log('modalDimension', modalDimensions);
-
     return (
       <React.Fragment>
         <div style={style} ref={this.containerRef}>
@@ -107,19 +95,15 @@ class ImageGallery extends React.Component {
             </ImageIconList>
           </Carousel>
         </div>
-        <Modal show={this.state.expandedView}
-          setExpandedView={this.setExpandedView}>
-          <div style={style} ref={this.modalRef}>
-            <Carousel photos={photos}
-              dimensions={modalDimensions}
-              imageIndex={this.state.imageIndex}
-              walkImage={this.walkImage} >
-            </Carousel>
-            <IconIndicatorList photos={photos}
-              selectedIndex={this.state.imageIndex}
-              setImageIndex={this.setImageIndex} />
-          </div>
-        </Modal>
+        { this.state.expandedView &&
+        <ExpandedCarousel
+          setExpandedView={this.setExpandedView}
+          imageIndex={this.state.imageIndex}
+          walkImage={this.walkImage}
+          setImageIndex={this.setImageIndex}
+          photos={photos} >
+        </ExpandedCarousel>
+        }
         <button onClick={() => {
           this.setExpandedView(true);
         }}>Expand</button>
