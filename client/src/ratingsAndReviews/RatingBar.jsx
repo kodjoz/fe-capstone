@@ -22,7 +22,7 @@ const RatingBar = (props) => {
 const RenderedBar = (props) => {
   return (
     <Bar percent={props.percent} empty={100 - props.percent}>
-      <Full percent={props.percent}></Full>
+      <Filled percent={props.percent}></Filled>
       <Empty empty={props.empty}></Empty>
     </Bar>
   );
@@ -31,7 +31,7 @@ const RenderedBar = (props) => {
 const StarRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
   padding-left: 0.5rem;
   cursor: pointer;
   width: 100%;
@@ -49,12 +49,11 @@ const Bar = styled.div`
   border-radius: 0;
   height: 1rem;
   flex-basis: 45%;
-  align-self: flex-end;
   border: 1px solid ${({ theme }) => theme.borders};
   display: flex;
 `;
 
-const Full = styled.div`
+const Filled = styled.div`
   border-radius: 0;
   height: 99%;
   width: ${props => props.percent}%;
@@ -70,7 +69,6 @@ const Empty = styled.div`
 `;
 
 const Percentage = styled(LowPriorityText)`
-  margin-top: 0.5rem;
   flex-basis: 15%;
   text-align: right;
 `;

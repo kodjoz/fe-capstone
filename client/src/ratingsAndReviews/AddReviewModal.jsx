@@ -38,23 +38,21 @@ class AddReviewModal extends React.Component {
   }
 
   addPhoto(event) {
+    console.log(event);
     //push url string to state's photos array, then
-    console.log('photo(s) added: ', event.target.files);
-    console.log('photo(s) added, stringify: ', JSON.stringify(event.target.files));
-    console.log('event files length:', event.target.files.length);
-    let photos = this.state.photos;
-    for (var key in event.target.files) {
-      if (photos.length < 5) { photos.push(event.target.files[key]); }
-    }
-    this.setState({photos: photos}, () => {
-      console.log('state photos: ', this.state.photos);
-    });
-    // this.setState({photosUploaded: this.state.photosUploaded + 1}, () => {
-    //   if (this.state.photosUploaded >= 5) {
-    //     document.getElementById('upload-photo-btn').style.visibility = 'hidden';
-    //     document.getElementById('upload-photo-btn').style.height = '1px';
-    //     document.getElementById('upload-limit-reached').style.visibility = 'visible';
-    //   }
+    // console.log('photo(s) added: ', event.target.files);
+    // console.log('photo(s) added, stringify: ', JSON.stringify(event.target.files));
+    // console.log('event files length:', event.target.files.length);
+    // return axios.post('s3.us-east-2.amazonaws.com/', {
+    //   //'arn:aws:s3:us-east-2:242939985293:accesspoint/imgcatch'
+    // });
+
+    // let photos = this.state.photos;
+    // for (var key in event.target.files) {
+    //   if (photos.length < 5) { photos.push(event.target.files[key]); }
+    // }
+    // this.setState({photos: photos}, () => {
+    //   console.log('state photos: ', this.state.photos);
     // });
   }
 

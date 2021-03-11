@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Tile, Button, Label } from '../globalStyles.js';
+import { Tile, Button, Label, Italic } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
@@ -129,8 +129,15 @@ class ReviewsList extends React.Component {
         characteristics.push({name: key, id: item[key]['id'], value: item[key]['value']});
       }
     }
-    if (!this.state.reviews) {
-      return (<AddReviewModal product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>);
+    if (!this.state.reviews || this.state.reviews.length === 0) {
+      return (
+        <div>
+          <h2>Ratings &amp; Reviews</h2>
+          <Summary>No one has written a review for this product yet. Tell us what you think and you could be the first!</Summary>
+          <Pad></Pad><AddReviewModal product_id={this.state.product_id} characteristics={characteristics} productName={'????'}></AddReviewModal>
+          <br></br>
+          <Pad> </Pad>
+        </div>);
     } else {
       return (
         <div>
@@ -164,7 +171,7 @@ class ReviewsList extends React.Component {
 const SortWrap = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 0.7rem;
+  margin-right: 1.5rem;
   position: relative;
   height: 4rem;
   overflow: visible;
@@ -217,6 +224,21 @@ const Footer = styled.div`
 
 const HeaderLabel = styled(Label)`
   z-index: -1;
+`;
+
+const Summary = styled(Italic)`
+  display: block;
+  font-size: 1.8rem;
+  margin-top: -0.7rem;
+  margin-bottom: 0.5rem;
+  margin-left: 3.5rem;
+`;
+
+const Pad = styled.div`
+  display: inline;
+  margin-left: 3.3rem;
+  height: 5vh;
+  padding-bottom: 20rem;
 `;
 
 ReviewsList.propTypes = {
