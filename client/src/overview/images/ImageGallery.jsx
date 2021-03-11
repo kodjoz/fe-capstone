@@ -11,6 +11,7 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.containerRef = React.createRef();
+    this.modalRef = React.createRef();
     this.state = {
       imageIndex: 0,
       thumbnailsIndex: 0,
@@ -74,6 +75,18 @@ class ImageGallery extends React.Component {
       dimensions.height = container.height;
     }
 
+
+    let modalDimensions = {
+      width: 1,
+      height: 1
+    };
+    if (this.modalRef && this.modalRef.current) {
+      const modalContainer = this.modalRef.current.getBoundingClientRect();
+      modalDimensions.width = modalContainer.width;
+      modalDimensions.height = modalContainer.height;
+    }
+    console.log('modalDimension', modalDimensions);
+
     return (
       <React.Fragment>
         <div style={style} ref={this.containerRef}>
@@ -96,9 +109,16 @@ class ImageGallery extends React.Component {
         </div>
         <Modal show={this.state.expandedView}
           setExpandedView={this.setExpandedView}>
-          <IconIndicatorList photos={photos}
-            selectedIndex={this.state.imageIndex}
-            setImageIndex={this.setImageIndex} />
+          <div style={style} ref={this.modalRef}>
+            <Carousel photos={photos}
+              dimensions={modalDimensions}
+              imageIndex={this.state.imageIndex}
+              walkImage={this.walkImage} >
+            </Carousel>
+            <IconIndicatorList photos={photos}
+              selectedIndex={this.state.imageIndex}
+              setImageIndex={this.setImageIndex} />
+          </div>
         </Modal>
         <button onClick={() => {
           this.setExpandedView(true);

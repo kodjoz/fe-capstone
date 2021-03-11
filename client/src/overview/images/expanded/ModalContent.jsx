@@ -5,16 +5,19 @@ import PropTypes from 'prop-types';
 
 const ContentDiv = styled.div`
   position: fixed;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  border: solid 15px ${Palette.foreground};
-  border-radius: 1px;
+  top: 10%;
+  left: 20%;
+  width: 60%;
+  height: 80%;
+  // border: solid 15px ${Palette.foreground};
+  border: none;
+  // border-radius: 1px;
 `;
 
 const CloseButton = styled.button`
-
+  position: absolute;
+  right: 1rem;
+  z-index: 101;
 `;
 
 const ModalContent = (props) => {
