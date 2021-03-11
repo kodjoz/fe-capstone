@@ -20,6 +20,7 @@ const ImageList = (props) => {
     const offset = props.imageIndex * props.displayWidth;
     return (
       <Image key={photo.url}
+        onImageClick={props.onImageClick}
         photo={photo}
         cursor={props.cursor}
         offset={offset} />
@@ -36,7 +37,8 @@ ImageList.propTypes = {
   photos: PhotoArray,
   displayWidth: PropTypes.number,
   imageIndex: PropTypes.number,
-  cursor: PropTypes.string
+  cursor: PropTypes.string,
+  onImageClick: PropTypes.func
 };
 
 export default ImageList;

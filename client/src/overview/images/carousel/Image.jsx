@@ -16,8 +16,14 @@ const ImageDiv = styled.div`
 `;
 
 const Image = (props) => {
+
+  const handleClick = () => {
+    props.onImageClick();
+  };
+
   return (
     <ImageDiv
+      onClick={handleClick}
       cursor={props.cursor}
       url={props.photo.url}
       offset={props.offset} />
@@ -27,7 +33,8 @@ const Image = (props) => {
 Image.propTypes = {
   photo: PhotoType,
   offset: PropTypes.number,
-  cursor: PropTypes.string
+  cursor: PropTypes.string,
+  onImageClick: PropTypes.func
 };
 
 export default Image;

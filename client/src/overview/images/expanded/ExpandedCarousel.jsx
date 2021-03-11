@@ -38,6 +38,7 @@ class ExpandedCarousel extends React.Component {
     const content = dimensions ? (
       <React.Fragment>
         <Carousel photos={this.props.photos}
+          onImageClick={() => { console.log('triggering zoomed view'); }}
           cursor={'cell'}
           dimensions={dimensions}
           imageIndex={this.props.imageIndex}
