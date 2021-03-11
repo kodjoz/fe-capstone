@@ -30,9 +30,8 @@ const RenderedBar = (props) => {
 
 const StarRow = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
   padding-left: 0.5rem;
   cursor: pointer;
   width: 100%;
@@ -50,7 +49,6 @@ const Bar = styled.div`
   border-radius: 0;
   height: 1rem;
   flex-basis: 45%;
-  align-self: flex-end;
   border: 1px solid ${({ theme }) => theme.borders};
   display: flex;
 `;
@@ -71,7 +69,6 @@ const Empty = styled.div`
 `;
 
 const Percentage = styled(LowPriorityText)`
-  margin-top: 0.5rem;
   flex-basis: 15%;
   text-align: right;
 `;

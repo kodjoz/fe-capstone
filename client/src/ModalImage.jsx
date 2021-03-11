@@ -35,7 +35,7 @@ class ModalImage extends React.Component {
     }
     return (
       <ModalWindow onClick={this.displayModal.bind(this)}>
-        <Border>
+        <NightBorder>
           <ImageWrapper>
             <PositionedButton
               ref={this.ref}>X</PositionedButton>
@@ -44,7 +44,7 @@ class ModalImage extends React.Component {
               alt="Customer image upload full-size"
             />
           </ImageWrapper>
-        </Border>
+        </NightBorder>
       </ModalWindow>
     );
   }
@@ -65,17 +65,16 @@ const ImageWrapper = styled.div`
   z-index: 100;
   display: flex;
   flex-direction: column;
-
-  max-height: 50vh;
-  max-width: 65vw;
-  border: solid 15px ${({ theme }) => theme.midLayer};
+  max-height: 65vh;
+  max-width: 80vw;
+  border: solid 10px ${({ theme }) => theme.midLayer};
   border-radius: 5px;
 `;
 
 const FullImage = styled.img`
   border-radius: 0;
   display: inline;
-  height: 50vh;
+  height: 65vh;
   width:
   object-fit: cover;
 `;
@@ -88,7 +87,7 @@ const PositionedButton = styled(Button)`
   align-self: flex-end;
 `;
 
-const Border = styled.div`
+const NightBorder = styled.div`
   border: solid 1px white;
   margin: 1px;
 `;
