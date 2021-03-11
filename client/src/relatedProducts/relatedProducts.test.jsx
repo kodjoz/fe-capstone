@@ -2,7 +2,7 @@ import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { render, screen, waitFor,
-  fireEvent } from '@testing-library/react';
+  fireEvent, within } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import RelatedProducts from './RelatedProducts';
 import { BrowserRouter } from 'react-router-dom';
@@ -65,9 +65,7 @@ it('renders a related products module', async () => {
       <RelatedProducts product_id={19089} product={productData} />
     </BrowserRouter>
   );
-  // waitFor(() => screen.findByText('Related Loading')).then(( => {
 
-  // }));
   // test that the loading screen disappears
   await waitFor(() => {
     expect(screen.queryByText('RELATED LOADING')).not.toBeInTheDocument();
@@ -92,6 +90,7 @@ it('shows a modal when star buttons are clicked', async () => {
         ctx.json(productData)
       );
     }),
+    ...handlers
   );
   render(
     <BrowserRouter>
@@ -105,5 +104,68 @@ it('shows a modal when star buttons are clicked', async () => {
   fireEvent.click(screen.getByText('x'));
   await waitFor(() => {
     expect(screen.getByText('Comparing')).toBeTruthy();
+  });
+});
+
+it('adds products to the users outfit', async () => {
+  server.use(
+    rest.get('/api/products/19089/related', (req, res, ctx) => {
+      return res(
+        ctx.json(relatedData)
+      );
+    }),
+    rest.get('/api/products/:product_id', (req, res, ctx) => {
+      return res(
+        ctx.json(productData)
+      );
+    }),
+    ...handlers
+  );
+  render(
+    <BrowserRouter>
+      <RelatedProducts product_id={19089} product={productData} />
+    </BrowserRouter>
+  );
+  await waitFor(() => {
+    expect(screen.queryByText('RELATED LOADING')).not.toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByText('Add Product to Outfit'));
+  await waitFor(() => {
+    const carousel = document.getElementById('Your OutfitContainer');
+    let name = within(carousel).getByText(productData.name);
+    expect(name).toBeTruthy();
+  });
+});
+
+it('removes products from the users outfit', async () => {
+  server.use(
+    rest.get('/api/products/19089/related', (req, res, ctx) => {
+      return res(
+        ctx.json(relatedData)
+      );
+    }),
+    rest.get('/api/products/:product_id', (req, res, ctx) => {
+      return res(
+        ctx.json(productData)
+      );
+    }),
+    ...handlers
+  );
+  render(
+    <BrowserRouter>
+      <RelatedProducts product_id={19089} product={productData} />
+    </BrowserRouter>
+  );
+  await waitFor(() => {
+    expect(screen.queryByText('RELATED LOADING')).not.toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByText('Add Product to Outfit'));
+  await waitFor(() => {
+    const carousel = document.getElementById('Your OutfitContainer');
+    let name = within(carousel).getByText(productData.name);
+    fireEvent.click(within(carousel).getByText('x'));
+    expect(name).not.toBeInTheDocument();
   });
 });
