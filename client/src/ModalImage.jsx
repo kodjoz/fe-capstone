@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Thumbnail, Button, ModalBackground, Palette } from './globalStyles.js';
+import { Thumbnail, Button, ModalBackground} from './globalStyles.js';
 import styled from 'styled-components';
 
 class ModalImage extends React.Component {
@@ -35,14 +35,16 @@ class ModalImage extends React.Component {
     }
     return (
       <ModalWindow onClick={this.displayModal.bind(this)}>
-        <ImageWrapper>
-          <PositionedButton
-            ref={this.ref}>X</PositionedButton>
-          <FullImage
-            src={this.props.src}
-            alt="Customer image upload full-size"
-          />
-        </ImageWrapper>
+        <NightBorder>
+          <ImageWrapper>
+            <PositionedButton
+              ref={this.ref}>X</PositionedButton>
+            <FullImage
+              src={this.props.src}
+              alt="Customer image upload full-size"
+            />
+          </ImageWrapper>
+        </NightBorder>
       </ModalWindow>
     );
   }
@@ -50,35 +52,44 @@ class ModalImage extends React.Component {
 
 const ModalWindow = styled(ModalBackground)`
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
 `;
 
-const PositionedButton = styled(Button)`
-  display: inline;
-  position: fixed;
-  margin-left: 45%;
-  opacity: 75%;
-  cursor: pointer;
-`;
-
 const ImageWrapper = styled.div`
   z-index: 100;
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  height: 50%;
-  width: 50%;
-  border: solid 15px ${Palette.foreground};
-  border-radius: 1px;
+  display: flex;
+  flex-direction: column;
+  max-height: 65vh;
+  max-width: 80vw;
+  border: solid 10px ${({ theme }) => theme.midLayer};
+  border-radius: 5px;
 `;
 
 const FullImage = styled.img`
+  border-radius: 0;
   display: inline;
-  height: 100%;
-  width: 100%;
+  height: 65vh;
+  width:
+  object-fit: cover;
+`;
+
+const PositionedButton = styled(Button)`
+  display: inline;
+  position: absolute;
+  opacity: 75%;
+  cursor: pointer;
+  align-self: flex-end;
+`;
+
+const NightBorder = styled.div`
+  border: solid 1px white;
+  margin: 1px;
 `;
 
 ModalImage.propTypes = {
