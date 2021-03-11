@@ -5,9 +5,9 @@ import { PhotoArray } from '../../types';
 
 const IndicatorsDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   position: absolute;
-  bottom: 0;
+  bottom: 2rem;
   width: 100%;
 `;
 
@@ -16,7 +16,6 @@ const Icon = styled.div`
   height: 2rem;
   border-radius: 50%;
   background-color: ${props => props.selected ? 'red' : 'black'};
-  margin: 2rem;
   cursor: pointer;
 `;
 
@@ -26,9 +25,8 @@ const IconIndicatorList = (props) => {
     let selected = index === props.selectedIndex;
     const updateSelected = () => props.setImageIndex(index);
     return (
-      <Icon
+      <Icon key={val.url}
         onClick={updateSelected}
-        key={val.url}
         selected={selected} />
     );
   });

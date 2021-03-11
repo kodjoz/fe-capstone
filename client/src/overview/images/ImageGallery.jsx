@@ -4,6 +4,7 @@ import { StyleType } from '../types.js';
 import ImageIconList from './ImageIconList';
 import Modal from './expanded/Modal';
 import Carousel from './carousel/Carousel';
+import IconIndicatorList from './expanded/IconIndicatorList';
 
 class ImageGallery extends React.Component {
 
@@ -22,10 +23,6 @@ class ImageGallery extends React.Component {
     this.setExpandedView = this.setExpandedView.bind(this);
     this.setZoomedView = this.setZoomedView.bind(this);
     this.walkImage = this.walkImage.bind(this);
-  }
-
-  componentDidMount() {
-    // console.log(this.containerRef.current.getBoundingClientRect());
   }
 
   setImageIndex(index) {
@@ -128,13 +125,12 @@ class ImageGallery extends React.Component {
             </ImageIconList>
           </Carousel>
         </div>
-        <Modal photos={photos}
-          imageIndex={this.state.imageIndex}
-          show={this.state.expandedView}
-          zoom={this.state.zoomedView}
-          setImageIndex={this.setImageIndex}
-          setExpandedView={this.setExpandedView}
-          setZoomedView={this.setZoomedView}/>
+        <Modal show={this.state.expandedView}
+          setExpandedView={this.setExpandedView}>
+          <IconIndicatorList photos={photos}
+            selectedIndex={this.state.imageIndex}
+            setImageIndex={this.setImageIndex} />
+        </Modal>
         <button onClick={() => {
           this.setExpandedView(true);
         }}>Expand</button>

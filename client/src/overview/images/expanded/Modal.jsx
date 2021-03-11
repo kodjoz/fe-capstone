@@ -3,7 +3,6 @@ import { ModalBackground } from '../../../globalStyles';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import ModalContent from './ModalContent';
-import { PhotoArray } from '../../types.js';
 
 const Modal = (props) => {
 
@@ -16,26 +15,17 @@ const Modal = (props) => {
   if (!props.show) { return null; }
   return (
     <ModalBackground onClick={closeModal}>
-      <ModalContent
-        photos={props.photos}
-        imageIndex={props.imageIndex}
-        zoom={props.zoom}
-        setImageIndex={props.setImageIndex}
-        setExpandedView={props.setExpandedView}
-        setZoomedView={props.setZoomedView}>
+      <ModalContent setExpandedView={props.setExpandedView}>
+        {props.children}
       </ModalContent>
     </ModalBackground>
   );
 };
 
 Modal.propTypes = {
-  photos: PhotoArray,
-  imageIndex: PropTypes.number,
   show: PropTypes.bool,
-  zoom: PropTypes.bool,
-  setImageIndex: PropTypes.func,
-  setExpandedView: PropTypes.func,
-  setZoomedView: PropTypes.func
+  children: PropTypes.element,
+  setExpandedView: PropTypes.func
 };
 
 export default Modal;

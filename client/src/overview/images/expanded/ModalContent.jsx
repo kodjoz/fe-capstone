@@ -2,9 +2,6 @@ import React from 'react';
 import { Palette } from '../../../globalStyles';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { PhotoArray } from '../../types';
-import IconIndicatorList from './IconIndicatorList';
-import Carousel from '../carousel/Carousel';
 
 const ContentDiv = styled.div`
   position: fixed;
@@ -31,24 +28,14 @@ const ModalContent = (props) => {
       <CloseButton onClick={closeModal}>
         Close
       </CloseButton>
-      <Carousel >
-
-      </Carousel>
-      <IconIndicatorList
-        setImageIndex={props.setImageIndex}
-        photos={props.photos}
-        selectedIndex={props.imageIndex}/>
+      {props.children}
     </ContentDiv>
   );
 };
 
 ModalContent.propTypes = {
-  photos: PhotoArray,
-  imageIndex: PropTypes.number,
-  zoom: PropTypes.bool,
-  setImageIndex: PropTypes.func,
+  children: PropTypes.element,
   setExpandedView: PropTypes.func,
-  setZoomedView: PropTypes.func
 };
 
 export default ModalContent;
