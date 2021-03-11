@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slide from './Slide.jsx';
 import StyledModal from './Modal.jsx';
-import styled from 'styled-components';
 
 class RelatedCarousel extends React.Component {
   constructor(props) {
@@ -55,9 +54,7 @@ class RelatedCarousel extends React.Component {
               data={product}
               value={product}
               cardButtonClick={this.cardButtonClick}
-              render={onClick => (
-                <Button onClick={onClick}>★</Button>
-              )}>
+              buttonText='★'>
             </Slide>
           );
         })}
@@ -75,18 +72,6 @@ class RelatedCarousel extends React.Component {
   }
 }
 
-const Button = styled.button `
-  font-size: 1em;
-  color: white;
-  background: none;
-  border-radius: 3px;
-  border: none;
-  position: absolute;
-  top: 0%;
-  left: 80%;
-  cursor: pointer;
-  background: rgba(0,0,0,0.19);
-`;
 
 RelatedCarousel.propTypes = {
   data: PropTypes.object.isRequired,
