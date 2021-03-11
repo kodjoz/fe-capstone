@@ -35,14 +35,16 @@ class ModalImage extends React.Component {
     }
     return (
       <ModalWindow onClick={this.displayModal.bind(this)}>
-        <ImageWrapper>
-          <PositionedButton
-            ref={this.ref}>X</PositionedButton>
-          <FullImage
-            src={this.props.src}
-            alt="Customer image upload full-size"
-          />
-        </ImageWrapper>
+        <Border>
+          <ImageWrapper>
+            <PositionedButton
+              ref={this.ref}>X</PositionedButton>
+            <FullImage
+              src={this.props.src}
+              alt="Customer image upload full-size"
+            />
+          </ImageWrapper>
+        </Border>
       </ModalWindow>
     );
   }
@@ -59,20 +61,23 @@ const ModalWindow = styled(ModalBackground)`
 const ImageWrapper = styled.div`
   z-index: 100;
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 25%;
   left: 25%;
+  height: 100%;
   max-height: 60vh;
-  max-width: 60vh;
-  border: solid 15px ${Palette.foreground};
+  max-width: 50vw;
+  border: solid 15px ${({ theme }) => theme.midLayer};
   border-radius: 5px;
 `;
 
 const PositionedButton = styled(Button)`
   display: inline;
   position: absolute;
-  margin-left: 91%;
   opacity: 75%;
   cursor: pointer;
+  align-self: flex-end;
 `;
 
 
@@ -81,6 +86,12 @@ const FullImage = styled.img`
   display: inline;
   height: 100%;
   width: 100%;
+  object-fit: contain;
+`;
+
+const Border = styled.div`
+  border: solid 1px white;
+  margin: 1px;
 `;
 
 ModalImage.propTypes = {

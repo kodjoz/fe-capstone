@@ -38,6 +38,7 @@ class AddReviewModal extends React.Component {
   }
 
   addPhoto(event) {
+    console.log(event);
     //push url string to state's photos array, then
     // console.log('photo(s) added: ', event.target.files);
     // console.log('photo(s) added, stringify: ', JSON.stringify(event.target.files));
