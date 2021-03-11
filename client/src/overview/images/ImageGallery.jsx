@@ -106,9 +106,6 @@ class ImageGallery extends React.Component {
           photos={photos} >
         </ExpandedCarousel>
         }
-        <button onClick={() => {
-          this.setExpandedView(true);
-        }}>Expand</button>
       </React.Fragment>
     );
   }

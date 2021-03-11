@@ -15,7 +15,8 @@ const Icon = styled.div`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: ${props => props.selected ? 'red' : 'black'};
+  background-color: ${props => props.selected ? props.theme.primaryDark : 'black'};
+  border: 1px solid ${props => props.theme.borders};
   cursor: pointer;
 `;
 
