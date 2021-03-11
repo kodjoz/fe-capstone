@@ -19,7 +19,10 @@ const ImageList = (props) => {
     // const offset = index * props.displayWidth;
     const offset = props.imageIndex * props.displayWidth;
     return (
-      <Image key={photo.url} photo={photo} offset={offset} />
+      <Image key={photo.url}
+        photo={photo}
+        cursor={props.cursor}
+        offset={offset} />
     );
   });
   return (
@@ -32,7 +35,8 @@ const ImageList = (props) => {
 ImageList.propTypes = {
   photos: PhotoArray,
   displayWidth: PropTypes.number,
-  imageIndex: PropTypes.number
+  imageIndex: PropTypes.number,
+  cursor: PropTypes.string
 };
 
 export default ImageList;

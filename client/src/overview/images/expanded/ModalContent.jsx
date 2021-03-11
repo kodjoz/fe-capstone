@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 const ContentDiv = styled.div`
   position: fixed;
   top: 10%;
-  left: 20%;
-  width: 60%;
+  left: 15%;
+  width: 70%;
   height: 80%;
   // border: solid 15px ${Palette.foreground};
   border: none;

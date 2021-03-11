@@ -24,6 +24,7 @@ const Carousel = (props) => {
   return (
     <React.Fragment>
       <ImageList photos={props.photos}
+        cursor={props.cursor}
         displayWidth={props.dimensions.width}
         imageIndex={props.imageIndex} />
       {props.children}
@@ -51,6 +52,7 @@ Carousel.propTypes = {
   imageIndex: PropTypes.number,
   setImageIndex: PropTypes.func,
   walkImage: PropTypes.func,
+  cursor: PropTypes.string
 };
 
 export default Carousel;

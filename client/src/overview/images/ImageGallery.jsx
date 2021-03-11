@@ -79,6 +79,7 @@ class ImageGallery extends React.Component {
       <React.Fragment>
         <div style={style} ref={this.containerRef}>
           <Carousel
+            cursor={'zoom-in'}
             photos={photos}
             dimensions={dimensions}
             imageIndex={this.state.imageIndex}

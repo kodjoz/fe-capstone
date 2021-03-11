@@ -12,11 +12,13 @@ const ImageDiv = styled.div`
   flex: 0 0 auto;
   transform: translateX(-${props => props.offset}px);
   transition: transform .5s ease-in-out;
+  cursor: ${props => props.cursor};
 `;
 
 const Image = (props) => {
   return (
     <ImageDiv
+      cursor={props.cursor}
       url={props.photo.url}
       offset={props.offset} />
   );
@@ -24,7 +26,8 @@ const Image = (props) => {
 
 Image.propTypes = {
   photo: PhotoType,
-  offset: PropTypes.number
+  offset: PropTypes.number,
+  cursor: PropTypes.string
 };
 
 export default Image;
