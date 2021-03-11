@@ -43,9 +43,17 @@ class QuestionAndAnswer extends React.Component {
           data.results.sort((a, b) => {
             return b.question_helpfulness - a.question_helpfulness;
           });
-          this.setState({
-            questions: data.results,
-          });
+
+          if (!this.state.questions) {
+            this.setState({
+              questions: data.results,
+            });
+          } else {
+            this.setState({
+              questions: data.results,
+              questionResults: data.results.slice(0, this.state.questionResults.length)
+            });
+          }
         })
         .catch((err) => { console.error(err); });
     } else {
@@ -54,7 +62,8 @@ class QuestionAndAnswer extends React.Component {
   }
 
   componentDidMount() {
-    this.getQuestions(1, 999)
+    // needs to be 5 or the 'More Answered Questions' button disappears
+    this.getQuestions(1, 5)
       .then(() => {
         this.setState({ questionResults: this.state.questions.slice(0, 4) });
       });
@@ -62,7 +71,7 @@ class QuestionAndAnswer extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.product_id !== prevProps.product_id) {
-      this.getQuestions(1, 999)
+      this.getQuestions(1, 5)
         .then(() => this.setState({ questionResults: this.state.questions.slice(0, 4) }));
     }
   }
@@ -90,38 +99,30 @@ class QuestionAndAnswer extends React.Component {
   }
 
   getMoreQuestions() {
-    let currentLength = this.state.questionResults.length;
-    let totalLength = this.state.questions.length;
+    if (this.state.questions.length >= 4) {
+      this.getQuestions(1, 999)
+        .then(() => {
+          let currentLength = this.state.questionResults.length;
+          let totalLength = this.state.questions.length;
 
-    if (currentLength < totalLength) {
-      this.setState({ questionResults: this.state.questions.slice(0, currentLength + 2)} );
+          if (currentLength < totalLength) {
+            this.setState({ questionResults: this.state.questions.slice(0, currentLength + 2)} );
+          }
+        })
+        .catch((err) => { console.error('There was an error getting more questions when you clicked "More Answered Questions"', err); });
     }
   }
   // if the user wants to load more answers click on the button and update the state
   getMoreAnswers() {
-    this.getQuestions(1, 999)
-      .then(() => {
-        this.setState({
-          getMoreAnswers: !this.state.getMoreAnswers
-        });
-      })
-      .catch((err) => { console.error('There was an error getting more answers', err); });
+    // passes this down as a prop to the Question component, API call is made from question component
+    this.setState({ getMoreAnswers: !this.state.getMoreAnswers });
   }
 
   markOrReport(endpoint, id, handler) {
-    // set question helpfulness
+    // set helpfulness or report question or answer to this endpoint
     return axios.put(`/api/qa/${endpoint}/${id}/${handler}`)
-      .then(() => {
-        // send message to API to mark question as helpful, then rerender the state
-        // Only query as many questions as we already have and no more
-        var totalLength = this.state.questions.length;
-        var visibleLength = this.state.questionResults.length;
-
-        return this.getQuestions(1, totalLength)
-          .then(() => this.setState({ questionResults: this.state.questions.slice(0, visibleLength)}));
-      })
       .catch((err) => {
-        console.error('error when marking question as helpful', err);
+        console.error(`Error when clicking ${endpoint} as ${handler}`, err);
       });
   }
 
@@ -143,10 +144,13 @@ class QuestionAndAnswer extends React.Component {
           value={this.state.searchTerm}/>
         <QuestionList
           loadAnswers={this.state.getMoreAnswers ? true : false}
-          loadQuestions={this.state.getMoreQuestions}>
+          loadQuestions={this.state.getMoreQuestions}
+          listHeight={this.state.getMoreQuestions ? '50vh' : 'initial'}>
           {questions.map((question) => (<Question
             key={question.question_id}
             markOrReport={this.markOrReport}
+            getQuestions={this.getQuestions}
+            numQuestions={questions.length}
             getMoreAnswers={this.state.getMoreAnswers}
             question={question}
             product={this.props.product} />))}
@@ -195,10 +199,9 @@ const QuestionList = styled.section`
   display: inline-grid;
   grid-row: span 1;
   overflow: auto;
-  height: 50vh;
+  max-height: 50vh;
   grid-template-areas:
     "styled-question";
-
 
 `;
 

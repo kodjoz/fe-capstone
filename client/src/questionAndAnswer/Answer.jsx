@@ -16,19 +16,23 @@ class Answer extends React.Component {
   }
 
   handleHelpfulOrReport(endpoint) {
-    var currentAnswer = this.props.answer.id;
 
-    if (endpoint === 'helpful') {
-      this.props.markOrReport('answers', currentAnswer, endpoint);
-      this.setState({ isHelpful: true });
-    } else if (endpoint === 'report') {
-      this.props.markOrReport('answers', currentAnswer, endpoint);
-      this.setState({ isReported: true });
+    if (this.state.isHelpful && endpoint === 'helpful') {
+      alert('You already marked this answer as helpful!');
+    } else if (this.state.isReported && endpoint === 'report') {
+      alert('You already reported this answer!');
+    } else {
+      this.props.markOrReport('answers', this.props.answer.answer_id, endpoint);
+      if (endpoint === 'helpful') {
+        this.setState({ isHelpful: true });
+      } else if (endpoint === 'report') {
+        this.setState({ isReported: true });
+      }
+      this.props.answer.helpfulness += 1;
     }
   }
 
   render() {
-
     if (!this.props.answer) {
       return '';
     }
@@ -45,11 +49,11 @@ class Answer extends React.Component {
 
     return (
       <AnswerWrapper>
-        <AnswerSummary><strong>A:</strong> {answer.body}</AnswerSummary>
+        <AnswerSummary><strong>A: </strong>{answer.body}</AnswerSummary>
         <Gallery>
           {answer.photos.length !== 0 ? answer.photos.map((photo) => {
             return (
-              <ModalImage src={photo} key={photo} />
+              <ModalImage src={photo.url} key={photo.id} />
             );
           }) : null}
         </Gallery>
@@ -84,7 +88,6 @@ const AnswerLinks = styled.span`
 const HelpfulLinkPreset = styled(HelpfulYes)`
   text-decoration: ${props => props.underline};
 `;
-
 
 Answer.propTypes = {
   answer: PropTypes.object.isRequired,
