@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { StyleType } from './types.js';
 
 const PriceContainer = styled.p`
-  padding: 0.25rem;
+  padding: 0.5rem;
 `;
 
 const StruckSpan = styled.span`
   text-decoration: line-through;
-  padding-right: 0.5rem;
+  padding-right: 1rem;
 `;
 
-const RedSpan = styled.span`
-  color: red;
+const ColorSpan = styled.span`
+  color: ${props => props.theme.primaryDark};
 `;
 
 const DisplayPrice = styled.span`
-  color: black;
+  color: ${props => props.theme.primaryText};
   font-weight: 300;
 `;
 
@@ -28,7 +28,7 @@ const PriceDisplay = (props) => {
     return (
       <PriceContainer>
         <StruckSpan>${props.selectedStyle.original_price}</StruckSpan>
-        <RedSpan>${props.selectedStyle.sale_price}</RedSpan>
+        <ColorSpan>${props.selectedStyle.sale_price}</ColorSpan>
       </PriceContainer>
     );
   } else {
