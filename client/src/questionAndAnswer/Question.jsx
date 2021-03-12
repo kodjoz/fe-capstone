@@ -85,7 +85,7 @@ class Question extends React.Component {
     if (!answers.length) {
       answers = [];
     } else if (this.props.getMoreAnswers && this.state.answers.length < 2) {
-      this.getAnswers(1, this.state.answers.length);
+      this.getAnswers(1, 999);
     } else if (!this.props.getMoreAnswers && this.state.answers.length > 2) {
       answers = this.state.answers.slice(0, 2);
     }
