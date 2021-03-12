@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Tile } from '../globalStyles';
 
-const Container = styled.div`
+const Container = styled(Tile)`
   padding: 2rem;
 `;
 

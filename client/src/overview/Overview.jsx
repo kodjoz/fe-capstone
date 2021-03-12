@@ -10,12 +10,16 @@ import ProductDetail from './ProductDetail';
 import PriceDisplay from './PriceDisplay';
 import StyleSelector from './styles/StyleSelector';
 import styled from 'styled-components';
+import { Tile } from '../globalStyles';
+import ProductFeatures from './ProductFeatures';
 
 const Grid = styled.div`
-  border: 1px solid ${({ theme }) => theme.borders};
   display: grid;
   grid-template-columns: 60% 40%;
   grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const LeftContainer = styled.div`
@@ -24,7 +28,7 @@ const LeftContainer = styled.div`
   min-height: 700px;
 `;
 
-const RightContainer = styled.div`
+const RightContainer = styled(Tile)`
   grid-column-start: 2;
   grid-column-end: 3;
   padding: 2rem;
@@ -140,6 +144,7 @@ class OverviewContainer extends React.Component {
           <AddToCart />
         </RightContainer>
         <ProductDescription product={this.props.product}/>
+        <ProductFeatures product={this.props.product} />
       </Grid>
     );
   }
