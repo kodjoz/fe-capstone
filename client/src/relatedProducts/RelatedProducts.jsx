@@ -12,6 +12,8 @@ class RelatedProductsWrapper extends React.Component {
       relatedProductsData: {},
       isLoading: true
     };
+
+    this.data = {};
   }
 
   //get list of related products using productId prop
@@ -27,7 +29,8 @@ class RelatedProductsWrapper extends React.Component {
       }));
     }).then(() => {
       this.setState({
-        isLoading: false
+        isLoading: false,
+        relatedProductsData: this.data
       });
     }).catch((err) => {
       console.log(err);
@@ -42,11 +45,7 @@ class RelatedProductsWrapper extends React.Component {
         product_id: id
       }
     }).then(({data}) => {
-      var oldProductData = this.state.relatedProductsData;
-      oldProductData[data.id] = data;
-      this.setState({
-        relatedProductsData: oldProductData
-      });
+      this.data[data.id] = data;
     });
   }
 
@@ -56,6 +55,7 @@ class RelatedProductsWrapper extends React.Component {
 
   componentWillUnmount() {
     // fix Warning: Can't perform a React state update on an unmounted component
+    this.data = {};
     this.setState = () => {
       return;
     };

@@ -152,7 +152,7 @@ const CarouselButton = styled.button`
   font-size: 3rem;
 
   &:hover {
-    background: ${props => props.theme.midLight};
+    background: ${props => props.theme.midLayer};
     opacity: 1;
   }
 
