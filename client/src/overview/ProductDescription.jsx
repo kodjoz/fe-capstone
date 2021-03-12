@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Tile } from '../globalStyles';
+
+const Container = styled(Tile)`
+  padding: 2rem;
+`;
 
 const ProductDescription = (props) => {
 
@@ -15,10 +21,10 @@ const ProductDescription = (props) => {
   const description = props.product.description ? <p>{props.product.description}</p> : '';
 
   return (
-    <div>
+    <Container>
       {slogan}
       {description}
-    </div>
+    </Container>
   );
 };
 

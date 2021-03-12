@@ -5,17 +5,19 @@ import { StyleType } from '../types';
 
 
 const Checkmark = styled.div`
-  width: 1.5rem;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  background-color: white;
-  border: 1px solid black;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 2rem;
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.primaryText};
+  border: 1px solid ${props => props.theme.primaryText};
   border-radius: 50%;
   padding: none;
   text-align: center;
   cursor: pointer;
   position: relative;
-  left: 3rem;
+  left: 6rem;
 `;
 
 const StyleThumbnail = (props) => {
@@ -36,10 +38,10 @@ const StyleThumbnail = (props) => {
         backgroundImage: `url(${thumbUrl})`,
         backgroundSize: 'cover',
         cursor: 'pointer',
-        width: '4rem',
-        height: '4rem',
+        width: '8rem',
+        height: '8rem',
         border: '1px solid black',
-        borderRadius: '2rem'
+        borderRadius: '4rem'
       }}>
       {checkmark}
     </div>

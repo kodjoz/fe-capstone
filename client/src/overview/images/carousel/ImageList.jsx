@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Image from './Image';
-import { PhotoArray } from '../types';
+import { PhotoArray } from '../../types';
 import styled from 'styled-components';
 
 const ImageFrame = styled.div`
@@ -19,7 +19,11 @@ const ImageList = (props) => {
     // const offset = index * props.displayWidth;
     const offset = props.imageIndex * props.displayWidth;
     return (
-      <Image key={photo.url} photo={photo} offset={offset} />
+      <Image key={photo.url}
+        onImageClick={props.onImageClick}
+        photo={photo}
+        cursor={props.cursor}
+        offset={offset} />
     );
   });
   return (
@@ -32,7 +36,9 @@ const ImageList = (props) => {
 ImageList.propTypes = {
   photos: PhotoArray,
   displayWidth: PropTypes.number,
-  imageIndex: PropTypes.number
+  imageIndex: PropTypes.number,
+  cursor: PropTypes.string,
+  onImageClick: PropTypes.func
 };
 
 export default ImageList;
