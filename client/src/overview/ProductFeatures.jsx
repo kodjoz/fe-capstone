@@ -1,7 +1,8 @@
 import React from 'react';
-import ProductType from './types';
 import { Tile } from '../globalStyles';
 import styled from 'styled-components';
+import { ProductType } from './types.js';
+
 
 const PaddedTile = styled(Tile)`
   padding: 2rem;
