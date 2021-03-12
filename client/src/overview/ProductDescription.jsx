@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  padding: 2rem;
+`;
 
 const ProductDescription = (props) => {
 
@@ -15,10 +20,10 @@ const ProductDescription = (props) => {
   const description = props.product.description ? <p>{props.product.description}</p> : '';
 
   return (
-    <div>
+    <Container>
       {slogan}
       {description}
-    </div>
+    </Container>
   );
 };
 

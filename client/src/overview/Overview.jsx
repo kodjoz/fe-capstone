@@ -12,20 +12,22 @@ import StyleSelector from './styles/StyleSelector';
 import styled from 'styled-components';
 
 const Grid = styled.div`
-border: 1px solid ${({ theme }) => theme.borders};
-display: grid;
-grid-column-gap: 1rem;
+  border: 1px solid ${({ theme }) => theme.borders};
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-column-gap: 1rem;
 `;
 
 const LeftContainer = styled.div`
-grid-column-start: 1;
-grid-column-end: 2;
-min-height: 700px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  min-height: 700px;
 `;
 
 const RightContainer = styled.div`
-grid-column-start: 2;
-grid-column-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  padding: 2rem;
 `;
 
 class OverviewContainer extends React.Component {
