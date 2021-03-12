@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import StarRow from '../starRow.jsx';
+import config from '../../../server/config.js';
 import { Button, Tile, ModalBackground, Italic, Palette, TextArea, FormTextInput } from '../globalStyles';
 
 
@@ -21,6 +21,8 @@ class AddReviewModal extends React.Component {
       photosUploaded: 0,
       name: null,
       email: null,
+      hoverActive: false,
+      hoverRating: 0
     };
     this.setChanges = this.setChanges.bind(this);
     this.setCharacteristic = this.setCharacteristic.bind(this);
@@ -38,10 +40,31 @@ class AddReviewModal extends React.Component {
   }
 
   addPhoto(event) {
-    console.log(event);
+    var img = new FormData;
+    img.append("image", event.target.files[0]);
+    //console.log(event);
     //push url string to state's photos array, then
-    // console.log('photo(s) added: ', event.target.files);
-    // console.log('photo(s) added, stringify: ', JSON.stringify(event.target.files));
+    console.log('photo(s) added: ', event.target.files);
+    return axios.post('https://api.imgbb.com/1/upload', {
+      headers: {
+        'mimeType': 'multipart/form-data',
+        'Content-Type': 'image/*'
+      },
+      params: {
+        key: config.imgBBtoken,
+        image: img
+      }
+    })
+      .then((res)=> {
+        console.log('post result: ', res);
+        var photos = this.state.photos;
+        photos.push(res.data.url);
+        console.log('state photos: ', photos);
+        this.setState({photos: photos});
+      })
+      .catch((error)=> {
+        console.log('error posting photo: ', error);
+      });
     // console.log('event files length:', event.target.files.length);
     // return axios.post('s3.us-east-2.amazonaws.com/', {
     //   //'arn:aws:s3:us-east-2:242939985293:accesspoint/imgcatch'
@@ -96,10 +119,83 @@ class AddReviewModal extends React.Component {
       });
   }
 
+  ratingHover(value) {
+    console.log('hovering');
+    //console.log('value, ', value, 'event: ', event, 'target: ', event.target);
+    this.setState({ hoverRating: value, hoverActive: true});
+  }
+
+  ratingHoverOff() {
+    this.setState({hoverActive: false});
+  }
+
+  ratingSet(value) {
+    this.setState({rating: value});
+  }
+
+
   render() {
     if (!this.state.active) {
       return (<ReviewsButton onClick={()=>{ this.setState({active: !this.state.active}); }}>ADD A REVIEW  +</ReviewsButton>);
     } else {
+      let star1;
+      let star2;
+      let star3;
+      let star4;
+      let star5;
+      if (this.state.hoverActive) {
+        if (this.state.hoverRating >= 1) {
+          star1 = <Star id={'rating1'} name={'rating'} value={1} onMouseEnter={()=>{ this.ratingHover(1); }} onClick={()=>{ this.ratingSet(1); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</Star>;
+        } else {
+          star1 = <Star id={'rating1'} name={'rating'} value={1} onMouseEnter={()=>{ this.ratingHover(1); }} onClick={()=>{ this.ratingSet(1); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.hoverRating >= 2) {
+          star2 = <Star id={'rating1'} name={'rating'} value={2} onMouseEnter={()=>{ this.ratingHover(2); }} onClick={()=>{ this.ratingSet(2); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</Star>;
+        } else {
+          star2 = <Star id={'rating2'} name={'rating'} value={2} onMouseEnter={()=>{ this.ratingHover(2); }} onClick={()=>{ this.ratingSet(2); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.hoverRating >= 3) {
+          star3 = <Star id={'rating3'} name={'rating'} value={3} onMouseEnter={()=>{ this.ratingHover(3); }} onClick={()=>{ this.ratingSet(3); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</Star>;
+        } else {
+          star3 = <Star id={'rating3'} name={'rating'} value={3} onMouseEnter={()=>{ this.ratingHover(3); }} onClick={()=>{ this.ratingSet(3); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.hoverRating >= 4) {
+          star4 = <Star id={'rating4'} name={'rating'} value={4} onMouseEnter={()=>{ this.ratingHover(4); }} onClick={()=>{ this.ratingSet(4); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</Star>;
+        } else {
+          star4 = <Star id={'rating4'} name={'rating'} value={4} onMouseEnter={()=>{ this.ratingHover(4); }} onClick={()=>{ this.ratingSet(4); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.hoverRating >= 5) {
+          star5 = <Star id={'rating5'} name={'rating'} value={5} onMouseEnter={()=>{ this.ratingHover(5); }} onClick={()=>{ this.ratingSet(5); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</Star>;
+        } else {
+          star5 = <Star id={'rating5'} name={'rating'} value={5} onMouseEnter={()=>{ this.ratingHover(5); }} onClick={()=>{ this.ratingSet(5); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+      } else {
+        if (this.state.rating >= 1) {
+          star1 = <RatedStar id={'rating1'} name={'rating'} value={1} onMouseEnter={()=>{ this.ratingHover(1); }} onClick={()=>{ this.ratingSet(1); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</RatedStar>;
+        } else {
+          star1 = <Star id={'rating1'} name={'rating'} value={1} onMouseEnter={()=>{ this.ratingHover(1); }} onClick={()=>{ this.ratingSet(1); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.rating >= 2) {
+          star2 = <RatedStar id={'rating1'} name={'rating'} value={2} onMouseEnter={()=>{ this.ratingHover(2); }} onClick={()=>{ this.ratingSet(2); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</RatedStar>;
+        } else {
+          star2 = <Star id={'rating2'} name={'rating'} value={2} onMouseEnter={()=>{ this.ratingHover(2); }} onClick={()=>{ this.ratingSet(2); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.rating >= 3) {
+          star3 = <RatedStar id={'rating3'} name={'rating'} value={3} onMouseEnter={()=>{ this.ratingHover(3); }} onClick={()=>{ this.ratingSet(3); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</RatedStar>;
+        } else {
+          star3 = <Star id={'rating3'} name={'rating'} value={3} onMouseEnter={()=>{ this.ratingHover(3); }} onClick={()=>{ this.ratingSet(3); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.rating >= 4) {
+          star4 = <RatedStar id={'rating4'} name={'rating'} value={4} onMouseEnter={()=>{ this.ratingHover(4); }} onClick={()=>{ this.ratingSet(4); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</RatedStar>;
+        } else {
+          star4 = <Star id={'rating4'} name={'rating'} value={4} onMouseEnter={()=>{ this.ratingHover(4); }} onClick={()=>{ this.ratingSet(4); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+        if (this.state.rating >= 5) {
+          star5 = <RatedStar id={'rating5'} name={'rating'} value={5} onMouseEnter={()=>{ this.ratingHover(5); }} onClick={()=>{ this.ratingSet(5); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9733;</RatedStar>;
+        } else {
+          star5 = <Star id={'rating5'} name={'rating'} value={5} onMouseEnter={()=>{ this.ratingHover(5); }} onClick={()=>{ this.ratingSet(5); }} onMouseLeave={()=>{ this.ratingHoverOff(); }}>&#9734;</Star>;
+        }
+      }
       let photoUploads;
       if (this.state.photos.length < 5) {
         photoUploads = <UploadPhoto type='file' accept='image/*' multiple onChange={this.addPhoto.bind(this)}/>;
@@ -113,7 +209,7 @@ class AddReviewModal extends React.Component {
         minBody = <Sidenote>Minimum length reached!</Sidenote>;
       }
       return (
-        <ModalBackground>
+        <Modal>
           <ReviewForm>
             <CloseButton onClick={()=>{ this.setState({active: false}); }}>X</CloseButton>
             <Title>Write Your Review</Title>
@@ -121,17 +217,7 @@ class AddReviewModal extends React.Component {
             <ProductName>About {this.props.product.name}</ProductName>
             <Form>
               <Heading>Rating<Asterisk>&#42;</Asterisk></Heading>
-              <StarRow name={'rating'} size={15} rating={0}></StarRow>
-              <input required type='radio' id={'rating1'} name='rating' value={1} onClick={this.setChanges} />
-              <RadioLabel htmlFor={'rating1'} value={1}>1</RadioLabel>
-              <input required type='radio' id={'rating2'} name='rating' value={2} onClick={this.setChanges} />
-              <RadioLabel htmlFor={'rating2'} value={2}>2</RadioLabel>
-              <input required type='radio' id={'rating3'} name='rating' value={3} onClick={this.setChanges} />
-              <RadioLabel htmlFor={'rating3'} value={3}>3</RadioLabel>
-              <input required type='radio' id={'rating4'} name='rating' value={4} onClick={this.setChanges} />
-              <RadioLabel htmlFor={'rating4'} value={4}>4</RadioLabel>
-              <input required type='radio' id={'rating5'} name='rating' value={5} onClick={this.setChanges} />
-              <RadioLabel htmlFor={'rating5'} value={5}>5</RadioLabel>
+              {star1} {star2} {star3} {star4} {star5}
               <Heading>Do you recommend this product? <Asterisk>&#42;</Asterisk></Heading>
               <input required type="radio" name='recommend' value={true} id="recommend-yes" onClick={this.setChanges} />
               <RadioLabel htmlFor="recommend-yes" value={true}>Yes</RadioLabel>
@@ -211,11 +297,17 @@ class AddReviewModal extends React.Component {
               <Heading></Heading>
             </Form>
           </ReviewForm>
-        </ModalBackground>
+        </Modal>
       );
     }
   }
 }
+
+const Modal = styled(ModalBackground)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ReviewsButton = styled(Button)`
   margin-top: 0.7rem;
@@ -336,6 +428,19 @@ const UploadLimitReached = styled(Sidenote)`
   margin-top: 0.5rem;
   display: block;
   font-size: 90%;
+`;
+
+const Star = styled.div`
+  display: inline;
+  font-size: 2.5rem;
+  font-family: Times;
+  color: #D8DCD6;
+  cursor: pointer;
+  margin-right: -0.4rem;
+`;
+
+const RatedStar = styled(Star)`
+  color: ${({ theme }) => theme.primary}
 `;
 
 AddReviewModal.propTypes = {
