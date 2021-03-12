@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const CategoryHeader = styled.h4`
-  text-transform: uppercase;
-  font-weight: 300;
+const NameHeader = styled.h1`
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
 `;
 
-const NameHeader = styled.h1`
-  margin-top: 0.5rem;
+const CategoryHeader = styled.h2`
+  text-transform: uppercase;
+  font-weight: 300;
   margin-bottom: 0.5rem;
 `;
 
@@ -19,8 +19,8 @@ const ProductDetail = (props) => {
   }
   return (
     <div>
-      <CategoryHeader>{props.product.category}</CategoryHeader>
       <NameHeader>{props.product.name}</NameHeader>
+      <CategoryHeader>{props.product.category}</CategoryHeader>
     </div>
   );
 };
