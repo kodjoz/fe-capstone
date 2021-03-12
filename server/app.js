@@ -1,6 +1,5 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const github = require('./config');
@@ -21,7 +20,6 @@ const options = {
   logLevel: 'error',
 };
 // create the proxy
-app.use(cors());
 const proxy = createProxyMiddleware(options);
 // middleware
 // use the proxy and create the '/api' endpoint that communicates with our actual API
