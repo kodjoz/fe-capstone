@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 class ThemeSlider extends React.Component {
@@ -23,12 +21,12 @@ class ThemeSlider extends React.Component {
   render() {
     return (
       <SlideWrapper>
-        <FontAwesomeIcon icon={faSun} size='lg' color="orange" />
+        <Icons>🌞</Icons>
         <Switch htmlFor="toggleTheme">
           <Slide title="Switch between light and dark theme" id="toggleTheme" type="checkbox" onClick={this.handleClick}></Slide>
           <Slider slideClicked={this.state.isClicked}></Slider>
         </Switch>
-        <FontAwesomeIcon icon={faMoon} size='lg' color={this.state.isClicked ? 'white' : 'darkblue'}/>
+        <Icons>🌙</Icons>
       </SlideWrapper>
     );
   }
@@ -78,6 +76,10 @@ const Slider = styled.span`
     -webkit-transition: .4s;
     transition: .4s;
   }
+`;
+
+const Icons = styled.span`
+  font-size: 2rem;
 `;
 
 // Needs the attribute type=checkbox in the JSX or it won't work
