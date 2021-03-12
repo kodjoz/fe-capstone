@@ -5,14 +5,15 @@ import { StyleType } from '../types.js';
 import ThumbnailRows from './ThumbnailRows';
 
 const Header = styled.h3`
-  font-size: 1rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   font-weight: 300;
+  margin-bottom: 2rem;
 `;
 
 const BoldSpan = styled.span`
   font-weight: bold;
-  padding-right: 0.3rem;
+  padding-right: 1rem;
 `;
 
 const StyleSelector = (props) => {
