@@ -10,7 +10,7 @@ const ArrowButton = styled.button`
 `;
 
 const ArrowButtonLeft = styled(ArrowButton)`
-  left: 120px;
+  left: ${props => props.left};
 `;
 
 const ArrowButtonRight = styled(ArrowButton)`

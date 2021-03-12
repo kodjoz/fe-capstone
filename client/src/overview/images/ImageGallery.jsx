@@ -78,7 +78,7 @@ class ImageGallery extends React.Component {
     return (
       <React.Fragment>
         <div style={style} ref={this.containerRef}>
-          <Carousel
+          <Carousel leftArrowOffset={'120px'}
             cursor={'zoom-in'}
             onImageClick={() => { this.setExpandedView(true); } }
             photos={photos}

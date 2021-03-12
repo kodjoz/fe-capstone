@@ -30,6 +30,7 @@ const Carousel = (props) => {
         imageIndex={props.imageIndex} />
       {props.children}
       <ArrowButtonLeft
+        left={props.leftArrowOffset}
         show={showLeftArrow}
         onClick={previousImage}>
         &lt;
@@ -45,6 +46,7 @@ const Carousel = (props) => {
 
 Carousel.propTypes = {
   children: PropTypes.element,
+  leftArrowOffset: PropTypes.string,
   photos: PhotoArray,
   dimensions: PropTypes.shape({
     width: PropTypes.number,

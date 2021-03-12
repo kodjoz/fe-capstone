@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 const ContentDiv = styled.div`
   position: fixed;
-  top: 10%;
-  left: 15%;
-  width: 70%;
-  height: 80%;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
   // border: solid 15px ${Palette.foreground};
   border: none;
   // border-radius: 1px;
