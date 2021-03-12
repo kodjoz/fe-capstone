@@ -40,12 +40,20 @@ class AddReviewModal extends React.Component {
   }
 
   addPhoto(event) {
-    console.log(event);
+    var img = new FormData;
+    img.append("image", event.target.files[0]);
+    //console.log(event);
     //push url string to state's photos array, then
     console.log('photo(s) added: ', event.target.files);
-    return axios.post('https://api.imgbb.com/1/image', {
-      key: config.imgBBtoken,
-      image: event.target.files[0],
+    return axios.post('https://api.imgbb.com/1/upload', {
+      headers: {
+        'mimeType': 'multipart/form-data',
+        'Content-Type': 'image/*'
+      },
+      params: {
+        key: config.imgBBtoken,
+        image: img
+      }
     })
       .then((res)=> {
         console.log('post result: ', res);
