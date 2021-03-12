@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Tile, Button, Label, Italic } from '../globalStyles.js';
+import { Button, Label, Italic, TileWithLabel } from '../globalStyles.js';
 import IndividualReview from './IndividualReview.jsx';
 import Ratings from './Ratings.jsx';
 import FactorsBreakdown from './FactorsBreakdown.jsx';
@@ -181,7 +181,7 @@ const RatingsReviewsPanel = styled.div`
   display: flex;
 `;
 
-const SharpTile = styled(Tile)`
+const SharpTile = styled(TileWithLabel)`
   border-radius: 0;
 `;
 
