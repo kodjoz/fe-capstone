@@ -21,9 +21,9 @@ class RelatedProductsWrapper extends React.Component {
     let product_id = this.props.product_id;
     axios.get(`/api/products/${product_id}/related`, {
       params: {
-        product_id: {product_id}
+        product_id: { product_id }
       }
-    }).then(({data}) => {
+    }).then(({ data }) => {
       return Promise.all(data.map((id) => {
         return this.getProductData(id);
       }));
@@ -44,7 +44,7 @@ class RelatedProductsWrapper extends React.Component {
       params: {
         product_id: id
       }
-    }).then(({data}) => {
+    }).then(({ data }) => {
       this.data[data.id] = data;
     });
   }
@@ -73,8 +73,8 @@ class RelatedProductsWrapper extends React.Component {
           render={(data) => {
             return <RelatedCarousel
               data={data}
-              currentProduct={this.props.product}/>;
-          }}/>
+              currentProduct={this.props.product} />;
+          }} />
         <CarouselWrapper
           name='Your Outfit'
           data={{}}
