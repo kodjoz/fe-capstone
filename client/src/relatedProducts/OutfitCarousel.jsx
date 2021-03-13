@@ -20,9 +20,10 @@ class OutfitCarousel extends React.Component {
   componentDidMount() {
     //set state to user's outfit data from local storage if present
     var localStorage = JSON.parse(window.localStorage.getItem('relatedProducts'));
-    if (localStorage && localStorage.yourOutfit) {
+    console.log(localStorage);
+    if (localStorage && localStorage.outfit) {
       this.setState({
-        outfit: localStorage.yourOutfit
+        outfit: localStorage.outfit
       });
     }
   }
