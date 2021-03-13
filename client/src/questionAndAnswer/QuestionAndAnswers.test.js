@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import handlers from './../mocks/qa';
-import 'jest-styled-components';
 import { render, waitFor } from '@testing-library/react';
 import { setupServer } from 'msw/node';
 import QuestionAndAnswer from './QuestionAndAnswer';
@@ -24,7 +23,7 @@ afterAll(() => {
 
 describe('Questions & Answers', () => {
 
-  xit('renders the Question & Answers module', async () => {
+  it('renders the Question & Answers module', async () => {
     const { getByText } = render(
       <QuestionAndAnswer product={productData} product_id={19089} />
     );
