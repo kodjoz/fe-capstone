@@ -98,7 +98,11 @@ class Slide extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div></div>;
+      return <StyledSlide>
+        <Button onClick={this.handleButtonClick}>
+          {this.props.buttonText}
+        </Button>
+      </StyledSlide>;
     }
     let thumb = this.state.defaultStyle.photos[0].thumbnail_url;
     return (
