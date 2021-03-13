@@ -100,6 +100,7 @@ const StyledCarouselWrapper = styled(TileWithLabel)`
   align-items: center;
   margin-top: 4em;
   position: relative;
+  border: none;
 `;
 const CarouselContainer = styled.div`
   border-radius: 0px;
