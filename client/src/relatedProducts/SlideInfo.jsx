@@ -12,9 +12,12 @@ const SlideInfo = (props) => {
   }
   //if the item is on sale, put sale price in red and strikethrough original price
   let saleSection = <p> {props.data.default_price}</p>;
-  if (props.data.sale_price) {
-    saleSection = <SalePrice>{props.data.sale_price}</SalePrice>;
-    saleSection += <p> <s>{props.data.default_price}</s></p>;
+  if (props.defaultStyle.sale_price) {
+    saleSection = (
+      <p>
+        <SalePrice>{props.defaultStyle.sale_price}</SalePrice>
+        <s>{props.defaultStyle.original_price}</s>
+      </p>);
   }
   return (
     <div className={props.className}>
@@ -29,6 +32,7 @@ const SlideInfo = (props) => {
 SlideInfo.propTypes = {
   className: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  defaultStyle: PropTypes.object,
   reviewData: PropTypes.object
 };
 
