@@ -162,7 +162,7 @@ const StyledModal = styled(Modal)`
 
 const CloseButton = styled(Button)`
   position: sticky;
-  top: 5%;
+  top: 2%;
   left: 90%;
   z-index: 1;
   padding: 0 0.75rem;
