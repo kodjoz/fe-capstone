@@ -13,19 +13,22 @@ class OutfitCarousel extends React.Component {
     this.addProductClickHandler = this.addProductClickHandler.bind(this);
 
     this.state = {
-      yourOutfit: {}
+      outfit: {}
     };
   }
 
   componentDidMount() {
+    //set state to user's outfit data from local storage if present
     var localStorage = JSON.parse(window.localStorage.getItem('relatedProducts'));
     if (localStorage && localStorage.yourOutfit) {
       this.setState({
-        yourOutfit: localStorage.yourOutfit
+        outfit: localStorage.yourOutfit
       });
     }
   }
+
   componentDidUpdate() {
+    //update local storage to reflect changed outfit
     window.localStorage.setItem('relatedProducts', JSON.stringify(this.state));
   }
 
@@ -34,23 +37,24 @@ class OutfitCarousel extends React.Component {
   }
 
   removeFromOutfit(product) {
-    let currentOutfit = this.state.yourOutfit;
+    let currentOutfit = this.state.outfit;
     delete currentOutfit[product.id];
     this.setState({
-      yourOutfit: currentOutfit
+      outfit: currentOutfit
     });
   }
 
   addToOutfit(newProduct) {
-    let currentOutfit = this.state.yourOutfit;
+    let currentOutfit = this.state.outfit;
     currentOutfit[newProduct['id']] = newProduct;
     this.setState({
-      yourOutfit: currentOutfit
+      outfit: currentOutfit
     });
   }
 
   addProductClickHandler(event) {
     event.preventDefault();
+    //current product can only be added once
     event.target.setAttribute('disabled', true);
     this.addToOutfit(this.props.currentProduct);
   }
@@ -65,7 +69,7 @@ class OutfitCarousel extends React.Component {
         <FirstSlide onClick={this.addProductClickHandler}>
           <p>Add Product to Outfit</p>
         </FirstSlide>
-        {Object.values(this.state.yourOutfit).map((product) => {
+        {Object.values(this.state.outfit).map((product) => {
           return <StyledSlide data={product}
             cardButtonClick={this.removeProductClickHandler}
             key={product.id}
