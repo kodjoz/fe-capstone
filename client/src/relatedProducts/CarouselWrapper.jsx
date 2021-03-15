@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { TileWithLabel, Label } from '../globalStyles';
 
 class CarouselWrapper extends React.Component {
   constructor(props) {
@@ -92,35 +93,14 @@ CarouselWrapper.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-const Label = styled.div`
-  width: 15rem;
-  height: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-left: -30px;
-  background-color: ${props => props.theme.primary};
-
-  h3 {
-    color: ${props => props.theme.topLayer};
-    transform-origin: 0 0;
-    transform: rotate(270deg);
-    bottom: 0;
-    position: absolute;
-    left: 0;
-    width: 350px;
-    margin-left: 4px;
-  }
-`;
-
-
-const StyledCarouselWrapper = styled.div`
+const StyledCarouselWrapper = styled(TileWithLabel)`
   border-radius: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 4em;
   position: relative;
+  border: none;
 `;
 const CarouselContainer = styled.div`
   border-radius: 0px;

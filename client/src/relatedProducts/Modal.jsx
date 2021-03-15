@@ -66,10 +66,12 @@ const Modal = React.forwardRef((props, ref) => {
           ref={ref}
           type="button"
           onClick={handleClose}>x</CloseButton>
-        <LowPriorityText>Comparing</LowPriorityText>
         <HeaderRow>
-          <p>{currentProduct.name}</p>
-          <p>{data.name}</p>
+          <LowPriorityText>Comparing</LowPriorityText>
+          <div>
+            <p>{currentProduct.name}</p>
+            <p>{data.name}</p>
+          </div>
         </HeaderRow>
         {table}
       </ModalTable>
@@ -93,15 +95,18 @@ const Row = styled.tr`
 `;
 
 const HeaderRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.25em;
+  padding-bottom: 0.25em;
   position: sticky;
-  top: 2.5em;
+  top: 0em;
   background: ${props => props.theme.midLight};
+  margin-top: 1rem;
 
-  p {
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  div > p {
     font-weight: bold;
     padding: 0.5em;
     margin: 0;
@@ -157,7 +162,7 @@ const StyledModal = styled(Modal)`
 
 const CloseButton = styled(Button)`
   position: sticky;
-  top: 5%;
+  top: 2%;
   left: 90%;
   z-index: 1;
   padding: 0 0.75rem;

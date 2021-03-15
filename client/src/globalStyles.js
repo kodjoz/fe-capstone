@@ -58,6 +58,10 @@ const TilePreset = styled.div`
   border: 1px solid ${({ theme }) => theme.borders};
 `;
 
+const TileWithLabelPreset = styled(TilePreset)`
+  margin-left: 3rem;
+`;
+
 //NOTE: font not finalized, we may wish to use an alt to Garamont so using <Italic> rather than manually setting font-style may save you future reworking
 const ItalicPreset = styled.span`
   font-style: italic;
@@ -168,7 +172,7 @@ const LabelPreset = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  margin-left: -30px;
+  margin-left: -3rem;
   background-color: ${props => props.theme.primary};
 
   h3 {
@@ -178,13 +182,14 @@ const LabelPreset = styled.div`
     bottom: 0;
     position: absolute;
     left: 0;
-    width: 350px;
-    margin-left: 4px;
+    width: 35rem;
+    margin-left: 0.5rem;
   }
 `;
 
 export const GlobalStyle = GlobalPreset;
 export const Tile = TilePreset;
+export const TileWithLabel = TileWithLabelPreset;
 export const ClickableText = ClickableTextPreset;
 export const LowPriorityText = LowPriorityTextPreset;
 export const Button = ButtonPreset;
