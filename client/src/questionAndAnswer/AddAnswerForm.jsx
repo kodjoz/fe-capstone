@@ -1,112 +1,204 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'; // trying to see if I need to import Axios here because it's already imported in parent
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Tile, ModalBackground, GridLabel, FormTextInput, TextArea, Button, LowPriorityText } from '../globalStyles';
 
-class AddAnswer extends React.Component {
-  constructor(props) {
-    super(props);
+// class AddAnswer extends React.Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      name: '',
-      body: '',
-      email: ''
-    };
+//     this.state = {
+//       name: '',
+//       body: '',
+//       email: ''
+//     };
 
-    this.updateForm = this.updateForm.bind(this);
-    this.submitAnswer = this.submitAnswer.bind(this);
-  }
+//     this.updateForm = this.updateForm.bind(this);
+//     this.submitAnswer = this.submitAnswer.bind(this);
+//   }
 
-  submitAnswer(e) {
+//   submitAnswer(e) {
+//     e.preventDefault;
+//     if (!this.state.name) {
+//       alert('You must enter the following: name');
+//     } else if (!this.state.email) {
+//       alert('You must enter the following: email');
+//     } else if (!this.state.body) {
+//       alert('You must enter the following: body');
+//     } else {
+//       return axios.post(`/api/qa/questions/${props.question.id}/answers`, {
+//         name: this.state.name,
+//         body: this.state.body,
+//         email: this.state.email
+//       })
+//         .then((response) => {
+//           console.log('Submission response', response.status, response.statusText);
+//         })
+//         .then(() => { props.handleClick(); })
+//         .catch((err) => { console.error('Error while submitting an answer', err); });
+//     }
+//   }
+
+//   updateForm(e) {
+//     const name = e.target.name;
+//     const value = e.target.value;
+
+//     this.setState({
+//       [name]: value
+//     });
+//   }
+
+//   render() {
+//     let showModal = props.toggle ? 'block' : 'none';
+//     let randomValue = Math.random();
+
+//     return (
+//       <AnswerModal display={showModal}>
+//         <AnswerWrapper>
+//           <Title>Product: {props.product ? props.product.name : ''} | Submit an Answer</Title>
+//           <Subtitle>Q: {props.question.body}</Subtitle>
+//           <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
+//             <FormTextInput
+//               type="text"
+//               id={'name' + randomValue}
+//               name="name"
+//               maxLength="60"
+//               required
+//               placeholder="Example: jack543!"
+//               onChange={this.updateForm}
+//             /><br />
+//             <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
+//           </GridLabel>
+//           <GridLabel gridArea="email-input" htmlFor={'email' + randomValue}>Email:<br />
+//             <FormTextInput
+//               type="email"
+//               id={'email' + randomValue}
+//               name="email"
+//               maxLength="60"
+//               required
+//               placeholder="Example: jack@email.com"
+//               onChange={this.updateForm}
+//             /><br />
+//             <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
+//           </GridLabel>
+//           <GridLabel gridArea="body-text" htmlFor={'body' + randomValue}>
+//             Add an Answer:<br />
+//             <TextArea
+//               id={'body' + randomValue}
+//               name="body"
+//               maxLength="1000"
+//               cols="60"
+//               rows="6"
+//               required
+//               onChange={this.updateForm}
+//             />
+//           </GridLabel>
+//           <SubmitAnswer>
+//             <FormButton
+//               type="button"
+//               onClick={this.submitAnswer}>Submit</FormButton>
+//             <FormButton
+//               onClick={props.handleClick}
+//             >Back</FormButton>
+//           </SubmitAnswer>
+//         </AnswerWrapper>
+//       </AnswerModal>
+//     );
+//   }
+// }
+
+const AddAnswer = (props) => {
+  const [name, setName] = useState('');
+  const [body, setBody] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleNameInput = e => {
+    setName({ name: e.target.value });
+  };
+
+  const handleBodyInput = e => {
+    setBody({ body: e.target.value });
+  };
+
+  const handleEmailInput = e => {
+    setEmail({ email: e.target.value });
+  };
+
+  const submitAnswer = (e) => {
     e.preventDefault;
-    if (!this.state.name) {
-      alert('You must enter the following: name');
-    } else if (!this.state.email) {
-      alert('You must enter the following: email');
-    } else if (!this.state.body) {
-      alert('You must enter the following: body');
-    } else {
-      return axios.post(`/api/qa/questions/${this.props.question.id}/answers`, {
-        name: this.state.name,
-        body: this.state.body,
-        email: this.state.email
+    return axios.post(`/api/qa/questions/${props.question.id}/answers`, {
+      name,
+      body,
+      email,
+    })
+      .then((response) => {
+        console.log('Submission response', response.status, response.statusText);
       })
-        .then((response) => {
-          console.log('Submission response', response.status, response.statusText);
-        })
-        .then(() => { this.props.handleClick(); })
-        .catch((err) => { console.error('Error while submitting an answer', err); });
-    }
-  }
+      .then(() => { props.handleClick(); })
+      .catch((err) => { console.error('Error while submitting an answer', err); });
+  };
 
-  updateForm(e) {
-    const name = e.target.name;
-    const value = e.target.value;
+  let randomValue = Math.random();
+  let showModal = props.toggle ? 'block' : 'none';
 
-    this.setState({
-      [name]: value
-    });
-  }
 
-  render() {
-    let showModal = this.props.toggle ? 'block' : 'none';
-    let randomValue = Math.random();
-
-    return (
-      <AnswerModal display={showModal}>
-        <AnswerWrapper>
-          <Title>Product: {this.props.product ? this.props.product.name : ''} | Submit an Answer</Title>
-          <Subtitle>Q: {this.props.question.body}</Subtitle>
-          <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
-            <FormTextInput
-              type="text"
-              id={'name' + randomValue}
-              name="name"
-              maxLength="60"
-              required
-              placeholder="Example: jack543!"
-              onChange={this.updateForm}
-            /><br />
-            <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
-          </GridLabel>
-          <GridLabel gridArea="email-input" htmlFor={'email' + randomValue}>Email:<br />
-            <FormTextInput
-              type="email"
-              id={'email' + randomValue}
-              name="email"
-              maxLength="60"
-              required
-              placeholder="Example: jack@email.com"
-              onChange={this.updateForm}
-            /><br />
-            <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
-          </GridLabel>
-          <GridLabel gridArea="body-text" htmlFor={'body' + randomValue}>
-            Add an Answer:<br />
-            <TextArea
-              id={'body' + randomValue}
-              name="body"
-              maxLength="1000"
-              cols="60"
-              rows="6"
-              required
-              onChange={this.updateForm}
-            />
-          </GridLabel>
-          <SubmitAnswer>
-            <FormButton
-              type="button"
-              onClick={this.submitAnswer}>Submit</FormButton>
-            <FormButton
-              onClick={this.props.handleClick}
-            >Back</FormButton>
-          </SubmitAnswer>
-        </AnswerWrapper>
-      </AnswerModal>
-    );
-  }
-}
+  return (
+    <AnswerModal display={showModal}>
+      <AnswerWrapper>
+        <Title>Product: {props.product ? props.product.name : ''} | Submit an Answer</Title>
+        <Subtitle>Q: {props.question.body}</Subtitle>
+        <GridLabel gridArea="name-input" htmlFor={'name' + randomValue}>What is your nickname?:<br />
+          <FormTextInput
+            type="text"
+            id={'name' + randomValue}
+            name="name"
+            maxLength="60"
+            required
+            placeholder="Example: jack543!"
+            value={name}
+            onChange={handleNameInput}
+          /><br />
+          <LowPriorityText>For privacy reasons, do not use your full name or email</LowPriorityText>
+        </GridLabel>
+        <GridLabel gridArea="email-input" htmlFor={'email' + randomValue}>Email:<br />
+          <FormTextInput
+            type="email"
+            id={'email' + randomValue}
+            name="email"
+            maxLength="60"
+            required
+            placeholder="Example: jack@email.com"
+            value={email}
+            onChange={handleEmailInput}
+          /><br />
+          <LowPriorityText>For authentication reasons, you will not be emailed</LowPriorityText>
+        </GridLabel>
+        <GridLabel gridArea="body-text" htmlFor={'body' + randomValue}>
+          Add an Answer:<br />
+          <TextArea
+            id={'body' + randomValue}
+            name="body"
+            maxLength="1000"
+            cols="60"
+            rows="6"
+            required
+            value={body}
+            onChange={handleBodyInput}
+          />
+        </GridLabel>
+        <SubmitAnswer>
+          <FormButton
+            type="button"
+            onClick={submitAnswer}>Submit</FormButton>
+          <FormButton
+            onClick={props.handleClick}
+          >Back</FormButton>
+        </SubmitAnswer>
+      </AnswerWrapper>
+    </AnswerModal>
+  );
+};
 
 const AnswerModal = styled(ModalBackground).attrs(props => ({
   display: props.display,
