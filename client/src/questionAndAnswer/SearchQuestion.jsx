@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ const SearchQuestion = (props) => {
   // pass in all the questions as props so we can search each question
   // update the visible question???
   return (
-    <React.Fragment>
+    <Fragment>
       <SearchBar
         type="text"
         title="Search questions"
@@ -18,7 +18,7 @@ const SearchQuestion = (props) => {
         onChange={props.onChange}
         value={props.value}
       ></SearchBar>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
