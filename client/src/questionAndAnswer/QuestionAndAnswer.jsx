@@ -12,7 +12,6 @@ const QuestionAndAnswer = (props) => {
   const [questions, setQuestions] = useState([]);
   const [questionResults, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  //const [getMoreQuestions, setMoreQuestions] = useState(false);
   const [getMoreAnswers, setMoreAnswers] = useState(false);
   const [isVisible, setVisible] = useState(false);
 
@@ -30,11 +29,16 @@ const QuestionAndAnswer = (props) => {
           data.results.sort((a, b) => {
             return b.question_helpfulness - a.question_helpfulness;
           });
-          setQuestions(data.results);
+
+          if (questions.length === 0) {
+            setQuestions(data.results);
+            setResults(data.results.slice(0, 4));
+          } else {
+            setQuestions(data.results);
+            setResults(data.results.slice(0, questionResults.length));
+          }
         })
         .catch((err) => { console.error(err); });
-    } else {
-      setResults([]);
     }
   };
 
@@ -60,7 +64,6 @@ const QuestionAndAnswer = (props) => {
     if (questions.length >= 4) {
       getQuestions(1, 999)
         .then(() => {
-
           if (questionResults.length < questions.length) {
             setResults(questions.slice(0, questionResults.length + 2));
           }
@@ -87,8 +90,8 @@ const QuestionAndAnswer = (props) => {
   };
 
   useEffect(() => {
-    getQuestions(1, 5);
-    setResults(questions);
+    getQuestions(1, 6)
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -106,7 +109,7 @@ const QuestionAndAnswer = (props) => {
           markOrReport={markOrReport}
           getQuestions={getQuestions}
           numQuestions={questions.length}
-          getMoreAnswers={toggleMoreAnswers}
+          getMoreAnswers={getMoreAnswers}
           question={question}
           product={props.product} />))}
       </QuestionList>
@@ -181,42 +184,42 @@ const QuestionAndAnswer = (props) => {
 //     }
 //   }
 
-//   // componentDidMount() {
-//   //   // needs to be 5 or the 'More Answered Questions' button disappears
-//   //   this.getQuestions(1, 5)
-//   //     .then(() => {
-//   //       this.setState({ questionResults: this.state.questions.slice(0, 4) });
-//   //     });
-//   // }
+//   componentDidMount() {
+//     // needs to be 5 or the 'More Answered Questions' button disappears
+//     this.getQuestions(1, 5)
+//       .then(() => {
+//         this.setState({ questionResults: this.state.questions.slice(0, 4) });
+//       });
+//   }
 
-//   // componentDidUpdate(prevProps) {
-//   //   if (this.props.product_id !== prevProps.product_id) {
-//   //     this.getQuestions(1, 5)
-//   //       .then(() => this.setState({ questionResults: this.state.questions.slice(0, 4) }));
-//   //   }
-//   // }
+//   componentDidUpdate(prevProps) {
+//     if (this.props.product_id !== prevProps.product_id) {
+//       this.getQuestions(1, 5)
+//         .then(() => this.setState({ questionResults: this.state.questions.slice(0, 4) }));
+//     }
+//   }
 
-//   // type in a term and update the state
-//   // searchQuestions(e) {
-//   //   this.setState({
-//   //     searchTerm: e.target.value.toLowerCase(),
-//   //   });
+//   //type in a term and update the state
+//   searchQuestions(e) {
+//     this.setState({
+//       searchTerm: e.target.value.toLowerCase(),
+//     });
 
-//   //   let searchResults = [];
+//     let searchResults = [];
 
-//   //   if (this.state.searchTerm.length > 2) {
-//   //     this.state.questions.forEach((question) => {
-//   //       // if the question contains the search term add to question results
-//   //       let lowerCaseQuestion = question.question_body.toLowerCase();
-//   //       if (lowerCaseQuestion.includes(this.state.searchTerm)) {
-//   //         searchResults.push(question);
-//   //       }
-//   //     });
-//   //     this.setState({ questionResults: searchResults });
-//   //   } else {
-//   //     this.setState({ questionResults: this.state.questions.slice(0, 4)} );
-//   //   }
-//   // }
+//     if (this.state.searchTerm.length > 2) {
+//       this.state.questions.forEach((question) => {
+//         // if the question contains the search term add to question results
+//         let lowerCaseQuestion = question.question_body.toLowerCase();
+//         if (lowerCaseQuestion.includes(this.state.searchTerm)) {
+//           searchResults.push(question);
+//         }
+//       });
+//       this.setState({ questionResults: searchResults });
+//     } else {
+//       this.setState({ questionResults: this.state.questions.slice(0, 4)} );
+//     }
+//   }
 
 // getMoreQuestions() {
 //   if (this.state.questions.length >= 4) {
@@ -232,7 +235,7 @@ const QuestionAndAnswer = (props) => {
 //       .catch((err) => { console.error('There was an error getting more questions when you clicked "More Answered Questions"', err); });
 //   }
 // }
-// if the user wants to load more answers click on the button and update the state
+// //if the user wants to load more answers click on the button and update the state
 // getMoreAnswers() {
 //   // passes this down as a prop to the Question component, API call is made from question component
 //   this.setState({ getMoreAnswers: !this.state.getMoreAnswers });
