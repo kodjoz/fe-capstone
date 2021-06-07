@@ -8,6 +8,11 @@ import { HelpfulLink } from './Answer';
 import AddAnswer from './AddAnswerForm';
 import { Helpful, HelpfulYes, Tile } from '../globalStyles.js';
 
+// const Question = (props) => {
+//   const [answers, setAnswers] = useState([]);
+//   const [answerResults, setResults] = useState([]);
+
+// };
 
 class Question extends React.Component {
   constructor(props) {

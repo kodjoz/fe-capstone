@@ -30,21 +30,11 @@ const QuestionAndAnswer = (props) => {
           data.results.sort((a, b) => {
             return b.question_helpfulness - a.question_helpfulness;
           });
-
-          if (!questions) {
-            setQuestions({
-              questions: data.results,
-            });
-          } else {
-            setQuestions({ questions: data.results });
-            setResults(
-              data.results.slice(0, questionResults.length)
-            );
-          }
+          setQuestions(data.results);
         })
         .catch((err) => { console.error(err); });
     } else {
-      return '';
+      setResults([]);
     }
   };
 
@@ -70,11 +60,9 @@ const QuestionAndAnswer = (props) => {
     if (questions.length >= 4) {
       getQuestions(1, 999)
         .then(() => {
-          let currentLength = questionResults.length;
-          let totalLength = questions.length;
 
-          if (currentLength < totalLength) {
-            setResults(questions.slice(0, currentLength + 2));
+          if (questionResults.length < questions.length) {
+            setResults(questions.slice(0, questionResults.length + 2));
           }
         })
         .catch((err) => { console.error('There was an error getting more questions when you clicked "More Answered Questions"', err); });
@@ -99,16 +87,9 @@ const QuestionAndAnswer = (props) => {
   };
 
   useEffect(() => {
-    getQuestions(1, 5)
-      .then(() => {
-        setResults(questions.slice(0, 4));
-      });
+    getQuestions(1, 5);
+    setResults(questions);
   }, []);
-
-  useEffect(() => {
-    getQuestions(1, 5)
-      .then(() => setResults(questions.slice(0, 4)));
-  }, [props.product_id]);
 
   return (
     <QuestionContainer>
