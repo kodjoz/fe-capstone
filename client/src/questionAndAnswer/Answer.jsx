@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { useToggle } from '../useToggle';
 import ModalImage from '../ModalImage.jsx';
 import { Gallery, Helpful, HelpfulYes } from '../globalStyles.js';
 
 const Answer = (props) => {
-  const [isHelpful, setHelpful] = useState(false);
-  const [isReported, setReported] = useState(false);
+  const [isHelpful, setHelpful] = useToggle();
+  const [isReported, setReported] = useToggle();
 
   const handleHelpfulOrReport = (endpoint) => {
     if (isHelpful && endpoint === 'helpful') {
