@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { useToggle } from '../useToggle.js';
 import Question from './Question';
 import SearchQuestion from './SearchQuestion';
 import AddQuestion from './AddQuestionForm';
@@ -13,9 +14,13 @@ const QuestionAndAnswer = (props) => {
   const [questionResults, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [getMoreAnswers, setMoreAnswers] = useState(false);
-  const [isVisible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useToggle();
 
   const getQuestions = (page, count) => {
+    //  START HERE
+    // Fixed rendering of questions issue
+    // New issue - can't view more than 4 questions at a time
+    // Tried changing the parameters in the function call
     if (props.product_id) {
       return axios.get('/api/qa/questions', {
         params: {
